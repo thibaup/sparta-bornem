@@ -7,15 +7,12 @@
     <link rel="icon" type="image/png" href="/favicon.png"> <!-- Make sure favicon exists at root or update path -->
     <link rel="stylesheet" href="/css/style.css"> <!-- Link to your main stylesheet -->
     <style>
-        /* ==========================================================================
-           General Page Styles (Copied from style.css or specific to this page)
-           ========================================================================== */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
             background-color: #f4f4f4;
-            margin: 0; /* Ensure no default body margin */
+            margin: 0;
         }
         .container {
             max-width: 1140px;
@@ -28,25 +25,29 @@
         }
         .main-content h1 {
             color: #1774b4;
-            margin-bottom: 20px; /* More space below main title */
-            font-size: clamp(2em, 5vw, 2.8em); /* Responsive main title */
+            margin-bottom: 20px;
+            font-size: clamp(2em, 5vw, 2.8em);
             border-bottom: 2px solid #eee;
             padding-bottom: 15px;
         }
         a {
-             color: #1774b4;
-             text-decoration: none;
-         }
+            color: #1774b4;
+            text-decoration: none;
+        }
         a:hover {
-             text-decoration: underline;
-         }
+            text-decoration: underline;
+        }
 
         /* ==========================================================================
-           Calendar Styling
-           ========================================================================== */
+        Calendar Styling
+        ========================================================================== */
 
         .calendar-view {
             margin-top: 30px;
+            /* Optional: Limit the maximum width the calendar grid can take */
+            /* max-width: 900px; */
+            /* margin-left: auto; */
+            /* margin-right: auto; */
         }
 
         .month-grid {
@@ -79,20 +80,24 @@
         .calendar-days {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 5px;
+            gap: 5px; /* Adjust gap as needed */
         }
 
         .calendar-day {
             border: 1px solid #f1f1f1;
-            min-height: 120px;
-            padding: 8px;
-            font-size: 0.9rem;
+            /* --- CORE CHANGE: Use aspect-ratio --- */
+            aspect-ratio: 1 / 1;  /* Make the cell square (width / height) */
+            /* --- REMOVE fixed min-height --- */
+            /* min-height: 120px; */
+            /* --- Adjust padding if needed for smaller cells --- */
+            padding: 5px; /* Reduced padding */
+            font-size: 0.85rem; /* Adjust base font size for cells */
             position: relative;
             background-color: #fff;
             transition: background-color 0.2s ease;
             display: flex;
             flex-direction: column;
-            overflow: hidden;
+            overflow: hidden; /* Keep hiding overflow */
         }
 
         .calendar-day.padding-day {
@@ -107,33 +112,32 @@
         .day-number {
             font-weight: bold;
             color: #343a40;
-            margin-bottom: 5px;
+            margin-bottom: 2px; /* Reduced margin */
             display: block;
             text-align: right;
-            font-size: 0.85em;
+            font-size: 0.8em; /* Smaller number relative to cell */
             align-self: flex-end;
-            padding-bottom: 3px;
+            /* Removed padding-bottom, use cell padding */
         }
 
         /* Optional container for events if more complex layout is needed later */
         /* .calendar-day-events { flex-grow: 1; overflow: hidden; } */
 
 
-        /* Base Calendar Event Style (Desktop / Default: Truncate) */
+        /* Base Calendar Event Style (Truncate by default) */
         .calendar-event {
             display: block;
-            font-size: 0.85em;
-            padding: 3px 5px;
-            margin-bottom: 4px;
+            font-size: 0.8em; /* Smaller event text relative to cell */
+            padding: 2px 4px; /* Reduced padding */
+            margin-bottom: 2px; /* Reduced margin */
             border-radius: 3px;
-            line-height: 1.3;
+            line-height: 1.2; /* Tighter line height */
             border-left: 3px solid transparent;
-            /* --- Default: Truncate --- */
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            cursor: default; /* Not clickable by default */
-            position: relative; /* For potential stacking */
+            cursor: default;
+            position: relative;
         }
 
         /* Base style for links within events (also truncate) */
@@ -145,20 +149,28 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        /* Hover effect for links */
         .calendar-event a:hover {
             text-decoration: underline;
         }
 
-        /* --- Expanded Event State (Toggled by JS) --- */
+        /* Expanded Event State (Toggled by JS) */
         .calendar-event.event-expanded {
-            white-space: normal;  /* Allow wrapping */
-            overflow: visible;    /* Show wrapped content */
-            text-overflow: clip;  /* No ellipsis */
-            z-index: 5;           /* Bring expanded text slightly forward */
-            background-color: #fff; /* Ensure background covers underlying elements */
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* Optional: subtle shadow */
-            cursor: default;      /* Change cursor back if needed after expansion */
+            white-space: normal;
+            overflow: visible;
+            text-overflow: clip;
+            z-index: 5;
+            background-color: #fff; /* Can use parent background or specific */
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            cursor: default;
+            /* Allow expanded item to slightly overlay others if needed */
+            position: absolute;
+            left: 0;
+            right: 0;
+            /* top: auto; Let it flow naturally below previous event */
+            width: auto; /* Let it take parent width */
+            min-height: fit-content; /* Try to fit its content */
+            border-left-width: 3px; /* Keep border */
+            padding: 3px 5px; /* Keep original padding */
         }
         /* Ensure link inside expanded event also wraps */
         .calendar-event.event-expanded a {
@@ -190,11 +202,7 @@
             padding-bottom: 10px;
             color: #495057;
         }
-        .legend p {
-            margin-bottom: 0.8em;
-            font-size: 0.95em;
-            line-height: 1.5;
-        }
+        .legend p { margin-bottom: 0.8em; font-size: 0.95em; line-height: 1.5; }
         .legend span { font-weight: bold; }
         .legend .legend-green { color: #28a745; }
         .legend .legend-blue { color: #007bff; }
@@ -204,70 +212,58 @@
 
         /* --- Responsive Adjustments --- */
 
-        /* Tablet Portrait & Smaller */
         @media (max-width: 768px) {
-            .month-grid { padding: 20px; }
-            .calendar-header {
-                font-size: 0.8rem;
-                padding-bottom: 8px;
-                margin-bottom: 8px;
-            }
+            .month-grid { padding: 15px; } /* Less padding */
+            .calendar-header { font-size: 0.75rem; padding-bottom: 6px; margin-bottom: 6px; }
             .calendar-day {
-                min-height: 100px;
-                padding: 6px;
-                font-size: 0.85rem;
+                padding: 4px; /* Further reduced padding */
+                font-size: 0.75rem; /* Smaller base font */
+                /* Aspect ratio still applies */
             }
             .day-number { font-size: 0.8em; }
 
             .calendar-event {
-                font-size: 0.8em;
-                padding: 2px 4px;
-                /* --- Make potentially truncated events clickable --- */
-                cursor: pointer; /* Indicate clickability below this breakpoint */
+                font-size: 0.75em; /* Smaller events */
+                padding: 1px 3px;
+                /* Clickable cursor is now set */
+                cursor: pointer;
             }
-
             .month-title { font-size: clamp(1.4em, 3.5vw, 1.8em); }
             .legend h2 { font-size: 1.3em; }
             .legend p { font-size: 0.9em; }
         }
 
-        /* Mobile Portrait */
         @media (max-width: 600px) {
-            .calendar-header {
-                font-size: 0.75rem;
-                 font-weight: 500;
-                 border-bottom: none;
-                 margin-bottom: 5px;
-            }
+            .calendar-header { font-size: 0.7rem; font-weight: 500; border-bottom: none; margin-bottom: 3px; }
             .calendar-days { gap: 2px; }
             .calendar-day {
-                min-height: 95px; /* Adjusted height */
-                padding: 4px;
-                font-size: 0.75rem;
+                padding: 3px; /* Even less padding */
+                font-size: 0.7rem;
                 border-width: 1px;
+                /* Aspect ratio still applies, cells become smaller squares */
             }
-            .day-number { font-size: 0.75em; margin-bottom: 2px; }
+            .day-number { font-size: 0.75em; margin-bottom: 1px; }
 
-            /* Event styles (smaller font, padding etc.) */
-            /* Wrapping is handled by JS toggle, not CSS overrides here */
             .calendar-event,
             .calendar-event a {
-                font-size: 0.75em;
-                padding: 1px 3px;
-                margin-bottom: 2px;
+                font-size: 0.75em; /* Relative to smaller cell */
+                padding: 1px 2px;
+                margin-bottom: 1px;
                 border-left-width: 2px;
             }
+            /* Expanded state needs less padding too */
+            .calendar-event.event-expanded { padding: 2px 4px; }
         }
 
         /* Very Small Mobile */
         @media (max-width: 400px) {
-             .calendar-day { min-height: 85px; } /* Adjusted */
-
-             /* Styles inherited from 600px breakpoint */
-             .calendar-event,
-             .calendar-event a {
+            .calendar-header { font-size: 0.65rem; }
+            .calendar-day { font-size: 0.65rem; padding: 2px; }
+            .day-number { font-size: 0.7em; }
+            .calendar-event,
+            .calendar-event a {
                 font-size: 0.7em; /* Even smaller font */
-             }
+            }
         }
     </style>
 </head>
