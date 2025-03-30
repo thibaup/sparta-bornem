@@ -190,48 +190,6 @@
         /* ==========================================================================
         Hero Section (Example Style)
         ========================================================================== */
-        .hero {
-            background-color: #343a40; /* Darker grey/blue background */
-            /* Or use a blue gradient or image */
-            /* background-image: linear-gradient(to right, #1774b4, #125a8c); */
-            background-size: cover;
-            background-position: center;
-            color: #ffffff;
-            padding: 60px 0;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .hero h2 {
-            font-size: 2.5em;
-            margin-bottom: 0.5em;
-            color: #ffffff;
-        }
-        .hero p {
-            font-size: 1.1em;
-            margin-bottom: 1.5em;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            color: #e9ecef; /* Lighter text */
-        }
-        /* --- Blue Theme: CTA Button --- */
-        .cta-button {
-            background-color: #1774b4; /* Theme Blue */
-            color: #ffffff;
-            padding: 12px 25px;
-            border-radius: 5px;
-            font-size: 1em;
-            font-weight: 600;
-            display: inline-block;
-            transition: background-color 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-        .cta-button:hover {
-            background-color: #125a8c; /* Darker blue */
-            text-decoration: none;
-            color: #ffffff; /* Ensure text stays white */
-        }
 
         /* ==========================================================================
         Main Content Area & Sections (Example Styles)
@@ -450,6 +408,81 @@
                 float: left;
                 margin: 0 20px 10px 0;
             }
+        }
+
+                /* --- Hero Section Styles --- */
+
+        .hero {
+            background-image: url('/images/474183398_1108689364383810_5813522470262771257_n.jpg');
+            background-size: cover;         /* Scale the image to cover the entire section */
+            background-position: center center; /* Center the image horizontally and vertically */
+            background-repeat: no-repeat;   /* Prevent the image from tiling */
+            background-attachment: fixed;   /* Optional: Creates a parallax-like effect on scroll */
+
+            /* Text & Layout Settings */
+            color: #ffffff;                 /* Set default text color to white for contrast */
+            padding: 100px 20px;            /* Add generous padding top/bottom, smaller left/right */
+            min-height: 50vh;               /* Minimum height (e.g., 50% of viewport height) */
+            text-align: center;             /* Center the text content */
+
+            /* Flexbox for vertical centering of the content container */
+            display: flex;
+            align-items: center;            /* Vertically center the .container div */
+            justify-content: center;        /* Horizontally center the .container div */
+
+            position: relative;             /* Needed for the optional overlay */
+            z-index: 1;                     /* Base layer */
+        }
+
+        /* Optional: Dark semi-transparent overlay for better text readability */
+        .hero::before {
+            content: "";                    /* Required for pseudo-elements */
+            position: absolute;             /* Position relative to the .hero section */
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.4); /* Black overlay with 40% opacity */
+            z-index: 2;                     /* Place overlay above background image */
+        }
+
+        /* Ensure the content container is above the overlay */
+        .hero .container {
+            position: relative;             /* Allow z-index stacking */
+            z-index: 3;                     /* Place content above the overlay */
+            max-width: 800px;               /* Optional: Limit content width */
+        }
+
+        .hero h2 {
+            font-size: 2.5em;
+            margin-bottom: 0.5em;
+            color: #ffffff;
+        }
+        .hero p {
+            font-size: 1.1em;
+            margin-bottom: 1.5em;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            color: #e9ecef; /* Lighter text */
+        }
+        /* --- Blue Theme: CTA Button --- */
+        .cta-button {
+            background-color: #1774b4; /* Theme Blue */
+            color: #ffffff;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-size: 1em;
+            font-weight: 600;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .cta-button:hover {
+            background-color: #125a8c; /* Darker blue */
+            text-decoration: none;
+            color: #ffffff; /* Ensure text stays white */
         }
     </style>
 
