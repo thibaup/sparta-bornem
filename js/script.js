@@ -111,13 +111,11 @@ async function loadLatestNews(count = 3, containerId = 'latest-news-grid', loadi
                 day: 'numeric', month: 'long', year: 'numeric'
             });
 
-            // Handle image URLs - use placeholder if none, prepend /images/ if relative path
-            let finalImageUrl = '/images/placeholder-news.png'; // Default placeholder
+            let finalImageUrl = '/images/nieuws/placeholder-news.png'; // Default placeholder
             if (item.image) { // Check if image property exists and is not empty
                 // Check if it's already a full URL
                 if (!item.image.startsWith('http://') && !item.image.startsWith('https://')) {
-                    // Assuming relative paths are relative to an /images/ folder at the root
-                    finalImageUrl = `/images/${item.image.trim()}`; // Add leading slash and trim whitespace
+                    finalImageUrl = `/images/nieuws/${item.image.trim()}`; 
                 } else {
                     finalImageUrl = item.image.trim(); // Use the full URL, trim whitespace
                 }
@@ -131,7 +129,7 @@ async function loadLatestNews(count = 3, containerId = 'latest-news-grid', loadi
             if (summaryText) {
                 articleHtml = `
                 <article class="news-item" id="latest-${item.id || ''}">
-                    <img src="${finalImageUrl}" alt="${item.title || 'Nieuws afbeelding'}" loading="lazy">
+                    <img src="${finalImageUrl}" alt="${item.title}" loading="lazy">
                     <div class="news-content">
                         <p class="news-meta">${formattedDate} | ${item.category || 'Algemeen'}</p>
                         <h3><a href="${itemLink}">${item.title}</a></h3>
@@ -143,7 +141,7 @@ async function loadLatestNews(count = 3, containerId = 'latest-news-grid', loadi
             } else {
                  articleHtml = `
                  <article class="news-item" id="latest-${item.id || ''}">
-                     <img src="${finalImageUrl}" alt="${item.title || 'Nieuws afbeelding'}" loading="lazy">
+                     <img src="${finalImageUrl}" alt="${item.title}" loading="lazy">
                      <div class="news-content">
                          <p class="news-meta">${formattedDate} | ${item.category || 'Algemeen'}</p>
                          <h3><a href="${itemLink}">${item.title}</a></h3>
@@ -169,7 +167,6 @@ async function loadLatestNews(count = 3, containerId = 'latest-news-grid', loadi
 }
 
 
-// --- Main Script Logic (Runs after initial HTML is parsed) ---
 document.addEventListener('DOMContentLoaded', function() {
 
     // --- Element Selectors ---

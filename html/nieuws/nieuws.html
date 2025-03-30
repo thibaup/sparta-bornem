@@ -62,10 +62,10 @@
                         day: 'numeric', month: 'long', year: 'numeric'
                     });
 
-                    let finalImageUrl = '/images/placeholder-news.png';
+                    let finalImageUrl = '/images/nieuws/placeholder-news.png';
                     if (item.image) {
                         if (!item.image.startsWith('http://') && !item.image.startsWith('https://')) {
-                            finalImageUrl = `/images/${item.image.startsWith('/') ? item.image.substring(1) : item.image}`;
+                            finalImageUrl = `/images/nieuws/${item.image.startsWith('/') ? item.image.substring(1) : item.image}`;
                         } else {
                             finalImageUrl = item.image;
                         }

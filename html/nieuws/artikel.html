@@ -206,7 +206,7 @@
                     let finalImageUrl = articleData.image;
                     if (!finalImageUrl.startsWith('http://') && !finalImageUrl.startsWith('https://')) {
                         // Prepend the images path (ensure leading/trailing slashes are correct)
-                        finalImageUrl = `/images/${finalImageUrl.startsWith('/') ? finalImageUrl.substring(1) : finalImageUrl}`;
+                        finalImageUrl = `/images/nieuws/${finalImageUrl.startsWith('/') ? finalImageUrl.substring(1) : finalImageUrl}`;
                     }
                     imageContainer.innerHTML = `<img class="article-image" src="${finalImageUrl}" alt="${articleData.alt || articleData.title}" loading="lazy">`;
                 } else {
