@@ -116,9 +116,9 @@
                 <textarea id="article-summary" rows="3"></textarea>
             </div>
              <div>
-                <label for="article-full-content">Volledige Tekst (Gebruik Enter voor nieuwe alinea's, basis HTML toegestaan):</label>
+                <label for="article-full-content">Volledige Tekst:</label>
                 <textarea id="article-full-content" rows="10"></textarea>
-                <small>Basis HTML zoals <b>, <i>, <a href="..."> is toegestaan. Nieuwe regels worden <br> tags.</small>
+                <small>Tool converteert automatisch platte tekst URLs (http/https/www) en e-mailadressen naar links. Nieuwe regels worden <br> tags. Basis HTML zoals <b>, <i> is ook toegestaan.</small>
             </div>
 
             <button type="submit">Voeg Toe & Genereer Volledige JSON</button>
@@ -154,7 +154,49 @@
             copyStatusEl.style.display = 'none';
         });
 
-        // --- Functions ---
+        // --- Helper Functions ---
+
+        /**
+         * Converts plain text URLs and emails in a string to HTML anchor tags.
+         * NOTE: This is a best-effort conversion using regex and may not perfectly
+         * handle edge cases or text that already contains complex HTML.
+         * @param {string} text - The input text.
+         * @returns {string} Text with detected URLs and emails converted to <a> tags.
+         */
+        function autoLinkText(text) {
+            if (!text) return '';
+
+            // 1. Link Emails first to avoid conflict with URL matching
+            // Uses word boundaries (\b) to avoid matching parts of other words/URLs
+            const emailRegex = /\b([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,})\b/gi;
+            text = text.replace(emailRegex, '<a href="mailto:$1">$1</a>');
+
+            // 2. Link URLs (starting with http, https, or www.)
+            // Regex explanation:
+            // (           # Start capturing group 1 (the full URL)
+            //   (?:         # Start non-capturing group for protocol or www
+            //     https?:\/\/ # Match http:// or https://
+            //     |           # OR
+            //     www\.       # Match www. (will prepend https:// later)
+            //   )           # End non-capturing group
+            //   [^\s<>()"]+  # Match one or more characters that are NOT whitespace, <, >, (, ), "
+            //                # Helps prevent grabbing trailing punctuation or breaking HTML
+            // )           # End capturing group 1
+            const urlRegex = /((?:https?:\/\/|www\.)[^\s<>()"]+)/gi;
+            text = text.replace(urlRegex, (match, url) => {
+                let href = url;
+                // Ensure www. links have a protocol for the href attribute
+                if (href.startsWith('www.')) {
+                    href = 'https://' + href;
+                }
+                // Create the anchor tag, ensuring the URL itself is displayed as the link text
+                return `<a href="${href}" target="_blank" rel="noopener noreferrer">${url}</a>`;
+            });
+
+            return text;
+        }
+
+        // --- Main Submit Handler ---
         async function handleFormSubmit(event) {
             event.preventDefault();
             formErrorEl.style.display = 'none';
@@ -174,7 +216,7 @@
             const title = titleInput.value.trim();
             const summary = summaryInput.value.trim();
             const imageName = imageInput.value.trim();
-            const fullContentRaw = fullContentInput.value.trim();
+            const fullContentRaw = fullContentInput.value.trim(); // Get raw text
 
             if (!id || !/^[a-z0-9-]+$/.test(id)) {
                  showError(formErrorEl, "Ongeldig ID. Gebruik alleen kleine letters, cijfers en koppeltekens.");
@@ -184,72 +226,65 @@
             }
             if (!date) { showError(formErrorEl, "Datum is verplicht."); dateInput.focus(); finalJsonOutputEl.textContent = 'Validatiefout.'; return; }
             if (!title) { showError(formErrorEl, "Titel is verplicht."); titleInput.focus(); finalJsonOutputEl.textContent = 'Validatiefout.'; return; }
-            // Optional: Add validation for image format if needed
-            // if (imageName && !/\.(jpg|jpeg|png|gif|webp)$/i.test(imageName) && !imageName.startsWith('http')) {
-            //     showError(formErrorEl, "Ongeldige afbeeldingsnaam. Moet eindigen op .jpg, .jpeg, .png, .gif, .webp of een URL zijn.");
-            //     imageInput.focus();
-            //      finalJsonOutputEl.textContent = 'Validatiefout.';
-            //     return;
-            // }
 
-            // Prepare new article data
+            // --- Process Content: Auto-Link -> Newlines ---
+            // 1. Auto-link URLs and emails in the raw text
+            let processedContent = autoLinkText(fullContentRaw);
+
+            // 2. Replace newlines with literal <br> tags for HTML display
+            //    Ensure this produces the exact string '<br>'
+            processedContent = processedContent.replace(/\r\n|\r|\n/g, '<br>');
+
+            // 3. IMPORTANT: REMOVED manual quote escaping. Let JSON.stringify handle it.
+            // processedContent = processedContent.replace(/"/g, '\\"');
+            // processedContent = processedContent.replace(/'/g, "\\'");
+
+            // Prepare new article data object
             const newArticleData = {
                 id: id,
                 date: date,
                 title: title,
                 category: document.getElementById('article-category').value.trim() || 'Algemeen',
-                // Use imageName directly, assuming it's just the filename. Prepend path if needed.
                 image: imageName ? imageName : "nieuws-beeld.png", // Default image if empty
-                // Alt text defaults to title in display logic usually, so not stored here
                 summary: summary || title, // Use title as summary if summary is empty
-                // Replace newlines with <br> tags for HTML display, escape quotes for JSON safety
-                full_content: fullContentRaw.replace(/\r\n|\r|\n/g, '<br>')
-                                             .replace(/"/g, '\\"') // Escape double quotes
-                                             .replace(/'/g, "\\'")  // Escape single quotes (optional but safer)
+                full_content: processedContent // Use the processed content directly
             };
 
             // --- Load existing JSON and add new article ---
             try {
-                // 1. Fetch existing data
-                let existingData = []; // Default to empty array
-                 finalJsonOutputEl.textContent = `Laden van ${newsDataUrl}...`;
-                 try {
-                     const response = await fetch(newsDataUrl + '?t=' + Date.now()); // Bust cache
-                     if (response.ok) {
-                         const text = await response.text();
-                         if (text.trim()) { // Check if response is not empty
+                let existingData = [];
+                finalJsonOutputEl.textContent = `Laden van ${newsDataUrl}...`;
+                try {
+                    // Add cache-busting query parameter
+                    const response = await fetch(`${newsDataUrl}?t=${Date.now()}`);
+                    if (response.ok) {
+                        const text = await response.text();
+                        if (text.trim()) {
                             existingData = JSON.parse(text);
-                            // Ensure it's an array
                             if (!Array.isArray(existingData)) {
-                                console.warn("Existing data is not an array, resetting to empty array.");
+                                console.warn("Existing data is not an array, resetting.");
                                 existingData = [];
                             }
-                         }
-                     } else if (response.status !== 404) { // Allow 404 (file not found)
-                          throw new Error(`HTTP error! Status: ${response.status}`);
-                     }
-                      // If 404 or empty, existingData remains [] which is fine
-                 } catch (fetchError) {
-                     // Log fetch error, but proceed with an empty array if it's just a network/parse issue
-                     // This allows creating the file from scratch using the tool
-                     console.warn(`Kon bestaande JSON niet laden of parsen van ${newsDataUrl}. Start met een lege lijst. Fout: ${fetchError.message}`);
-                     // Optionally show a non-blocking warning to the user:
-                     // showError(formErrorEl, `Waarschuwing: Kon ${newsDataUrl} niet laden. Nieuw artikel wordt aan een lege lijst toegevoegd.`);
-                     existingData = []; // Ensure it's an empty array on error
-                 }
+                        }
+                    } else if (response.status !== 404) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    // If 404 or empty, existingData remains []
+                } catch (fetchError) {
+                    console.warn(`Kon bestaande JSON niet laden/parsen (${newsDataUrl}). Start met lege lijst. Fout: ${fetchError.message}`);
+                    existingData = []; // Ensure it's an empty array on error
+                }
 
-
-                // 2. Add the new article (prepend to show newest first)
+                // Add the new article (prepend to show newest first)
                 const updatedData = [newArticleData, ...existingData];
-                // OR append: const updatedData = [...existingData, newArticleData];
 
-                // 3. Stringify the combined data
+                // Stringify the combined data. JSON.stringify will correctly escape quotes
+                // and backslashes within the 'processedContent' string.
                 const finalJsonString = JSON.stringify(updatedData, null, 2); // Pretty print
 
-                // 4. Display the final JSON
+                // Display the final JSON
                 finalJsonOutputEl.textContent = finalJsonString;
                 showSuccess(copyStatusEl, "Volledige JSON gegenereerd. Kopieer de inhoud hierboven.");
-
 
             } catch (error) {
                 console.error('Error generating final JSON:', error);
@@ -258,12 +293,40 @@
             }
         }
 
+        // --- Helper Functions (autoLinkText, copyToClipboard, showError, showSuccess) ---
+        // Keep the existing helper functions as they were in the previous correct version
+        // ... (autoLinkText function definition here) ...
+        // ... (copyToClipboard function definition here) ...
+        // ... (showError function definition here) ...
+        // ... (showSuccess function definition here) ...
+
+        /**
+         * Converts plain text URLs and emails in a string to HTML anchor tags.
+         * NOTE: This is a best-effort conversion using regex and may not perfectly
+         * handle edge cases or text that already contains complex HTML.
+         * @param {string} text - The input text.
+         * @returns {string} Text with detected URLs and emails converted to <a> tags.
+         */
+        function autoLinkText(text) {
+            if (!text) return '';
+            const emailRegex = /\b([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,})\b/gi;
+            text = text.replace(emailRegex, '<a href="mailto:$1">$1</a>');
+            const urlRegex = /((?:https?:\/\/|www\.)[^\s<>()"]+)/gi;
+            text = text.replace(urlRegex, (match, url) => {
+                let href = url;
+                if (href.startsWith('www.')) {
+                    href = 'https://' + href;
+                }
+                return `<a href="${href}" target="_blank" rel="noopener noreferrer">${url}</a>`;
+            });
+            return text;
+        }
+
         function copyToClipboard(text, statusElement) {
              if (!navigator.clipboard) {
                  alert('Clipboard API niet ondersteund door uw browser.');
                  return;
              }
-
              if (!text || text.startsWith('Vul het formulier in') || text.startsWith('Bezig met verwerken') || text.startsWith('Validatiefout') || text.startsWith('Fout bij genereren')) {
                  alert('Geen geldige JSON om te kopiëren.');
                  return;
@@ -282,7 +345,6 @@
              element.style.display = 'block';
              element.classList.remove('success');
              element.classList.add('error');
-             // Hide after a while
              setTimeout(() => { element.style.display = 'none'; }, 5000);
          }
 
@@ -291,7 +353,6 @@
              element.style.display = 'block';
              element.classList.remove('error');
              element.classList.add('success');
-              // Hide after a while
              setTimeout(() => { element.style.display = 'none'; }, 3000);
          }
     </script>

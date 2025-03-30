@@ -10,62 +10,136 @@
 
     <!-- Specific Styles for Single Article Page -->
     <style>
-        /* Style the article wrapper */
-        .article-container {
-            background-color: #ffffff; /* White background for article */
-            padding: 30px 40px; /* More horizontal padding */
-            border-radius: 8px; /* Rounded corners */
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08); /* Subtle shadow */
-            margin-top: 20px; /* Space below header/main title */
-            margin-bottom: 30px; /* Space above back link */
+        /* --- Basic Reset & Body Styling --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4; }
+        /* Ensure container respects max-width and has horizontal padding */
+        .container { max-width: 1140px; margin: 20px auto; padding: 0 20px; } /* Added top/bottom margin */
+        a { color: #1774b4; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        img { max-width: 100%; height: auto; display: block; /* Prevent potential bottom space */ }
+        h1, h2, h3, h4 { margin-bottom: 0.8em; color: #1a1a1a; font-weight: 600; }
+        p { margin-bottom: 1em; }
+        ul { margin-bottom: 1em; margin-left: 20px; }
+        mark { background-color: #ffe066; padding: 0.1em 0.3em; border-radius: 3px; }
+        strong, b { font-weight: 600; }
+
+        /* --- Main Content Area Wrapper --- */
+        .main-content {
+            /* This container already has max-width and padding from .container */
+            padding-top: 20px;    /* Add space below header */
+            padding-bottom: 40px; /* Add space above footer */
         }
 
-        /* Style the main article title */
+        /* --- Single Article Styling --- */
+        .article-container {
+            background-color: #ffffff;
+            /* Increased padding for more whitespace */
+            padding: 30px 40px 40px 40px; /* Added bottom padding */
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08); /* Slightly deeper shadow */
+            margin-bottom: 40px; /* Space below article box before back link */
+        }
+
         #article-title {
-            color: #1774b4; /* Theme blue */
+            color: #1774b4;
             margin-top: 0;
-            margin-bottom: 10px;
-            font-size: 2.2em;
+            margin-bottom: 10px; /* Space below title */
+            font-size: clamp(1.8em, 4vw, 2.5em); /* Responsive title size */
             line-height: 1.3;
             border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
+            padding-bottom: 15px; /* More space below border */
         }
 
-        /* Style the metadata (date/category) */
         .article-meta {
             display: block;
             color: #6c757d;
             font-size: 0.9em;
-            margin-bottom: 25px;
+            margin-bottom: 25px; /* Space below meta */
         }
 
-        /* Style the main article image */
+        /* Style image container, not just image, if needed */
+        #article-image-container {
+            text-align: center; /* Center the image within this div */
+            margin-bottom: 30px; /* Space below image */
+        }
+
         .article-image {
+            /* Max width to prevent huge images, but allow smaller ones */
             max-width: 100%;
+            width: auto; /* Let image scale naturally up to max-width */
+            max-height: 500px; /* Optional: Prevent overly tall images */
             height: auto;
-            margin-bottom: 30px;
             border-radius: 5px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            max-width: 750px; /* Limit image width */
+            display: inline-block; /* Allows centering via text-align on parent */
         }
 
-        /* Style the main article body content */
         .article-full-content {
             line-height: 1.7;
-            font-size: 1.05em;
+            font-size: 1.05em; /* Slightly larger body text */
+            /* --- FIX FOR TEXT OVERFLOW --- */
+            overflow-wrap: break-word; /* Standard property */
+            word-wrap: break-word;     /* Older browsers fallback */
+            word-break: break-word;    /* Helps break long words/URLs */
+            /* Ensure child elements don't cause overflow if they have fixed widths */
+            overflow: hidden; /* Added: Hide potential overflow from child elements */
         }
+
         .article-full-content p {
             margin-bottom: 1.2em;
         }
         .article-full-content a {
-             font-weight: 500;
-             text-decoration: underline;
+            font-weight: 500;
+            /* Ensure links also break if very long */
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            word-break: break-word;
+            /* Maybe slightly different color? */
+            /* color: #125a8c; */
         }
         .article-full-content a:hover {
-             text-decoration: none;
+            text-decoration: none;
         }
+        /* Add styles for other potential elements if needed */
+        .article-full-content ul,
+        .article-full-content ol {
+            margin-left: 25px;
+            margin-bottom: 1.2em;
+        }
+        .article-full-content li {
+            margin-bottom: 0.5em;
+        }
+        .article-full-content blockquote {
+            border-left: 4px solid #eee;
+            padding-left: 15px;
+            margin: 1.5em 0;
+            color: #666;
+            font-style: italic;
+        }
+        .article-full-content code { /* Basic styling for code */
+            background-color: #f1f1f1;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 0.9em;
+            /* Code can overflow easily */
+            white-space: pre-wrap; /* Wrap code but preserve whitespace */
+            word-break: break-all; /* Allow breaking anywhere in code */
+        }
+        .article-full-content pre { /* Styling for preformatted blocks */
+            background-color: #f1f1f1;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto; /* Add scrollbar if code block is too wide */
+            margin: 1.5em 0;
+        }
+        .article-full-content pre code {
+            background-color: transparent; /* Reset code style inside pre */
+            padding: 0;
+            white-space: pre; /* Preserve whitespace exactly as is */
+            word-break: normal; /* Don't break words inside pre */
+        }
+
 
         /* Loading/Error messages */
         #article-loading, #article-error {
@@ -75,21 +149,21 @@
 
         /* Back link styling */
         .back-link {
-             display: inline-block;
-             margin-top: 20px; /* Adjusted spacing */
-             font-weight: 600;
-             color: #1774b4;
-             text-decoration: none;
-             padding: 8px 15px;
-             border: 1px solid #1774b4;
-             border-radius: 4px;
-             transition: background-color 0.2s ease, color 0.2s ease;
+            display: inline-block;
+            /* No top margin needed here, use margin on .article-container */
+            font-weight: 600;
+            color: #1774b4;
+            text-decoration: none;
+            padding: 8px 15px;
+            border: 1px solid #1774b4;
+            border-radius: 4px;
+            transition: background-color 0.2s ease, color 0.2s ease;
         }
-         .back-link:hover {
-             background-color: #1774b4;
-             color: #fff;
-             text-decoration: none;
-         }
+        .back-link:hover {
+            background-color: #1774b4;
+            color: #fff;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -202,32 +276,34 @@
                 metaEl.textContent = `${itemDate.toLocaleDateString('nl-BE', { day: 'numeric', month: 'long', year: 'numeric' })} | ${articleData.category || 'Algemeen'}`;
 
 
+                // ... inside loadSingleArticle function, after finding articleData ...
+
                 if (articleData.image) {
                     let finalImageUrl = articleData.image;
-                    if (!finalImageUrl.startsWith('http://') && !finalImageUrl.startsWith('https://')) {
-                        // Prepend the images path (ensure leading/trailing slashes are correct)
-                        finalImageUrl = `/images/nieuws/${finalImageUrl.startsWith('/') ? finalImageUrl.substring(1) : finalImageUrl}`;
-                    }
+                    // *** Corrected Image Path Logic: Assume image filename is relative to /images/nieuws/ ***
+                     if (!finalImageUrl.startsWith('http://') && !finalImageUrl.startsWith('https://')) {
+                         // Ensure no double slashes if filename starts with /
+                         finalImageUrl = `/images/nieuws/${finalImageUrl.replace(/^\//, '')}`;
+                     }
+                    // *** End Corrected Image Path Logic ***
                     imageContainer.innerHTML = `<img class="article-image" src="${finalImageUrl}" alt="${articleData.alt || articleData.title}" loading="lazy">`;
                 } else {
                     imageContainer.innerHTML = ''; // Clear if no image
                 }
 
                 if (articleData.full_content) {
-                    // Replace literal '\n' from JSON with paragraph tags
                     const paragraphs = articleData.full_content.split('\\n')
-                                        .map(p => p.trim()) // Remove whitespace around paragraphs
-                                        .filter(p => p.length > 0); // Remove empty paragraphs
-                    // Use innerHTML carefully. Assumes trusted content or sanitization needed elsewhere
+                                        .map(p => p.trim()) 
+                                        .filter(p => p.length > 0);
                     bodyEl.innerHTML = paragraphs.map(p => `<p>${p}</p>`).join('');
                 } 
 
-                if (loadingEl) loadingEl.style.display = 'none'; // Hide loading message
+                if (loadingEl) loadingEl.style.display = 'none';
 
             } catch (error) {
                 console.error(`Error loading article ${articleId}:`, error);
                 titleEl.textContent = "Fout bij Laden";
-                bodyEl.innerHTML = ''; // Clear potentially incomplete content
+                bodyEl.innerHTML = '';
                 imageContainer.innerHTML = ''; // Clear image
                 metaEl.textContent = ''; // Clear meta
                 if (loadingEl) loadingEl.style.display = 'none';
