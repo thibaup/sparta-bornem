@@ -258,13 +258,9 @@ document.addEventListener('DOMContentLoaded', function() {
                  parentLink.setAttribute('aria-expanded', 'false'); // Initially closed
 
                 parentLink.addEventListener('click', (event) => {
-                    // Only activate accordion behavior if the mobile menu is VISIBLE and screen is narrow
-                    // Check if menuToggle is visible (better than checking mainNavUl.active which might not be set yet on fast clicks)
                     const isMobileView = window.innerWidth < mobileBreakpoint && getComputedStyle(menuToggle).display !== 'none';
 
                     if (isMobileView) {
-                        // Prevent default link behavior ONLY on mobile accordion interaction
-                        // Allow click through if it's just text (no href) or explicitly prevent always
                         if(parentLink.getAttribute('href') && parentLink.getAttribute('href') !== '#') {
                              event.preventDefault();
                         }
@@ -272,8 +268,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         // Toggle the current submenu
                         const isOpening = !li.classList.contains('submenu-open');
 
-                        // --- Optional: Close other open submenus (True Accordion) ---
-                        // Comment this block out if you want multiple submenus open at once
                          if (isOpening) { // Only close others if we are opening this one
                              li.parentElement.querySelectorAll(':scope > li.submenu-open').forEach(otherLi => {
                                  if (otherLi !== li) { // Don't close the one we just opened
@@ -287,7 +281,6 @@ document.addEventListener('DOMContentLoaded', function() {
                                  }
                              });
                          }
-                         // --- End Optional Accordion Block ---
 
                         // Now toggle the current item
                         li.classList.toggle('submenu-open', isOpening); // Use force parameter
