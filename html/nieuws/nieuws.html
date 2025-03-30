@@ -383,16 +383,13 @@
                 if (loadingContainer) {
                     loadingContainer.innerHTML = displayError;
                 } else if (newsPlaceholder) {
-                    // Fallback if loading container was already gone somehow
                     newsPlaceholder.innerHTML = `<div style="grid-column: 1 / -1;">${displayError}</div>`;
                 }
-                 // Disable search if loading fails
                  searchInput.disabled = true;
                  searchInput.placeholder = "Nieuws laden mislukt";
             }
         }
 
-        // Run the initial load when the DOM is ready
         document.addEventListener('DOMContentLoaded', loadInitialNews);
     </script>
 </body>

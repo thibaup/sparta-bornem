@@ -12,70 +12,102 @@
         }
 
         .month-grid {
-            margin-bottom: 40px; /* Space between months */
+            margin-bottom: 50px; /* Increased space between months */
             background-color: #fff;
-            padding: 20px;
+            padding: 25px; /* Increased padding */
             border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08); /* Slightly deeper shadow */
         }
 
         .month-title {
             text-align: center;
-            font-size: 1.8em;
+            font-size: clamp(1.6em, 4vw, 2em); /* Responsive font size */
             color: #1774b4; /* Theme blue */
-            margin-bottom: 20px;
+            margin-bottom: 25px; /* Increased space */
         }
 
         .calendar-header {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
             text-align: center;
-            font-weight: bold;
+            font-weight: 600; /* Slightly bolder */
             color: #6c757d;
             padding-bottom: 10px;
             margin-bottom: 10px;
-            border-bottom: 2px solid #eee;
-            font-size: 0.9em;
+            border-bottom: 1px solid #dee2e6; /* Standard border */
+            font-size: 0.9rem; /* Use rem for better scaling */
         }
 
         .calendar-days {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 5px; /* Gap between day cells */
+            gap: 5px; /* Keep small gap */
         }
 
         .calendar-day {
-            border: 1px solid #e9ecef;
-            min-height: 100px; /* Minimum height for days */
+            border: 1px solid #f1f1f1; /* Lighter border for subtle grid lines */
+            min-height: 120px; /* Slightly increased base height */
             padding: 8px;
-            font-size: 0.85em;
-            position: relative; /* For positioning day number */
+            font-size: 0.9rem; /* Base font size using rem */
+            position: relative;
             background-color: #fff;
             transition: background-color 0.2s ease;
+            display: flex; /* Use flexbox for content alignment */
+            flex-direction: column; /* Stack number and events */
+            overflow: hidden; /* Prevent content spilling */
         }
 
-        .calendar-day.padding-day { /* Style for days outside the current month */
-            background-color: #f8f9fa; /* Lighter grey */
-            opacity: 0.7;
+        .calendar-day.padding-day {
+            background-color: #f8f9fa;
+            opacity: 0.6;
+            border-color: transparent; /* Hide border for padding days */
         }
+        .calendar-day.padding-day .day-number {
+            color: #adb5bd; /* Lighter number for padding days */
+        }
+
 
         .day-number {
             font-weight: bold;
-            color: #495057;
+            color: #343a40; /* Darker number */
             margin-bottom: 5px;
             display: block;
             text-align: right;
+            font-size: 0.85em; /* Relative to parent */
+            align-self: flex-end; /* Push to the right */
+            padding-bottom: 3px; /* Space below number */
         }
+
+        .calendar-day-events {
+            flex-grow: 1; /* Allow event container to take space */
+            overflow: hidden; /* Hide overflowing events */
+            /* We'll handle event overflow individually */
+        }
+
 
         .calendar-event {
             display: block; /* Each event on a new line */
-            font-size: 0.9em; /* Slightly smaller event text */
+            font-size: 0.85em; /* Adjusted relative size */
             padding: 3px 5px;
-            margin-bottom: 3px;
+            margin-bottom: 4px; /* Slightly more space */
             border-radius: 3px;
             line-height: 1.3;
-            border-left: 3px solid transparent; /* Prepare for color border */
+            border-left: 3px solid transparent;
+            /* --- Crucial for Text Truncation --- */
+            white-space: nowrap;      /* Prevent wrapping */
+            overflow: hidden;         /* Hide overflow */
+            text-overflow: ellipsis;  /* Show ... */
+            cursor: default;          /* Indicate non-interactive unless it's a link */
         }
+        /* Add title attribute for hover tooltip (handled by JS ideally, but good CSS fallback) */
+        .calendar-event[title]:hover {
+            overflow: visible; /* Allow seeing full text on hover IF title exists */
+            white-space: normal;
+            position: relative; /* Needed for z-index */
+            z-index: 10; /* Bring to front on hover */
+            background-color: inherit; /* Ensure background matches */
+        }
+
 
         /* Apply colors to events */
         .event-green { border-left-color: #28a745; background-color: rgba(40, 167, 69, 0.1); }
@@ -85,40 +117,101 @@
 
         .calendar-event a {
             text-decoration: none;
-            color: inherit; /* Inherit color from parent */
+            color: inherit;
+            display: block; /* Make link take full event space */
+            /* Ensure link inherits overflow properties */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         .calendar-event a:hover {
             text-decoration: underline;
+            /* Allow link text to be fully visible on hover */
+            overflow: visible;
+            white-space: normal;
         }
 
 
-        /* Legend Styling (Keep existing or adjust) */
+        /* Legend Styling (Adjusted for consistency) */
         .legend {
             margin-bottom: 30px;
-            padding: 15px 20px;
-            background-color: #e9ecef;
+            padding: 20px;
+            background-color: #f8f9fa; /* Slightly lighter */
             border-radius: 5px;
             border: 1px solid #dee2e6;
         }
-        .legend h2 { margin-top: 0; margin-bottom: 15px; font-size: 1.5em; border-bottom: 1px solid #ced4da; padding-bottom: 8px; }
-        .legend p { margin-bottom: 0.6em; font-size: 0.95em; }
+        .legend h2 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.4em; /* Adjusted size */
+            border-bottom: 1px solid #ced4da;
+            padding-bottom: 10px;
+            color: #495057; /* Slightly muted color */
+        }
+        .legend p {
+            margin-bottom: 0.8em;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
         .legend span { font-weight: bold; }
+        /* Specific legend color classes */
         .legend .legend-green { color: #28a745; }
         .legend .legend-blue { color: #007bff; }
         .legend .legend-red { color: #dc3545; }
         .legend .legend-black { color: #343a40; }
 
         /* --- Responsive Adjustments --- */
+
+        /* Tablet Portrait & Smaller */
         @media (max-width: 768px) {
-            .calendar-header { font-size: 0.75em; padding-bottom: 5px; margin-bottom: 5px;}
-            .calendar-day { min-height: 80px; padding: 5px; font-size: 0.75em; }
-            .day-number { font-size: 0.9em; margin-bottom: 3px;}
-            .calendar-event { font-size: 0.8em; padding: 2px 4px; }
-            .month-title { font-size: 1.5em; }
+            .month-grid { padding: 20px; }
+            .calendar-header {
+                font-size: 0.8rem;
+                padding-bottom: 8px;
+                margin-bottom: 8px;
+            }
+            .calendar-day {
+                min-height: 100px; /* Adjust as needed */
+                padding: 6px;
+                font-size: 0.85rem;
+            }
+            .day-number { font-size: 0.8em; } /* Relative to day cell */
+            .calendar-event {
+                font-size: 0.8em; /* Relative to day cell */
+                padding: 2px 4px;
+            }
+            .month-title { font-size: clamp(1.4em, 3.5vw, 1.8em); }
+            .legend h2 { font-size: 1.3em; }
+            .legend p { font-size: 0.9em; }
         }
-        @media (max-width: 480px) {
-            .calendar-header span { writing-mode: vertical-rl; text-orientation: mixed; } /* Make headers vertical? or abbreviate */
-            .calendar-day { min-height: 60px; }
+
+        /* Mobile Portrait */
+        @media (max-width: 600px) {
+            /* Headers use single letter from HTML */
+            .calendar-header {
+                font-size: 0.75rem; /* Smaller header font */
+                font-weight: 500; /* Less bold maybe */
+                border-bottom: none; /* Remove border, use cell borders */
+                margin-bottom: 5px;
+            }
+            .calendar-days { gap: 2px; } /* Reduce gap further */
+            .calendar-day {
+                min-height: 90px; /* Allow cells to be shorter */
+                padding: 4px; /* Reduce padding */
+                font-size: 0.75rem; /* Smaller base font in cell */
+                border-width: 1px; /* Ensure border is visible */
+            }
+            .day-number { font-size: 0.75em; margin-bottom: 2px; }
+            .calendar-event {
+                font-size: 0.75em; /* Smaller event font */
+                padding: 1px 3px;
+                margin-bottom: 2px;
+                border-left-width: 2px; /* Thinner color indicator */
+            }
+        }
+
+        @media (max-width: 400px) {
+            .calendar-day { min-height: 75px; } 
         }
     </style>
 </head>
@@ -142,7 +235,7 @@
             <section class="month-grid">
                 <h2 class="month-title">December 2024</h2>
                 <div class="calendar-header">
-                    <span>Ma</span><span>Di</span><span>Wo</span><span>Do</span><span>Vr</span><span>Za</span><span>Zo</span>
+                    <span>M</span><span>D</span><span>W</span><span>D</span><span>V</span><span>Z</span><span>Z</span>
                 </div>
                 <div class="calendar-days">
                     <!-- Padding days for start of month (Dec 1st is Sunday) -->
@@ -200,7 +293,7 @@
             <section class="month-grid">
                 <h2 class="month-title">Januari 2025</h2>
                 <div class="calendar-header">
-                    <span>Ma</span><span>Di</span><span>Wo</span><span>Do</span><span>Vr</span><span>Za</span><span>Zo</span>
+                    <span>M</span><span>D</span><span>W</span><span>D</span><span>V</span><span>Z</span><span>Z</span>
                 </div>
                 <div class="calendar-days">
                     <!-- Padding days (Jan 1st is Wednesday) -->
@@ -250,7 +343,7 @@
             <section class="month-grid">
                 <h2 class="month-title">Februari 2025</h2>
                 <div class="calendar-header">
-                    <span>Ma</span><span>Di</span><span>Wo</span><span>Do</span><span>Vr</span><span>Za</span><span>Zo</span>
+                    <span>M</span><span>D</span><span>W</span><span>D</span><span>V</span><span>Z</span><span>Z</span>
                 </div>
                 <div class="calendar-days">
                      <!-- Padding days (Feb 1st is Saturday) -->
@@ -300,8 +393,8 @@
              <section class="month-grid">
                  <h2 class="month-title">Maart 2025</h2>
                  <div class="calendar-header">
-                     <span>Ma</span><span>Di</span><span>Wo</span><span>Do</span><span>Vr</span><span>Za</span><span>Zo</span>
-                 </div>
+                    <span>M</span><span>D</span><span>W</span><span>D</span><span>V</span><span>Z</span><span>Z</span>
+                </div>
                  <div class="calendar-days">
                       <!-- Padding days (Mar 1st is Saturday) -->
                      <div class="calendar-day padding-day"></div>
@@ -354,7 +447,7 @@
             <section class="month-grid">
                 <h2 class="month-title">April 2025</h2>
                 <div class="calendar-header">
-                    <span>Ma</span><span>Di</span><span>Wo</span><span>Do</span><span>Vr</span><span>Za</span><span>Zo</span>
+                    <span>M</span><span>D</span><span>W</span><span>D</span><span>V</span><span>Z</span><span>Z</span>
                 </div>
                 <div class="calendar-days">
                      <!-- Padding days (Apr 1st is Tuesday) -->
@@ -404,7 +497,7 @@
             <section class="month-grid">
                 <h2 class="month-title">Mei 2025</h2>
                 <div class="calendar-header">
-                   <span>Ma</span><span>Di</span><span>Wo</span><span>Do</span><span>Vr</span><span>Za</span><span>Zo</span>
+                    <span>M</span><span>D</span><span>W</span><span>D</span><span>V</span><span>Z</span><span>Z</span>
                 </div>
                 <div class="calendar-days">
                      <!-- Padding days (May 1st is Thursday) -->
@@ -451,7 +544,7 @@
              <section class="month-grid">
                 <h2 class="month-title">Juni 2025</h2>
                 <div class="calendar-header">
-                   <span>Ma</span><span>Di</span><span>Wo</span><span>Do</span><span>Vr</span><span>Za</span><span>Zo</span>
+                    <span>M</span><span>D</span><span>W</span><span>D</span><span>V</span><span>Z</span><span>Z</span>
                 </div>
                 <div class="calendar-days">
                     <!-- Padding days (Jun 1st is Sunday) -->
@@ -513,7 +606,7 @@
               <section class="month-grid">
                 <h2 class="month-title">Augustus 2025</h2>
                 <div class="calendar-header">
-                   <span>Ma</span><span>Di</span><span>Wo</span><span>Do</span><span>Vr</span><span>Za</span><span>Zo</span>
+                    <span>M</span><span>D</span><span>W</span><span>D</span><span>V</span><span>Z</span><span>Z</span>
                 </div>
                 <div class="calendar-days">
                     <!-- Padding days (Aug 1st is Friday) -->
@@ -560,7 +653,7 @@
              <section class="month-grid">
                 <h2 class="month-title">September 2025</h2>
                 <div class="calendar-header">
-                   <span>Ma</span><span>Di</span><span>Wo</span><span>Do</span><span>Vr</span><span>Za</span><span>Zo</span>
+                    <span>M</span><span>D</span><span>W</span><span>D</span><span>V</span><span>Z</span><span>Z</span>
                 </div>
                 <div class="calendar-days">
                     <!-- Sep 1st is Monday -->
