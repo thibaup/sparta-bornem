@@ -177,13 +177,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const footerPlaceholder = document.getElementById('footer-placeholder');
 
     // --- Page Info ---
-    // *** IMPORTANT: Adjust 'home.html' if your homepage is index.html or other ***
-    const currentPagePath = window.location.pathname; // Get the full path
-    let currentPageFilename = currentPagePath.split('/').pop() || 'home.html'; // Default to home.html
-    // Handle root case where pop() might be empty
-    if (currentPagePath === '/' || currentPagePath.endsWith('/index.html')) {
-        currentPageFilename = 'home.html'; // Treat root or index.html as home.html
-    }
+    // Get the current full path from the browser's location object
+    const currentPagePath = window.location.pathname;
 
 
     // --- Function Definitions within DOMContentLoaded Scope ---
@@ -339,45 +334,78 @@ document.addEventListener('DOMContentLoaded', function() {
         // --- Active Page Link Highlighting Logic ---
         const navLinks = mainNavUl.querySelectorAll('a[href]'); // Select all links with href within the main nav UL
 
+        /**
+         * Normalizes a URL path for comparison.
+         * Removes trailing index/home.html, removes trailing .html,
+         * removes trailing slash (unless root), decodes URI components.
+         * @param {string} path - The URL path to normalize.
+         * @returns {string} The normalized path.
+         */
         const normalizePath = (path) => {
-            if (!path) return '/'; // Handle cases where path might be undefined/null
-            // Treat index.html as root
+            if (!path) return '/'; // Handle null/undefined path
+
+             // 1. Decode URI component first (handles spaces %20 etc.)
+             try {
+                path = decodeURIComponent(path);
+            } catch (e) {
+                 console.warn("Could not decode path component:", path, e);
+                 // Continue with the potentially encoded path if decoding fails
+            }
+
+            // 2. Remove index.html or home.html from the end
             if (path.endsWith('/index.html')) {
                 path = path.substring(0, path.length - 'index.html'.length);
-            }
-             // Treat home.html as root
-            if (path.endsWith('/home.html')) {
+            } else if (path.endsWith('/home.html')) {
                  path = path.substring(0, path.length - 'home.html'.length);
             }
-             // Remove trailing slash unless it's the root
+
+            // 3. Remove .html extension from the end (Key fix for Netlify Pretty URLs)
+            if (path.endsWith('.html')) {
+                path = path.substring(0, path.length - '.html'.length);
+            }
+
+            // 4. Remove trailing slash unless it's the root '/'
             if (path !== '/' && path.endsWith('/')) {
                 path = path.substring(0, path.length - 1);
             }
-             // Ensure root path is just '/'
-             if (path === '') {
-                 path = '/';
-             }
+
+            // 5. Ensure root path is consistently just '/' after modifications
+            if (path === '') {
+                path = '/';
+            }
+
+            // 6. Optional: Convert to lowercase for case-insensitive comparison (Uncomment if needed)
+            // path = path.toLowerCase();
+
             return path;
         };
 
-        const normalizedCurrentPath = normalizePath(currentPagePath); // currentPagePath defined earlier
 
+        // Normalize the current page's path ONCE
+        const normalizedCurrentPath = normalizePath(currentPagePath);
+
+        // Iterate through navigation links
         navLinks.forEach(link => {
             const linkHref = link.getAttribute('href');
             if (!linkHref || linkHref === '#') return; // Skip non-links or placeholder links
 
             let linkPath;
             try {
-                // Construct absolute URL to handle relative paths correctly
+                // Construct absolute URL's path to handle relative paths correctly
                 linkPath = new URL(linkHref, window.location.origin).pathname;
             } catch (e) {
                 console.warn(`Invalid URL encountered in navigation: ${linkHref}`);
                 return; // Skip invalid URLs
             }
 
+            // Normalize the link's path
             const normalizedLinkPath = normalizePath(linkPath);
 
-            // Check for active state
+            // --- Debugging Line (Remove in production) ---
+            // console.log(`Comparing: Current='${normalizedCurrentPath}' vs Link='${normalizedLinkPath}' (Original href: ${linkHref}, Current Path: ${currentPagePath})`);
+            // ---------------------------------------------
+
+            // Check for active state using the normalized paths
             if (normalizedCurrentPath === normalizedLinkPath) {
                 link.classList.add('active');
 
@@ -385,33 +413,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 let currentElement = link.parentElement; // Start with the LI containing the link
                 while (currentElement && currentElement.matches('.main-nav li, .main-nav ul')) {
                     if (currentElement.tagName === 'LI') {
-                         // Add class to the LI itself
-                        currentElement.classList.add('active-ancestor');
+                        currentElement.classList.add('active-ancestor'); // Add class to the parent LI
 
-                         // Find the direct anchor link within that LI (the parent menu item trigger)
+                        // Find the direct anchor link within that LI (the parent menu item trigger)
                         const parentTriggerLink = currentElement.querySelector(':scope > a');
                         if (parentTriggerLink) {
                             parentTriggerLink.classList.add('active'); // Highlight the trigger link
-                             // Optionally expand active ancestors on mobile load (can make menu long)
-                             // const isMobileView = window.innerWidth < mobileBreakpoint && getComputedStyle(menuToggle).display !== 'none';
-                             // if (isMobileView && currentElement.classList.contains('menu-item-has-children')) { // Assuming you add this class in HTML for items with children
-                             //    const submenuToOpen = currentElement.querySelector(':scope > ul.submenu');
-                             //    currentElement.classList.add('submenu-open');
-                             //    if(submenuToOpen) submenuToOpen.classList.add('submenu-active');
-                             //    if(parentTriggerLink) parentTriggerLink.setAttribute('aria-expanded', 'true');
-                             // }
                         }
                     }
                     // Move up to the parent UL, then its parent LI
-                     const parentUl = currentElement.closest('ul');
-                     if (parentUl && parentUl.classList.contains('submenu')) {
-                         currentElement = parentUl.parentElement; // Go to the LI containing the submenu
+                     const parentUl = currentElement.closest('ul.submenu'); // Look specifically for submenu ULs
+                     if (parentUl) { // If we are inside a submenu UL
+                         currentElement = parentUl.parentElement; // Go to the LI containing this submenu
                      } else {
                          break; // Stop if we reach the main nav UL or something else
                      }
                 }
-            }
-        });
+            } // End if active
+        }); // End navLinks.forEach
 
 
     }; // End initializeHeader
@@ -423,8 +442,6 @@ document.addEventListener('DOMContentLoaded', function() {
          const yearSpan = document.getElementById('current-year');
          if (yearSpan) {
              yearSpan.textContent = new Date().getFullYear();
-         } else {
-             // console.warn("Footer initialization warning: Element with ID 'current-year' not found.");
          }
     };
 
@@ -445,7 +462,6 @@ document.addEventListener('DOMContentLoaded', function() {
             headerLoaded = await loadHTML(headerPath, headerPlaceholder);
         }
         // Initialize header AFTER potential loading OR if it exists statically
-        // Check if the .site-header element is now present in the DOM
         if (document.querySelector('.site-header')) {
              initializeHeader();
         } else {
@@ -458,7 +474,6 @@ document.addEventListener('DOMContentLoaded', function() {
              footerLoaded = await loadHTML(footerPath, footerPlaceholder);
         }
          // Initialize footer AFTER potential loading OR if it exists statically
-         // Check if the .site-footer element is now present in the DOM
          if (document.querySelector('.site-footer')) {
              initializeFooter();
              adjustFooterPosition(); // Adjust position after footer content is known
@@ -470,14 +485,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
         // --- Load Latest News ---
-        // Ensure function exists before calling
         if (typeof loadLatestNews === 'function') {
            await loadLatestNews(); // Load news if container exists on the page
         }
 
 
         // --- Final Footer Position Check ---
-        // Call again after potential content changes from news load
         if (typeof adjustFooterPosition === 'function') {
             setTimeout(adjustFooterPosition, 100); // Slightly longer delay after potential layout shifts
         }
@@ -493,7 +506,6 @@ document.addEventListener('DOMContentLoaded', function() {
 // --- Global Event Listeners ---
 
 // Adjust footer position when all resources are loaded (images etc.)
-// This is a good final check for layout shifts
 window.addEventListener('load', adjustFooterPosition);
 
 // Adjust footer position on window resize (debounced)
