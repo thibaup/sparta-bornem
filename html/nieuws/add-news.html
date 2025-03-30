@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nieuwsartikel JSON Generator (Automatisch)</title>
-    <!-- Link your main CSS for consistency -->
-    <link rel="stylesheet" href="/css/style.css">
+
     <style>
         /* Keep body padding, but inherit main styles */
         body { padding: 20px; background-color: #f8f9fa; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333;}
@@ -85,14 +84,14 @@
     <!-- No header/footer needed for this utility page -->
     <div class="tool-container">
         <h1>Nieuwsartikel JSON Generator (Automatisch)</h1>
-        <p class="note">Vul de velden in en klik op 'Voeg Toe & Genereer Volledige JSON'. De tool laadt automatisch de bestaande <code>nieuws-data.json</code>, voegt het nieuwe artikel toe, en toont het volledige resultaat hieronder. Kopieer deze volledige JSON om je <code>nieuws-data.json</code> bestand te vervangen.</p>
+        <p class="note">Vul de velden in en klik op 'Voeg Toe & Genereer Volledige JSON'. De tool laadt automatisch de bestaande <code>nieuws-data.json</code>, voegt het nieuwe artikel toe (<strong>alleen als het ID uniek is</strong>), en toont het volledige resultaat hieronder. Kopieer deze volledige JSON om je <code>nieuws-data.json</code> bestand te vervangen.</p>
 
         <form id="news-form">
             <h2>Nieuw Artikel Invoeren</h2>
             <div>
                 <label for="article-id">Uniek ID (bv. 'nieuwe-trainer-jan'):</label>
                 <input type="text" id="article-id" required>
-                <small>Gebruik alleen kleine letters, cijfers, en koppeltekens (-). Geen spaties.</small>
+                <small>Gebruik alleen kleine letters, cijfers, en koppeltekens (-). Geen spaties. <strong>Moet uniek zijn!</strong></small>
             </div>
             <div>
                 <label for="article-date">Datum (YYYY-MM-DD):</label>
@@ -152,158 +151,14 @@
             finalJsonOutputEl.textContent = 'Vul het formulier in en klik op \'Voeg Toe & Genereer\'...';
             formErrorEl.style.display = 'none';
             copyStatusEl.style.display = 'none';
+             // Ensure ID field loses any error styling if previously set
+            document.getElementById('article-id').style.borderColor = '';
         });
 
         // --- Helper Functions ---
 
         /**
          * Converts plain text URLs and emails in a string to HTML anchor tags.
-         * NOTE: This is a best-effort conversion using regex and may not perfectly
-         * handle edge cases or text that already contains complex HTML.
-         * @param {string} text - The input text.
-         * @returns {string} Text with detected URLs and emails converted to <a> tags.
-         */
-        function autoLinkText(text) {
-            if (!text) return '';
-
-            // 1. Link Emails first to avoid conflict with URL matching
-            // Uses word boundaries (\b) to avoid matching parts of other words/URLs
-            const emailRegex = /\b([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,})\b/gi;
-            text = text.replace(emailRegex, '<a href="mailto:$1">$1</a>');
-
-            // 2. Link URLs (starting with http, https, or www.)
-            // Regex explanation:
-            // (           # Start capturing group 1 (the full URL)
-            //   (?:         # Start non-capturing group for protocol or www
-            //     https?:\/\/ # Match http:// or https://
-            //     |           # OR
-            //     www\.       # Match www. (will prepend https:// later)
-            //   )           # End non-capturing group
-            //   [^\s<>()"]+  # Match one or more characters that are NOT whitespace, <, >, (, ), "
-            //                # Helps prevent grabbing trailing punctuation or breaking HTML
-            // )           # End capturing group 1
-            const urlRegex = /((?:https?:\/\/|www\.)[^\s<>()"]+)/gi;
-            text = text.replace(urlRegex, (match, url) => {
-                let href = url;
-                // Ensure www. links have a protocol for the href attribute
-                if (href.startsWith('www.')) {
-                    href = 'https://' + href;
-                }
-                // Create the anchor tag, ensuring the URL itself is displayed as the link text
-                return `<a href="${href}" target="_blank" rel="noopener noreferrer">${url}</a>`;
-            });
-
-            return text;
-        }
-
-        // --- Main Submit Handler ---
-        async function handleFormSubmit(event) {
-            event.preventDefault();
-            formErrorEl.style.display = 'none';
-            copyStatusEl.style.display = 'none';
-            finalJsonOutputEl.textContent = 'Bezig met verwerken...'; // Feedback
-
-            const idInput = document.getElementById('article-id');
-            const dateInput = document.getElementById('article-date');
-            const titleInput = document.getElementById('article-title');
-            const summaryInput = document.getElementById('article-summary');
-            const imageInput = document.getElementById('article-image');
-            const fullContentInput = document.getElementById('article-full-content');
-
-            // Basic Validation
-            const id = idInput.value.trim();
-            const date = dateInput.value;
-            const title = titleInput.value.trim();
-            const summary = summaryInput.value.trim();
-            const imageName = imageInput.value.trim();
-            const fullContentRaw = fullContentInput.value.trim(); // Get raw text
-
-            if (!id || !/^[a-z0-9-]+$/.test(id)) {
-                 showError(formErrorEl, "Ongeldig ID. Gebruik alleen kleine letters, cijfers en koppeltekens.");
-                 idInput.focus();
-                 finalJsonOutputEl.textContent = 'Validatiefout.';
-                 return;
-            }
-            if (!date) { showError(formErrorEl, "Datum is verplicht."); dateInput.focus(); finalJsonOutputEl.textContent = 'Validatiefout.'; return; }
-            if (!title) { showError(formErrorEl, "Titel is verplicht."); titleInput.focus(); finalJsonOutputEl.textContent = 'Validatiefout.'; return; }
-
-            // --- Process Content: Auto-Link -> Newlines ---
-            // 1. Auto-link URLs and emails in the raw text
-            let processedContent = autoLinkText(fullContentRaw);
-
-            // 2. Replace newlines with literal <br> tags for HTML display
-            //    Ensure this produces the exact string '<br>'
-            processedContent = processedContent.replace(/\r\n|\r|\n/g, '<br>');
-
-            // 3. IMPORTANT: REMOVED manual quote escaping. Let JSON.stringify handle it.
-            // processedContent = processedContent.replace(/"/g, '\\"');
-            // processedContent = processedContent.replace(/'/g, "\\'");
-
-            // Prepare new article data object
-            const newArticleData = {
-                id: id,
-                date: date,
-                title: title,
-                category: document.getElementById('article-category').value.trim() || 'Algemeen',
-                image: imageName ? imageName : "nieuws-beeld.png", // Default image if empty
-                summary: summary || title, // Use title as summary if summary is empty
-                full_content: processedContent // Use the processed content directly
-            };
-
-            // --- Load existing JSON and add new article ---
-            try {
-                let existingData = [];
-                finalJsonOutputEl.textContent = `Laden van ${newsDataUrl}...`;
-                try {
-                    // Add cache-busting query parameter
-                    const response = await fetch(`${newsDataUrl}?t=${Date.now()}`);
-                    if (response.ok) {
-                        const text = await response.text();
-                        if (text.trim()) {
-                            existingData = JSON.parse(text);
-                            if (!Array.isArray(existingData)) {
-                                console.warn("Existing data is not an array, resetting.");
-                                existingData = [];
-                            }
-                        }
-                    } else if (response.status !== 404) {
-                        throw new Error(`HTTP error! Status: ${response.status}`);
-                    }
-                    // If 404 or empty, existingData remains []
-                } catch (fetchError) {
-                    console.warn(`Kon bestaande JSON niet laden/parsen (${newsDataUrl}). Start met lege lijst. Fout: ${fetchError.message}`);
-                    existingData = []; // Ensure it's an empty array on error
-                }
-
-                // Add the new article (prepend to show newest first)
-                const updatedData = [newArticleData, ...existingData];
-
-                // Stringify the combined data. JSON.stringify will correctly escape quotes
-                // and backslashes within the 'processedContent' string.
-                const finalJsonString = JSON.stringify(updatedData, null, 2); // Pretty print
-
-                // Display the final JSON
-                finalJsonOutputEl.textContent = finalJsonString;
-                showSuccess(copyStatusEl, "Volledige JSON gegenereerd. Kopieer de inhoud hierboven.");
-
-            } catch (error) {
-                console.error('Error generating final JSON:', error);
-                showError(formErrorEl, `Fout bij genereren JSON: ${error.message}`);
-                finalJsonOutputEl.textContent = "Fout bij genereren.";
-            }
-        }
-
-        // --- Helper Functions (autoLinkText, copyToClipboard, showError, showSuccess) ---
-        // Keep the existing helper functions as they were in the previous correct version
-        // ... (autoLinkText function definition here) ...
-        // ... (copyToClipboard function definition here) ...
-        // ... (showError function definition here) ...
-        // ... (showSuccess function definition here) ...
-
-        /**
-         * Converts plain text URLs and emails in a string to HTML anchor tags.
-         * NOTE: This is a best-effort conversion using regex and may not perfectly
-         * handle edge cases or text that already contains complex HTML.
          * @param {string} text - The input text.
          * @returns {string} Text with detected URLs and emails converted to <a> tags.
          */
@@ -324,19 +179,18 @@
 
         function copyToClipboard(text, statusElement) {
              if (!navigator.clipboard) {
-                 alert('Clipboard API niet ondersteund door uw browser.');
+                 showError(statusElement, 'Clipboard API niet ondersteund.'); // Use showError for consistency
                  return;
              }
-             if (!text || text.startsWith('Vul het formulier in') || text.startsWith('Bezig met verwerken') || text.startsWith('Validatiefout') || text.startsWith('Fout bij genereren')) {
-                 alert('Geen geldige JSON om te kopiëren.');
+             if (!text || text.startsWith('Vul het formulier in') || text.startsWith('Bezig met verwerken') || text.startsWith('Validatiefout') || text.startsWith('Fout:') || text.startsWith('Laden')) {
+                 showError(statusElement, 'Geen geldige JSON om te kopiëren.');
                  return;
              }
             navigator.clipboard.writeText(text).then(() => {
                 showSuccess(statusElement, "Volledige JSON gekopieerd!");
             }).catch(err => {
                 console.error('Kopiëren mislukt: ', err);
-                alert('Automatisch kopiëren mislukt. Probeer handmatig te selecteren en kopiëren.');
-                showError(statusElement, "Kopiëren mislukt.");
+                showError(statusElement, 'Automatisch kopiëren mislukt. Probeer handmatig.');
             });
         }
 
@@ -345,7 +199,10 @@
              element.style.display = 'block';
              element.classList.remove('success');
              element.classList.add('error');
-             setTimeout(() => { element.style.display = 'none'; }, 5000);
+             // No automatic timeout for form errors, only for copy status
+             if (element.id !== 'form-error') {
+                 setTimeout(() => { element.style.display = 'none'; }, 5000);
+             }
          }
 
          function showSuccess(element, message) {
@@ -355,6 +212,120 @@
              element.classList.add('success');
              setTimeout(() => { element.style.display = 'none'; }, 3000);
          }
+
+
+        // --- Main Submit Handler ---
+        async function handleFormSubmit(event) {
+            event.preventDefault();
+            formErrorEl.style.display = 'none'; // Hide previous errors
+            copyStatusEl.style.display = 'none';
+            finalJsonOutputEl.textContent = 'Bezig met verwerken...'; // Feedback
+
+            const idInput = document.getElementById('article-id');
+            const dateInput = document.getElementById('article-date');
+            const titleInput = document.getElementById('article-title');
+            const summaryInput = document.getElementById('article-summary');
+            const imageInput = document.getElementById('article-image');
+            const fullContentInput = document.getElementById('article-full-content');
+            const categoryInput = document.getElementById('article-category');
+
+            // Reset potential previous error style on ID field
+            idInput.style.borderColor = '';
+
+            // Basic Validation
+            const id = idInput.value.trim();
+            const date = dateInput.value;
+            const title = titleInput.value.trim();
+            const summary = summaryInput.value.trim();
+            const category = categoryInput.value.trim() || 'Algemeen';
+            const imageName = imageInput.value.trim();
+            const fullContentRaw = fullContentInput.value.trim(); // Get raw text
+
+            if (!id || !/^[a-z0-9-]+$/.test(id)) {
+                 showError(formErrorEl, "Ongeldig ID. Gebruik alleen kleine letters, cijfers en koppeltekens.");
+                 idInput.focus();
+                 idInput.style.borderColor = '#dc3545'; // Highlight error field
+                 finalJsonOutputEl.textContent = 'Fout: Validatiefout in formulier.';
+                 return;
+            }
+            if (!date) { showError(formErrorEl, "Datum is verplicht."); dateInput.focus(); finalJsonOutputEl.textContent = 'Fout: Validatiefout in formulier.'; return; }
+            if (!title) { showError(formErrorEl, "Titel is verplicht."); titleInput.focus(); finalJsonOutputEl.textContent = 'Fout: Validatiefout in formulier.'; return; }
+
+            // --- Process Content: Auto-Link -> Newlines ---
+            let processedContent = autoLinkText(fullContentRaw);
+            processedContent = processedContent.replace(/\r\n|\r|\n/g, '<br>');
+
+            // Prepare new article data object
+            const newArticleData = {
+                id: id,
+                date: date,
+                title: title,
+                category: category,
+                image: imageName ? imageName : "nieuws-beeld.png", // Default image if empty
+                summary: summary || title, // Use title as summary if summary is empty
+                full_content: processedContent // Use the processed content directly
+            };
+
+            // --- Load existing JSON, Check for Duplicate ID, and Add New Article ---
+            try {
+                let existingData = [];
+                finalJsonOutputEl.textContent = `Laden van ${newsDataUrl}...`;
+
+                try {
+                    const response = await fetch(`${newsDataUrl}?t=${Date.now()}`); // Cache-bust
+                    if (response.ok) {
+                        const text = await response.text();
+                        if (text.trim()) { // Check if file is not empty
+                            existingData = JSON.parse(text);
+                            if (!Array.isArray(existingData)) {
+                                console.warn(`${newsDataUrl} bevatte geen array. Wordt gereset naar een lege lijst.`);
+                                existingData = [];
+                            }
+                        }
+                        // If file was empty or only whitespace, existingData remains []
+                    } else if (response.status === 404) {
+                        console.warn(`${newsDataUrl} niet gevonden. Start met een lege lijst.`);
+                        existingData = []; // Ensure it's an empty array if file doesn't exist
+                    } else {
+                        // Handle other HTTP errors (like 500, 403 etc.)
+                        throw new Error(`HTTP error! Status: ${response.status} bij laden van ${newsDataUrl}`);
+                    }
+                } catch (fetchOrParseError) {
+                    // Handle network errors or JSON parsing errors
+                    console.error(`Fout bij laden/parsen ${newsDataUrl}:`, fetchOrParseError);
+                    showError(formErrorEl, `Kon ${newsDataUrl} niet laden of lezen. Controleer of het bestand bestaat en geldige JSON bevat. (${fetchOrParseError.message})`);
+                    finalJsonOutputEl.textContent = `Fout: Kan ${newsDataUrl} niet verwerken.`;
+                    return; // Stop if we can't load the base data
+                }
+
+                // *** CHECK FOR DUPLICATE ID ***
+                const isDuplicateId = existingData.some(article => article.id === id);
+                if (isDuplicateId) {
+                    showError(formErrorEl, `Fout: Artikel ID "${id}" bestaat al. Kies een uniek ID.`);
+                    idInput.focus();
+                    idInput.style.borderColor = '#dc3545'; // Highlight error field
+                    finalJsonOutputEl.textContent = `Fout: Duplicaat ID "${id}" gevonden. Artikel niet toegevoegd.`;
+                    return; // Stop further processing
+                }
+                // *** END CHECK ***
+
+                // Add the new article (prepend to show newest first)
+                const updatedData = [newArticleData, ...existingData];
+
+                // Stringify the combined data
+                const finalJsonString = JSON.stringify(updatedData, null, 2); // Pretty print
+
+                // Display the final JSON
+                finalJsonOutputEl.textContent = finalJsonString;
+                showSuccess(copyStatusEl, "Volledige JSON gegenereerd. Kopieer de inhoud hierboven.");
+
+            } catch (error) { // Catch any unexpected errors during the process
+                console.error('Onverwachte fout bij verwerken:', error);
+                showError(formErrorEl, `Onverwachte fout: ${error.message}`);
+                finalJsonOutputEl.textContent = "Fout bij genereren.";
+            }
+        }
+
     </script>
 </body>
 </html>

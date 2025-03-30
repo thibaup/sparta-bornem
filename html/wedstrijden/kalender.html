@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kalender - Atletiekclub Sparta Bornem</title>
-    <link rel="icon" type="image/png" href="/favicon.png"> <!-- Make sure favicon exists at root or update path -->
-    <link rel="stylesheet" href="/css/style.css"> <!-- Link to your main stylesheet -->
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="stylesheet" href="/css/style.css"> 
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -44,10 +44,6 @@
 
         .calendar-view {
             margin-top: 30px;
-            /* Optional: Limit the maximum width the calendar grid can take */
-            /* max-width: 900px; */
-            /* margin-left: auto; */
-            /* margin-right: auto; */
         }
 
         .month-grid {
@@ -80,24 +76,20 @@
         .calendar-days {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 5px; /* Adjust gap as needed */
+            gap: 5px; 
         }
 
         .calendar-day {
             border: 1px solid #f1f1f1;
-            /* --- CORE CHANGE: Use aspect-ratio --- */
-            aspect-ratio: 1 / 1;  /* Make the cell square (width / height) */
-            /* --- REMOVE fixed min-height --- */
-            /* min-height: 120px; */
-            /* --- Adjust padding if needed for smaller cells --- */
-            padding: 5px; /* Reduced padding */
-            font-size: 0.85rem; /* Adjust base font size for cells */
+            aspect-ratio: 1 / 1;
+            padding: 5px; 
+            font-size: 0.85rem;
             position: relative;
             background-color: #fff;
             transition: background-color 0.2s ease;
             display: flex;
             flex-direction: column;
-            overflow: hidden; /* Keep hiding overflow */
+            overflow: hidden; 
         }
 
         .calendar-day.padding-day {
@@ -112,26 +104,20 @@
         .day-number {
             font-weight: bold;
             color: #343a40;
-            margin-bottom: 2px; /* Reduced margin */
+            margin-bottom: 2px;
             display: block;
             text-align: right;
-            font-size: 0.8em; /* Smaller number relative to cell */
+            font-size: 0.8em; 
             align-self: flex-end;
-            /* Removed padding-bottom, use cell padding */
         }
 
-        /* Optional container for events if more complex layout is needed later */
-        /* .calendar-day-events { flex-grow: 1; overflow: hidden; } */
-
-
-        /* Base Calendar Event Style (Truncate by default) */
         .calendar-event {
             display: block;
-            font-size: 0.8em; /* Smaller event text relative to cell */
-            padding: 2px 4px; /* Reduced padding */
-            margin-bottom: 2px; /* Reduced margin */
+            font-size: 0.8em;
+            padding: 2px 4px; 
+            margin-bottom: 2px; 
             border-radius: 3px;
-            line-height: 1.2; /* Tighter line height */
+            line-height: 1.2; 
             border-left: 3px solid transparent;
             white-space: nowrap;
             overflow: hidden;
@@ -140,7 +126,6 @@
             position: relative;
         }
 
-        /* Base style for links within events (also truncate) */
         .calendar-event a {
             text-decoration: none;
             color: inherit;
@@ -153,40 +138,34 @@
             text-decoration: underline;
         }
 
-        /* Expanded Event State (Toggled by JS) */
         .calendar-event.event-expanded {
             white-space: normal;
             overflow: visible;
             text-overflow: clip;
             z-index: 5;
-            background-color: #fff; /* Can use parent background or specific */
+            background-color: #fff; 
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             cursor: default;
-            /* Allow expanded item to slightly overlay others if needed */
             position: absolute;
             left: 0;
             right: 0;
-            /* top: auto; Let it flow naturally below previous event */
-            width: auto; /* Let it take parent width */
-            min-height: fit-content; /* Try to fit its content */
-            border-left-width: 3px; /* Keep border */
-            padding: 3px 5px; /* Keep original padding */
+            width: auto;
+            min-height: fit-content;
+            border-left-width: 3px; 
+            padding: 3px 5px;
         }
-        /* Ensure link inside expanded event also wraps */
+
         .calendar-event.event-expanded a {
             white-space: normal;
             overflow: visible;
             text-overflow: clip;
         }
 
-        /* Apply colors to events */
         .event-green { border-left-color: #28a745; background-color: rgba(40, 167, 69, 0.1); }
         .event-blue { border-left-color: #007bff; background-color: rgba(0, 123, 255, 0.1); }
         .event-red { border-left-color: #dc3545; background-color: rgba(220, 53, 69, 0.1); }
         .event-black { border-left-color: #343a40; background-color: rgba(52, 58, 64, 0.1); }
 
-
-        /* Legend Styling */
         .legend {
             margin-bottom: 30px;
             padding: 20px;
@@ -210,22 +189,18 @@
         .legend .legend-black { color: #343a40; }
 
 
-        /* --- Responsive Adjustments --- */
-
         @media (max-width: 768px) {
-            .month-grid { padding: 15px; } /* Less padding */
+            .month-grid { padding: 15px; } 
             .calendar-header { font-size: 0.75rem; padding-bottom: 6px; margin-bottom: 6px; }
             .calendar-day {
-                padding: 4px; /* Further reduced padding */
-                font-size: 0.75rem; /* Smaller base font */
-                /* Aspect ratio still applies */
+                padding: 4px; 
+                font-size: 0.75rem; 
             }
             .day-number { font-size: 0.8em; }
 
             .calendar-event {
-                font-size: 0.75em; /* Smaller events */
+                font-size: 0.75em;
                 padding: 1px 3px;
-                /* Clickable cursor is now set */
                 cursor: pointer;
             }
             .month-title { font-size: clamp(1.4em, 3.5vw, 1.8em); }
@@ -237,39 +212,35 @@
             .calendar-header { font-size: 0.7rem; font-weight: 500; border-bottom: none; margin-bottom: 3px; }
             .calendar-days { gap: 2px; }
             .calendar-day {
-                padding: 3px; /* Even less padding */
+                padding: 3px; 
                 font-size: 0.7rem;
                 border-width: 1px;
-                /* Aspect ratio still applies, cells become smaller squares */
             }
             .day-number { font-size: 0.75em; margin-bottom: 1px; }
 
             .calendar-event,
             .calendar-event a {
-                font-size: 0.75em; /* Relative to smaller cell */
+                font-size: 0.75em;
                 padding: 1px 2px;
                 margin-bottom: 1px;
                 border-left-width: 2px;
             }
-            /* Expanded state needs less padding too */
             .calendar-event.event-expanded { padding: 2px 4px; }
         }
 
-        /* Very Small Mobile */
         @media (max-width: 400px) {
             .calendar-header { font-size: 0.65rem; }
             .calendar-day { font-size: 0.65rem; padding: 2px; }
             .day-number { font-size: 0.7em; }
             .calendar-event,
             .calendar-event a {
-                font-size: 0.7em; /* Even smaller font */
+                font-size: 0.7em;
             }
         }
     </style>
 </head>
 <body>
-    <div id="header-placeholder">
-        <!-- Header loaded by /js/script.js -->
+    <div id="header-placeholder"> 
     </div>
 
     <main class="container main-content">
@@ -675,12 +646,10 @@
     </main>
 
     <div id="footer-placeholder">
-        <!-- Footer loaded by /js/script.js -->
     </div>
 
-    <script src="/js/script.js" defer></script> <!-- Your existing script for header/footer -->
+    <script src="/js/script.js" defer></script>
 
-    <!-- NEW SCRIPT BLOCK FOR CALENDAR INTERACTION -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const calendarView = document.querySelector('.calendar-view');
