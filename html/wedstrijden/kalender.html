@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="nl-NL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalender - Atletiekclub Sparta Bornem</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- Include calendar styles here or in main CSS -->
+    <link rel="stylesheet" href="/css/calendar-styles.css"> <!-- Example if separated -->
+    <style>
+        .calendar-view {
+            margin-top: 30px;
+        }
+
+        .month-grid {
+            margin-bottom: 40px; /* Space between months */
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .month-title {
+            text-align: center;
+            font-size: 1.8em;
+            color: #1774b4; /* Theme blue */
+            margin-bottom: 20px;
+        }
+
+        .calendar-header {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            font-weight: bold;
+            color: #6c757d;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #eee;
+            font-size: 0.9em;
+        }
+
+        .calendar-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px; /* Gap between day cells */
+        }
+
+        .calendar-day {
+            border: 1px solid #e9ecef;
+            min-height: 100px; /* Minimum height for days */
+            padding: 8px;
+            font-size: 0.85em;
+            position: relative; /* For positioning day number */
+            background-color: #fff;
+            transition: background-color 0.2s ease;
+        }
+
+        .calendar-day.padding-day { /* Style for days outside the current month */
+            background-color: #f8f9fa; /* Lighter grey */
+            opacity: 0.7;
+        }
+
+        .day-number {
+            font-weight: bold;
+            color: #495057;
+            margin-bottom: 5px;
+            display: block;
+            text-align: right;
+        }
+
+        .calendar-event {
+            display: block; /* Each event on a new line */
+            font-size: 0.9em; /* Slightly smaller event text */
+            padding: 3px 5px;
+            margin-bottom: 3px;
+            border-radius: 3px;
+            line-height: 1.3;
+            border-left: 3px solid transparent; /* Prepare for color border */
+        }
+
+        /* Apply colors to events */
+        .event-green { border-left-color: #28a745; background-color: rgba(40, 167, 69, 0.1); }
+        .event-blue { border-left-color: #007bff; background-color: rgba(0, 123, 255, 0.1); }
+        .event-red { border-left-color: #dc3545; background-color: rgba(220, 53, 69, 0.1); }
+        .event-black { border-left-color: #343a40; background-color: rgba(52, 58, 64, 0.1); }
+
+        .calendar-event a {
+            text-decoration: none;
+            color: inherit; /* Inherit color from parent */
+        }
+        .calendar-event a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* Legend Styling (Keep existing or adjust) */
+        .legend {
+            margin-bottom: 30px;
+            padding: 15px 20px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            border: 1px solid #dee2e6;
+        }
+        .legend h2 { margin-top: 0; margin-bottom: 15px; font-size: 1.5em; border-bottom: 1px solid #ced4da; padding-bottom: 8px; }
+        .legend p { margin-bottom: 0.6em; font-size: 0.95em; }
+        .legend span { font-weight: bold; }
+        .legend .legend-green { color: #28a745; }
+        .legend .legend-blue { color: #007bff; }
+        .legend .legend-red { color: #dc3545; }
+        .legend .legend-black { color: #343a40; }
+
+        /* --- Responsive Adjustments --- */
+        @media (max-width: 768px) {
+            .calendar-header { font-size: 0.75em; padding-bottom: 5px; margin-bottom: 5px;}
+            .calendar-day { min-height: 80px; padding: 5px; font-size: 0.75em; }
+            .day-number { font-size: 0.9em; margin-bottom: 3px;}
+            .calendar-event { font-size: 0.8em; padding: 2px 4px; }
+            .month-title { font-size: 1.5em; }
+        }
+        @media (max-width: 480px) {
+            .calendar-header span { writing-mode: vertical-rl; text-orientation: mixed; } /* Make headers vertical? or abbreviate */
+            .calendar-day { min-height: 60px; }
+        }
+    </style>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <main class="container main-content">
+        <h1>Wedstrijden Kalender</h1>
+
+        <section class="legend">
+            <h2>Legende</h2>
+            <p><span class="legend-green">Groen:</span> 'gewone' wedstrijden (incl. PK) waar begeleiding voorzien is.</p>
+            <p><span class="legend-blue">Blauw:</span> kampioenschappen (KVV/BK) & Interclub (BVV) waar begeleiding geprobeerd wordt te voorzien.</p>
+            <p><span class="legend-red">Rood:</span> 'gewone' wedstrijden zonder voorziene begeleiding.</p>
+            <p><span class="legend-black">Zwart:</span> Andere clubactiviteiten of onbekende status.</p>
+        </section>
+
+        <div class="calendar-view">
+
+            <!-- === DECEMBER 2024 === -->
+            <section class="month-grid">
+                <h2 class="month-title">December 2024</h2>
+                <div class="calendar-header">
+                    <span>Ma</span><span>Di</span><span>Wo</span><span>Do</span><span>Vr</span><span>Za</span><span>Zo</span>
+                </div>
+                <div class="calendar-days">
+                    <!-- Padding days for start of month (Dec 1st is Sunday) -->
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day"><span class="day-number">1</span></div>
+                    <!-- Week 1 -->
+                    <div class="calendar-day"><span class="day-number">2</span></div>
+                    <div class="calendar-day"><span class="day-number">3</span></div>
+                    <div class="calendar-day"><span class="day-number">4</span></div>
+                    <div class="calendar-day"><span class="day-number">5</span></div>
+                    <div class="calendar-day"><span class="day-number">6</span></div>
+                    <div class="calendar-day"><span class="day-number">7</span><span class="calendar-event event-red">KAAG-meeting Gent</span></div>
+                    <div class="calendar-day"><span class="day-number">8</span><span class="calendar-event event-blue">BK AMH Gent</span></div>
+                    <!-- Week 2 -->
+                    <div class="calendar-day"><span class="day-number">9</span></div>
+                    <div class="calendar-day"><span class="day-number">10</span></div>
+                    <div class="calendar-day"><span class="day-number">11</span></div>
+                    <div class="calendar-day"><span class="day-number">12</span></div>
+                    <div class="calendar-day"><span class="day-number">13</span></div>
+                    <div class="calendar-day"><span class="day-number">14</span></div>
+                    <div class="calendar-day"><span class="day-number">15</span></div>
+                     <!-- Week 3 -->
+                    <div class="calendar-day"><span class="day-number">16</span></div>
+                    <div class="calendar-day"><span class="day-number">17</span></div>
+                    <div class="calendar-day"><span class="day-number">18</span></div>
+                    <div class="calendar-day"><span class="day-number">19</span></div>
+                    <div class="calendar-day"><span class="day-number">20</span></div>
+                    <div class="calendar-day"><span class="day-number">21</span><span class="calendar-event event-red">RIEM-meeting Gent</span></div>
+                    <div class="calendar-day"><span class="day-number">22</span></div>
+                    <!-- Week 4 -->
+                    <div class="calendar-day"><span class="day-number">23</span></div>
+                    <div class="calendar-day"><span class="day-number">24</span></div>
+                    <div class="calendar-day"><span class="day-number">25</span></div>
+                    <div class="calendar-day"><span class="day-number">26</span><span class="calendar-event event-green">RCG-meeting Gent</span></div>
+                    <div class="calendar-day"><span class="day-number">27</span></div>
+                    <div class="calendar-day"><span class="day-number">28</span><span class="calendar-event event-green">STAX-meeting Gent</span></div>
+                    <div class="calendar-day"><span class="day-number">29</span></div>
+                    <!-- Week 5 -->
+                    <div class="calendar-day"><span class="day-number">30</span></div>
+                    <div class="calendar-day"><span class="day-number">31</span></div>
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day padding-day"></div>
+                </div>
+            </section>
+
+             <!-- === JANUARI 2025 === -->
+            <section class="month-grid">
+                <h2 class="month-title">Januari 2025</h2>
+                <div class="calendar-header">
+                    <span>Ma</span><span>Di</span><span>Wo</span><span>Do</span><span>Vr</span><span>Za</span><span>Zo</span>
+                </div>
+                <div class="calendar-days">
+                    <!-- Padding days (Jan 1st is Wednesday) -->
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day"><span class="day-number">1</span></div>
+                    <div class="calendar-day"><span class="day-number">2</span></div>
+                    <div class="calendar-day"><span class="day-number">3</span></div>
+                    <div class="calendar-day"><span class="day-number">4</span><span class="calendar-event event-red">VS-meeting Gent</span></div>
+                    <div class="calendar-day"><span class="day-number">5</span></div>
+                    <!-- Week 1 -->
+                    <div class="calendar-day"><span class="day-number">6</span></div>
+                    <div class="calendar-day"><span class="day-number">7</span></div>
+                    <div class="calendar-day"><span class="day-number">8</span></div>
+                    <div class="calendar-day"><span class="day-number">9</span></div>
+                    <div class="calendar-day"><span class="day-number">10</span></div>
+                    <div class="calendar-day"><span class="day-number">11</span><span class="calendar-event event-green">PK Antwerpen Gent</span></div>
+                    <div class="calendar-day"><span class="day-number">12</span></div>
+                    <!-- Week 2 -->
+                    <div class="calendar-day"><span class="day-number">13</span></div>
+                    <div class="calendar-day"><span class="day-number">14</span></div>
+                    <div class="calendar-day"><span class="day-number">15</span></div>
+                    <div class="calendar-day"><span class="day-number">16</span></div>
+                    <div class="calendar-day"><span class="day-number">17</span></div>
+                    <div class="calendar-day"><span class="day-number">18</span></div>
+                    <div class="calendar-day"><span class="day-number">19</span><span class="calendar-event event-blue">KVV Cad/Sch Gent</span></div>
+                    <!-- Week 3 -->
+                    <div class="calendar-day"><span class="day-number">20</span></div>
+                    <div class="calendar-day"><span class="day-number">21</span></div>
+                    <div class="calendar-day"><span class="day-number">22</span></div>
+                    <div class="calendar-day"><span class="day-number">23</span></div>
+                    <div class="calendar-day"><span class="day-number">24</span></div>
+                    <div class="calendar-day"><span class="day-number">25</span></div>
+                    <div class="calendar-day"><span class="day-number">26</span><span class="calendar-event event-blue">KVV AC Gent</span></div>
+                    <!-- Week 4 -->
+                    <div class="calendar-day"><span class="day-number">27</span></div>
+                    <div class="calendar-day"><span class="day-number">28</span></div>
+                    <div class="calendar-day"><span class="day-number">29</span></div>
+                    <div class="calendar-day"><span class="day-number">30</span></div>
+                    <div class="calendar-day"><span class="day-number">31</span></div>
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day padding-day"></div>
+                </div>
+            </section>
+
+             <!-- === FEBRUARI 2025 === -->
+            <section class="month-grid">
+                <h2 class="month-title">Februari 2025</h2>
+                <div class="calendar-header">
+                    <span>Ma</span><span>Di</span><span>Wo</span><span>Do</span><span>Vr</span><span>Za</span><span>Zo</span>
+                </div>
+                <div class="calendar-days">
+                     <!-- Padding days (Feb 1st is Saturday) -->
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day"><span class="day-number">1</span><span class="calendar-event event-blue">BK 4x200m Gent</span></div>
+                    <div class="calendar-day"><span class="day-number">2</span></div>
+                    <!-- Week 1 -->
+                    <div class="calendar-day"><span class="day-number">3</span></div>
+                    <div class="calendar-day"><span class="day-number">4</span></div>
+                    <div class="calendar-day"><span class="day-number">5</span></div>
+                    <div class="calendar-day"><span class="day-number">6</span></div>
+                    <div class="calendar-day"><span class="day-number">7</span></div>
+                    <div class="calendar-day"><span class="day-number">8</span><span class="calendar-event event-blue">BK Meerpk LLN (dag 1)</span></div>
+                    <div class="calendar-day"><span class="day-number">9</span><span class="calendar-event event-blue">BK Meerpk LLN (dag 2)</span></div>
+                    <!-- Week 2 -->
+                    <div class="calendar-day"><span class="day-number">10</span></div>
+                    <div class="calendar-day"><span class="day-number">11</span></div>
+                    <div class="calendar-day"><span class="day-number">12</span></div>
+                    <div class="calendar-day"><span class="day-number">13</span></div>
+                    <div class="calendar-day"><span class="day-number">14</span></div>
+                    <div class="calendar-day"><span class="day-number">15</span></div>
+                    <div class="calendar-day"><span class="day-number">16</span><span class="calendar-event event-red">EA-meeting</span></div>
+                    <!-- Week 3 -->
+                    <div class="calendar-day"><span class="day-number">17</span></div>
+                    <div class="calendar-day"><span class="day-number">18</span></div>
+                    <div class="calendar-day"><span class="day-number">19</span></div>
+                    <div class="calendar-day"><span class="day-number">20</span></div>
+                    <div class="calendar-day"><span class="day-number">21</span></div>
+                    <div class="calendar-day"><span class="day-number">22</span><span class="calendar-event event-blue">BK Masters Gent</span></div>
+                    <div class="calendar-day"><span class="day-number">23</span><span class="calendar-event event-blue">BK AC Gent</span></div>
+                     <!-- Week 4 -->
+                    <div class="calendar-day"><span class="day-number">24</span></div>
+                    <div class="calendar-day"><span class="day-number">25</span></div>
+                    <div class="calendar-day"><span class="day-number">26</span></div>
+                    <div class="calendar-day"><span class="day-number">27</span></div>
+                    <div class="calendar-day"><span class="day-number">28</span></div>
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day padding-day"></div>
+                </div>
+            </section>
+
+             <!-- === MAART 2025 === -->
+             <section class="month-grid">
+                 <h2 class="month-title">Maart 2025</h2>
+                 <div class="calendar-header">
+                     <span>Ma</span><span>Di</span><span>Wo</span><span>Do</span><span>Vr</span><span>Za</span><span>Zo</span>
+                 </div>
+                 <div class="calendar-days">
+                      <!-- Padding days (Mar 1st is Saturday) -->
+                     <div class="calendar-day padding-day"></div>
+                     <div class="calendar-day padding-day"></div>
+                     <div class="calendar-day padding-day"></div>
+                     <div class="calendar-day padding-day"></div>
+                     <div class="calendar-day padding-day"></div>
+                     <div class="calendar-day"><span class="day-number">1</span><span class="calendar-event event-blue">BK Cad/Sch LLN</span></div>
+                     <div class="calendar-day"><span class="day-number">2</span><span class="calendar-event event-blue">BK Jun/Bel Gent</span></div>
+                     <!-- Week 1 -->
+                     <div class="calendar-day"><span class="day-number">3</span></div>
+                     <div class="calendar-day"><span class="day-number">4</span></div>
+                     <div class="calendar-day"><span class="day-number">5</span></div>
+                     <div class="calendar-day"><span class="day-number">6</span></div>
+                     <div class="calendar-day"><span class="day-number">7</span></div>
+                     <div class="calendar-day"><span class="day-number">8</span><span class="calendar-event event-green">KAAG Estafette Gent</span></div>
+                     <div class="calendar-day"><span class="day-number">9</span><span class="calendar-event event-blue">BK Studenten Gent</span></div>
+                     <!-- ... continue filling days ... -->
+                      <div class="calendar-day"><span class="day-number">10</span></div>
+                     <div class="calendar-day"><span class="day-number">11</span></div>
+                     <div class="calendar-day"><span class="day-number">12</span></div>
+                     <div class="calendar-day"><span class="day-number">13</span></div>
+                     <div class="calendar-day"><span class="day-number">14</span></div>
+                     <div class="calendar-day"><span class="day-number">15</span></div>
+                     <div class="calendar-day"><span class="day-number">16</span></div>
+                      <div class="calendar-day"><span class="day-number">17</span></div>
+                     <div class="calendar-day"><span class="day-number">18</span></div>
+                     <div class="calendar-day"><span class="day-number">19</span></div>
+                     <div class="calendar-day"><span class="day-number">20</span></div>
+                     <div class="calendar-day"><span class="day-number">21</span></div>
+                     <div class="calendar-day"><span class="day-number">22</span></div>
+                     <div class="calendar-day"><span class="day-number">23</span></div>
+                     <div class="calendar-day"><span class="day-number">24</span></div>
+                     <div class="calendar-day"><span class="day-number">25</span></div>
+                     <div class="calendar-day"><span class="day-number">26</span></div>
+                     <div class="calendar-day"><span class="day-number">27</span></div>
+                     <div class="calendar-day"><span class="day-number">28</span></div>
+                     <div class="calendar-day"><span class="day-number">29</span></div>
+                     <div class="calendar-day"><span class="day-number">30</span></div>
+                      <div class="calendar-day"><span class="day-number">31</span></div>
+                     <div class="calendar-day padding-day"></div>
+                     <div class="calendar-day padding-day"></div>
+                     <div class="calendar-day padding-day"></div>
+                     <div class="calendar-day padding-day"></div>
+                     <div class="calendar-day padding-day"></div>
+                 </div>
+             </section>
+
+            <!-- === APRIL 2025 === -->
+            <section class="month-grid">
+                <h2 class="month-title">April 2025</h2>
+                <div class="calendar-header">
+                    <span>Ma</span><span>Di</span><span>Wo</span><span>Do</span><span>Vr</span><span>Za</span><span>Zo</span>
+                </div>
+                <div class="calendar-days">
+                     <!-- Padding days (Apr 1st is Tuesday) -->
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day"><span class="day-number">1</span></div>
+                    <div class="calendar-day"><span class="day-number">2</span></div>
+                    <div class="calendar-day"><span class="day-number">3</span></div>
+                    <div class="calendar-day"><span class="day-number">4</span></div>
+                    <div class="calendar-day"><span class="day-number">5</span></div>
+                    <div class="calendar-day"><span class="day-number">6</span></div>
+                    <!-- Week 1 -->
+                    <div class="calendar-day"><span class="day-number">7</span></div>
+                    <div class="calendar-day"><span class="day-number">8</span></div>
+                    <div class="calendar-day"><span class="day-number">9</span></div>
+                    <div class="calendar-day"><span class="day-number">10</span></div>
+                    <div class="calendar-day"><span class="day-number">11</span><span class="calendar-event event-black">Stage Blankenberge (dag 1)</span></div>
+                    <div class="calendar-day"><span class="day-number">12</span><span class="calendar-event event-black">Stage Blankenberge (dag 2)</span></div>
+                    <div class="calendar-day"><span class="day-number">13</span><span class="calendar-event event-black">Stage Blankenberge (dag 3)</span></div>
+                    <!-- Week 2 -->
+                    <div class="calendar-day"><span class="day-number">14</span></div>
+                    <div class="calendar-day"><span class="day-number">15</span></div>
+                    <div class="calendar-day"><span class="day-number">16</span></div>
+                    <div class="calendar-day"><span class="day-number">17</span></div>
+                    <div class="calendar-day"><span class="day-number">18</span></div>
+                    <div class="calendar-day"><span class="day-number">19</span></div>
+                    <div class="calendar-day"><span class="day-number">20</span></div>
+                     <!-- Week 3 -->
+                    <div class="calendar-day"><span class="day-number">21</span></div>
+                    <div class="calendar-day"><span class="day-number">22</span></div>
+                    <div class="calendar-day"><span class="day-number">23</span></div>
+                    <div class="calendar-day"><span class="day-number">24</span></div>
+                    <div class="calendar-day"><span class="day-number">25</span></div>
+                    <div class="calendar-day"><span class="day-number">26</span><span class="calendar-event event-green">PK AC dag 1 Mol</span></div>
+                    <div class="calendar-day"><span class="day-number">27</span><span class="calendar-event event-green">PK AC dag 2 Duffel</span></div>
+                     <!-- Week 4 -->
+                    <div class="calendar-day"><span class="day-number">28</span></div>
+                    <div class="calendar-day"><span class="day-number">29</span></div>
+                    <div class="calendar-day"><span class="day-number">30</span></div>
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day padding-day"></div>
+                </div>
+            </section>
+
+            <!-- === MEI 2025 === -->
+            <section class="month-grid">
+                <h2 class="month-title">Mei 2025</h2>
+                <div class="calendar-header">
+                   <span>Ma</span><span>Di</span><span>Wo</span><span>Do</span><span>Vr</span><span>Za</span><span>Zo</span>
+                </div>
+                <div class="calendar-days">
+                     <!-- Padding days (May 1st is Thursday) -->
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day"><span class="day-number">1</span></div>
+                    <div class="calendar-day"><span class="day-number">2</span></div>
+                    <div class="calendar-day"><span class="day-number">3</span></div>
+                    <div class="calendar-day"><span class="day-number">4</span><span class="calendar-event event-blue">BVV Cad/Sch</span></div>
+                    <!-- Continue for rest of May... -->
+                    <div class="calendar-day"><span class="day-number">5</span></div>
+                    <div class="calendar-day"><span class="day-number">6</span></div>
+                    <div class="calendar-day"><span class="day-number">7</span></div>
+                    <div class="calendar-day"><span class="day-number">8</span></div>
+                    <div class="calendar-day"><span class="day-number">9</span></div>
+                    <div class="calendar-day"><span class="day-number">10</span></div>
+                    <div class="calendar-day"><span class="day-number">11</span><span class="calendar-event event-blue">BVV AC</span></div>
+                    <div class="calendar-day"><span class="day-number">12</span></div>
+                    <div class="calendar-day"><span class="day-number">13</span></div>
+                    <div class="calendar-day"><span class="day-number">14</span></div>
+                    <div class="calendar-day"><span class="day-number">15</span></div>
+                    <div class="calendar-day"><span class="day-number">16</span></div>
+                    <div class="calendar-day"><span class="day-number">17</span></div>
+                    <div class="calendar-day"><span class="day-number">18</span></div>
+                     <div class="calendar-day"><span class="day-number">19</span></div>
+                    <div class="calendar-day"><span class="day-number">20</span></div>
+                    <div class="calendar-day"><span class="day-number">21</span></div>
+                    <div class="calendar-day"><span class="day-number">22</span></div>
+                    <div class="calendar-day"><span class="day-number">23</span></div>
+                    <div class="calendar-day"><span class="day-number">24</span></div>
+                    <div class="calendar-day"><span class="day-number">25</span></div>
+                     <div class="calendar-day"><span class="day-number">26</span></div>
+                    <div class="calendar-day"><span class="day-number">27</span></div>
+                    <div class="calendar-day"><span class="day-number">28</span></div>
+                    <div class="calendar-day"><span class="day-number">29</span><span class="calendar-event event-blue">KVV AC</span></div>
+                    <div class="calendar-day"><span class="day-number">30</span></div>
+                    <div class="calendar-day"><span class="day-number">31</span></div>
+                    <div class="calendar-day padding-day"></div>
+                </div>
+            </section>
+
+            <!-- === JUNI 2025 === -->
+             <section class="month-grid">
+                <h2 class="month-title">Juni 2025</h2>
+                <div class="calendar-header">
+                   <span>Ma</span><span>Di</span><span>Wo</span><span>Do</span><span>Vr</span><span>Za</span><span>Zo</span>
+                </div>
+                <div class="calendar-days">
+                    <!-- Padding days (Jun 1st is Sunday) -->
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day"><span class="day-number">1</span></div>
+                    <!-- Continue for rest of June... -->
+                    <div class="calendar-day"><span class="day-number">2</span></div>
+                    <div class="calendar-day"><span class="day-number">3</span></div>
+                    <div class="calendar-day"><span class="day-number">4</span></div>
+                    <div class="calendar-day"><span class="day-number">5</span></div>
+                    <div class="calendar-day"><span class="day-number">6</span></div>
+                    <div class="calendar-day"><span class="day-number">7</span></div>
+                    <div class="calendar-day"><span class="day-number">8</span></div>
+                    <div class="calendar-day"><span class="day-number">9</span></div>
+                    <div class="calendar-day"><span class="day-number">10</span></div>
+                    <div class="calendar-day"><span class="day-number">11</span></div>
+                    <div class="calendar-day"><span class="day-number">12</span></div>
+                    <div class="calendar-day"><span class="day-number">13</span></div>
+                    <div class="calendar-day"><span class="day-number">14</span><span class="calendar-event event-blue">BK AMH</span></div>
+                    <div class="calendar-day"><span class="day-number">15</span><span class="calendar-event event-blue">BVV Masters</span></div>
+                    <div class="calendar-day"><span class="day-number">16</span></div>
+                    <div class="calendar-day"><span class="day-number">17</span></div>
+                    <div class="calendar-day"><span class="day-number">18</span></div>
+                    <div class="calendar-day"><span class="day-number">19</span></div>
+                    <div class="calendar-day"><span class="day-number">20</span></div>
+                    <div class="calendar-day"><span class="day-number">21</span><span class="calendar-event event-blue">BK Masters (dag 1)</span></div>
+                    <div class="calendar-day"><span class="day-number">22</span><span class="calendar-event event-blue">BK Masters (dag 2)</span></div>
+                    <div class="calendar-day"><span class="day-number">23</span></div>
+                    <div class="calendar-day"><span class="day-number">24</span></div>
+                    <div class="calendar-day"><span class="day-number">25</span></div>
+                    <div class="calendar-day"><span class="day-number">26</span></div>
+                    <div class="calendar-day"><span class="day-number">27</span></div>
+                    <div class="calendar-day"><span class="day-number">28</span></div>
+                    <div class="calendar-day"><span class="day-number">29</span></div>
+                    <div class="calendar-day"><span class="day-number">30</span></div>
+                    <!-- Padding -->
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day padding-day"></div>
+
+                </div>
+            </section>
+
+             <!-- === JULI 2025 === (No events listed) -->
+             <section class="month-grid">
+                <h2 class="month-title">Juli 2025</h2>
+                 <p style="text-align: center; font-style: italic;">(Geen geplande club-/kampioenschapsevents)</p>
+                 <!-- Optionally add full grid if desired -->
+             </section>
+
+             <!-- === AUGUSTUS 2025 === -->
+              <section class="month-grid">
+                <h2 class="month-title">Augustus 2025</h2>
+                <div class="calendar-header">
+                   <span>Ma</span><span>Di</span><span>Wo</span><span>Do</span><span>Vr</span><span>Za</span><span>Zo</span>
+                </div>
+                <div class="calendar-days">
+                    <!-- Padding days (Aug 1st is Friday) -->
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day"><span class="day-number">1</span></div>
+                    <div class="calendar-day"><span class="day-number">2</span><span class="calendar-event event-blue">BK AC (dag 1)</span></div>
+                    <div class="calendar-day"><span class="day-number">3</span><span class="calendar-event event-blue">BK AC (dag 2)</span></div>
+                    <!-- Continue for rest of August... -->
+                     <div class="calendar-day"><span class="day-number">4</span></div>
+                    <div class="calendar-day"><span class="day-number">5</span></div>
+                    <div class="calendar-day"><span class="day-number">6</span></div>
+                    <div class="calendar-day"><span class="day-number">7</span></div>
+                    <div class="calendar-day"><span class="day-number">8</span></div>
+                    <div class="calendar-day"><span class="day-number">9</span><span class="calendar-event event-blue">BK Meerkampen (dag 1)</span></div>
+                    <div class="calendar-day"><span class="day-number">10</span><span class="calendar-event event-blue">BK Meerkampen (dag 2)</span></div>
+                    <div class="calendar-day"><span class="day-number">11</span></div>
+                    <div class="calendar-day"><span class="day-number">12</span></div>
+                    <div class="calendar-day"><span class="day-number">13</span></div>
+                    <div class="calendar-day"><span class="day-number">14</span></div>
+                    <div class="calendar-day"><span class="day-number">15</span><span class="calendar-event event-blue">KVV Cad/Sch</span></div>
+                    <div class="calendar-day"><span class="day-number">16</span></div>
+                    <div class="calendar-day"><span class="day-number">17</span></div>
+                    <div class="calendar-day"><span class="day-number">18</span></div>
+                    <div class="calendar-day"><span class="day-number">19</span></div>
+                    <div class="calendar-day"><span class="day-number">20</span></div>
+                    <div class="calendar-day"><span class="day-number">21</span></div>
+                    <div class="calendar-day"><span class="day-number">22</span></div>
+                    <div class="calendar-day"><span class="day-number">23</span></div>
+                    <div class="calendar-day"><span class="day-number">24</span><span class="calendar-event event-green">PK Estafette Bornem</span></div>
+                    <div class="calendar-day"><span class="day-number">25</span></div>
+                    <div class="calendar-day"><span class="day-number">26</span></div>
+                    <div class="calendar-day"><span class="day-number">27</span></div>
+                    <div class="calendar-day"><span class="day-number">28</span></div>
+                    <div class="calendar-day"><span class="day-number">29</span></div>
+                    <div class="calendar-day"><span class="day-number">30</span><span class="calendar-event event-blue">BK Cad/Sch (dag 1)</span></div>
+                    <div class="calendar-day"><span class="day-number">31</span><span class="calendar-event event-blue">BK Cad/Sch (dag 2)</span></div>
+                 </div>
+             </section>
+
+             <!-- === SEPTEMBER 2025 === -->
+             <section class="month-grid">
+                <h2 class="month-title">September 2025</h2>
+                <div class="calendar-header">
+                   <span>Ma</span><span>Di</span><span>Wo</span><span>Do</span><span>Vr</span><span>Za</span><span>Zo</span>
+                </div>
+                <div class="calendar-days">
+                    <!-- Sep 1st is Monday -->
+                    <div class="calendar-day"><span class="day-number">1</span></div>
+                    <div class="calendar-day"><span class="day-number">2</span></div>
+                    <div class="calendar-day"><span class="day-number">3</span></div>
+                    <div class="calendar-day"><span class="day-number">4</span></div>
+                    <div class="calendar-day"><span class="day-number">5</span></div>
+                    <div class="calendar-day"><span class="day-number">6</span></div>
+                    <div class="calendar-day"><span class="day-number">7</span><span class="calendar-event event-blue">BK Jun/Bel</span></div>
+                    <!-- Continue for rest of September... -->
+                     <div class="calendar-day"><span class="day-number">8</span></div>
+                    <div class="calendar-day"><span class="day-number">9</span></div>
+                    <div class="calendar-day"><span class="day-number">10</span></div>
+                    <div class="calendar-day"><span class="day-number">11</span></div>
+                    <div class="calendar-day"><span class="day-number">12</span></div>
+                    <div class="calendar-day"><span class="day-number">13</span></div>
+                    <div class="calendar-day"><span class="day-number">14</span><span class="calendar-event event-blue">BK Estafette</span></div>
+                     <div class="calendar-day"><span class="day-number">15</span></div>
+                    <div class="calendar-day"><span class="day-number">16</span></div>
+                    <div class="calendar-day"><span class="day-number">17</span></div>
+                    <div class="calendar-day"><span class="day-number">18</span></div>
+                    <div class="calendar-day"><span class="day-number">19</span></div>
+                    <div class="calendar-day"><span class="day-number">20</span></div>
+                    <div class="calendar-day"><span class="day-number">21</span><span class="calendar-event event-blue">KVV Masters</span></div>
+                     <div class="calendar-day"><span class="day-number">22</span></div>
+                    <div class="calendar-day"><span class="day-number">23</span></div>
+                    <div class="calendar-day"><span class="day-number">24</span></div>
+                    <div class="calendar-day"><span class="day-number">25</span></div>
+                    <div class="calendar-day"><span class="day-number">26</span></div>
+                    <div class="calendar-day"><span class="day-number">27</span></div>
+                    <div class="calendar-day"><span class="day-number">28</span></div>
+                     <div class="calendar-day"><span class="day-number">29</span></div>
+                    <div class="calendar-day"><span class="day-number">30</span></div>
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day padding-day"></div>
+                    <div class="calendar-day padding-day"></div>
+                 </div>
+             </section>
+
+        </div> <!-- End calendar-view -->
+    </main>
+
+    <div id="footer-placeholder"></div>
+    <script src="/js/script.js" defer></script>
+</body>
+</html>

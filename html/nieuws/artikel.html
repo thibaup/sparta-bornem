@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="nl-NL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title will be set dynamically by JS -->
+    <title>Nieuwsartikel - Sparta Bornem</title>
+    <link rel="icon" type="image/png" href="/images/website-logo.png"> <!-- Assuming favicon in root -->
+    <link rel="stylesheet" href="/css/style.css"> <!-- Link main CSS -->
+
+    <!-- Specific Styles for Single Article Page -->
+    <style>
+        /* Style the article wrapper */
+        .article-container {
+            background-color: #ffffff; /* White background for article */
+            padding: 30px 40px; /* More horizontal padding */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08); /* Subtle shadow */
+            margin-top: 20px; /* Space below header/main title */
+            margin-bottom: 30px; /* Space above back link */
+        }
+
+        /* Style the main article title */
+        #article-title {
+            color: #1774b4; /* Theme blue */
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 2.2em;
+            line-height: 1.3;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        /* Style the metadata (date/category) */
+        .article-meta {
+            display: block;
+            color: #6c757d;
+            font-size: 0.9em;
+            margin-bottom: 25px;
+        }
+
+        /* Style the main article image */
+        .article-image {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 30px;
+            border-radius: 5px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 750px; /* Limit image width */
+        }
+
+        /* Style the main article body content */
+        .article-full-content {
+            line-height: 1.7;
+            font-size: 1.05em;
+        }
+        .article-full-content p {
+            margin-bottom: 1.2em;
+        }
+        .article-full-content a {
+             font-weight: 500;
+             text-decoration: underline;
+        }
+        .article-full-content a:hover {
+             text-decoration: none;
+        }
+
+        /* Loading/Error messages */
+        #article-loading, #article-error {
+            text-align: center; padding: 40px 20px; font-style: italic; font-size: 1.1em; color: #6c757d;
+        }
+        #article-error { color: #dc3545; font-weight: 500; }
+
+        /* Back link styling */
+        .back-link {
+             display: inline-block;
+             margin-top: 20px; /* Adjusted spacing */
+             font-weight: 600;
+             color: #1774b4;
+             text-decoration: none;
+             padding: 8px 15px;
+             border: 1px solid #1774b4;
+             border-radius: 4px;
+             transition: background-color 0.2s ease, color 0.2s ease;
+        }
+         .back-link:hover {
+             background-color: #1774b4;
+             color: #fff;
+             text-decoration: none;
+         }
+    </style>
+</head>
+<body>
+
+    <!-- Use main tag with container and main-content classes -->
+    <main class="container main-content">
+
+        <div class="article-container">
+            <article>
+                <h1 id="article-title">Artikel Laden...</h1>
+                <span id="article-meta" class="article-meta"></span>
+                <div id="article-image-container"></div>
+                <div id="article-body" class="article-full-content">
+                    <p id="article-loading">Artikel laden...</p>
+                    <p id="article-error" style="display: none;">Artikel kon niet worden geladen of gevonden.</p>
+                </div>
+            </article>
+        </div> <!-- End article-container -->
+
+        <a href="/html/nieuws/nieuws.html" class="back-link" id="back-link">« Terug naar Nieuwsoverzicht</a>
+
+    </main>
+    <script>
+        /**
+         * Loads and displays a single news article based on the 'id' URL parameter.
+         * Fetches data from a JSON file, populates title, meta, image, and body content.
+         * Constructs image URLs relative to /images/ if not a full URL.
+         * Sets the "Back" link based on the 'ref' URL parameter.
+         */
+        async function loadSingleArticle() {
+            const params = new URLSearchParams(window.location.search);
+            const articleId = params.get('id'); // Get 'id' from "?id=..."
+            const referrerUrl = params.get('ref'); // Get 'ref' from "&ref=..."
+
+            // Get references to DOM elements
+            const titleEl = document.getElementById('article-title');
+            const metaEl = document.getElementById('article-meta');
+            const imageContainer = document.getElementById('article-image-container');
+            const bodyEl = document.getElementById('article-body');
+            const loadingEl = document.getElementById('article-loading');
+            const errorEl = document.getElementById('article-error');
+            const backLink = document.getElementById('back-link');
+
+            titleEl.textContent = "Artikel Laden...";
+            if (loadingEl) loadingEl.style.display = 'block';
+            if (errorEl) errorEl.style.display = 'none';
+            bodyEl.innerHTML = ''; // Clear previous content
+            imageContainer.innerHTML = '';
+            metaEl.textContent = '';
+
+            const defaultBackHref = '/html/nieuws/nieuws.html';
+            const defaultBackText = '« Terug naar Nieuwsoverzicht';
+            if (backLink) {
+                if (referrerUrl) {
+                    try {
+                        const decodedRef = decodeURIComponent(referrerUrl);
+                        backLink.href = decodedRef;
+                        // Set text based on referrer
+                        if (decodedRef.includes('nieuws.html')) {
+                            backLink.textContent = '« Terug naar Nieuwsoverzicht';
+                        } else if (decodedRef === '/' || decodedRef.includes('home.html') || decodedRef.includes('index.html')) {
+                            backLink.textContent = '« Terug naar Home';
+                        } else {
+                            backLink.textContent = '« Terug naar Vorige';
+                        }
+                    } catch (e) {
+                        console.error("Error decoding referrer URL:", e);
+                        backLink.href = defaultBackHref; // Fallback on error
+                        backLink.textContent = defaultBackText;
+                    }
+                } else {
+                    // Default if no referrer was passed
+                    backLink.href = defaultBackHref;
+                    backLink.textContent = defaultBackText;
+                }
+                backLink.style.display = 'inline-block'; // Ensure it's visible initially
+            }
+            // ------------------------
+
+            // --- Validate Article ID ---
+            if (!articleId) {
+                titleEl.textContent = "Fout";
+                if (loadingEl) loadingEl.style.display = 'none';
+                errorEl.textContent = "Geen artikel ID gevonden in de URL.";
+                errorEl.style.display = 'block';
+                if (backLink) backLink.style.display = 'inline-block'; // Keep back link visible
+                return; // Stop execution
+            }
+            const newsDataUrl = '/html/nieuws/nieuws-data.json'; 
+
+            try {
+                const response = await fetch(newsDataUrl);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status} fetching ${newsDataUrl}`);
+                }
+                const allNewsData = await response.json();
+
+                // Find the specific article by ID
+                const articleData = allNewsData.find(item => item.id === articleId);
+
+                if (!articleData) {
+                    throw new Error(`Artikel met ID '${articleId}' niet gevonden in JSON data.`);
+                }
+
+                // --- Populate the Page Content ---
+                document.title = `${articleData.title} - Sparta Bornem`; // Set browser tab title
+                titleEl.textContent = articleData.title;
+
+                const itemDate = new Date(articleData.date);
+                metaEl.textContent = `${itemDate.toLocaleDateString('nl-BE', { day: 'numeric', month: 'long', year: 'numeric' })} | ${articleData.category || 'Algemeen'}`;
+
+
+                if (articleData.image) {
+                    let finalImageUrl = articleData.image;
+                    if (!finalImageUrl.startsWith('http://') && !finalImageUrl.startsWith('https://')) {
+                        // Prepend the images path (ensure leading/trailing slashes are correct)
+                        finalImageUrl = `/images/${finalImageUrl.startsWith('/') ? finalImageUrl.substring(1) : finalImageUrl}`;
+                    }
+                    imageContainer.innerHTML = `<img class="article-image" src="${finalImageUrl}" alt="${articleData.alt || articleData.title}" loading="lazy">`;
+                } else {
+                    imageContainer.innerHTML = ''; // Clear if no image
+                }
+
+                if (articleData.full_content) {
+                    // Replace literal '\n' from JSON with paragraph tags
+                    const paragraphs = articleData.full_content.split('\\n')
+                                        .map(p => p.trim()) // Remove whitespace around paragraphs
+                                        .filter(p => p.length > 0); // Remove empty paragraphs
+                    // Use innerHTML carefully. Assumes trusted content or sanitization needed elsewhere
+                    bodyEl.innerHTML = paragraphs.map(p => `<p>${p}</p>`).join('');
+                } 
+
+                if (loadingEl) loadingEl.style.display = 'none'; // Hide loading message
+
+            } catch (error) {
+                console.error(`Error loading article ${articleId}:`, error);
+                titleEl.textContent = "Fout bij Laden";
+                bodyEl.innerHTML = ''; // Clear potentially incomplete content
+                imageContainer.innerHTML = ''; // Clear image
+                metaEl.textContent = ''; // Clear meta
+                if (loadingEl) loadingEl.style.display = 'none';
+                errorEl.textContent = `Fout: ${error.message}`;
+                errorEl.style.display = 'block';
+
+                if (backLink) backLink.style.display = 'inline-block';
+            }
+        } // --- End loadSingleArticle function ---
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // No need for setTimeout if the main script uses 'defer'
+            loadSingleArticle();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="nl-NL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ligging & Route - Atletiekclub Sparta Bornem</title>
+    <!-- Link to favicon -->
+    <link rel="icon" type="image/png" href="/images/website-logo.png"> <!-- Assuming favicon in root -->
+
+    <link rel="stylesheet" href="/css/style.css"> <!-- Adjust path if css folder is not at the root -->
+
+    <style>
+        .location-image {
+            display: block; /* Needed for auto margins */
+            margin: 20px auto; /* Center the image and add space */
+            max-width: 526px; /* Max width from original img */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 5px; /* Optional: slight rounding */
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Optional: subtle shadow */
+        }
+        .subheading-location { /* Style for the "Piste" heading */
+             /* Using the main theme blue */
+            color: #1774b4; /* Or use #2b8ebf if preferred */
+            font-size: 1.5em; /* Adjust size as needed */
+            margin-top: 30px;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 5px;
+        }
+        .google-maps-link {
+            display: inline-block; /* Treat like a button */
+            background-color: #1774b4; /* Theme blue */
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+        .google-maps-link:hover {
+            background-color: #125a8c; /* Darker blue */
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        /* Remove default blockquote styling if not desired */
+        blockquote {
+            margin: 1em 0; /* Remove side margins */
+            padding: 0;
+            border-left: none; /* Remove potential left border */
+        }
+    </style>
+
+</head>
+<body>
+    <div id="header-placeholder"><p style="text-align:center; padding: 20px;">Loading header...</p></div>
+
+    <main class="container">
+        <h1>Ligging</h1>
+
+        <section>
+            <h4 class="subheading-location">Piste</h4>
+            <p>Al onze trainingen en wedstrijden gaan door op de terreinen en de piste van domein “Het Breeven” Breevendreef 108, 2880 te Bornem.</p>
+            <p>Onze kunststofpiste is 400m lang en beschikt over 6 banen rondom en 7 banen in rechte lijn. Ons clublokaal bevindt zicht naast de atletiekpiste en is open op trainingsdagen.</p>
+
+            <a href="http://www.spartabornem.be/wp-content/uploads/2025/01/luchtfoto-spbo.png" target="_blank" rel="noopener noreferrer">
+                <img decoding="async" class="location-image" title="Luchtfoto Breeven" src="http://www.spartabornem.be/wp-content/uploads/2025/01/luchtfoto-spbo-1024x652.png" alt="Luchtfoto van atletiekpiste Breeven Bornem" width="526" height="335">
+            </a>
+
+            <p style="text-align: center;">
+                <a href="https://maps.app.goo.gl/LMbwjGs4s1a4ZyJs6" class="google-maps-link" target="_blank" rel="noopener noreferrer">Bekijk op Google Maps</a>
+            </p>
+        </section>
+
+    </main>
+
+    <div id="footer-placeholder"><p style="text-align:center; padding: 20px;">Loading footer...</p></div>
+    <script src="/js/script.js" defer></script>
+</body>
+</html>

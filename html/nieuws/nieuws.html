@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="nl-NL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nieuwsarchief - Atletiekclub Sparta Bornem</title>
+    <link rel="icon" type="image/png" href="/images/website-logo.png">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .news-archive-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+         #news-loading { text-align: center; padding: 30px; font-style: italic; }
+    </style>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <main class="container main-content">
+        <h1>Nieuwsarchief</h1>
+        <p>Bekijk hier alle nieuwsberichten van Sparta Bornem.</p>
+
+        <section id="news-archive-placeholder" class="news-archive-grid">
+             <p id="news-loading">Nieuws wordt geladen...</p>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+    <script src="/js/script.js" defer></script>
+
+    <script>
+        async function loadAndDisplayNews() {
+            const newsPlaceholder = document.getElementById('news-archive-placeholder');
+            const loadingMessage = document.getElementById('news-loading');
+            const newsDataUrl = '/html/nieuws/nieuws-data.json'; 
+
+            try {
+                const response = await fetch(newsDataUrl);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status} fetching ${newsDataUrl}`);
+                }
+                const newsData = await response.json();
+
+                newsData.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+                if (loadingMessage) loadingMessage.remove();
+                newsPlaceholder.innerHTML = '';
+
+                if (newsData.length === 0) {
+                    newsPlaceholder.innerHTML = '<p style="grid-column: 1 / -1; text-align: center;">Geen nieuwsberichten gevonden.</p>';
+                    return;
+                }
+
+                const referrerPath = window.location.pathname;
+
+                newsData.forEach(item => {
+                    const itemDate = new Date(item.date);
+                    const formattedDate = itemDate.toLocaleDateString('nl-BE', {
+                        day: 'numeric', month: 'long', year: 'numeric'
+                    });
+
+                    let finalImageUrl = '/images/placeholder-news.png';
+                    if (item.image) {
+                        if (!item.image.startsWith('http://') && !item.image.startsWith('https://')) {
+                            finalImageUrl = `/images/${item.image.startsWith('/') ? item.image.substring(1) : item.image}`;
+                        } else {
+                            finalImageUrl = item.image;
+                        }
+                    }
+
+                    const summaryText = item.summary; 
+                    const itemLink = `/html/nieuws/artikel.html?id=${item.id || ''}&ref=${encodeURIComponent(referrerPath)}`;
+                    
+                    let articleHtml
+
+                    if (summaryText) {
+                        articleHtml = `
+                        <article class="news-item" id="${item.id || ''}">
+                            <img src="${finalImageUrl}" alt="${item.title}" loading="lazy">
+                            <div class="news-content">
+                                <p class="news-meta">${formattedDate} | ${item.category || 'Algemeen'}</p>
+                                <h3><a href="${itemLink}">${item.title}</a></h3>
+                                <p>${summaryText}</p>
+                                <a href="${itemLink}" class="read-more">Lees meer »</a>
+                            </div>
+                        </article>
+                        `;
+                    } else {
+                        articleHtml = `
+                        <article class="news-item" id="${item.id || ''}">
+                            <img src="${finalImageUrl}" alt="${item.title}" loading="lazy">
+                            <div class="news-content">
+                                <p class="news-meta">${formattedDate} | ${item.category || 'Algemeen'}</p>
+                                <h3><a href="${itemLink}">${item.title}</a></h3>
+                            </div>
+                        </article>
+                    `;
+                    }
+
+                    newsPlaceholder.insertAdjacentHTML('beforeend', articleHtml);
+                });
+
+            } catch (error) {
+                // Handle errors during fetch or processing
+                console.error('Error loading or processing news data:', error);
+                const displayError = `<p style="color:red; text-align:center; grid-column: 1 / -1;">Kon nieuws niet laden. (${error.message})</p>`;
+                if(loadingMessage) {
+                    loadingMessage.innerHTML = displayError;
+                } else if (newsPlaceholder) {
+                    newsPlaceholder.innerHTML = displayError;
+                }
+            }
+        } // End loadAndDisplayNews
+
+        // Run the function when the DOM is ready
+        document.addEventListener('DOMContentLoaded', loadAndDisplayNews);
+    </script>
+</body>
+</html>

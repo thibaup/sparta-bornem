@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="nl-NL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nieuwsartikel JSON Generator (Automatisch)</title>
+    <!-- Link your main CSS for consistency -->
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        /* Keep body padding, but inherit main styles */
+        body { padding: 20px; background-color: #f8f9fa; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333;}
+        .tool-container { max-width: 800px; margin: 20px auto; background-color: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        /* Use H1 style from main css if defined, otherwise default */
+        h1 { color: #1774b4; margin-bottom: 15px; }
+        h2 { color: #1774b4; margin-bottom: 15px; margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px;}
+        label { display: block; margin-bottom: 5px; font-weight: 600; }
+        input[type="text"], input[type="date"], input[type="url"], textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 1em;
+            font-family: inherit;
+            line-height: inherit; /* Ensure textarea line height matches */
+        }
+        textarea { min-height: 150px; }
+        /* Use .cta-button style from main css for primary action */
+        button[type="submit"] {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #1774b4; /* Theme blue */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600; /* Match CTA button */
+            transition: background-color 0.3s ease;
+            margin-right: 10px;
+            text-transform: none; /* Override potential uppercase from main style */
+        }
+        button[type="submit"]:hover {
+            background-color: #125a8c; /* Darker blue */
+        }
+        /* Secondary button style */
+        #clear-form, .copy-button {
+             display: inline-block;
+             padding: 8px 15px; /* Slightly smaller */
+             background-color: #6c757d; /* Grey */
+             color: white;
+             border: none;
+             border-radius: 4px;
+             cursor: pointer;
+             font-size: 0.9em;
+             transition: background-color 0.3s ease;
+             margin-right: 10px;
+             text-transform: none;
+        }
+         #clear-form:hover, .copy-button:hover {
+             background-color: #5a6268;
+         }
+
+        #final-json-output {
+            background-color: #e9ecef;
+            border: 1px solid #ced4da; /* Solid border for final output */
+            padding: 15px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            min-height: 200px; /* Increased height */
+            margin-top: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.9em; /* Slightly smaller mono text */
+        }
+        .note { font-style: italic; color: #6c757d; margin-bottom: 20px; font-size: 0.9em;}
+        .error { color: #dc3545; font-weight: bold; margin-top: 10px; font-size: 0.9em;}
+        .success { color: #28a745; font-weight: bold; margin-top: 10px; font-size: 0.9em;}
+        small { font-size: 0.8em; color: #6c757d; display: block; margin-top: -10px; margin-bottom: 10px;}
+
+    </style>
+</head>
+<body>
+    <!-- No header/footer needed for this utility page -->
+    <div class="tool-container">
+        <h1>Nieuwsartikel JSON Generator (Automatisch)</h1>
+        <p class="note">Vul de velden in en klik op 'Voeg Toe & Genereer Volledige JSON'. De tool laadt automatisch de bestaande <code>nieuws-data.json</code>, voegt het nieuwe artikel toe, en toont het volledige resultaat hieronder. Kopieer deze volledige JSON om je <code>nieuws-data.json</code> bestand te vervangen.</p>
+
+        <form id="news-form">
+            <h2>Nieuw Artikel Invoeren</h2>
+            <div>
+                <label for="article-id">Uniek ID (bv. 'nieuwe-trainer-jan'):</label>
+                <input type="text" id="article-id" required>
+                <small>Gebruik alleen kleine letters, cijfers, en koppeltekens (-). Geen spaties.</small>
+            </div>
+            <div>
+                <label for="article-date">Datum (YYYY-MM-DD):</label>
+                <input type="date" id="article-date" required>
+            </div>
+             <div>
+                <label for="article-title">Titel:</label>
+                <input type="text" id="article-title" required>
+            </div>
+             <div>
+                <label for="article-category">Categorie (bv. 'Mededelingen', 'Wedstrijden'):</label>
+                <input type="text" id="article-category" value="Algemeen">
+            </div>
+             <div>
+                <label for="article-image">Afbeelding Bestandsnaam (bv. 'mijn-foto.jpg' - plaats in /images/):</label>
+                <input type="text" id="article-image" placeholder="nieuws-beeld.png">
+                <small>Voer alleen de bestandsnaam in. Upload de afbeelding naar de '/images/' map.</small>
+            </div>
+             <div>
+                <label for="article-summary">Samenvatting (voor de nieuwslijst):</label>
+                <textarea id="article-summary" rows="3"></textarea>
+            </div>
+             <div>
+                <label for="article-full-content">Volledige Tekst (Gebruik Enter voor nieuwe alinea's, basis HTML toegestaan):</label>
+                <textarea id="article-full-content" rows="10"></textarea>
+                <small>Basis HTML zoals <b>, <i>, <a href="..."> is toegestaan. Nieuwe regels worden <br> tags.</small>
+            </div>
+
+            <button type="submit">Voeg Toe & Genereer Volledige JSON</button>
+            <button type="button" id="clear-form">Wis Formulier</button>
+            <div id="form-error" class="error" style="display: none;"></div>
+        </form>
+
+        <h2>Volledige Bijgewerkte JSON:</h2>
+        <pre id="final-json-output">Vul het formulier in en klik op 'Voeg Toe & Genereer'...</pre>
+        <button class="copy-button" id="copy-final-json">Kopieer Volledige JSON</button>
+        <div id="copy-status" class="success" style="display: none;">Gekopieerd!</div>
+
+    </div>
+
+    <script>
+        const form = document.getElementById('news-form');
+        const finalJsonOutputEl = document.getElementById('final-json-output');
+        const copyFinalJsonBtn = document.getElementById('copy-final-json');
+        const clearFormBtn = document.getElementById('clear-form');
+        const formErrorEl = document.getElementById('form-error');
+        const copyStatusEl = document.getElementById('copy-status');
+
+        // --- Config ---
+        const newsDataUrl = '/html/nieuws/nieuws-data.json'; // IMPORTANT: Path to your actual JSON file
+
+        // --- Event Listeners ---
+        form.addEventListener('submit', handleFormSubmit);
+        copyFinalJsonBtn.addEventListener('click', () => copyToClipboard(finalJsonOutputEl.textContent, copyStatusEl));
+        clearFormBtn.addEventListener('click', () => {
+            form.reset();
+            finalJsonOutputEl.textContent = 'Vul het formulier in en klik op \'Voeg Toe & Genereer\'...';
+            formErrorEl.style.display = 'none';
+            copyStatusEl.style.display = 'none';
+        });
+
+        // --- Functions ---
+        async function handleFormSubmit(event) {
+            event.preventDefault();
+            formErrorEl.style.display = 'none';
+            copyStatusEl.style.display = 'none';
+            finalJsonOutputEl.textContent = 'Bezig met verwerken...'; // Feedback
+
+            const idInput = document.getElementById('article-id');
+            const dateInput = document.getElementById('article-date');
+            const titleInput = document.getElementById('article-title');
+            const summaryInput = document.getElementById('article-summary');
+            const imageInput = document.getElementById('article-image');
+            const fullContentInput = document.getElementById('article-full-content');
+
+            // Basic Validation
+            const id = idInput.value.trim();
+            const date = dateInput.value;
+            const title = titleInput.value.trim();
+            const summary = summaryInput.value.trim();
+            const imageName = imageInput.value.trim();
+            const fullContentRaw = fullContentInput.value.trim();
+
+            if (!id || !/^[a-z0-9-]+$/.test(id)) {
+                 showError(formErrorEl, "Ongeldig ID. Gebruik alleen kleine letters, cijfers en koppeltekens.");
+                 idInput.focus();
+                 finalJsonOutputEl.textContent = 'Validatiefout.';
+                 return;
+            }
+            if (!date) { showError(formErrorEl, "Datum is verplicht."); dateInput.focus(); finalJsonOutputEl.textContent = 'Validatiefout.'; return; }
+            if (!title) { showError(formErrorEl, "Titel is verplicht."); titleInput.focus(); finalJsonOutputEl.textContent = 'Validatiefout.'; return; }
+            // Optional: Add validation for image format if needed
+            // if (imageName && !/\.(jpg|jpeg|png|gif|webp)$/i.test(imageName) && !imageName.startsWith('http')) {
+            //     showError(formErrorEl, "Ongeldige afbeeldingsnaam. Moet eindigen op .jpg, .jpeg, .png, .gif, .webp of een URL zijn.");
+            //     imageInput.focus();
+            //      finalJsonOutputEl.textContent = 'Validatiefout.';
+            //     return;
+            // }
+
+            // Prepare new article data
+            const newArticleData = {
+                id: id,
+                date: date,
+                title: title,
+                category: document.getElementById('article-category').value.trim() || 'Algemeen',
+                // Use imageName directly, assuming it's just the filename. Prepend path if needed.
+                image: imageName ? imageName : "nieuws-beeld.png", // Default image if empty
+                // Alt text defaults to title in display logic usually, so not stored here
+                summary: summary || title, // Use title as summary if summary is empty
+                // Replace newlines with <br> tags for HTML display, escape quotes for JSON safety
+                full_content: fullContentRaw.replace(/\r\n|\r|\n/g, '<br>')
+                                             .replace(/"/g, '\\"') // Escape double quotes
+                                             .replace(/'/g, "\\'")  // Escape single quotes (optional but safer)
+            };
+
+            // --- Load existing JSON and add new article ---
+            try {
+                // 1. Fetch existing data
+                let existingData = []; // Default to empty array
+                 finalJsonOutputEl.textContent = `Laden van ${newsDataUrl}...`;
+                 try {
+                     const response = await fetch(newsDataUrl + '?t=' + Date.now()); // Bust cache
+                     if (response.ok) {
+                         const text = await response.text();
+                         if (text.trim()) { // Check if response is not empty
+                            existingData = JSON.parse(text);
+                            // Ensure it's an array
+                            if (!Array.isArray(existingData)) {
+                                console.warn("Existing data is not an array, resetting to empty array.");
+                                existingData = [];
+                            }
+                         }
+                     } else if (response.status !== 404) { // Allow 404 (file not found)
+                          throw new Error(`HTTP error! Status: ${response.status}`);
+                     }
+                      // If 404 or empty, existingData remains [] which is fine
+                 } catch (fetchError) {
+                     // Log fetch error, but proceed with an empty array if it's just a network/parse issue
+                     // This allows creating the file from scratch using the tool
+                     console.warn(`Kon bestaande JSON niet laden of parsen van ${newsDataUrl}. Start met een lege lijst. Fout: ${fetchError.message}`);
+                     // Optionally show a non-blocking warning to the user:
+                     // showError(formErrorEl, `Waarschuwing: Kon ${newsDataUrl} niet laden. Nieuw artikel wordt aan een lege lijst toegevoegd.`);
+                     existingData = []; // Ensure it's an empty array on error
+                 }
+
+
+                // 2. Add the new article (prepend to show newest first)
+                const updatedData = [newArticleData, ...existingData];
+                // OR append: const updatedData = [...existingData, newArticleData];
+
+                // 3. Stringify the combined data
+                const finalJsonString = JSON.stringify(updatedData, null, 2); // Pretty print
+
+                // 4. Display the final JSON
+                finalJsonOutputEl.textContent = finalJsonString;
+                showSuccess(copyStatusEl, "Volledige JSON gegenereerd. Kopieer de inhoud hierboven.");
+
+
+            } catch (error) {
+                console.error('Error generating final JSON:', error);
+                showError(formErrorEl, `Fout bij genereren JSON: ${error.message}`);
+                finalJsonOutputEl.textContent = "Fout bij genereren.";
+            }
+        }
+
+        function copyToClipboard(text, statusElement) {
+             if (!navigator.clipboard) {
+                 alert('Clipboard API niet ondersteund door uw browser.');
+                 return;
+             }
+
+             if (!text || text.startsWith('Vul het formulier in') || text.startsWith('Bezig met verwerken') || text.startsWith('Validatiefout') || text.startsWith('Fout bij genereren')) {
+                 alert('Geen geldige JSON om te kopiëren.');
+                 return;
+             }
+            navigator.clipboard.writeText(text).then(() => {
+                showSuccess(statusElement, "Volledige JSON gekopieerd!");
+            }).catch(err => {
+                console.error('Kopiëren mislukt: ', err);
+                alert('Automatisch kopiëren mislukt. Probeer handmatig te selecteren en kopiëren.');
+                showError(statusElement, "Kopiëren mislukt.");
+            });
+        }
+
+         function showError(element, message) {
+             element.textContent = message;
+             element.style.display = 'block';
+             element.classList.remove('success');
+             element.classList.add('error');
+             // Hide after a while
+             setTimeout(() => { element.style.display = 'none'; }, 5000);
+         }
+
+         function showSuccess(element, message) {
+             element.textContent = message;
+             element.style.display = 'block';
+             element.classList.remove('error');
+             element.classList.add('success');
+              // Hide after a while
+             setTimeout(() => { element.style.display = 'none'; }, 3000);
+         }
+    </script>
+</body>
+</html>

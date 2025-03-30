@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="nl-NL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atletiekclub Sparta Bornem - Modern Atletiekplezier</title>
+    <!-- Link to a potential future favicon -->
+    <link rel="icon" type="image/png" href="/images/website-logo.png"> <!-- Assuming favicon.png is in the same folder -->
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            height: 100%; /* Needed for sticky footer */
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa; /* Slightly lighter grey background */
+            /* --- Sticky Footer Flexbox Setup --- */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Target the main content wrapper */
+        /* Assumes <main> tag wraps content between header/footer */
+        main {
+            /* Add padding so content doesn't touch footer */
+            padding-bottom: 60px; /* Adjust value as needed */
+            /* Does NOT grow, prevents internal elements stretching */
+        }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- Blue Theme: Links --- */
+        a {
+            color: #1774b4; /* Theme Blue */
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            /* color: #125a8c; */ /* Optional: Darker blue */
+            text-decoration: underline;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        h1, h2, h3, h4 {
+            margin-bottom: 0.8em;
+            color: #1a1a1a;
+            font-weight: 600;
+        }
+        p { margin-bottom: 1em; }
+        ul { margin-bottom: 1em; margin-left: 20px; }
+
+
+        /* ==========================================================================
+        Header & Navigation Styles (White Header, Blue Accents)
+        ========================================================================== */
+
+        .site-header {
+            background-color: #ffffff;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08); /* Softer shadow */
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            flex-shrink: 0; /* Part of sticky footer */
+        }
+        .header-container { display: flex; justify-content: space-between; align-items: center; /* Mobile wrap added via MQ */ }
+        .logo h1 { margin: 0; font-size: 1.8em; }
+        .logo a { color: #212529; text-decoration: none; font-weight: 700; }
+        .logo img { max-height: 50px; }
+        .main-nav ul { list-style: none; padding: 0; margin: 0; display: flex; /* Mobile direction added via MQ */ }
+        .main-nav li { margin-left: 25px; position: relative; /* Mobile margin added via MQ */ }
+        .main-nav a {
+            color: #343a40; /* Dark grey nav text */
+            text-transform: uppercase;
+            font-weight: 600;
+            font-size: 0.95em;
+            padding-bottom: 5px;
+            border-bottom: 2px solid transparent;
+            transition: color 0.3s ease, border-color 0.3s ease;
+            /* Mobile display/padding added via MQ */
+        }
+        /* --- Blue Theme: Nav Hover/Active --- */
+        .main-nav a:hover,
+        .main-nav a.active {
+            color: #1774b4; /* Theme Blue */
+            border-bottom-color: #1774b4; /* Theme Blue */
+            /* Mobile active style overrides in MQ */
+        }
+
+        /* --- Dropdowns (Submenus) --- */
+        .main-nav .submenu {
+        display: none;
+        position: absolute;
+        background-color: #fff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        list-style: none;
+        padding: 10px 0;
+        margin-top: 5px;
+        min-width: 220px;
+        left: 0;
+        z-index: 1001;
+        border-radius: 4px; /* Optional */
+        /* Mobile position added via MQ */
+        }
+        /* --- Blue Theme: Active Submenu Item --- */
+        .main-nav .submenu a.active {
+        color: #1774b4; /* Theme Blue */
+        font-weight: 600;
+        border-bottom-color: transparent !important; /* Keep no border */
+        /* Mobile active style overrides in MQ */
+        }
+        .main-nav .submenu li {
+            margin: 0;
+            position: relative;
+            /* Mobile border added via MQ */
+        }
+        .main-nav .submenu a {
+        display: block;
+        padding: 8px 15px;
+        color: #343a40;
+        text-transform: none;
+        font-weight: 400;
+        border-bottom: none;
+        white-space: nowrap;
+        transition: background-color 0.2s ease, color 0.2s ease;
+        /* Mobile padding added via MQ */
+        }
+        /* --- Blue Theme: Submenu Hover --- */
+        .main-nav .submenu a:hover {
+        background-color: #e8f1f8; /* Light blue background */
+        color: #125a8c; /* Darker blue text */
+        }
+        .main-nav .submenu .submenu {
+        top: -10px;
+        left: 100%;
+        margin-top: 0;
+        margin-left: 1px;
+            min-width: 200px;
+        /* Mobile position added via MQ */
+        }
+        .main-nav li:hover > .submenu {
+        display: block; /* Desktop only show on hover */
+        }
+
+        /* --- Dropdown Indicators --- */
+        .main-nav > ul > li.menu-item-has-children > a::after {
+        content: ' ▼';
+        font-size: 0.7em;
+        display: inline-block;
+        margin-left: 4px;
+        vertical-align: middle;
+        color: #6c757d;
+        /* Mobile display added via MQ */
+        }
+        .main-nav .submenu li.menu-item-has-children > a::after {
+        content: ' ▶';
+        font-size: 0.7em;
+        display: inline-block;
+        margin-left: 4px;
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+            /* Mobile display added via MQ */
+        }
+        .main-nav .submenu li.menu-item-has-children > a {
+        padding-right: 30px;
+        }
+
+
+        /* ==========================================================================
+        Hero Section (Example Style)
+        ========================================================================== */
+        .hero {
+            background-color: #343a40; /* Darker grey/blue background */
+            /* Or use a blue gradient or image */
+            /* background-image: linear-gradient(to right, #1774b4, #125a8c); */
+            background-size: cover;
+            background-position: center;
+            color: #ffffff;
+            padding: 60px 0;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .hero h2 {
+            font-size: 2.5em;
+            margin-bottom: 0.5em;
+            color: #ffffff;
+        }
+        .hero p {
+            font-size: 1.1em;
+            margin-bottom: 1.5em;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            color: #e9ecef; /* Lighter text */
+        }
+        /* --- Blue Theme: CTA Button --- */
+        .cta-button {
+            background-color: #1774b4; /* Theme Blue */
+            color: #ffffff;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-size: 1em;
+            font-weight: 600;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .cta-button:hover {
+            background-color: #125a8c; /* Darker blue */
+            text-decoration: none;
+            color: #ffffff; /* Ensure text stays white */
+        }
+
+        /* ==========================================================================
+        Main Content Area & Sections (Example Styles)
+        ========================================================================== */
+        .main-content {
+            padding: 30px 0; /* Generic padding for content sections inside <main> */
+        }
+
+        /* --- News Section --- */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .news-item {
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex; /* Added for better structure */
+            flex-direction: column; /* Stack image/content */
+        }
+        .news-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+        }
+        .news-item img {
+            display: block;
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background-color: #eee;
+            flex-shrink: 0;
+        }
+        .news-content {
+            padding: 20px;
+            flex-grow: 1; /* Allow content to fill space */
+            display: flex;
+            flex-direction: column;
+        }
+        .news-content h3 {
+            font-size: 1.3em;
+            margin-top: 0;
+        }
+        .news-content h3 a {
+            color: #1a1a1a;
+            transition: color 0.2s ease;
+        }
+        /* --- Blue Theme: News Link Hover --- */
+        .news-content h3 a:hover {
+            color: #1774b4; /* Theme Blue */
+            text-decoration: none;
+        }
+        .news-meta {
+            font-size: 0.85em;
+            color: #6c757d; /* Muted grey */
+            margin-bottom: 10px;
+        }
+        .news-content p { /* Make text take available space */
+            flex-grow: 1;
+        }
+        .read-more { /* Inherits blue link color */
+            display: inline-block;
+            margin-top: 15px;
+            font-weight: 600;
+            align-self: flex-start;
+        }
+
+        /* --- Quick Info Section --- */
+        .quick-info {
+            background-color: #e9ecef; /* Lighter grey */
+            padding: 40px 0;
+            margin-top: 40px;
+        }
+        .info-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+        /* --- Blue Theme: Quick Info Heading --- */
+        .info-column h3 {
+            color: #1774b4; /* Theme Blue */
+            margin-bottom: 15px;
+        }
+        .info-column i.icon-placeholder {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            display: inline-block;
+            color: #6c757d; /* Muted grey */
+        }
+
+
+        /* ==========================================================================
+        Footer Styles (Blue Theme)
+        ========================================================================== */
+
+        .site-footer {
+            background-color: #1774b4; /* Theme Blue background */
+            color: #e9ecef; /* Lighter text */
+            padding: 40px 0 20px;
+            font-size: 0.9em;
+            /* --- Sticky Footer Properties --- */
+            margin-top: auto; /* Pushes footer down */
+            flex-shrink: 0; /* Prevent footer from shrinking */
+        }
+
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-bottom: 30px; }
+        .footer-column h4 { color: #ffffff; margin-bottom: 15px; font-size: 1.1em; }
+        .footer-column ul { list-style: none; padding: 0; margin: 0 0 1em 0;}
+        .footer-column li { margin-bottom: 8px; }
+        .footer-column a {
+            color: #dee2e6; /* Light grey links */
+            transition: color 0.2s ease;
+        }
+        .footer-column a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+        .footer-bottom {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #4a9dcf; /* Lighter blue border */
+            font-size: 0.85em;
+            color: #adb5bd; /* Muted text */
+        }
+
+
+        /* ==========================================================================
+        Utility Classes
+        ========================================================================== */
+        .text-center { text-align: center; }
+        .section-title {
+            font-size: 2em;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #343a40; /* Dark grey */
+        }
+
+        /* ==========================================================================
+        Mobile Responsive Styles
+        ========================================================================== */
+        .menu-toggle { display: none; background: none; border: none; font-size: 1.8em; cursor: pointer; color: #343a40; padding: 5px; }
+
+        @media (max-width: 768px) {
+            .header-container { position: relative; flex-wrap: wrap; }
+            .logo { flex-basis: 80%; }
+            .menu-toggle { display: block; position: absolute; top: 15px; right: 20px; }
+            .main-nav { width: 100%; margin-top: 15px; }
+            .main-nav ul { flex-direction: column; width: 100%; display: none; background-color: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+            .main-nav ul.active { display: block; }
+            .main-nav li { margin: 0; border-bottom: 1px solid #e9ecef; }
+            .main-nav li:last-child { border-bottom: none; }
+            .main-nav a { display: block; padding: 12px 20px; text-align: left; border-bottom: none; }
+            /* Mobile active link style */
+            .main-nav a.active {
+                color: #1774b4; /* Theme Blue */
+                background-color: #e8f1f8; /* Light blue background */
+                border-bottom-color: transparent !important; /* Still ensure no border */
+            }
+
+            /* Mobile Dropdown Adjustments */
+            .main-nav .submenu, .main-nav .submenu .submenu {
+                position: static;
+                display: block;
+                box-shadow: none;
+                background-color: transparent;
+                padding: 0;
+                margin-top: 0;
+                min-width: auto;
+                margin-left: 0;
+                border-top: none;
+            }
+            .main-nav ul ul li {
+                border-bottom: 1px dotted #ced4da;
+                background-color: #f8f9fa; /* Match body bg */
+            }
+            .main-nav ul ul ul li {
+                background-color: #e9ecef; /* Lighter grey for L3 */
+                border-bottom: 1px dotted #adb5bd;
+            }
+            .main-nav ul ul li:last-child { border-bottom: none; }
+            .main-nav ul ul a { padding-left: 35px; background-color: transparent; font-size: 0.9em; }
+            .main-nav ul ul ul a { padding-left: 50px; background-color: transparent; }
+            /* Mobile active submenu link */
+            .main-nav .submenu a.active {
+                color: #1774b4;
+                background-color: #ddeafa; /* Slightly darker blue bg for active sub */
+                font-weight: 600;
+                border-bottom-color: transparent !important;
+            }
+            .main-nav li.menu-item-has-children > a::after { display: none; }
+
+            /* Example Mobile Hero Adjustments */
+            .hero h2 { font-size: 2em; }
+
+            /* Page Specific Mobile */
+            .main-content .contact-image { float: none; display: block; margin: 0 auto 15px auto; }
+        }
+
+        /* ==========================================================================
+        Page Specific Styles (Example - Keep Separate if possible)
+        ========================================================================== */
+        .main-content .contact-image { /* Example from previous */
+            float: none;
+            display: block;
+            margin: 0 auto 15px auto;
+            width: 150px;
+            border-radius: 4px;
+        }
+
+        @media (min-width: 769px) {
+            .main-content .contact-image {
+                float: left;
+                margin: 0 20px 10px 0;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div id="header-placeholder">
+        <!-- Header will be loaded here by JavaScript -->
+        <p>Loading header...</p> <!-- Optional loading message -->
+    </div>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h2>Welkom bij Atletiekclub Sparta Bornem</h2>
+                <p>Dé plek voor atletiekplezier voor jong en oud in Bornem en omstreken. Ontdek onze trainingen, wedstrijden en clubactiviteiten.</p>
+                <a href="/html/(Nieuwe) leden/aansluiten.html" class="cta-button">Word nu lid!</a>
+            </div>
+        </section>
+
+
+        <section class="main-content container">
+            <h2 class="section-title">Laatste Nieuws</h2>
+
+            <div class="news-grid" id="latest-news-grid">
+                <p id="latest-news-loading" style="text-align: center; padding: 20px; font-style: italic; grid-column: 1 / -1;">Laatste nieuws wordt geladen...</p>
+
+            </div>
+            <div class="text-center" style="margin-top: 30px;">
+                <a href="/html/nieuws/nieuws.html" class="cta-button" style="background-color: #555;">Bekijk alle nieuwsberichten</a>
+            </div>
+        </section>
+
+        <section class="quick-info">
+            <div class="container info-columns">
+                <div class="info-column">
+                    <h3>Trainingen</h3>
+                    <p>Bekijk het Trainingsschema en de Trainers.</p>
+                    <a href="/html/info/training.html" class="read-more">Trainingsschema »</a>
+                </div>
+                <div class="info-column">
+                    <h3>Kalender</h3>
+                    <p>Blijf op de hoogte van komende wedstrijden.</p>
+                    <a href="/html/wedstrijden/kalender.html" class="read-more">Bekijk kalender »</a>
+                </div>
+                <div class="info-column">
+                    <h3>Word Lid</h3>
+                    <p>Sluit je aan bij onze sportieve familie en ervaar de passie voor atletiek.</p>
+                    <a href="/html/(Nieuwe) leden/aansluiten.html" class="read-more">Info & Aansluiten »</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder">
+        <p>Loading footer...</p>
+    </div>
+
+    <script src="/js/script.js" defer></script>
+</body>
+</html>
+</body>
+</html>

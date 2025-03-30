@@ -1,0 +1,367 @@
+/* ==========================================================================
+   Base Styles & Layout Prep
+   ========================================================================== */
+
+   * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa; /* Slightly lighter grey background */
+    /* Sticky Footer Flexbox Setup (assuming you use it) */
+    /* If not using JS position toggle, uncomment these */
+    /* min-height: 100vh; */
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* position: relative; */ /* Needed if using JS absolute positioning */
+}
+
+/* Target the main content wrapper */
+main {
+     /* Add padding so content doesn't touch footer directly */
+     padding-bottom: 60px; /* Adjust value as needed */
+}
+
+
+.container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- Blue Theme: Base Link Color --- */
+a {
+    color: #1774b4; /* Theme Blue */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+a:hover {
+    /* color: #125a8c; */ /* Optional: Darker blue on hover */
+    text-decoration: underline;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+h1, h4 {
+    margin-bottom: 0.8em;
+    color: #1a1a1a;
+    font-weight: 600;
+}
+p { margin-bottom: 1em; }
+ul { margin-bottom: 1em; margin-left: 20px; }
+
+
+/* ==========================================================================
+   Header & Navigation Styles (White Header, Blue Accents)
+   ========================================================================== */
+
+
+   .site-header {
+    background-color: #ffffff;
+    padding: 15px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    flex-shrink: 0; /* Keep if using Flexbox sticky footer */
+
+    /* --- ADD THIS LINE --- */
+    min-width: 280px; /* Or 300px, 320px - Prevents collapsing too much */
+    /* --------------------- */
+}
+
+.header-container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+.logo h1 { margin: 0; font-size: 1.8em; }
+.logo a { color: #212529; text-decoration: none; font-weight: 700; } /* Slightly darker logo text */
+.logo img { max-height: 50px; }
+.main-nav ul { list-style: none; padding: 0; margin: 0; display: flex; }
+.main-nav li { margin-left: 25px; position: relative; }
+.main-nav a {
+    color: #343a40; /* Dark grey nav text */
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 0.95em;
+    padding-bottom: 5px;
+    border-bottom: 2px solid transparent;
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+/* --- Blue Theme: Nav Hover/Active --- */
+.main-nav a:hover,
+.main-nav a.active {
+    color: #1774b4; /* Theme Blue */
+    border-bottom-color: #1774b4; /* Theme Blue */
+}
+
+/* --- Dropdowns (Submenus) --- */
+.main-nav .submenu {
+   display: none;
+   position: absolute;
+   background-color: #fff;
+   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow for dropdown */
+   list-style: none;
+   padding: 10px 0;
+   margin-top: 5px;
+   min-width: 220px;
+   left: 0;
+   z-index: 1001;
+   border-radius: 4px; /* Optional: Slight rounding */
+}
+/* --- Blue Theme: Active Submenu Item --- */
+.main-nav .submenu a.active {
+   color: #1774b4; /* Theme Blue */
+   font-weight: 600;
+   border-bottom-color: transparent !important; /* Keep no border */
+   /* Optional: Slight background indication */
+   /* background-color: #e8f1f8; */
+}
+.main-nav .submenu li {
+    margin: 0;
+    position: relative;
+}
+.main-nav .submenu a {
+   display: block;
+   padding: 8px 15px;
+   color: #343a40; /* Match nav text color */
+   text-transform: none;
+   font-weight: 400;
+   border-bottom: none;
+   white-space: nowrap;
+   transition: background-color 0.2s ease, color 0.2s ease;
+}
+/* --- Blue Theme: Submenu Hover --- */
+.main-nav .submenu a:hover {
+   background-color: #e8f1f8; /* Light blue background on hover */
+   color: #125a8c; /* Darker blue text on hover */
+}
+.main-nav .submenu .submenu {
+   top: -10px;
+   left: 100%;
+   margin-top: 0;
+   margin-left: 1px;
+    min-width: 200px;
+}
+.main-nav li:hover > .submenu {
+   display: block;
+}
+
+/* --- Dropdown Indicators --- */
+.main-nav > ul > li.menu-item-has-children > a::after {
+   content: ' ▼';
+   font-size: 0.7em;
+   display: inline-block;
+   margin-left: 4px;
+   vertical-align: middle;
+   color: #6c757d; /* Muted color for indicator */
+}
+.main-nav .submenu li.menu-item-has-children > a::after {
+   content: ' ▶';
+   font-size: 0.7em;
+   display: inline-block;
+   margin-left: 4px;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d; /* Muted color */
+}
+.main-nav .submenu li.menu-item-has-children > a {
+   padding-right: 30px;
+}
+
+
+
+/* ==========================================================================
+   Footer Styles (Blue Theme)
+   ========================================================================== */
+
+.site-footer {
+    background-color: #1774b4; /* Theme Blue background */
+    color: #e9ecef; /* Lighter text color for contrast */
+    padding: 40px 0 20px;
+    font-size: 0.9em;
+    /* --- Sticky Footer Properties (If using JS Position Toggle) --- */
+    /* position: relative; */ /* Default state for JS toggle */
+    /* width: 100%; */
+    /* --- Sticky Footer Properties (If using Flexbox) --- */
+    /* margin-top: auto; */
+    /* flex-shrink: 0; */
+}
+
+.footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-bottom: 30px; }
+.footer-column h4 { color: #ffffff; margin-bottom: 15px; font-size: 1.1em; }
+.footer-column ul { list-style: none; padding: 0; margin: 0 0 1em 0;}
+.footer-column li { margin-bottom: 8px; }
+/* --- Blue Theme: Footer Links --- */
+.footer-column a {
+    color: #dee2e6; /* Light grey/off-white links */
+    transition: color 0.2s ease;
+ }
+.footer-column a:hover {
+    color: #ffffff; /* White on hover */
+    text-decoration: underline;
+}
+.footer-bottom {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #4a9dcf; /* Lighter blue border */
+    font-size: 0.85em;
+    color: #adb5bd; /* Slightly muted text */
+}
+
+
+/* ==========================================================================
+   Mobile Responsive Styles
+   ========================================================================== */
+.menu-toggle { display: none; background: none; border: none; font-size: 1.8em; cursor: pointer; color: #343a40; padding: 5px; } /* Match nav text color */
+
+@media (max-width: 768px) {
+    .header-container { position: relative; flex-wrap: wrap; }
+    .logo { flex-basis: 80%; }
+    .menu-toggle { display: block; position: absolute; top: 15px; right: 20px; }
+    .main-nav { width: 100%; margin-top: 15px; }
+    .main-nav ul { flex-direction: column; width: 100%; display: none; background-color: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .main-nav ul.active { display: block; }
+    .main-nav li { margin: 0; border-bottom: 1px solid #e9ecef; } /* Lighter border */
+    .main-nav li:last-child { border-bottom: none; }
+    .main-nav a { display: block; padding: 12px 20px; text-align: left; border-bottom: none; }
+    /* --- Blue Theme: Mobile Active Link --- */
+    .main-nav a.active {
+        color: #1774b4; /* Theme Blue */
+        background-color: #e8f1f8; /* Light blue background */
+    }
+
+    /* Mobile Dropdown Adjustments */
+    .main-nav .submenu, .main-nav .submenu .submenu {
+        position: static;
+        display: block;
+        box-shadow: none;
+        background-color: transparent;
+        padding: 0;
+        margin-top: 0;
+        min-width: auto;
+        margin-left: 0;
+        border-top: none;
+    }
+    .main-nav ul ul li {
+        border-bottom: 1px dotted #ced4da; /* Slightly darker dotted */
+        background-color: #f8f9fa; /* Match body bg */
+    }
+    .main-nav ul ul ul li {
+        background-color: #e9ecef; /* Lighter grey for L3 */
+        border-bottom: 1px dotted #adb5bd;
+    }
+    .main-nav ul ul li:last-child { border-bottom: none; }
+    .main-nav ul ul a {
+        padding-left: 35px;
+        background-color: transparent;
+    }
+    .main-nav ul ul ul a {
+        padding-left: 50px;
+        background-color: transparent;
+    }
+    /* --- Blue Theme: Mobile Active Submenu Link --- */
+    .main-nav .submenu a.active {
+       color: #1774b4; /* Theme Blue */
+       background-color: #ddeafa; /* Slightly darker blue bg for active sub */
+       font-weight: 600;
+    }
+    .main-nav li.menu-item-has-children > a::after { display: none; }
+
+    /* Keep page specific mobile styles */
+    .main-content .contact-image { float: none; display: block; margin: 0 auto 15px auto; }
+}
+
+/* ==========================================================================
+   Page Specific Styles (Example - Keep Separate if possible)
+   ========================================================================== */
+/* Add page-specific CSS here */
+.main-content .contact-image { /* Example from previous */
+    float: none;
+    display: block;
+    margin: 0 auto 15px auto;
+    width: 150px;
+    border-radius: 4px;
+}
+
+@media (min-width: 769px) {
+    .main-content .contact-image {
+        float: left;
+        margin: 0 20px 10px 0;
+    }
+}
+
+/* ==========================================================================
+   Page Specific Styles: Records Tables
+   ========================================================================== */
+
+/* Make table scroll horizontally on small screens */
+.table-responsive {
+    overflow-x: auto;
+    margin-top: 20px; /* Space above table */
+    margin-bottom: 30px; /* Space below table */
+    border: 1px solid #dee2e6; /* Optional border around scroll area */
+    border-radius: 5px;
+}
+
+.records-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px; /* Prevent extreme squishing on small screens */
+    font-size: 0.95em; /* Slightly smaller font */
+}
+
+.records-table th,
+.records-table td {
+    border: 1px solid #dee2e6;
+    padding: 10px 12px; /* Adjust padding */
+    text-align: left;
+    vertical-align: top; /* Align names top for relays */
+}
+
+.records-table th {
+    background-color: #e9ecef; /* Light grey header */
+    font-weight: 600;
+    white-space: nowrap; /* Prevent headers wrapping */
+}
+
+.records-table tbody tr:nth-child(even) {
+    background-color: #f8f9fa; /* Zebra striping */
+}
+
+.records-table tbody tr:hover {
+    background-color: #e8f1f8; /* Light blue hover */
+}
+
+/* Styling for the "missing record" notice */
+.record-notice {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #fff3cd; /* Light yellow background */
+    border: 1px solid #ffeeba;
+    border-left: 5px solid #ffc107; /* Yellow left border */
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+.record-notice a {
+    font-weight: 600;
+}
+
+
+[contenteditable="true"] {
+    outline: 2px dashed #1774b4; /* Blue dashed outline when editing */
+    background-color: #f0f8ff; /* Light blue background when editing */
+    cursor: text;
+}
