@@ -365,3 +365,56 @@ ul { margin-bottom: 1em; margin-left: 20px; }
     background-color: #f0f8ff; /* Light blue background when editing */
     cursor: text;
 }
+
+/* --- Mobile Navigation Accordion Styles --- */
+
+/* Define your mobile breakpoint - MUST match JS window.innerWidth check */
+@media (max-width: 991px) { /* Adjust this breakpoint as needed */
+
+    /* Hide all submenus by default when the mobile menu is active */
+    .main-nav ul.active .submenu {
+        display: none; /* Hide initially */
+    }
+
+    /* Show the active submenu when its parent LI has 'submenu-open' */
+    .main-nav ul.active li.submenu-open > ul.submenu.submenu-active {
+        display: block; /* Show the toggled submenu */
+
+    }
+
+    /* Style the parent link/text to indicate it's expandable */
+    .main-nav ul.active li > a[aria-haspopup="true"] {
+        display: flex; /* Use flexbox to position indicator */
+        justify-content: space-between; /* Push indicator to the right */
+        align-items: center;
+        width: 100%; /* Ensure it takes full width */
+    }
+
+    /* Add an indicator (e.g., arrow) */
+    .main-nav ul.active li > a[aria-haspopup="true"]::after {
+        content: '▼'; /* Down arrow for closed */
+        display: inline-block;
+        margin-left: 8px;
+        font-size: 0.8em;
+        transition: transform 0.3s ease;
+    }
+
+    /* Change indicator when the submenu is open */
+    .main-nav ul.active li.submenu-open > a[aria-haspopup="true"]::after {
+        transform: rotate(180deg); /* Point arrow up */
+    }
+
+} /* End Media Query */
+
+/* --- Desktop Hover Styles (Ensure these are OUTSIDE the media query) --- */
+/* Keep your existing desktop :hover styles */
+/* Example (make sure these apply only above the mobile breakpoint) */
+@media (min-width: 992px) { /* Adjust breakpoint */
+    .main-nav ul li:hover > .submenu {
+        display: block; /* Or however you show them on desktop */
+        opacity: 1;
+        visibility: visible;
+        /* Reset any mobile-specific styles if necessary */
+    }
+
+}
