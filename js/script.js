@@ -337,7 +337,8 @@ document.addEventListener('DOMContentLoaded', function() {
         /**
          * Normalizes a URL path for comparison.
          * Removes trailing index/home.html, removes trailing .html,
-         * removes trailing slash (unless root), decodes URI components.
+         * removes trailing slash (unless root), decodes URI components,
+         * converts to lowercase.
          * @param {string} path - The URL path to normalize.
          * @returns {string} The normalized path.
          */
@@ -374,8 +375,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 path = '/';
             }
 
-            // 6. Optional: Convert to lowercase for case-insensitive comparison (Uncomment if needed)
-            // path = path.toLowerCase();
+            // 6. Convert to lowercase for case-insensitive comparison (Fix for Netlify)
+             path = path.toLowerCase(); // <<< THIS LINE IS NOW ACTIVE
 
             return path;
         };
@@ -401,10 +402,6 @@ document.addEventListener('DOMContentLoaded', function() {
             // Normalize the link's path
             const normalizedLinkPath = normalizePath(linkPath);
 
-            // --- Debugging Line (Remove in production) ---
-            // console.log(`Comparing: Current='${normalizedCurrentPath}' vs Link='${normalizedLinkPath}' (Original href: ${linkHref}, Current Path: ${currentPagePath})`);
-            // ---------------------------------------------
-
             // Check for active state using the normalized paths
             if (normalizedCurrentPath === normalizedLinkPath) {
                 link.classList.add('active');
@@ -418,6 +415,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         // Find the direct anchor link within that LI (the parent menu item trigger)
                         const parentTriggerLink = currentElement.querySelector(':scope > a');
                         if (parentTriggerLink) {
+                             // console.log("Adding 'active' to parent link:", parentTriggerLink); // Optional debug
                             parentTriggerLink.classList.add('active'); // Highlight the trigger link
                         }
                     }
