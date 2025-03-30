@@ -280,15 +280,12 @@
 
                 if (articleData.image) {
                     let finalImageUrl = articleData.image;
-                    // *** Corrected Image Path Logic: Assume image filename is relative to /images/nieuws/ ***
                      if (!finalImageUrl.startsWith('http://') && !finalImageUrl.startsWith('https://')) {
-                         // Ensure no double slashes if filename starts with /
                          finalImageUrl = `/images/nieuws/${finalImageUrl.replace(/^\//, '')}`;
                      }
-                    // *** End Corrected Image Path Logic ***
                     imageContainer.innerHTML = `<img class="article-image" src="${finalImageUrl}" alt="${articleData.alt || articleData.title}" loading="lazy">`;
                 } else {
-                    imageContainer.innerHTML = ''; // Clear if no image
+                    imageContainer.innerHTML = '';
                 }
 
                 if (articleData.full_content) {
@@ -312,7 +309,7 @@
 
                 if (backLink) backLink.style.display = 'inline-block';
             }
-        } // --- End loadSingleArticle function ---
+        }
 
         document.addEventListener('DOMContentLoaded', () => {
             // No need for setTimeout if the main script uses 'defer'

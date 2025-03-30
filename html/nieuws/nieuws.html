@@ -7,13 +7,231 @@
     <link rel="icon" type="image/png" href="/images/website-logo.png">
     <link rel="stylesheet" href="/css/style.css">
     <style>
-        .news-archive-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 20px;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
-         #news-loading { text-align: center; padding: 30px; font-style: italic; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4; /* Consistent background */
+        }
+
+        a {
+            color: #1774b4; /* Theme blue */
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block; /* Prevent potential bottom space */
+        }
+
+        .container {
+            max-width: 1140px;
+            margin: 20px auto; /* Center container and add top/bottom margin */
+            padding: 0 20px;   /* Side padding */
+        }
+
+        /* Styles for main content area, like padding below header / above footer */
+        .main-content {
+            padding-top: 20px;
+            padding-bottom: 40px;
+        }
+
+        .main-content h1 {
+            color: #1774b4; /* Theme blue for main page title */
+            margin-bottom: 10px; /* Space below H1 */
+            font-size: 2.5em; /* Larger page title */
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        /* Style the intro paragraph on pages like the archive */
+        .main-content > p:first-of-type {
+            margin-top: 10px;
+            margin-bottom: 25px; /* Space below intro p */
+            font-size: 1.1em;
+            color: #555;
+        }
+
+
+        /* ==========================================================================
+        News Search Bar Styling
+        ========================================================================== */
+        .news-search-container {
+            margin-bottom: 30px; /* Space below search bar */
+            position: relative; /* For potential future icons */
+        }
+
+        #news-search-input {
+            width: 100%; /* Full width */
+            padding: 12px 15px; /* Comfortable padding */
+            font-size: 1em;
+            font-family: inherit; /* Use body font */
+            border: 1px solid #ced4da; /* Standard border */
+            border-radius: 5px; /* Rounded corners */
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075); /* Subtle inner shadow */
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        #news-search-input:focus {
+            border-color: #1774b4; /* Highlight border on focus */
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075), 0 0 0 0.2rem rgba(23, 116, 180, 0.25); /* Add focus ring */
+            outline: none; /* Remove default outline */
+        }
+
+        /* Style the placeholder text */
+        #news-search-input::placeholder {
+            color: #999;
+            opacity: 1; /* Firefox */
+        }
+
+        /* Clear button (X) for search inputs in WebKit browsers */
+        #news-search-input::-webkit-search-cancel-button,
+        #news-search-input::-webkit-search-decoration {
+        -webkit-appearance: none;
+        appearance: none; /* Remove default styling */
+        /* Add custom styling for clear button if desired */
+        }
+
+
+        /* ==========================================================================
+        News Grid & Item Styling (Using Flexbox Wrap)
+        ========================================================================== */
+
+        /* --- News Grid Layout (Using Flexbox) --- */
+        .news-archive-grid {
+            display: flex;      /* CHANGED: Use Flexbox */
+            flex-wrap: wrap;    /* CHANGED: Allow items to wrap to the next line */
+            gap: 30px;          /* Keep the gap between items */
+            padding-top: 20px;  /* Keep space below intro text/search */
+            align-items: stretch; /* ADDED: Makes items in the same row have equal height */
+        }
+
+        .news-item {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+
+            flex-grow: 1;
+            flex-basis: 300px;
+            min-width: 280px;
+
+            max-width: calc(50% - 15px); 
+        }
+        .news-item:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+            transform: translateY(-3px);
+        }
+
+        .news-item-image-link {
+            display: block;
+            line-height: 0;
+        }
+
+        .news-item img {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* --- News Item Content Area --- */
+        .news-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1; /* Pushes read-more down */
+        }
+
+        .news-meta {
+            font-size: 0.85em;
+            color: #6c757d;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .news-title {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .news-title a {
+            color: #1774b4;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .news-title a:hover {
+            color: #125a8c;
+            text-decoration: underline;
+        }
+
+        .news-summary {
+            font-size: 0.95em;
+            color: #495057;
+            line-height: 1.6;
+            flex-grow: 1; /* Allows summary to push read-more down */
+            margin-bottom: 15px;
+
+            /* Clamp summary text */
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-height: calc(1.6em * 3 * 0.95); /* Approximate min height for clamping */
+        }
+
+        .read-more {
+            margin-top: auto; /* Pushes to bottom */
+            align-self: flex-start; /* Aligns left */
+            font-size: 0.9em;
+            font-weight: 600;
+            color: #1774b4;
+            text-decoration: none;
+            transition: color 0.2s ease;
+            padding: 5px 0; /* Clickable area */
+        }
+
+        .read-more:hover {
+            color: #125a8c;
+            text-decoration: underline;
+        }
+
+        /* --- "No Results" Message Styling --- */
+        #news-no-results {
+            width: 100%; /* Takes full width */
+            text-align: center;
+            padding: 30px;
+            font-style: italic;
+            color: #6c757d;
+            display: none; /* Initially hidden */
+            /* grid-column removed */
+        }
+
+        .visually-hidden {
+            position: absolute !important;
+            height: 1px; width: 1px;
+            overflow: hidden;
+            clip: rect(1px, 1px, 1px, 1px);
+            white-space: nowrap; /* Prevent wrapping */
+        }
+
+        /* Add other specific styles for other pages/components as needed */
     </style>
 </head>
 <body>
@@ -23,100 +241,159 @@
         <h1>Nieuwsarchief</h1>
         <p>Bekijk hier alle nieuwsberichten van Sparta Bornem.</p>
 
+        <!-- ======================== -->
+        <!-- === ADD SEARCH BAR === -->
+        <!-- ======================== -->
+        <div class="news-search-container">
+             <label for="news-search-input" class="visually-hidden">Zoek nieuws:</label>
+             <input type="search" id="news-search-input" placeholder="Zoek op titel of samenvatting...">
+        </div>
+        <!-- ======================== -->
+
+        <!-- Add a loading message container for better control -->
+        <div id="news-loading-container" style="text-align: center; padding: 30px; font-style: italic;">
+            <p id="news-loading">Nieuws wordt geladen...</p>
+        </div>
+
+        <!-- Add a container for displaying "no results" message -->
+        <div id="news-no-results" style="display: none; text-align: center; padding: 30px; font-style: italic; color: #6c757d;">
+            <p>Geen nieuwsberichten gevonden die voldoen aan uw zoekopdracht.</p>
+        </div>
+
+
+        <!-- The grid itself -->
         <section id="news-archive-placeholder" class="news-archive-grid">
-             <p id="news-loading">Nieuws wordt geladen...</p>
+             <!-- News items will be loaded here -->
         </section>
     </main>
 
     <div id="footer-placeholder"></div>
-    <script src="/js/script.js" defer></script>
+    <script src="/js/script.js" defer></script> <!-- Assume this loads header/footer -->
 
+    <!-- Keep the existing script block for loading news -->
     <script>
-        async function loadAndDisplayNews() {
-            const newsPlaceholder = document.getElementById('news-archive-placeholder');
-            const loadingMessage = document.getElementById('news-loading');
-            const newsDataUrl = '/html/nieuws/nieuws-data.json'; 
+        // --- Global Variables for News Data and Elements ---
+        let allNewsArticles = []; // To store the original full list
+        const newsPlaceholder = document.getElementById('news-archive-placeholder');
+        const loadingContainer = document.getElementById('news-loading-container');
+        const searchInput = document.getElementById('news-search-input');
+        const noResultsEl = document.getElementById('news-no-results');
+        const newsDataUrl = '/html/nieuws/nieuws-data.json';
 
+        /**
+         * Renders a list of news articles into the placeholder.
+         * @param {Array} articlesToRender - The array of article objects to display.
+         */
+        function renderNewsArticles(articlesToRender) {
+            newsPlaceholder.innerHTML = ''; // Clear previous results
+            noResultsEl.style.display = 'none'; // Hide no results message initially
+
+            if (articlesToRender.length === 0) {
+                noResultsEl.style.display = 'block'; // Show no results message
+                return;
+            }
+
+            const referrerPath = window.location.pathname; // Needed for backlink
+
+            articlesToRender.forEach(item => {
+                const itemDate = new Date(item.date);
+                const formattedDate = itemDate.toLocaleDateString('nl-BE', {
+                    day: 'numeric', month: 'long', year: 'numeric'
+                });
+
+                // Image path logic
+                let finalImageUrl = '/images/nieuws/placeholder-news.png';
+                if (item.image) {
+                    if (!item.image.startsWith('http://') && !item.image.startsWith('https://')) {
+                        finalImageUrl = `/images/nieuws/${item.image.replace(/^\//, '')}`;
+                    } else {
+                        finalImageUrl = item.image;
+                    }
+                }
+
+                const summaryText = item.summary || '';
+                const itemLink = `/html/nieuws/artikel.html?id=${item.id || ''}&ref=${encodeURIComponent(referrerPath)}`;
+
+                // Generate HTML
+                const articleHtml = `
+                    <article class="news-item" id="news-${item.id || ''}">
+                        <a href="${itemLink}" class="news-item-image-link" aria-hidden="true" tabindex="-1">
+                            <img src="${finalImageUrl}" alt="" loading="lazy">
+                        </a>
+                        <div class="news-content">
+                            <p class="news-meta">${formattedDate} | ${item.category || 'Algemeen'}</p>
+                            <h3 class="news-title"><a href="${itemLink}">${item.title}</a></h3>
+                            ${summaryText ? `<p class="news-summary">${summaryText}</p>` : ''}
+                            <a href="${itemLink}" class="read-more">Lees meer »</a>
+                        </div>
+                    </article>
+                    `;
+
+                newsPlaceholder.insertAdjacentHTML('beforeend', articleHtml);
+            });
+        }
+
+        /**
+         * Handles the search input event, filters articles, and re-renders.
+         */
+        function handleSearch() {
+            const searchTerm = searchInput.value.trim().toLowerCase();
+
+            const filteredArticles = allNewsArticles.filter(item => {
+                const titleMatch = item.title?.toLowerCase().includes(searchTerm);
+                const summaryMatch = item.summary?.toLowerCase().includes(searchTerm);
+                // Optional: Add category match?
+                // const categoryMatch = item.category?.toLowerCase().includes(searchTerm);
+                return titleMatch || summaryMatch; // || categoryMatch;
+            });
+
+            renderNewsArticles(filteredArticles);
+        }
+
+        /**
+         * Fetches, sorts, stores, and initially displays all news articles.
+         */
+        async function loadInitialNews() {
             try {
-                const response = await fetch(newsDataUrl);
+                const response = await fetch(newsDataUrl + '?t=' + Date.now());
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status} fetching ${newsDataUrl}`);
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 const newsData = await response.json();
 
-                newsData.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-                if (loadingMessage) loadingMessage.remove();
-                newsPlaceholder.innerHTML = '';
-
-                if (newsData.length === 0) {
-                    newsPlaceholder.innerHTML = '<p style="grid-column: 1 / -1; text-align: center;">Geen nieuwsberichten gevonden.</p>';
-                    return;
+                if (!Array.isArray(newsData)) {
+                    throw new Error("Gedownloade nieuwsdata is geen geldige lijst.");
                 }
 
-                const referrerPath = window.location.pathname;
+                // Sort data by date descending
+                allNewsArticles = newsData.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-                newsData.forEach(item => {
-                    const itemDate = new Date(item.date);
-                    const formattedDate = itemDate.toLocaleDateString('nl-BE', {
-                        day: 'numeric', month: 'long', year: 'numeric'
-                    });
+                // Remove loading message container
+                if (loadingContainer) loadingContainer.remove();
 
-                    let finalImageUrl = '/images/nieuws/placeholder-news.png';
-                    if (item.image) {
-                        if (!item.image.startsWith('http://') && !item.image.startsWith('https://')) {
-                            finalImageUrl = `/images/nieuws/${item.image.startsWith('/') ? item.image.substring(1) : item.image}`;
-                        } else {
-                            finalImageUrl = item.image;
-                        }
-                    }
+                // Initial render of all articles
+                renderNewsArticles(allNewsArticles);
 
-                    const summaryText = item.summary; 
-                    const itemLink = `/html/nieuws/artikel.html?id=${item.id || ''}&ref=${encodeURIComponent(referrerPath)}`;
-                    
-                    let articleHtml
-
-                    if (summaryText) {
-                        articleHtml = `
-                        <article class="news-item" id="${item.id || ''}">
-                            <img src="${finalImageUrl}" alt="${item.title}" loading="lazy">
-                            <div class="news-content">
-                                <p class="news-meta">${formattedDate} | ${item.category || 'Algemeen'}</p>
-                                <h3><a href="${itemLink}">${item.title}</a></h3>
-                                <p>${summaryText}</p>
-                                <a href="${itemLink}" class="read-more">Lees meer »</a>
-                            </div>
-                        </article>
-                        `;
-                    } else {
-                        articleHtml = `
-                        <article class="news-item" id="${item.id || ''}">
-                            <img src="${finalImageUrl}" alt="${item.title}" loading="lazy">
-                            <div class="news-content">
-                                <p class="news-meta">${formattedDate} | ${item.category || 'Algemeen'}</p>
-                                <h3><a href="${itemLink}">${item.title}</a></h3>
-                            </div>
-                        </article>
-                    `;
-                    }
-
-                    newsPlaceholder.insertAdjacentHTML('beforeend', articleHtml);
-                });
+                // Add search event listener *after* data is loaded
+                searchInput.addEventListener('input', handleSearch);
 
             } catch (error) {
-                // Handle errors during fetch or processing
-                console.error('Error loading or processing news data:', error);
-                const displayError = `<p style="color:red; text-align:center; grid-column: 1 / -1;">Kon nieuws niet laden. (${error.message})</p>`;
-                if(loadingMessage) {
-                    loadingMessage.innerHTML = displayError;
+                console.error('Error loading initial news data:', error);
+                const displayError = `<p style="color:red; text-align:center;">Kon nieuws niet laden. (${error.message})</p>`;
+                if (loadingContainer) {
+                    loadingContainer.innerHTML = displayError;
                 } else if (newsPlaceholder) {
-                    newsPlaceholder.innerHTML = displayError;
+                    // Fallback if loading container was already gone somehow
+                    newsPlaceholder.innerHTML = `<div style="grid-column: 1 / -1;">${displayError}</div>`;
                 }
+                 // Disable search if loading fails
+                 searchInput.disabled = true;
+                 searchInput.placeholder = "Nieuws laden mislukt";
             }
-        } // End loadAndDisplayNews
+        }
 
-        // Run the function when the DOM is ready
-        document.addEventListener('DOMContentLoaded', loadAndDisplayNews);
+        // Run the initial load when the DOM is ready
+        document.addEventListener('DOMContentLoaded', loadInitialNews);
     </script>
 </body>
 </html>
