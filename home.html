@@ -407,14 +407,14 @@
 
         .hero {
             background-image: url('/images/pagina/474183398_1108689364383810_5813522470262771257_n.jpg');
-            background-size: cover;
+            background-size:cover;
             background-position: center center;
             background-repeat: no-repeat;
             background-attachment: fixed;
 
             color: #ffffff;        
             padding: 100px 20px;          
-            min-height: 50vh;      
+            min-height: 75vh;      
             text-align: center;
 
             display: flex;
@@ -425,23 +425,21 @@
             z-index: 1;   
         }
 
-
         .hero::before {
-            content: "";                    
-            position: absolute;          
+            content: "";                    /* Required for pseudo-elements */
+            position: absolute;             /* Position relative to the .hero section */
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(0, 0, 0, 0.4); 
-            z-index: 2;    
+            background-color: rgba(0, 0, 0, 0.4); /* Black overlay with 40% opacity */
+            z-index: 2;                     /* Place overlay above background image */
         }
 
-        /* Ensure the content container is above the overlay */
         .hero .container {
-            position: relative;             /* Allow z-index stacking */
-            z-index: 3;                     /* Place content above the overlay */
-            max-width: 800px;               /* Optional: Limit content width */
+            position: relative;        
+            z-index: 3;          
+            max-width: 800px;  
         }
 
         .hero h2 {
@@ -455,11 +453,11 @@
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
-            color: #e9ecef; /* Lighter text */
+            color: #e9ecef; 
         }
-        /* --- Blue Theme: CTA Button --- */
+
         .cta-button {
-            background-color: #1774b4; /* Theme Blue */
+            background-color: #1774b4; 
             color: #ffffff;
             padding: 12px 25px;
             border-radius: 5px;
@@ -471,9 +469,9 @@
             cursor: pointer;
         }
         .cta-button:hover {
-            background-color: #125a8c; /* Darker blue */
+            background-color: #125a8c; 
             text-decoration: none;
-            color: #ffffff; /* Ensure text stays white */
+            color: #ffffff;
         }
     </style>
 
