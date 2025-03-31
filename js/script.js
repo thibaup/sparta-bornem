@@ -168,21 +168,14 @@ async function loadLatestNews(count = 3, containerId = 'latest-news-grid', loadi
 
 
 document.addEventListener('DOMContentLoaded', function() {
-
-    // --- Element Selectors ---
     const headerPlaceholder = document.getElementById('header-placeholder');
     const footerPlaceholder = document.getElementById('footer-placeholder');
 
     // --- Page Info ---
-    // Get the current full path from the browser's location object
     const currentPagePath = window.location.pathname;
 
 
     // --- Function Definitions within DOMContentLoaded Scope ---
-
-    /**
-     * Loads HTML content from a URL into a placeholder element using root-relative paths.
-     */
     const loadHTML = async (url, placeholder) => {
         const rootRelativeUrl = url.startsWith('/') ? url : '/' + url;
 
@@ -208,15 +201,15 @@ document.addEventListener('DOMContentLoaded', function() {
      */
     const initializeHeader = () => {
         const menuToggle = document.querySelector('.menu-toggle');
-        const mainNavUl = document.querySelector('.main-nav > ul'); // Target the main UL directly
-        const mobileBreakpoint = 992; // Define mobile breakpoint (MUST match CSS @media query)
+        const mainNavUl = document.querySelector('.main-nav > ul');
+        const mobileBreakpoint = 992;
 
         // --- Mobile Menu Toggle Logic ---
         if (menuToggle && mainNavUl) {
             menuToggle.addEventListener('click', () => {
-                const isActive = mainNavUl.classList.toggle('active'); // Toggle and check state
-                menuToggle.innerHTML = isActive ? '✕' : '☰'; // Update icon
-                menuToggle.setAttribute('aria-expanded', isActive); // Update ARIA state
+                const isActive = mainNavUl.classList.toggle('active'); 
+                menuToggle.innerHTML = isActive ? '✕' : '☰'; 
+                menuToggle.setAttribute('aria-expanded', isActive);
 
                 // Reset any open submenus when the main menu is closed
                 if (!isActive) {
@@ -238,16 +231,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // --- Accordion Logic for Mobile Submenus ---
-        const menuItems = mainNavUl.querySelectorAll(':scope > li'); // Select only top-level LIs for accordion trigger
+        const menuItems = mainNavUl.querySelectorAll(':scope > li');
 
         menuItems.forEach(li => {
-            const parentLink = li.querySelector(':scope > a'); // The direct link/text element
-            const submenu = li.querySelector(':scope > ul.submenu'); // The direct submenu
+            const parentLink = li.querySelector(':scope > a');
+            const submenu = li.querySelector(':scope > ul.submenu'); 
 
             if (parentLink && submenu) {
-                 // Set initial ARIA state for accessibility
                  parentLink.setAttribute('aria-haspopup', 'true');
-                 parentLink.setAttribute('aria-expanded', 'false'); // Initially closed
+                 parentLink.setAttribute('aria-expanded', 'false');
 
                 parentLink.addEventListener('click', (event) => {
                     const isMobileView = window.innerWidth < mobileBreakpoint && getComputedStyle(menuToggle).display !== 'none';
@@ -260,9 +252,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         // Toggle the current submenu
                         const isOpening = !li.classList.contains('submenu-open');
 
-                         if (isOpening) { // Only close others if we are opening this one
+                         if (isOpening) {
                              li.parentElement.querySelectorAll(':scope > li.submenu-open').forEach(otherLi => {
-                                 if (otherLi !== li) { // Don't close the one we just opened
+                                 if (otherLi !== li) {
                                      otherLi.classList.remove('submenu-open');
                                      const otherSubmenu = otherLi.querySelector(':scope > ul.submenu');
                                      if (otherSubmenu) otherSubmenu.classList.remove('submenu-active');
@@ -275,13 +267,11 @@ document.addEventListener('DOMContentLoaded', function() {
                          }
 
                         // Now toggle the current item
-                        li.classList.toggle('submenu-open', isOpening); // Use force parameter
+                        li.classList.toggle('submenu-open', isOpening);
                         submenu.classList.toggle('submenu-active', isOpening);
                         parentLink.setAttribute('aria-expanded', isOpening);
 
                     }
-                    // If NOT mobile view, the click should proceed as normal (follow href or do nothing if no href)
-                    // Desktop hover effects are handled purely by CSS.
                 });
 
                 // Handle nested submenus (if any) - apply same logic recursively or flatly
@@ -302,7 +292,6 @@ document.addEventListener('DOMContentLoaded', function() {
                                  }
                                  const isNestedOpening = !nestedLi.classList.contains('submenu-open');
 
-                                 // Optional: Close siblings within the *same* nested level
                                  if (isNestedOpening) {
                                     nestedLi.parentElement.querySelectorAll(':scope > li.submenu-open').forEach(otherNestedLi => {
                                         if(otherNestedLi !== nestedLi) {

@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atletiekclub Sparta Bornem - Modern Atletiekplezier</title>
-    <!-- Link to a potential future favicon -->
-    <link rel="icon" type="image/png" href="/images/website-logo.png"> <!-- Assuming favicon.png is in the same folder -->
+    <title>Atletiekclub Sparta Bornem</title>
+    <link rel="icon" type="image/png" href="/images/website-logo.png">
     <style>
         * {
             box-sizing: border-box;
@@ -188,14 +187,10 @@
 
 
         /* ==========================================================================
-        Hero Section (Example Style)
-        ========================================================================== */
-
-        /* ==========================================================================
         Main Content Area & Sections (Example Styles)
         ========================================================================== */
         .main-content {
-            padding: 30px 0; /* Generic padding for content sections inside <main> */
+            padding: 30px 0; 
         }
 
         /* --- News Section --- */
@@ -210,8 +205,8 @@
             overflow: hidden;
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex; /* Added for better structure */
-            flex-direction: column; /* Stack image/content */
+            display: flex; 
+            flex-direction: column; 
         }
         .news-item:hover {
             transform: translateY(-5px);
@@ -227,7 +222,7 @@
         }
         .news-content {
             padding: 20px;
-            flex-grow: 1; /* Allow content to fill space */
+            flex-grow: 1; 
             display: flex;
             flex-direction: column;
         }
@@ -241,18 +236,18 @@
         }
         /* --- Blue Theme: News Link Hover --- */
         .news-content h3 a:hover {
-            color: #1774b4; /* Theme Blue */
+            color: #1774b4; 
             text-decoration: none;
         }
         .news-meta {
             font-size: 0.85em;
-            color: #6c757d; /* Muted grey */
+            color: #6c757d;
             margin-bottom: 10px;
         }
-        .news-content p { /* Make text take available space */
+        .news-content p {
             flex-grow: 1;
         }
-        .read-more { /* Inherits blue link color */
+        .read-more {
             display: inline-block;
             margin-top: 15px;
             font-weight: 600;
@@ -261,7 +256,7 @@
 
         /* --- Quick Info Section --- */
         .quick-info {
-            background-color: #e9ecef; /* Lighter grey */
+            background-color: #e9ecef;
             padding: 40px 0;
             margin-top: 40px;
         }
@@ -273,14 +268,14 @@
         }
         /* --- Blue Theme: Quick Info Heading --- */
         .info-column h3 {
-            color: #1774b4; /* Theme Blue */
+            color: #1774b4;
             margin-bottom: 15px;
         }
         .info-column i.icon-placeholder {
             font-size: 2.5em;
             margin-bottom: 10px;
             display: inline-block;
-            color: #6c757d; /* Muted grey */
+            color: #6c757d;
         }
 
 
@@ -289,13 +284,12 @@
         ========================================================================== */
 
         .site-footer {
-            background-color: #1774b4; /* Theme Blue background */
-            color: #e9ecef; /* Lighter text */
+            background-color: #1774b4; 
+            color: #e9ecef;
             padding: 40px 0 20px;
             font-size: 0.9em;
-            /* --- Sticky Footer Properties --- */
-            margin-top: auto; /* Pushes footer down */
-            flex-shrink: 0; /* Prevent footer from shrinking */
+            margin-top: auto; 
+            flex-shrink: 0; 
         }
 
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-bottom: 30px; }
@@ -314,9 +308,9 @@
             text-align: center;
             margin-top: 30px;
             padding-top: 20px;
-            border-top: 1px solid #4a9dcf; /* Lighter blue border */
+            border-top: 1px solid #4a9dcf; 
             font-size: 0.85em;
-            color: #adb5bd; /* Muted text */
+            color: #adb5bd; 
         }
 
 
@@ -346,11 +340,11 @@
             .main-nav li { margin: 0; border-bottom: 1px solid #e9ecef; }
             .main-nav li:last-child { border-bottom: none; }
             .main-nav a { display: block; padding: 12px 20px; text-align: left; border-bottom: none; }
-            /* Mobile active link style */
+
             .main-nav a.active {
-                color: #1774b4; /* Theme Blue */
-                background-color: #e8f1f8; /* Light blue background */
-                border-bottom-color: transparent !important; /* Still ensure no border */
+                color: #1774b4; 
+                background-color: #e8f1f8; 
+                border-bottom-color: transparent !important; 
             }
 
             /* Mobile Dropdown Adjustments */
@@ -367,10 +361,10 @@
             }
             .main-nav ul ul li {
                 border-bottom: 1px dotted #ced4da;
-                background-color: #f8f9fa; /* Match body bg */
+                background-color: #f8f9fa; 
             }
             .main-nav ul ul ul li {
-                background-color: #e9ecef; /* Lighter grey for L3 */
+                background-color: #e9ecef; 
                 border-bottom: 1px dotted #adb5bd;
             }
             .main-nav ul ul li:last-child { border-bottom: none; }
@@ -379,7 +373,7 @@
             /* Mobile active submenu link */
             .main-nav .submenu a.active {
                 color: #1774b4;
-                background-color: #ddeafa; /* Slightly darker blue bg for active sub */
+                background-color: #ddeafa; 
                 font-weight: 600;
                 border-bottom-color: transparent !important;
             }
@@ -395,7 +389,7 @@
         /* ==========================================================================
         Page Specific Styles (Example - Keep Separate if possible)
         ========================================================================== */
-        .main-content .contact-image { /* Example from previous */
+        .main-content .contact-image {
             float: none;
             display: block;
             margin: 0 auto 15px auto;
@@ -410,40 +404,34 @@
             }
         }
 
-                /* --- Hero Section Styles --- */
-
         .hero {
             background-image: url('/images/pagina/474183398_1108689364383810_5813522470262771257_n.jpg');
-            background-size: cover;         /* Scale the image to cover the entire section */
-            background-position: center center; /* Center the image horizontally and vertically */
-            background-repeat: no-repeat;   /* Prevent the image from tiling */
-            background-attachment: fixed;   /* Optional: Creates a parallax-like effect on scroll */
+            background-size: cover;         
+            background-position: center center;
+            background-repeat: no-repeat;    
+            background-attachment: fixed;  
 
-            /* Text & Layout Settings */
-            color: #ffffff;                 /* Set default text color to white for contrast */
-            padding: 100px 20px;            /* Add generous padding top/bottom, smaller left/right */
-            min-height: 50vh;               /* Minimum height (e.g., 50% of viewport height) */
-            text-align: center;             /* Center the text content */
+            color: #ffffff;
+            padding: 100px 20px;
+            min-height: 50vh;
+            text-align: center;
 
-            /* Flexbox for vertical centering of the content container */
             display: flex;
-            align-items: center;            /* Vertically center the .container div */
-            justify-content: center;        /* Horizontally center the .container div */
+            align-items: center;
+            justify-content: center;
 
-            position: relative;             /* Needed for the optional overlay */
-            z-index: 1;                     /* Base layer */
+            position: relative; 
+            z-index: 1;       
         }
-
-        /* Optional: Dark semi-transparent overlay for better text readability */
         .hero::before {
-            content: "";                    /* Required for pseudo-elements */
-            position: absolute;             /* Position relative to the .hero section */
+            content: '';
+            position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(0, 0, 0, 0.4); /* Black overlay with 40% opacity */
-            z-index: 2;                     /* Place overlay above background image */
+            background-color: rgba(0, 0, 0, 0.3); 
+            z-index: -1; /
         }
 
         /* Ensure the content container is above the overlay */

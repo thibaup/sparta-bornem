@@ -141,7 +141,7 @@
         const copyStatusEl = document.getElementById('copy-status');
 
         // --- Config ---
-        const newsDataUrl = '/html/nieuws/nieuws-data.json'; // IMPORTANT: Path to your actual JSON file
+        const newsDataUrl = '/html/nieuws/nieuws-data.json';
 
         // --- Event Listeners ---
         form.addEventListener('submit', handleFormSubmit);
@@ -179,7 +179,7 @@
 
         function copyToClipboard(text, statusElement) {
              if (!navigator.clipboard) {
-                 showError(statusElement, 'Clipboard API niet ondersteund.'); // Use showError for consistency
+                 showError(statusElement, 'Clipboard API niet ondersteund.');
                  return;
              }
              if (!text || text.startsWith('Vul het formulier in') || text.startsWith('Bezig met verwerken') || text.startsWith('Validatiefout') || text.startsWith('Fout:') || text.startsWith('Laden')) {
@@ -199,7 +199,7 @@
              element.style.display = 'block';
              element.classList.remove('success');
              element.classList.add('error');
-             // No automatic timeout for form errors, only for copy status
+
              if (element.id !== 'form-error') {
                  setTimeout(() => { element.style.display = 'none'; }, 5000);
              }
@@ -217,9 +217,9 @@
         // --- Main Submit Handler ---
         async function handleFormSubmit(event) {
             event.preventDefault();
-            formErrorEl.style.display = 'none'; // Hide previous errors
+            formErrorEl.style.display = 'none';
             copyStatusEl.style.display = 'none';
-            finalJsonOutputEl.textContent = 'Bezig met verwerken...'; // Feedback
+            finalJsonOutputEl.textContent = 'Bezig met verwerken...';
 
             const idInput = document.getElementById('article-id');
             const dateInput = document.getElementById('article-date');
@@ -229,33 +229,29 @@
             const fullContentInput = document.getElementById('article-full-content');
             const categoryInput = document.getElementById('article-category');
 
-            // Reset potential previous error style on ID field
             idInput.style.borderColor = '';
 
-            // Basic Validation
             const id = idInput.value.trim();
             const date = dateInput.value;
             const title = titleInput.value.trim();
             const summary = summaryInput.value.trim();
             const category = categoryInput.value.trim() || 'Algemeen';
             const imageName = imageInput.value.trim();
-            const fullContentRaw = fullContentInput.value.trim(); // Get raw text
+            const fullContentRaw = fullContentInput.value.trim();
 
             if (!id || !/^[a-z0-9-]+$/.test(id)) {
                  showError(formErrorEl, "Ongeldig ID. Gebruik alleen kleine letters, cijfers en koppeltekens.");
                  idInput.focus();
-                 idInput.style.borderColor = '#dc3545'; // Highlight error field
+                 idInput.style.borderColor = '#dc3545';
                  finalJsonOutputEl.textContent = 'Fout: Validatiefout in formulier.';
                  return;
             }
             if (!date) { showError(formErrorEl, "Datum is verplicht."); dateInput.focus(); finalJsonOutputEl.textContent = 'Fout: Validatiefout in formulier.'; return; }
             if (!title) { showError(formErrorEl, "Titel is verplicht."); titleInput.focus(); finalJsonOutputEl.textContent = 'Fout: Validatiefout in formulier.'; return; }
 
-            // --- Process Content: Auto-Link -> Newlines ---
             let processedContent = autoLinkText(fullContentRaw);
             processedContent = processedContent.replace(/\r\n|\r|\n/g, '<br>');
 
-            // Prepare new article data object
             const newArticleData = {
                 id: id,
                 date: date,
@@ -282,20 +278,18 @@
                                 existingData = [];
                             }
                         }
-                        // If file was empty or only whitespace, existingData remains []
+
                     } else if (response.status === 404) {
                         console.warn(`${newsDataUrl} niet gevonden. Start met een lege lijst.`);
-                        existingData = []; // Ensure it's an empty array if file doesn't exist
+                        existingData = []; 
                     } else {
-                        // Handle other HTTP errors (like 500, 403 etc.)
                         throw new Error(`HTTP error! Status: ${response.status} bij laden van ${newsDataUrl}`);
                     }
                 } catch (fetchOrParseError) {
-                    // Handle network errors or JSON parsing errors
                     console.error(`Fout bij laden/parsen ${newsDataUrl}:`, fetchOrParseError);
                     showError(formErrorEl, `Kon ${newsDataUrl} niet laden of lezen. Controleer of het bestand bestaat en geldige JSON bevat. (${fetchOrParseError.message})`);
                     finalJsonOutputEl.textContent = `Fout: Kan ${newsDataUrl} niet verwerken.`;
-                    return; // Stop if we can't load the base data
+                    return;
                 }
 
                 // *** CHECK FOR DUPLICATE ID ***
@@ -303,23 +297,20 @@
                 if (isDuplicateId) {
                     showError(formErrorEl, `Fout: Artikel ID "${id}" bestaat al. Kies een uniek ID.`);
                     idInput.focus();
-                    idInput.style.borderColor = '#dc3545'; // Highlight error field
+                    idInput.style.borderColor = '#dc3545';
                     finalJsonOutputEl.textContent = `Fout: Duplicaat ID "${id}" gevonden. Artikel niet toegevoegd.`;
                     return; // Stop further processing
                 }
                 // *** END CHECK ***
 
-                // Add the new article (prepend to show newest first)
                 const updatedData = [newArticleData, ...existingData];
-
-                // Stringify the combined data
-                const finalJsonString = JSON.stringify(updatedData, null, 2); // Pretty print
+                const finalJsonString = JSON.stringify(updatedData, null, 2); 
 
                 // Display the final JSON
                 finalJsonOutputEl.textContent = finalJsonString;
                 showSuccess(copyStatusEl, "Volledige JSON gegenereerd. Kopieer de inhoud hierboven.");
 
-            } catch (error) { // Catch any unexpected errors during the process
+            } catch (error) {
                 console.error('Onverwachte fout bij verwerken:', error);
                 showError(formErrorEl, `Onverwachte fout: ${error.message}`);
                 finalJsonOutputEl.textContent = "Fout bij genereren.";
