@@ -407,40 +407,51 @@
 
         .hero {
             background-image: url('/images/pagina/474183398_1108689364383810_5813522470262771257_n.jpg');
-            background-size:cover;
+            background-size: cover;
             background-position: center center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
+            background-repeat: no-repeat; 
 
-            color: #ffffff;        
-            padding: 100px 20px;          
-            min-height: 75vh;      
+
+            background-attachment: scroll; 
+            color: #ffffff;
+            padding: 100px 20px;
+            min-height: 50vh;
             text-align: center;
-
             display: flex;
-            align-items: center;   
-            justify-content: center;       
-
+            align-items: center;
+            justify-content: center;
             position: relative;
-            z-index: 1;   
+            z-index: 1;
         }
 
         .hero::before {
-            content: "";                    /* Required for pseudo-elements */
-            position: absolute;             /* Position relative to the .hero section */
+            content: "";
+            position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(0, 0, 0, 0.4); /* Black overlay with 40% opacity */
-            z-index: 2;                     /* Place overlay above background image */
+            background-color: rgba(0, 0, 0, 0.4);
+
+            z-index: 2;
         }
 
-        /* Ensure the content container is above the overlay */
+        @media (min-width: 768px) {
+            .hero {
+                background-attachment: fixed;
+                min-height: 75vh;
+            }
+        }
+
+
         .hero .container {
-            position: relative;             /* Allow z-index stacking */
-            z-index: 3;                     /* Place content above the overlay */
-            max-width: 800px;               /* Optional: Limit content width */
+            position: relative; 
+            z-index: 3
+        }
+        .hero .container {
+            position: relative;           
+            z-index: 3;           
+            max-width: 800px;   
         }
 
         .hero h2 {
