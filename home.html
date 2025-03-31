@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atletiekclub Sparta Bornem</title>
-    <!-- Link to a potential future favicon -->
-    <link rel="icon" type="image/png" href="/images/website-logo.png"> <!-- Assuming favicon.png is in the same folder -->
+    <link rel="icon" type="image/png" href="/images/website-logo.png">
     <style>
         * {
             box-sizing: border-box;
@@ -14,26 +13,23 @@
         }
 
         html {
-            height: 100%; /* Needed for sticky footer */
+            height: 100%;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
-            background-color: #f8f9fa; /* Slightly lighter grey background */
-            /* --- Sticky Footer Flexbox Setup --- */
+            background-color: #f8f9fa; /* Body background needed */
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
-        /* Target the main content wrapper */
-        /* Assumes <main> tag wraps content between header/footer */
         main {
-            /* Add padding so content doesn't touch footer */
-            padding-bottom: 60px; /* Adjust value as needed */
-            /* Does NOT grow, prevents internal elements stretching */
+            padding-bottom: 60px;
+             /* Changed: Allow main to grow to push footer down */
+            flex-grow: 1;
         }
 
         .container {
@@ -42,295 +38,83 @@
             padding: 0 20px;
         }
 
-        /* --- Blue Theme: Links --- */
-        a {
-            color: #1774b4; /* Theme Blue */
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        a:hover {
-            /* color: #125a8c; */ /* Optional: Darker blue */
-            text-decoration: underline;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        h1, h2, h3, h4 {
-            margin-bottom: 0.8em;
-            color: #1a1a1a;
-            font-weight: 600;
-        }
+        a { color: #1774b4; text-decoration: none; transition: color 0.3s ease; }
+        a:hover { text-decoration: underline; }
+        img { max-width: 100%; height: auto; display: block; }
+        h1, h2, h3, h4 { margin-bottom: 0.8em; color: #1a1a1a; font-weight: 600; }
         p { margin-bottom: 1em; }
         ul { margin-bottom: 1em; margin-left: 20px; }
 
-
-        /* ==========================================================================
-        Header & Navigation Styles (White Header, Blue Accents)
-        ========================================================================== */
-
+        /* ================== Header & Navigation Styles ================== */
         .site-header {
-            background-color: #ffffff;
-            padding: 15px 0;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08); /* Softer shadow */
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            flex-shrink: 0; /* Part of sticky footer */
+            background-color: #ffffff; padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+            position: sticky; top: 0; z-index: 1000; flex-shrink: 0;
         }
-        .header-container { display: flex; justify-content: space-between; align-items: center; /* Mobile wrap added via MQ */ }
+        .header-container { display: flex; justify-content: space-between; align-items: center; }
         .logo h1 { margin: 0; font-size: 1.8em; }
         .logo a { color: #212529; text-decoration: none; font-weight: 700; }
         .logo img { max-height: 50px; }
-        .main-nav ul { list-style: none; padding: 0; margin: 0; display: flex; /* Mobile direction added via MQ */ }
-        .main-nav li { margin-left: 25px; position: relative; /* Mobile margin added via MQ */ }
+        .main-nav ul { list-style: none; padding: 0; margin: 0; display: flex; }
+        .main-nav li { margin-left: 25px; position: relative; }
         .main-nav a {
-            color: #343a40; /* Dark grey nav text */
-            text-transform: uppercase;
-            font-weight: 600;
-            font-size: 0.95em;
-            padding-bottom: 5px;
-            border-bottom: 2px solid transparent;
+            color: #343a40; text-transform: uppercase; font-weight: 600; font-size: 0.95em;
+            padding-bottom: 5px; border-bottom: 2px solid transparent;
             transition: color 0.3s ease, border-color 0.3s ease;
-            /* Mobile display/padding added via MQ */
         }
-        /* --- Blue Theme: Nav Hover/Active --- */
-        .main-nav a:hover,
-        .main-nav a.active {
-            color: #1774b4; /* Theme Blue */
-            border-bottom-color: #1774b4; /* Theme Blue */
-            /* Mobile active style overrides in MQ */
-        }
-
-        /* --- Dropdowns (Submenus) --- */
+        .main-nav a:hover, .main-nav a.active { color: #1774b4; border-bottom-color: #1774b4; }
         .main-nav .submenu {
-        display: none;
-        position: absolute;
-        background-color: #fff;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        list-style: none;
-        padding: 10px 0;
-        margin-top: 5px;
-        min-width: 220px;
-        left: 0;
-        z-index: 1001;
-        border-radius: 4px; /* Optional */
-        /* Mobile position added via MQ */
+            display: none; position: absolute; background-color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); list-style: none;
+            padding: 10px 0; margin-top: 5px; min-width: 220px; left: 0; z-index: 1001; border-radius: 4px;
         }
-        /* --- Blue Theme: Active Submenu Item --- */
-        .main-nav .submenu a.active {
-        color: #1774b4; /* Theme Blue */
-        font-weight: 600;
-        border-bottom-color: transparent !important; /* Keep no border */
-        /* Mobile active style overrides in MQ */
-        }
-        .main-nav .submenu li {
-            margin: 0;
-            position: relative;
-            /* Mobile border added via MQ */
-        }
+        .main-nav .submenu a.active { color: #1774b4; font-weight: 600; border-bottom-color: transparent !important; }
+        .main-nav .submenu li { margin: 0; position: relative; }
         .main-nav .submenu a {
-        display: block;
-        padding: 8px 15px;
-        color: #343a40;
-        text-transform: none;
-        font-weight: 400;
-        border-bottom: none;
-        white-space: nowrap;
-        transition: background-color 0.2s ease, color 0.2s ease;
-        /* Mobile padding added via MQ */
+            display: block; padding: 8px 15px; color: #343a40; text-transform: none; font-weight: 400;
+            border-bottom: none; white-space: nowrap; transition: background-color 0.2s ease, color 0.2s ease;
         }
-        /* --- Blue Theme: Submenu Hover --- */
-        .main-nav .submenu a:hover {
-        background-color: #e8f1f8; /* Light blue background */
-        color: #125a8c; /* Darker blue text */
-        }
-        .main-nav .submenu .submenu {
-        top: -10px;
-        left: 100%;
-        margin-top: 0;
-        margin-left: 1px;
-            min-width: 200px;
-        /* Mobile position added via MQ */
-        }
-        .main-nav li:hover > .submenu {
-        display: block; /* Desktop only show on hover */
-        }
+        .main-nav .submenu a:hover { background-color: #e8f1f8; color: #125a8c; }
+        .main-nav .submenu .submenu { top: -10px; left: 100%; margin-top: 0; margin-left: 1px; min-width: 200px; }
+        .main-nav li:hover > .submenu { display: block; }
+        .main-nav > ul > li.menu-item-has-children > a::after { content: ' ▼'; font-size: 0.7em; display: inline-block; margin-left: 4px; vertical-align: middle; color: #6c757d; }
+        .main-nav .submenu li.menu-item-has-children > a::after { content: ' ▶'; font-size: 0.7em; display: inline-block; margin-left: 4px; position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: #6c757d; }
+        .main-nav .submenu li.menu-item-has-children > a { padding-right: 30px; }
 
-        /* --- Dropdown Indicators --- */
-        .main-nav > ul > li.menu-item-has-children > a::after {
-        content: ' ▼';
-        font-size: 0.7em;
-        display: inline-block;
-        margin-left: 4px;
-        vertical-align: middle;
-        color: #6c757d;
-        /* Mobile display added via MQ */
-        }
-        .main-nav .submenu li.menu-item-has-children > a::after {
-        content: ' ▶';
-        font-size: 0.7em;
-        display: inline-block;
-        margin-left: 4px;
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #6c757d;
-            /* Mobile display added via MQ */
-        }
-        .main-nav .submenu li.menu-item-has-children > a {
-        padding-right: 30px;
-        }
+        /* ================== Main Content & Sections ================== */
+        .main-content { padding: 30px 0; }
+        .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .news-item { background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; }
+        .news-item:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.12); }
+        .news-item img { display: block; width: 100%; height: 200px; object-fit: cover; background-color: #eee; flex-shrink: 0; }
+        .news-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
+        .news-content h3 { font-size: 1.3em; margin-top: 0; }
+        .news-content h3 a { color: #1a1a1a; transition: color 0.2s ease; }
+        .news-content h3 a:hover { color: #1774b4; text-decoration: none; }
+        .news-meta { font-size: 0.85em; color: #6c757d; margin-bottom: 10px; }
+        .news-content p { flex-grow: 1; }
+        .read-more { display: inline-block; margin-top: 15px; font-weight: 600; align-self: flex-start; }
+        .quick-info { background-color: #e9ecef; padding: 40px 0; margin-top: 40px; }
+        .info-columns { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; text-align: center; }
+        .info-column h3 { color: #1774b4; margin-bottom: 15px; }
+        .info-column i.icon-placeholder { font-size: 2.5em; margin-bottom: 10px; display: inline-block; color: #6c757d; }
 
-
-        /* ==========================================================================
-        Main Content Area & Sections (Example Styles)
-        ========================================================================== */
-        .main-content {
-            padding: 30px 0; 
-        }
-
-        /* --- News Section --- */
-        .news-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        .news-item {
-            background-color: #ffffff;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex; 
-            flex-direction: column; 
-        }
-        .news-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.12);
-        }
-        .news-item img {
-            display: block;
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            background-color: #eee;
-            flex-shrink: 0;
-        }
-        .news-content {
-            padding: 20px;
-            flex-grow: 1; 
-            display: flex;
-            flex-direction: column;
-        }
-        .news-content h3 {
-            font-size: 1.3em;
-            margin-top: 0;
-        }
-        .news-content h3 a {
-            color: #1a1a1a;
-            transition: color 0.2s ease;
-        }
-        /* --- Blue Theme: News Link Hover --- */
-        .news-content h3 a:hover {
-            color: #1774b4; 
-            text-decoration: none;
-        }
-        .news-meta {
-            font-size: 0.85em;
-            color: #6c757d;
-            margin-bottom: 10px;
-        }
-        .news-content p {
-            flex-grow: 1;
-        }
-        .read-more {
-            display: inline-block;
-            margin-top: 15px;
-            font-weight: 600;
-            align-self: flex-start;
-        }
-
-        /* --- Quick Info Section --- */
-        .quick-info {
-            background-color: #e9ecef;
-            padding: 40px 0;
-            margin-top: 40px;
-        }
-        .info-columns {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            text-align: center;
-        }
-        /* --- Blue Theme: Quick Info Heading --- */
-        .info-column h3 {
-            color: #1774b4;
-            margin-bottom: 15px;
-        }
-        .info-column i.icon-placeholder {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            display: inline-block;
-            color: #6c757d;
-        }
-
-
-        /* ==========================================================================
-        Footer Styles (Blue Theme)
-        ========================================================================== */
-
-        .site-footer {
-            background-color: #1774b4; 
-            color: #e9ecef;
-            padding: 40px 0 20px;
-            font-size: 0.9em;
-            margin-top: auto; 
-            flex-shrink: 0; 
-        }
-
+        /* ================== Footer Styles ================== */
+        .site-footer { background-color: #1774b4; color: #e9ecef; padding: 40px 0 20px; font-size: 0.9em; margin-top: auto; flex-shrink: 0; }
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-bottom: 30px; }
         .footer-column h4 { color: #ffffff; margin-bottom: 15px; font-size: 1.1em; }
         .footer-column ul { list-style: none; padding: 0; margin: 0 0 1em 0;}
         .footer-column li { margin-bottom: 8px; }
-        .footer-column a {
-            color: #dee2e6; /* Light grey links */
-            transition: color 0.2s ease;
-        }
-        .footer-column a:hover {
-            color: #ffffff;
-            text-decoration: underline;
-        }
-        .footer-bottom {
-            text-align: center;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #4a9dcf; 
-            font-size: 0.85em;
-            color: #adb5bd; 
-        }
+        .footer-column a { color: #dee2e6; transition: color 0.2s ease; }
+        .footer-column a:hover { color: #ffffff; text-decoration: underline; }
+        .footer-bottom { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #4a9dcf; font-size: 0.85em; color: #adb5bd; }
 
-
-        /* ==========================================================================
-        Utility Classes
-        ========================================================================== */
+        /* ================== Utility Classes ================== */
         .text-center { text-align: center; }
-        .section-title {
-            font-size: 2em;
-            text-align: center;
-            margin-bottom: 40px;
-            color: #343a40; /* Dark grey */
-        }
+        .section-title { font-size: 2em; text-align: center; margin-bottom: 40px; color: #343a40; }
 
-        /* ==========================================================================
-        Mobile Responsive Styles
-        ========================================================================== */
+        /* ================== Mobile Responsive Styles ================== */
         .menu-toggle { display: none; background: none; border: none; font-size: 1.8em; cursor: pointer; color: #343a40; padding: 5px; }
-
         @media (max-width: 768px) {
             .header-container { position: relative; flex-wrap: wrap; }
             .logo { flex-basis: 80%; }
@@ -341,107 +125,70 @@
             .main-nav li { margin: 0; border-bottom: 1px solid #e9ecef; }
             .main-nav li:last-child { border-bottom: none; }
             .main-nav a { display: block; padding: 12px 20px; text-align: left; border-bottom: none; }
-
-            .main-nav a.active {
-                color: #1774b4; 
-                background-color: #e8f1f8; 
-                border-bottom-color: transparent !important; 
-            }
-
-            /* Mobile Dropdown Adjustments */
-            .main-nav .submenu, .main-nav .submenu .submenu {
-                position: static;
-                display: block;
-                box-shadow: none;
-                background-color: transparent;
-                padding: 0;
-                margin-top: 0;
-                min-width: auto;
-                margin-left: 0;
-                border-top: none;
-            }
-            .main-nav ul ul li {
-                border-bottom: 1px dotted #ced4da;
-                background-color: #f8f9fa; 
-            }
-            .main-nav ul ul ul li {
-                background-color: #e9ecef; 
-                border-bottom: 1px dotted #adb5bd;
-            }
+            .main-nav a.active { color: #1774b4; background-color: #e8f1f8; border-bottom-color: transparent !important; }
+            .main-nav .submenu, .main-nav .submenu .submenu { position: static; display: block; box-shadow: none; background-color: transparent; padding: 0; margin-top: 0; min-width: auto; margin-left: 0; border-top: none; }
+            .main-nav ul ul li { border-bottom: 1px dotted #ced4da; background-color: #f8f9fa; }
+            .main-nav ul ul ul li { background-color: #e9ecef; border-bottom: 1px dotted #adb5bd; }
             .main-nav ul ul li:last-child { border-bottom: none; }
             .main-nav ul ul a { padding-left: 35px; background-color: transparent; font-size: 0.9em; }
             .main-nav ul ul ul a { padding-left: 50px; background-color: transparent; }
-            /* Mobile active submenu link */
-            .main-nav .submenu a.active {
-                color: #1774b4;
-                background-color: #ddeafa; 
-                font-weight: 600;
-                border-bottom-color: transparent !important;
-            }
+            .main-nav .submenu a.active { color: #1774b4; background-color: #ddeafa; font-weight: 600; border-bottom-color: transparent !important; }
             .main-nav li.menu-item-has-children > a::after { display: none; }
-
-            /* Example Mobile Hero Adjustments */
-            .hero h2 { font-size: 2em; }
-
-            /* Page Specific Mobile */
             .main-content .contact-image { float: none; display: block; margin: 0 auto 15px auto; }
+             /* --- Ensure Hero H2 is adjusted on mobile --- */
+            .hero h2 { font-size: 2em; }
+        }
+
+        /* ================== Page Specific Styles ================== */
+        .main-content .contact-image { float: none; display: block; margin: 0 auto 15px auto; width: 150px; border-radius: 4px; }
+        @media (min-width: 769px) {
+            .main-content .contact-image { float: left; margin: 0 20px 10px 0; }
         }
 
         /* ==========================================================================
-        Page Specific Styles (Example - Keep Separate if possible)
-        ========================================================================== */
-        .main-content .contact-image {
-            float: none;
-            display: block;
-            margin: 0 auto 15px auto;
-            width: 150px;
-            border-radius: 4px;
-        }
-
-        @media (min-width: 769px) {
-            .main-content .contact-image {
-                float: left;
-                margin: 0 20px 10px 0;
-            }
-        }
-
+           Hero Section - Setup for JS Background Adjustment
+           ========================================================================== */
         .hero {
+            /* --- Use STABLE background properties --- */
             background-image: url('/images/pagina/474183398_1108689364383810_5813522470262771257_n.jpg');
-            background-size:cover;
-            background-position: center center;
+            background-size: cover;
+            background-position: center center; /* Initial position */
             background-repeat: no-repeat;
-            background-attachment: fixed;
+            /* background-attachment: fixed; <--- REMOVED */
+            background-attachment: scroll; /* Explicitly set default */
 
-            color: #ffffff;        
-            padding: 100px 20px;          
-            min-height: 75vh;      
+            /* --- Keep other hero styles --- */
+            color: #ffffff;
+            padding: 100px 20px;
+            min-height: 75vh;
             text-align: center;
-
             display: flex;
-            align-items: center;   
-            justify-content: center;       
+            align-items: center;
+            justify-content: center;
 
+            /* --- Positioning Context for Overlay/Content --- */
             position: relative;
-            z-index: 1;   
+            z-index: 1; /* Base stacking context */
+            overflow: hidden; /* Recommended for elements with adjusted backgrounds */
         }
 
+        /* --- Overlay Layer (using ::before) --- */
         .hero::before {
-            content: "";                    /* Required for pseudo-elements */
-            position: absolute;             /* Position relative to the .hero section */
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.4); /* Black overlay with 40% opacity */
-            z-index: 2;                     /* Place overlay above background image */
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0, 0, 0, 0.4); /* Your overlay color */
+            z-index: 2; /* Overlay ABOVE background (implicit), BELOW content */
         }
 
+        /* --- Hero Content Container --- */
         .hero .container {
-            position: relative;        
-            z-index: 3;          
-            max-width: 800px;  
+            position: relative; /* Keep content flow relative */
+            z-index: 3; /* Ensure content is ABOVE overlay */
+            max-width: 800px;
         }
 
+        /* --- Hero Text/Button Styles --- */
         .hero h2 {
             font-size: 2.5em;
             margin-bottom: 0.5em;
@@ -453,35 +200,28 @@
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
-            color: #e9ecef; 
+            color: #e9ecef;
         }
-
         .cta-button {
-            background-color: #1774b4; 
-            color: #ffffff;
-            padding: 12px 25px;
-            border-radius: 5px;
-            font-size: 1em;
-            font-weight: 600;
-            display: inline-block;
-            transition: background-color 0.3s ease;
-            border: none;
-            cursor: pointer;
+            background-color: #1774b4; color: #ffffff; padding: 12px 25px; border-radius: 5px;
+            font-size: 1em; font-weight: 600; display: inline-block;
+            transition: background-color 0.3s ease; border: none; cursor: pointer;
         }
-        .cta-button:hover {
-            background-color: #125a8c; 
-            text-decoration: none;
-            color: #ffffff;
-        }
-    </style>
+        .cta-button:hover { background-color: #125a8c; text-decoration: none; color: #ffffff; }
 
-    <link rel="stylesheet" href="css/style.css">
+        /* --- Media Query from before for Hero H2 on Mobile --- */
+        @media (max-width: 768px) {
+            .hero h2 { font-size: 2em; }
+        }
+
+    </style>
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
 </head>
 <body>
 
     <div id="header-placeholder">
-        <!-- Header will be loaded here by JavaScript -->
-        <p>Loading header...</p> <!-- Optional loading message -->
+        <!-- Header loaded by JS -->
+        <p>Loading header...</p>
     </div>
 
     <main>
@@ -493,13 +233,11 @@
             </div>
         </section>
 
-
         <section class="main-content container">
             <h2 class="section-title">Laatste Nieuws</h2>
-
             <div class="news-grid" id="latest-news-grid">
                 <p id="latest-news-loading" style="text-align: center; padding: 20px; font-style: italic; grid-column: 1 / -1;">Laatste nieuws wordt geladen...</p>
-
+                <!-- News items loaded here -->
             </div>
             <div class="text-center" style="margin-top: 30px;">
                 <a href="/html/nieuws/nieuws.html" class="cta-button">Bekijk alle nieuwsberichten</a>
@@ -528,11 +266,46 @@
     </main>
 
     <div id="footer-placeholder">
+        <!-- Footer loaded by JS -->
         <p>Loading footer...</p>
     </div>
 
+    <!-- External JS file (ensure path is correct) -->
     <script src="/js/script.js" defer></script>
-</body>
-</html>
+
+    <!-- Inline script for the background adjustment -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const heroElement = document.querySelector('.hero');
+
+            if (heroElement) {
+                let ticking = false;
+
+                const handleScroll = () => {
+                    const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+
+                    const yPos = `calc(50% + ${scrollY}px)`;
+
+                    if (!ticking) {
+                        window.requestAnimationFrame(() => {
+                            // Apply the calculated position
+                            heroElement.style.backgroundPositionY = yPos;
+                            // Keep X position centered
+                            heroElement.style.backgroundPositionX = 'center';
+                            ticking = false;
+                        });
+                        ticking = true;
+                    }
+                };
+
+                // Call once on load to set initial position based on any initial scroll
+                handleScroll();
+
+                // Add scroll listener
+                window.addEventListener('scroll', handleScroll, { passive: true }); // Use passive listener for performance
+            }
+        });
+    </script>
+
 </body>
 </html>
