@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atletiekclub Sparta Bornem</title>
-    <link rel="icon" type="image/png" href="/images/website-logo.png">
+    <!-- Link to a potential future favicon -->
+    <link rel="icon" type="image/png" href="/images/website-logo.png"> <!-- Assuming favicon.png is in the same folder -->
     <style>
         * {
             box-sizing: border-box;
@@ -405,49 +406,35 @@
         }
 
         .hero {
-            /* --- Background Image Settings --- */
             background-image: url('/images/pagina/474183398_1108689364383810_5813522470262771257_n.jpg');
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
-            /* background-attachment: fixed;  <-- Apply this conditionally */
-            background-attachment: scroll; /* Default to scroll (safer for mobile) */
+            background-attachment: fixed;
 
-            /* --- Content Styling --- */
-            color: #ffffff;
-            padding: 100px 20px;
-            min-height: 50vh;
+            color: #ffffff;        
+            padding: 100px 20px;          
+            min-height: 50vh;      
             text-align: center;
 
-            /* --- Flexbox for Centering Content --- */
             display: flex;
-            align-items: center;
-            justify-content: center;
+            align-items: center;   
+            justify-content: center;       
 
-            /* --- Positioning Context --- */
             position: relative;
-            z-index: 1;
+            z-index: 1;   
         }
 
-        /* --- Media Query for Larger Screens (Tablets and Desktops) --- */
-        /* Apply the 'fixed' attachment only when the screen is wide enough */
-        /* Adjust the 768px breakpoint as needed for your design */
-        @media (min-width: 768px) {
-            .hero {
-                background-attachment: fixed; /* Enable the parallax effect */
-            }
-        }
 
-        /* Optional: Example of a semi-transparent overlay *within* the hero */
         .hero::before {
-            content: '';
-            position: absolute;
+            content: "";                    
+            position: absolute;          
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(0, 0, 0, 0.3); /* Example dark overlay */
-            z-index: -1; /* Place it behind the hero content but above the background */
+            background-color: rgba(0, 0, 0, 0.4); 
+            z-index: 2;    
         }
 
         /* Ensure the content container is above the overlay */
