@@ -4,15 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atletiekclub Sparta Bornem</title>
-    <link rel="icon" type="image/png" href="/images/website-logo.png">
-
-    <!-- Add Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+    <!-- Link to a potential future favicon -->
+    <link rel="icon" type="image/png" href="/images/website-logo.png"> <!-- Assuming favicon.png is in the same folder -->
     <style>
-        /* ==========================================================================
-           Base & Reset Styles
-           ========================================================================== */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -20,25 +14,26 @@
         }
 
         html {
-            height: 100%;
-            scroll-behavior: smooth; /* Optional: Smooth scrolling for anchor links */
+            height: 100%; /* Needed for sticky footer */
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
-            background-color: #f8f9fa;
+            background-color: #f8f9fa; /* Slightly lighter grey background */
+            /* --- Sticky Footer Flexbox Setup --- */
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            /* Hide horizontal scrollbar potentially caused by animations */
-            overflow-x: hidden;
         }
 
+        /* Target the main content wrapper */
+        /* Assumes <main> tag wraps content between header/footer */
         main {
-            flex-grow: 1; /* Ensures main content takes available space */
-            padding-bottom: 60px; /* Space for footer */
+            /* Add padding so content doesn't touch footer */
+            padding-bottom: 60px; /* Adjust value as needed */
+            /* Does NOT grow, prevents internal elements stretching */
         }
 
         .container {
@@ -47,23 +42,14 @@
             padding: 0 20px;
         }
 
-        /* --- Theme & Links --- */
-        :root {
-            --theme-blue: #1774b4;
-            --theme-blue-dark: #125a8c;
-            --light-grey: #f8f9fa;
-            --medium-grey: #e9ecef;
-            --dark-grey: #343a40;
-            --text-grey: #6c757d;
-        }
-
+        /* --- Blue Theme: Links --- */
         a {
-            color: var(--theme-blue);
+            color: #1774b4; /* Theme Blue */
             text-decoration: none;
             transition: color 0.3s ease;
         }
         a:hover {
-            color: var(--theme-blue-dark);
+            /* color: #125a8c; */ /* Optional: Darker blue */
             text-decoration: underline;
         }
 
@@ -81,84 +67,352 @@
         p { margin-bottom: 1em; }
         ul { margin-bottom: 1em; margin-left: 20px; }
 
-        .main-nav .submenu {
-            display: none;
-            position: absolute;
-            background-color: #fff;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            list-style: none;
-            padding: 10px 0;
-            margin-top: 5px;
-            min-width: 220px;
-            left: 0;
-            z-index: 1001;
-            border-radius: 4px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+
+        /* ==========================================================================
+        Header & Navigation Styles (White Header, Blue Accents)
+        ========================================================================== */
+
+        .site-header {
+            background-color: #ffffff;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08); /* Softer shadow */
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            flex-shrink: 0; /* Part of sticky footer */
         }
-        .main-nav .submenu a.active {
-            color: var(--theme-blue);
+        .header-container { display: flex; justify-content: space-between; align-items: center; /* Mobile wrap added via MQ */ }
+        .logo h1 { margin: 0; font-size: 1.8em; }
+        .logo a { color: #212529; text-decoration: none; font-weight: 700; }
+        .logo img { max-height: 50px; }
+        .main-nav ul { list-style: none; padding: 0; margin: 0; display: flex; /* Mobile direction added via MQ */ }
+        .main-nav li { margin-left: 25px; position: relative; /* Mobile margin added via MQ */ }
+        .main-nav a {
+            color: #343a40; /* Dark grey nav text */
+            text-transform: uppercase;
             font-weight: 600;
-            border-bottom-color: transparent !important;
+            font-size: 0.95em;
+            padding-bottom: 5px;
+            border-bottom: 2px solid transparent;
+            transition: color 0.3s ease, border-color 0.3s ease;
+            /* Mobile display/padding added via MQ */
         }
-        .main-nav .submenu li { margin: 0; position: relative; }
-        .main-nav .submenu a {
-            display: block;
-            padding: 8px 15px;
-            color: var(--dark-grey);
-            text-transform: none;
-            font-weight: 400;
-            border-bottom: none;
-            white-space: nowrap;
-            transition: background-color 0.2s ease, color 0.2s ease;
-        }
-        .main-nav .submenu a:hover {
-            background-color: #e8f1f8;
-            color: var(--theme-blue-dark);
-        }
-        .main-nav .submenu .submenu {
-            top: -10px;
-            left: 100%;
-            margin-top: 0;
-            margin-left: 1px;
-            min-width: 200px;
-        }
-        .main-nav li:hover > .submenu {
-            display: block; 
-            opacity: 1;
-            visibility: visible; 
-            transform: translateY(0); 
+        /* --- Blue Theme: Nav Hover/Active --- */
+        .main-nav a:hover,
+        .main-nav a.active {
+            color: #1774b4; /* Theme Blue */
+            border-bottom-color: #1774b4; /* Theme Blue */
+            /* Mobile active style overrides in MQ */
         }
 
+        /* --- Dropdowns (Submenus) --- */
+        .main-nav .submenu {
+        display: none;
+        position: absolute;
+        background-color: #fff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        list-style: none;
+        padding: 10px 0;
+        margin-top: 5px;
+        min-width: 220px;
+        left: 0;
+        z-index: 1001;
+        border-radius: 4px; /* Optional */
+        /* Mobile position added via MQ */
+        }
+        /* --- Blue Theme: Active Submenu Item --- */
+        .main-nav .submenu a.active {
+        color: #1774b4; /* Theme Blue */
+        font-weight: 600;
+        border-bottom-color: transparent !important; /* Keep no border */
+        /* Mobile active style overrides in MQ */
+        }
+        .main-nav .submenu li {
+            margin: 0;
+            position: relative;
+            /* Mobile border added via MQ */
+        }
+        .main-nav .submenu a {
+        display: block;
+        padding: 8px 15px;
+        color: #343a40;
+        text-transform: none;
+        font-weight: 400;
+        border-bottom: none;
+        white-space: nowrap;
+        transition: background-color 0.2s ease, color 0.2s ease;
+        /* Mobile padding added via MQ */
+        }
+        /* --- Blue Theme: Submenu Hover --- */
+        .main-nav .submenu a:hover {
+        background-color: #e8f1f8; /* Light blue background */
+        color: #125a8c; /* Darker blue text */
+        }
+        .main-nav .submenu .submenu {
+        top: -10px;
+        left: 100%;
+        margin-top: 0;
+        margin-left: 1px;
+            min-width: 200px;
+        /* Mobile position added via MQ */
+        }
+        .main-nav li:hover > .submenu {
+        display: block; /* Desktop only show on hover */
+        }
+
+        /* --- Dropdown Indicators --- */
         .main-nav > ul > li.menu-item-has-children > a::after {
-            content: ' ▼';
-            font-size: 0.7em;
-            display: inline-block;
-            margin-left: 4px;
-            vertical-align: middle;
-            color: var(--text-grey);
+        content: ' ▼';
+        font-size: 0.7em;
+        display: inline-block;
+        margin-left: 4px;
+        vertical-align: middle;
+        color: #6c757d;
+        /* Mobile display added via MQ */
         }
         .main-nav .submenu li.menu-item-has-children > a::after {
-            content: ' ▶';
-            font-size: 0.7em;
-            display: inline-block;
-            margin-left: 4px;
+        content: ' ▶';
+        font-size: 0.7em;
+        display: inline-block;
+        margin-left: 4px;
             position: absolute;
             right: 15px;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--text-grey);
+            color: #6c757d;
+            /* Mobile display added via MQ */
         }
-        .main-nav .submenu li.menu-item-has-children > a { padding-right: 30px; }
+        .main-nav .submenu li.menu-item-has-children > a {
+        padding-right: 30px;
+        }
+
+
+        /* ==========================================================================
+        Main Content Area & Sections (Example Styles)
+        ========================================================================== */
+        .main-content {
+            padding: 30px 0; 
+        }
+
+        /* --- News Section --- */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .news-item {
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex; 
+            flex-direction: column; 
+        }
+        .news-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+        }
+        .news-item img {
+            display: block;
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background-color: #eee;
+            flex-shrink: 0;
+        }
+        .news-content {
+            padding: 20px;
+            flex-grow: 1; 
+            display: flex;
+            flex-direction: column;
+        }
+        .news-content h3 {
+            font-size: 1.3em;
+            margin-top: 0;
+        }
+        .news-content h3 a {
+            color: #1a1a1a;
+            transition: color 0.2s ease;
+        }
+        /* --- Blue Theme: News Link Hover --- */
+        .news-content h3 a:hover {
+            color: #1774b4; 
+            text-decoration: none;
+        }
+        .news-meta {
+            font-size: 0.85em;
+            color: #6c757d;
+            margin-bottom: 10px;
+        }
+        .news-content p {
+            flex-grow: 1;
+        }
+        .read-more {
+            display: inline-block;
+            margin-top: 15px;
+            font-weight: 600;
+            align-self: flex-start;
+        }
+
+        /* --- Quick Info Section --- */
+        .quick-info {
+            background-color: #e9ecef;
+            padding: 40px 0;
+            margin-top: 40px;
+        }
+        .info-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+        /* --- Blue Theme: Quick Info Heading --- */
+        .info-column h3 {
+            color: #1774b4;
+            margin-bottom: 15px;
+        }
+        .info-column i.icon-placeholder {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            display: inline-block;
+            color: #6c757d;
+        }
+
+
+        /* ==========================================================================
+        Footer Styles (Blue Theme)
+        ========================================================================== */
+
+        .site-footer {
+            background-color: #1774b4; 
+            color: #e9ecef;
+            padding: 40px 0 20px;
+            font-size: 0.9em;
+            margin-top: auto; 
+            flex-shrink: 0; 
+        }
+
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-bottom: 30px; }
+        .footer-column h4 { color: #ffffff; margin-bottom: 15px; font-size: 1.1em; }
+        .footer-column ul { list-style: none; padding: 0; margin: 0 0 1em 0;}
+        .footer-column li { margin-bottom: 8px; }
+        .footer-column a {
+            color: #dee2e6; /* Light grey links */
+            transition: color 0.2s ease;
+        }
+        .footer-column a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+        .footer-bottom {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #4a9dcf; 
+            font-size: 0.85em;
+            color: #adb5bd; 
+        }
+
+
+        /* ==========================================================================
+        Utility Classes
+        ========================================================================== */
+        .text-center { text-align: center; }
+        .section-title {
+            font-size: 2em;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #343a40; /* Dark grey */
+        }
+
+        /* ==========================================================================
+        Mobile Responsive Styles
+        ========================================================================== */
+        .menu-toggle { display: none; background: none; border: none; font-size: 1.8em; cursor: pointer; color: #343a40; padding: 5px; }
+
+        @media (max-width: 768px) {
+            .header-container { position: relative; flex-wrap: wrap; }
+            .logo { flex-basis: 80%; }
+            .menu-toggle { display: block; position: absolute; top: 15px; right: 20px; }
+            .main-nav { width: 100%; margin-top: 15px; }
+            .main-nav ul { flex-direction: column; width: 100%; display: none; background-color: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+            .main-nav ul.active { display: block; }
+            .main-nav li { margin: 0; border-bottom: 1px solid #e9ecef; }
+            .main-nav li:last-child { border-bottom: none; }
+            .main-nav a { display: block; padding: 12px 20px; text-align: left; border-bottom: none; }
+
+            .main-nav a.active {
+                color: #1774b4; 
+                background-color: #e8f1f8; 
+                border-bottom-color: transparent !important; 
+            }
+
+            /* Mobile Dropdown Adjustments */
+            .main-nav .submenu, .main-nav .submenu .submenu {
+                position: static;
+                display: block;
+                box-shadow: none;
+                background-color: transparent;
+                padding: 0;
+                margin-top: 0;
+                min-width: auto;
+                margin-left: 0;
+                border-top: none;
+            }
+            .main-nav ul ul li {
+                border-bottom: 1px dotted #ced4da;
+                background-color: #f8f9fa; 
+            }
+            .main-nav ul ul ul li {
+                background-color: #e9ecef; 
+                border-bottom: 1px dotted #adb5bd;
+            }
+            .main-nav ul ul li:last-child { border-bottom: none; }
+            .main-nav ul ul a { padding-left: 35px; background-color: transparent; font-size: 0.9em; }
+            .main-nav ul ul ul a { padding-left: 50px; background-color: transparent; }
+            /* Mobile active submenu link */
+            .main-nav .submenu a.active {
+                color: #1774b4;
+                background-color: #ddeafa; 
+                font-weight: 600;
+                border-bottom-color: transparent !important;
+            }
+            .main-nav li.menu-item-has-children > a::after { display: none; }
+
+            /* Example Mobile Hero Adjustments */
+            .hero h2 { font-size: 2em; }
+
+            /* Page Specific Mobile */
+            .main-content .contact-image { float: none; display: block; margin: 0 auto 15px auto; }
+        }
+
+        /* ==========================================================================
+        Page Specific Styles (Example - Keep Separate if possible)
+        ========================================================================== */
+        .main-content .contact-image {
+            float: none;
+            display: block;
+            margin: 0 auto 15px auto;
+            width: 150px;
+            border-radius: 4px;
+        }
+
+        @media (min-width: 769px) {
+            .main-content .contact-image {
+                float: left;
+                margin: 0 20px 10px 0;
+            }
+        }
 
         .hero {
             background-image: url('/images/pagina/474183398_1108689364383810_5813522470262771257_n.jpg');
             background-size: cover;
             background-position: center center;
-            background-repeat: no-repeat;
-            background-attachment: scroll;
+            background-repeat: no-repeat; 
+
+
+            background-attachment: scroll; 
             color: #ffffff;
             padding: 100px 20px;
             min-height: 50vh;
@@ -173,262 +427,73 @@
         .hero::before {
             content: "";
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5); 
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.4);
+
             z-index: 2;
         }
 
+        @media (min-width: 768px) {
+            .hero {
+                background-attachment: fixed;
+                min-height: 75vh;
+            }
+        }
+
+
         .hero .container {
-            position: relative;
-            z-index: 3;
-            max-width: 800px;
+            position: relative; 
+            z-index: 3
         }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero h2, .hero p, .hero .cta-button {
-            opacity: 0; 
-            animation: fadeInUp 0.8s ease-out forwards; 
+        .hero .container {
+            position: relative;           
+            z-index: 3;           
+            max-width: 800px;   
         }
 
         .hero h2 {
-            font-size: 2.8em;
+            font-size: 2.5em;
             margin-bottom: 0.5em;
             color: #ffffff;
-            animation-delay: 0.1s; 
         }
         .hero p {
-            font-size: 1.2em;
+            font-size: 1.1em;
             margin-bottom: 1.5em;
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
-            color: #e9ecef;
-            animation-delay: 0.3s; 
+            color: #e9ecef; /* Lighter text */
         }
+        /* --- Blue Theme: CTA Button --- */
         .cta-button {
-            background-color: var(--theme-blue);
+            background-color: #1774b4; /* Theme Blue */
             color: #ffffff;
             padding: 12px 25px;
             border-radius: 5px;
             font-size: 1em;
             font-weight: 600;
             display: inline-block;
-            transition: background-color 0.3s ease, transform 0.3s ease; 
+            transition: background-color 0.3s ease;
             border: none;
             cursor: pointer;
         }
         .cta-button:hover {
-            background-color: var(--theme-blue-dark);
+            background-color: #125a8c; /* Darker blue */
             text-decoration: none;
-            color: #ffffff;
-            transform: scale(1.05); 
-        }
-        .hero .cta-button {
-             animation-delay: 0.5s;
-        }
-
-        @media (min-width: 768px) {
-            .hero {
-                background-attachment: fixed; 
-                min-height: 75vh;
-                padding: 120px 20px;
-            }
-            .hero h2 { font-size: 3.5em; }
-            .hero p { font-size: 1.3em; }
-        }
-
-
-        /* ==========================================================================
-           Main Content & Sections
-           ========================================================================== */
-        .main-content {
-            padding: 40px 0; 
-        }
-
-        .section-title {
-            font-size: 2.2em; 
-            text-align: center;
-            margin-bottom: 50px;
-            color: var(--dark-grey);
-            opacity: 0; 
-            animation: fadeInUp 0.8s ease-out forwards;
-             animation-delay: 0.2s;
-        }
-
-        .news-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        .news-item {
-            background-color: #ffffff;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-        }
-        .news-item:hover {
-            transform: translateY(-6px) scale(1.02); 
-            box-shadow: 0 6px 18px rgba(0,0,0,0.15); 
-        }
-        .news-item img {
-            display: block;
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            background-color: #eee;
-            flex-shrink: 0;
-        }
-        .news-content {
-            padding: 20px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        .news-content h3 {
-            font-size: 1.3em;
-            margin-top: 0;
-        }
-        .news-content h3 a {
-            color: #1a1a1a;
-            transition: color 0.2s ease;
-        }
-        .news-content h3 a:hover {
-            color: var(--theme-blue);
-            text-decoration: none;
-        }
-        .news-meta {
-            font-size: 0.85em;
-            color: var(--text-grey);
-            margin-bottom: 10px;
-        }
-        .news-content p {
-            flex-grow: 1;
-        }
-        .read-more {
-            display: inline-block;
-            margin-top: 15px;
-            font-weight: 600;
-            align-self: flex-start;
-            transition: transform 0.3s ease; 
-        }
-         .read-more:hover {
-             transform: translateX(3px); 
-         }
-
-        /* --- Quick Info Section --- */
-        .quick-info {
-            background-color: var(--medium-grey);
-            padding: 50px 0; 
-            margin-top: 50px; 
-        }
-        .info-columns {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px; /* Increased gap */
-            text-align: center;
-        }
-        .info-column {
-            opacity: 0; 
-            animation: fadeInUp 0.7s ease-out forwards;
-        }
-
-        .info-column:nth-child(1) { animation-delay: 0.2s; }
-        .info-column:nth-child(2) { animation-delay: 0.4s; }
-        .info-column:nth-child(3) { animation-delay: 0.6s; }
-
-        .info-column h3 {
-            color: var(--theme-blue);
-            margin-bottom: 15px;
-            font-size: 1.4em;
-        }
-        .info-column .icon {
-            font-size: 3em; /* Larger icon */
-            margin-bottom: 15px;
-            display: inline-block;
-            color: var(--text-grey);
-            transition: color 0.3s ease, transform 0.3s ease;
-        }
-        .info-column:hover .icon {
-            color: var(--theme-blue); 
-             transform: scale(1.1);
-        }
-        .info-column p {
-            min-height: 4.8em; 
-        }
-
-        /* ==========================================================================
-           Utility & Mobile
-           ========================================================================== */
-        .text-center { text-align: center; }
-        .menu-toggle { display: none; background: none; border: none; font-size: 1.8em; cursor: pointer; color: var(--dark-grey); padding: 5px; }
-
-        @media (max-width: 768px) {
-            .header-container { position: relative; flex-wrap: wrap; }
-            .logo { flex-basis: 80%; }
-            .menu-toggle { display: block; position: absolute; top: 15px; right: 20px; }
-            .main-nav { width: 100%; margin-top: 15px; }
-            .main-nav ul { flex-direction: column; width: 100%; display: none; background-color: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-            .main-nav ul.active { display: block; } /* JS should add/remove 'active' class */
-            .main-nav li { margin: 0; border-bottom: 1px solid var(--medium-grey); }
-            .main-nav li:last-child { border-bottom: none; }
-            .main-nav a { display: block; padding: 12px 20px; text-align: left; border-bottom: none; transform: none !important; /* Reset hover transform */ } /* Reset transform */
-             .main-nav > ul > li > a:hover {
-                 transform: none; /* Disable lift on mobile nav */
-            }
-            .main-nav a.active {
-                color: var(--theme-blue);
-                background-color: #e8f1f8;
-                border-bottom-color: transparent !important;
-            }
-
-            /* Mobile Dropdowns */
-            .main-nav .submenu, .main-nav .submenu .submenu {
-                position: static; display: block; box-shadow: none; background-color: transparent;
-                padding: 0; margin-top: 0; min-width: auto; margin-left: 0; border-top: none;
-                opacity: 1; visibility: visible; transform: none; /* Override desktop animation styles */
-            }
-            .main-nav ul ul li { border-bottom: 1px dotted #ced4da; background-color: var(--light-grey); }
-            .main-nav ul ul ul li { background-color: var(--medium-grey); border-bottom: 1px dotted #adb5bd; }
-            .main-nav ul ul li:last-child { border-bottom: none; }
-            .main-nav ul ul a { padding-left: 35px; background-color: transparent; font-size: 0.9em; }
-            .main-nav ul ul ul a { padding-left: 50px; background-color: transparent; }
-            .main-nav .submenu a.active {
-                color: var(--theme-blue); background-color: #ddeafa; font-weight: 600;
-                border-bottom-color: transparent !important;
-            }
-            .main-nav li.menu-item-has-children > a::after { display: none; } /* Hide arrows on mobile */
-
-            .hero { padding: 80px 15px; min-height: 40vh; background-attachment: scroll; }
-            .hero h2 { font-size: 2em; }
-            .hero p { font-size: 1em; }
-
-            .section-title { font-size: 1.8em; margin-bottom: 30px; }
-            .news-grid { grid-template-columns: 1fr; } 
-            .info-columns { grid-template-columns: 1fr; gap: 25px;}
-             .info-column p { min-height: auto; }
+            color: #ffffff; /* Ensure text stays white */
         }
     </style>
 
     <link rel="stylesheet" href="css/style.css">
-
 </head>
 <body>
 
     <div id="header-placeholder">
-         <p style="text-align: center; padding: 10px; background-color: #eee;">Loading header...</p>
+        <!-- Header will be loaded here by JavaScript -->
+        <p>Loading header...</p> <!-- Optional loading message -->
     </div>
 
     <main>
@@ -440,12 +505,15 @@
             </div>
         </section>
 
+
         <section class="main-content container">
             <h2 class="section-title">Laatste Nieuws</h2>
 
             <div class="news-grid" id="latest-news-grid">
+                <p id="latest-news-loading" style="text-align: center; padding: 20px; font-style: italic; grid-column: 1 / -1;">Laatste nieuws wordt geladen...</p>
+
             </div>
-            <div class="text-center" style="margin-top: 40px;"> 
+            <div class="text-center" style="margin-top: 30px;">
                 <a href="/html/nieuws/nieuws.html" class="cta-button">Bekijk alle nieuwsberichten</a>
             </div>
         </section>
@@ -453,21 +521,18 @@
         <section class="quick-info">
             <div class="container info-columns">
                 <div class="info-column">
-                    <i class="fas fa-person-running icon"></i>
                     <h3>Trainingen</h3>
-                    <p>Bekijk het actuele trainingsschema en maak kennis met onze gemotiveerde trainers.</p>
-                    <a href="/html/info/training.html" class="read-more">Trainingsinfo »</a>
+                    <p>Bekijk het Trainingsschema en de Trainers.</p>
+                    <a href="/html/info/training.html" class="read-more">Trainingsschema »</a>
                 </div>
                 <div class="info-column">
-                    <i class="fas fa-calendar-days icon"></i>
                     <h3>Kalender</h3>
-                    <p>Mis geen enkele wedstrijd of clubactiviteit. Bekijk hier de volledige kalender.</p>
+                    <p>Blijf op de hoogte van komende wedstrijden.</p>
                     <a href="/html/wedstrijden/kalender.html" class="read-more">Bekijk kalender »</a>
                 </div>
                 <div class="info-column">
-                    <i class="fas fa-user-plus icon"></i>
                     <h3>Word Lid</h3>
-                    <p>Sluit je aan bij onze sportieve familie en ervaar de passie voor atletiek in Bornem.</p>
+                    <p>Sluit je aan bij onze sportieve familie en ervaar de passie voor atletiek.</p>
                     <a href="/html/(Nieuwe) leden/aansluiten.html" class="read-more">Info & Aansluiten »</a>
                 </div>
             </div>
@@ -475,8 +540,11 @@
     </main>
 
     <div id="footer-placeholder">
+        <p>Loading footer...</p>
     </div>
 
     <script src="/js/script.js" defer></script>
+</body>
+</html>
 </body>
 </html>

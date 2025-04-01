@@ -1,8 +1,8 @@
 /* ==========================================================================
    Base Styles & Layout Prep
-   ========================================================================== */
+========================================================================== */
 
-   * {
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -16,19 +16,11 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: #333;
-    background-color: #f8f9fa; /* Slightly lighter grey background */
-    /* Sticky Footer Flexbox Setup (assuming you use it) */
-    /* If not using JS position toggle, uncomment these */
-    /* min-height: 100vh; */
-    /* display: flex; */
-    /* flex-direction: column; */
-    /* position: relative; */ /* Needed if using JS absolute positioning */
+    background-color: #f8f9fa; /
 }
 
-/* Target the main content wrapper */
 main {
-     /* Add padding so content doesn't touch footer directly */
-     padding-bottom: 60px; /* Adjust value as needed */
+     padding-bottom: 60px; 
 }
 
 
@@ -38,14 +30,12 @@ main {
     padding: 0 20px;
 }
 
-/* --- Blue Theme: Base Link Color --- */
 a {
-    color: #1774b4; /* Theme Blue */
+    color: #1774b4; 
     text-decoration: none;
     transition: color 0.3s ease;
 }
 a:hover {
-    /* color: #125a8c; */ /* Optional: Darker blue on hover */
     text-decoration: underline;
 }
 
@@ -63,33 +53,27 @@ p { margin-bottom: 1em; }
 ul { margin-bottom: 1em; margin-left: 20px; }
 
 
-/* ==========================================================================
-   Header & Navigation Styles (White Header, Blue Accents)
-   ========================================================================== */
 
-
-   .site-header {
+.site-header {
     background-color: #ffffff;
     padding: 15px 0;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
     position: sticky;
     top: 0;
     z-index: 1000;
-    flex-shrink: 0; /* Keep if using Flexbox sticky footer */
+    flex-shrink: 0;
 
-    /* --- ADD THIS LINE --- */
-    min-width: 280px; /* Or 300px, 320px - Prevents collapsing too much */
-    /* --------------------- */
+    min-width: 280px; 
 }
 
 .header-container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
 .logo h1 { margin: 0; font-size: 1.8em; }
-.logo a { color: #212529; text-decoration: none; font-weight: 700; } /* Slightly darker logo text */
+.logo a { color: #212529; text-decoration: none; font-weight: 700; } 
 .logo img { max-height: 50px; }
 .main-nav ul { list-style: none; padding: 0; margin: 0; display: flex; }
 .main-nav li { margin-left: 25px; position: relative; }
 .main-nav a {
-    color: #343a40; /* Dark grey nav text */
+    color: #343a40;
     text-transform: uppercase;
     font-weight: 600;
     font-size: 0.95em;
@@ -97,34 +81,31 @@ ul { margin-bottom: 1em; margin-left: 20px; }
     border-bottom: 2px solid transparent;
     transition: color 0.3s ease, border-color 0.3s ease;
 }
-/* --- Blue Theme: Nav Hover/Active --- */
+
 .main-nav a:hover,
 .main-nav a.active {
-    color: #1774b4; /* Theme Blue */
-    border-bottom-color: #1774b4; /* Theme Blue */
+    color: #1774b4; 
+    border-bottom-color: #1774b4; 
 }
 
-/* --- Dropdowns (Submenus) --- */
 .main-nav .submenu {
    display: none;
    position: absolute;
    background-color: #fff;
-   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow for dropdown */
+   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
    list-style: none;
    padding: 10px 0;
    margin-top: 5px;
    min-width: 220px;
    left: 0;
    z-index: 1001;
-   border-radius: 4px; /* Optional: Slight rounding */
+   border-radius: 4px; 
 }
-/* --- Blue Theme: Active Submenu Item --- */
+
 .main-nav .submenu a.active {
-   color: #1774b4; /* Theme Blue */
+   color: #1774b4; 
    font-weight: 600;
-   border-bottom-color: transparent !important; /* Keep no border */
-   /* Optional: Slight background indication */
-   /* background-color: #e8f1f8; */
+   border-bottom-color: transparent !important;
 }
 .main-nav .submenu li {
     margin: 0;
@@ -133,17 +114,17 @@ ul { margin-bottom: 1em; margin-left: 20px; }
 .main-nav .submenu a {
    display: block;
    padding: 8px 15px;
-   color: #343a40; /* Match nav text color */
+   color: #343a40; 
    text-transform: none;
    font-weight: 400;
    border-bottom: none;
    white-space: nowrap;
    transition: background-color 0.2s ease, color 0.2s ease;
 }
-/* --- Blue Theme: Submenu Hover --- */
+
 .main-nav .submenu a:hover {
-   background-color: #e8f1f8; /* Light blue background on hover */
-   color: #125a8c; /* Darker blue text on hover */
+   background-color: #e8f1f8; 
+   color: #125a8c;
 }
 .main-nav .submenu .submenu {
    top: -10px;
@@ -156,14 +137,13 @@ ul { margin-bottom: 1em; margin-left: 20px; }
    display: block;
 }
 
-/* --- Dropdown Indicators --- */
 .main-nav > ul > li.menu-item-has-children > a::after {
    content: ' ▼';
    font-size: 0.7em;
    display: inline-block;
    margin-left: 4px;
    vertical-align: middle;
-   color: #6c757d; /* Muted color for indicator */
+   color: #6c757d;
 }
 .main-nav .submenu li.menu-item-has-children > a::after {
    content: ' ▶';
@@ -174,7 +154,7 @@ ul { margin-bottom: 1em; margin-left: 20px; }
     right: 15px;
     top: 50%;
     transform: translateY(-50%);
-    color: #6c757d; /* Muted color */
+    color: #6c757d; 
 }
 .main-nav .submenu li.menu-item-has-children > a {
    padding-right: 30px;
@@ -182,50 +162,61 @@ ul { margin-bottom: 1em; margin-left: 20px; }
 
 
 
-/* ==========================================================================
-   Footer Styles (Blue Theme)
-   ========================================================================== */
 
 .site-footer {
-    background-color: #1774b4; /* Theme Blue background */
-    color: #e9ecef; /* Lighter text color for contrast */
+    background-color: var(--theme-blue, #1774b4);
+    color: #e9ecef;
     padding: 40px 0 20px;
     font-size: 0.9em;
-    /* --- Sticky Footer Properties (If using JS Position Toggle) --- */
-    /* position: relative; */ /* Default state for JS toggle */
-    /* width: 100%; */
-    /* --- Sticky Footer Properties (If using Flexbox) --- */
-    /* margin-top: auto; */
-    /* flex-shrink: 0; */
+    margin-top: auto;
+    flex-shrink: 0;
 }
 
-.footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-bottom: 30px; }
-.footer-column h4 { color: #ffffff; margin-bottom: 15px; font-size: 1.1em; }
-.footer-column ul { list-style: none; padding: 0; margin: 0 0 1em 0;}
-.footer-column li { margin-bottom: 8px; }
-/* --- Blue Theme: Footer Links --- */
-.footer-column a {
-    color: #dee2e6; /* Light grey/off-white links */
-    transition: color 0.2s ease;
- }
-.footer-column a:hover {
-    color: #ffffff; /* White on hover */
-    text-decoration: underline;
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
 }
+
+.footer-column h4 {
+    color: #ffffff; 
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1em 0; 
+}
+
+.footer-column li {
+    margin-bottom: 8px;
+}
+
+.footer-column a {
+    color: #dee2e6; 
+    transition: color 0.2s ease, padding-left 0.3s ease;
+}
+
+.footer-column a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+    padding-left: 5px;
+}
+
 .footer-bottom {
     text-align: center;
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px solid #4a9dcf; /* Lighter blue border */
+    margin-top: 30px; 
+    padding-top: 20px; 
+    border-top: 1px solid #4a9dcf;
     font-size: 0.85em;
-    color: #adb5bd; /* Slightly muted text */
+    color: #adb5bd; 
 }
 
 
-/* ==========================================================================
-   Mobile Responsive Styles
-   ========================================================================== */
-.menu-toggle { display: none; background: none; border: none; font-size: 1.8em; cursor: pointer; color: #343a40; padding: 5px; } /* Match nav text color */
+.menu-toggle { display: none; background: none; border: none; font-size: 1.8em; cursor: pointer; color: #343a40; padding: 5px; }
 
 @media (max-width: 768px) {
     .header-container { position: relative; flex-wrap: wrap; }
@@ -234,7 +225,7 @@ ul { margin-bottom: 1em; margin-left: 20px; }
     .main-nav { width: 100%; margin-top: 15px; }
     .main-nav ul { flex-direction: column; width: 100%; display: none; background-color: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
     .main-nav ul.active { display: block; }
-    .main-nav li { margin: 0; border-bottom: 1px solid #e9ecef; } /* Lighter border */
+    .main-nav li { margin: 0; border-bottom: 1px solid #e9ecef; }
     .main-nav li:last-child { border-bottom: none; }
     .main-nav a { display: block; padding: 12px 20px; text-align: left; border-bottom: none; }
     /* --- Blue Theme: Mobile Active Link --- */
@@ -242,6 +233,7 @@ ul { margin-bottom: 1em; margin-left: 20px; }
         color: #1774b4; /* Theme Blue */
         background-color: #e8f1f8; /* Light blue background */
     }
+    
 
     /* Mobile Dropdown Adjustments */
     .main-nav .submenu, .main-nav .submenu .submenu {
@@ -274,8 +266,8 @@ ul { margin-bottom: 1em; margin-left: 20px; }
     }
     /* --- Blue Theme: Mobile Active Submenu Link --- */
     .main-nav .submenu a.active {
-       color: #1774b4; /* Theme Blue */
-       background-color: #ddeafa; /* Slightly darker blue bg for active sub */
+       color: #1774b4; 
+       background-color: #ddeafa;
        font-weight: 600;
     }
     .main-nav li.menu-item-has-children > a::after { display: none; }
@@ -287,8 +279,8 @@ ul { margin-bottom: 1em; margin-left: 20px; }
 /* ==========================================================================
    Page Specific Styles (Example - Keep Separate if possible)
    ========================================================================== */
-/* Add page-specific CSS here */
-.main-content .contact-image { /* Example from previous */
+
+.main-content .contact-image {
     float: none;
     display: block;
     margin: 0 auto 15px auto;
@@ -310,48 +302,47 @@ ul { margin-bottom: 1em; margin-left: 20px; }
 /* Make table scroll horizontally on small screens */
 .table-responsive {
     overflow-x: auto;
-    margin-top: 20px; /* Space above table */
-    margin-bottom: 30px; /* Space below table */
-    border: 1px solid #dee2e6; /* Optional border around scroll area */
+    margin-top: 20px;
+    margin-bottom: 30px;
+    border: 1px solid #dee2e6; 
     border-radius: 5px;
 }
 
 .records-table {
     width: 100%;
     border-collapse: collapse;
-    min-width: 600px; /* Prevent extreme squishing on small screens */
-    font-size: 0.95em; /* Slightly smaller font */
+    min-width: 600px; 
+    font-size: 0.95em;
 }
 
 .records-table th,
 .records-table td {
     border: 1px solid #dee2e6;
-    padding: 10px 12px; /* Adjust padding */
+    padding: 10px 12px; 
     text-align: left;
-    vertical-align: top; /* Align names top for relays */
+    vertical-align: top; 
 }
 
 .records-table th {
-    background-color: #e9ecef; /* Light grey header */
+    background-color: #e9ecef; 
     font-weight: 600;
-    white-space: nowrap; /* Prevent headers wrapping */
+    white-space: nowrap;
 }
 
 .records-table tbody tr:nth-child(even) {
-    background-color: #f8f9fa; /* Zebra striping */
+    background-color: #f8f9fa; 
 }
 
 .records-table tbody tr:hover {
-    background-color: #e8f1f8; /* Light blue hover */
+    background-color: #e8f1f8; 
 }
 
-/* Styling for the "missing record" notice */
 .record-notice {
     margin-top: 20px;
     padding: 15px;
-    background-color: #fff3cd; /* Light yellow background */
+    background-color: #fff3cd;
     border: 1px solid #ffeeba;
-    border-left: 5px solid #ffc107; /* Yellow left border */
+    border-left: 5px solid #ffc107; 
     border-radius: 4px;
     font-size: 0.9em;
 }
@@ -361,60 +352,47 @@ ul { margin-bottom: 1em; margin-left: 20px; }
 
 
 [contenteditable="true"] {
-    outline: 2px dashed #1774b4; /* Blue dashed outline when editing */
-    background-color: #f0f8ff; /* Light blue background when editing */
+    outline: 2px dashed #1774b4; 
+    background-color: #f0f8ff; 
     cursor: text;
 }
 
-/* --- Mobile Navigation Accordion Styles --- */
 
-/* Define your mobile breakpoint - MUST match JS window.innerWidth check */
-@media (max-width: 991px) { /* Adjust this breakpoint as needed */
-
-    /* Hide all submenus by default when the mobile menu is active */
+@media (max-width: 991px) {
     .main-nav ul.active .submenu {
         display: none; /* Hide initially */
     }
 
-    /* Show the active submenu when its parent LI has 'submenu-open' */
     .main-nav ul.active li.submenu-open > ul.submenu.submenu-active {
-        display: block; /* Show the toggled submenu */
+        display: block; 
 
     }
 
-    /* Style the parent link/text to indicate it's expandable */
     .main-nav ul.active li > a[aria-haspopup="true"] {
-        display: flex; /* Use flexbox to position indicator */
-        justify-content: space-between; /* Push indicator to the right */
+        display: flex; 
+        justify-content: space-between;
         align-items: center;
         width: 100%; /* Ensure it takes full width */
     }
 
-    /* Add an indicator (e.g., arrow) */
     .main-nav ul.active li > a[aria-haspopup="true"]::after {
-        content: '▼'; /* Down arrow for closed */
+        content: '▼'; 
         display: inline-block;
         margin-left: 8px;
         font-size: 0.8em;
         transition: transform 0.3s ease;
     }
 
-    /* Change indicator when the submenu is open */
     .main-nav ul.active li.submenu-open > a[aria-haspopup="true"]::after {
-        transform: rotate(180deg); /* Point arrow up */
+        transform: rotate(180deg);
     }
+} 
 
-} /* End Media Query */
-
-/* --- Desktop Hover Styles (Ensure these are OUTSIDE the media query) --- */
-/* Keep your existing desktop :hover styles */
-/* Example (make sure these apply only above the mobile breakpoint) */
-@media (min-width: 992px) { /* Adjust breakpoint */
+@media (min-width: 992px) { 
     .main-nav ul li:hover > .submenu {
-        display: block; /* Or however you show them on desktop */
+        display: block; 
         opacity: 1;
         visibility: visible;
-        /* Reset any mobile-specific styles if necessary */
     }
-
 }
+
