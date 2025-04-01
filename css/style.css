@@ -340,7 +340,7 @@ ul { margin-bottom: 1em; margin-left: 20px; }
     }
 
     .main-nav > ul > li.menu-item-has-children:hover > a::after {
-        transform: rotate(0deg);;
+        transform: rotate(0deg);
         color : #1774b4;
     }
     
@@ -349,11 +349,6 @@ ul { margin-bottom: 1em; margin-left: 20px; }
         color: #1774b4;
     }
     
-    .main-nav .submenu li.menu-item-has-children > a {
-       transform: translateY(-50%) rotate(0deg);
-       padding-right: 0px;
-    }
-     
     .main-nav ul.active li > a[aria-haspopup="true"] {
         display: flex; 
         justify-content: space-between;
@@ -368,7 +363,7 @@ ul { margin-bottom: 1em; margin-left: 20px; }
         font-size: 0.8em;
         transition: transform 0.3s ease;
     }
-    
+
     .main-nav ul.active li.submenu-open > a[aria-haspopup="true"]::after {
         transform: rotate(180deg);
     }

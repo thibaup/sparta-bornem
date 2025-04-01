@@ -125,27 +125,6 @@
             transform: translateY(0); 
         }
 
-        .main-nav > ul > li.menu-item-has-children > a::after {
-            content: ' ▼';
-            font-size: 0.7em;
-            display: inline-block;
-            margin-left: 4px;
-            vertical-align: middle;
-            color: var(--text-grey);
-        }
-        .main-nav .submenu li.menu-item-has-children > a::after {
-            content: ' ▶';
-            font-size: 0.7em;
-            display: inline-block;
-            margin-left: 4px;
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-grey);
-        }
-        .main-nav .submenu li.menu-item-has-children > a { padding-right: 30px; }
-
         .hero {
             background-image: url('/images/pagina/474183398_1108689364383810_5813522470262771257_n.jpg');
             background-size: cover;
@@ -362,51 +341,6 @@
         .text-center { text-align: center; }
         .menu-toggle { display: none; background: none; border: none; font-size: 1.8em; cursor: pointer; color: var(--dark-grey); padding: 5px; }
 
-        @media (max-width: 768px) {
-            .header-container { position: relative; flex-wrap: wrap; }
-            .logo { flex-basis: 80%; }
-            .menu-toggle { display: block; position: absolute; top: 15px; right: 20px; }
-            .main-nav { width: 100%; margin-top: 15px; }
-            .main-nav ul { flex-direction: column; width: 100%; display: none; background-color: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-            .main-nav ul.active { display: block; } /* JS should add/remove 'active' class */
-            .main-nav li { margin: 0; border-bottom: 1px solid var(--medium-grey); }
-            .main-nav li:last-child { border-bottom: none; }
-            .main-nav a { display: block; padding: 12px 20px; text-align: left; border-bottom: none; transform: none !important; /* Reset hover transform */ } /* Reset transform */
-             .main-nav > ul > li > a:hover {
-                 transform: none; /* Disable lift on mobile nav */
-            }
-            .main-nav a.active {
-                color: var(--theme-blue);
-                background-color: #e8f1f8;
-                border-bottom-color: transparent !important;
-            }
-
-            /* Mobile Dropdowns */
-            .main-nav .submenu, .main-nav .submenu .submenu {
-                position: static; display: block; box-shadow: none; background-color: transparent;
-                padding: 0; margin-top: 0; min-width: auto; margin-left: 0; border-top: none;
-                opacity: 1; visibility: visible; transform: none; /* Override desktop animation styles */
-            }
-            .main-nav ul ul li { border-bottom: 1px dotted #ced4da; background-color: var(--light-grey); }
-            .main-nav ul ul ul li { background-color: var(--medium-grey); border-bottom: 1px dotted #adb5bd; }
-            .main-nav ul ul li:last-child { border-bottom: none; }
-            .main-nav ul ul a { padding-left: 35px; background-color: transparent; font-size: 0.9em; }
-            .main-nav ul ul ul a { padding-left: 50px; background-color: transparent; }
-            .main-nav .submenu a.active {
-                color: var(--theme-blue); background-color: #ddeafa; font-weight: 600;
-                border-bottom-color: transparent !important;
-            }
-            .main-nav li.menu-item-has-children > a::after { display: none; } /* Hide arrows on mobile */
-
-            .hero { padding: 80px 15px; min-height: 40vh; background-attachment: scroll; }
-            .hero h2 { font-size: 2em; }
-            .hero p { font-size: 1em; }
-
-            .section-title { font-size: 1.8em; margin-bottom: 30px; }
-            .news-grid { grid-template-columns: 1fr; } 
-            .info-columns { grid-template-columns: 1fr; gap: 25px;}
-             .info-column p { min-height: auto; }
-        }
     </style>
 
     <link rel="stylesheet" href="css/style.css">
