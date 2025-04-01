@@ -160,6 +160,11 @@ ul { margin-bottom: 1em; margin-left: 20px; }
    padding-right: 30px;
 }
 
+main.main-content {
+    padding-bottom: 40px;
+    padding-top: 90px;
+}
+
 
 .site-footer {
     background-color: var(--theme-blue, #1774b4);
@@ -231,6 +236,7 @@ ul { margin-bottom: 1em; margin-left: 20px; }
         color: #1774b4; /* Theme Blue */
         background-color: #e8f1f8; /* Light blue background */
     }
+    
 
     /* Mobile Dropdown Adjustments */
     .main-nav .submenu, .main-nav .submenu .submenu {
@@ -356,7 +362,6 @@ ul { margin-bottom: 1em; margin-left: 20px; }
 
 
 @media (max-width: 991px) {
-
     .main-nav ul.active .submenu {
         display: none; /* Hide initially */
     }
