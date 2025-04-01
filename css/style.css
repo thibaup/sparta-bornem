@@ -203,7 +203,6 @@ ul { margin-bottom: 1em; margin-left: 20px; }
    min-width: 200px;
 }
 
-/* Dropdown indicator animations */
 .main-nav > ul > li.menu-item-has-children > a::after {
    content: ' ▼';
    font-size: 0.7em;
@@ -239,7 +238,6 @@ ul { margin-bottom: 1em; margin-left: 20px; }
    padding-right: 30px;
 }
 
-/* Menu toggle animation */
 .menu-toggle { 
     display: none; 
     background: none; 
@@ -249,11 +247,6 @@ ul { margin-bottom: 1em; margin-left: 20px; }
     color: #343a40; 
     padding: 5px;
     transition: transform 0.3s ease, color 0.3s ease;
-}
-
-.menu-toggle:hover {
-    transform: rotate(90deg);
-    color: #1774b4;
 }
 
 /* Mobile menu animations */
@@ -340,15 +333,27 @@ ul { margin-bottom: 1em; margin-left: 20px; }
         background-color: transparent;
     }
     
-    /* Blue Theme: Mobile Active Submenu Link */
     .main-nav .submenu a.active {
        color: #1774b4; 
        background-color: #ddeafa;
        font-weight: 600;
     }
+
+    .main-nav > ul > li.menu-item-has-children:hover > a::after {
+        transform: rotate(0deg);;
+        color : #1774b4;
+    }
     
-    .main-nav li.menu-item-has-children > a::after { display: none; }
+    .main-nav .submenu li.menu-item-has-children:hover > a::after {
+        transform: translateY(-50%) rotate(0deg);
+        color: #1774b4;
+    }
     
+    .main-nav .submenu li.menu-item-has-children > a {
+       transform: translateY(-50%) rotate(0deg);
+       padding-right: 0px;
+    }
+     
     .main-nav ul.active li > a[aria-haspopup="true"] {
         display: flex; 
         justify-content: space-between;
@@ -369,7 +374,6 @@ ul { margin-bottom: 1em; margin-left: 20px; }
     }
 }
 
-/* ========== SITE FOOTER ========== */
 .site-footer {
     background-color: var(--theme-blue, #1774b4);
     color: #e9ecef;
@@ -494,7 +498,6 @@ ul { margin-bottom: 1em; margin-left: 20px; }
     cursor: text;
 }
 
-/* ========== RESPONSIVE BREAKPOINTS ========== */
 @media (max-width: 991px) {
     .main-nav ul.active .submenu {
         display: none; /* Hide initially */

@@ -230,7 +230,6 @@ document.addEventListener('DOMContentLoaded', function() {
             console.warn("Header initialization warning: Menu toggle button or nav UL not found.");
         }
 
-        // --- Accordion Logic for Mobile Submenus ---
         const menuItems = mainNavUl.querySelectorAll(':scope > li');
 
         menuItems.forEach(li => {
@@ -249,7 +248,6 @@ document.addEventListener('DOMContentLoaded', function() {
                              event.preventDefault();
                         }
 
-                        // Toggle the current submenu
                         const isOpening = !li.classList.contains('submenu-open');
 
                          if (isOpening) {
@@ -274,7 +272,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 });
 
-                // Handle nested submenus (if any) - apply same logic recursively or flatly
                  const nestedSubmenuItems = submenu.querySelectorAll(':scope > li');
                  nestedSubmenuItems.forEach(nestedLi => {
                      const nestedParentLink = nestedLi.querySelector(':scope > a');
