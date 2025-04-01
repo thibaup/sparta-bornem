@@ -395,25 +395,18 @@ class NewsArticleApp:
 
 # --- Main Execution ---
 if __name__ == "__main__":
-    # Ensure image destination directory exists on startup (optional, browse also checks)
     try:
         os.makedirs(IMAGE_DEST_DIR_ABSOLUTE, exist_ok=True)
     except OSError as e:
         print(f"Warning: Could not pre-create image directory {IMAGE_DEST_DIR_ABSOLUTE}: {e}")
-        # Proceed anyway, the browse function will handle it or fail later
 
     root = tk.Tk()
     app = NewsArticleApp(root)
 
-    # Attempt to configure styles for validation feedback (might depend on theme)
     try:
         s = ttk.Style()
-        # Configure a style that changes the border or background on invalid state
-        # Note: Visual effect depends heavily on the theme ('clam', 'vista', 'aqua', 'default')
-        # This changes the border color for 'clam' theme on some OS.
         s.map('TEntry',
               bordercolor=[('invalid', 'red'), ('!invalid', 'grey')],
-              # fieldbackground=[('invalid', '#FFCCCC')] # Background might not work well
              )
     except tk.TclError:
         print("Info: Could not configure ttk styles for validation feedback.")
