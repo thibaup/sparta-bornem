@@ -76,63 +76,52 @@ async function loadLatestNews(count = 3, containerId = 'latest-news-grid', loadi
     const newsDataUrl = '/html/nieuws/nieuws-data.json'; // Assuming JSON is in /nieuws/ folder at root
 
     try {
-        // Fetch the news data
         const response = await fetch(newsDataUrl);
         if (!response.ok) {
-            // Throw an error if the fetch fails (e.g., 404 Not Found)
             throw new Error(`HTTP error! status: ${response.status} fetching ${newsDataUrl}`);
         }
-        const newsData = await response.json(); // Parse the JSON data
+        const newsData = await response.json();
 
-        // Sort data by date descending (newest first) using Date objects
         newsData.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-        // Get the specified number of latest news items
         const latestNews = newsData.slice(0, count);
 
-        // Remove the loading message and clear any previous content
         if (loadingMessage) loadingMessage.remove();
         newsContainer.innerHTML = '';
 
-        // Handle case where no news items are found after fetching/sorting
         if (latestNews.length === 0) {
             newsContainer.innerHTML = '<p style="grid-column: 1 / -1; text-align: center;">Geen nieuwsberichten gevonden.</p>';
-            return; // Stop execution for this function
+            return; 
         }
 
-        // Get the current page path to pass as a referrer
         const referrerPath = window.location.pathname;
 
-        // Loop through the latest news items and generate HTML for each
         latestNews.forEach(item => {
-            // Format the date for display
             const itemDate = new Date(item.date);
             const formattedDate = itemDate.toLocaleDateString('nl-BE', {
                 day: 'numeric', month: 'long', year: 'numeric'
             });
 
-            let finalImageUrl = '/images/nieuws/placeholder-news.png'; // Default placeholder
-            if (item.image) { // Check if image property exists and is not empty
-                // Check if it's already a full URL
+            let finalImageUrl = '/images/nieuws/placeholder-news.png'; 
+            if (item.image) { 
                 if (!item.image.startsWith('http://') && !item.image.startsWith('https://')) {
-                    finalImageUrl = `/images/nieuws/${item.image.trim()}`; 
+                    finalImageUrl = `/images/nieuws/${item.image.trim()}`;
                 } else {
-                    finalImageUrl = item.image.trim(); // Use the full URL, trim whitespace
+                    finalImageUrl = item.image.trim();
                 }
             }
 
-            const summaryText = item.summary || ''; // Ensure summaryText is a string, even if null/undefined
+            const summaryText = item.summary || '';
             const itemLink = `/html/nieuws/artikel.html?id=${item.id || ''}&ref=${encodeURIComponent(referrerPath)}`;
 
-            // Use template literals for cleaner HTML construction
             let articleHtml;
             if (summaryText) {
                 articleHtml = `
                 <article class="news-item" id="latest-${item.id || ''}">
                     <img src="${finalImageUrl}" alt="${item.title}" loading="lazy">
                     <div class="news-content">
-                        <p class="news-meta">${formattedDate} | ${item.category || 'Algemeen'}</p>
                         <h3><a href="${itemLink}">${item.title}</a></h3>
+                        <p class="news-meta">${formattedDate} | ${item.category || 'Algemeen'}</p>
                         <p>${summaryText}</p>
                         <a href="${itemLink}" class="read-more">Lees meer »</a>
                     </div>
@@ -143,8 +132,8 @@ async function loadLatestNews(count = 3, containerId = 'latest-news-grid', loadi
                  <article class="news-item" id="latest-${item.id || ''}">
                      <img src="${finalImageUrl}" alt="${item.title}" loading="lazy">
                      <div class="news-content">
-                         <p class="news-meta">${formattedDate} | ${item.category || 'Algemeen'}</p>
                          <h3><a href="${itemLink}">${item.title}</a></h3>
+                         <p class="news-meta">${formattedDate} | ${item.category || 'Algemeen'}</p>
                          <a href="${itemLink}" class="read-more">Lees meer »</a>
                      </div>
                  </article>
@@ -155,7 +144,6 @@ async function loadLatestNews(count = 3, containerId = 'latest-news-grid', loadi
         });
 
     } catch (error) {
-        // Handle errors during fetch or processing
         console.error('Error loading or processing latest news data:', error);
         const displayError = `<p style="color:red; text-align:center; grid-column: 1 / -1;">Kon laatste nieuws niet laden. (${error.message})</p>`;
         if(loadingMessage) {
