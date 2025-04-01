@@ -68,7 +68,7 @@ ul { margin-bottom: 1em; margin-left: 20px; }
    ========================================================================== */
 
 
-   .site-header {
+.site-header {
     background-color: #ffffff;
     padding: 15px 0;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
@@ -181,50 +181,63 @@ ul { margin-bottom: 1em; margin-left: 20px; }
 }
 
 
-
-/* ==========================================================================
-   Footer Styles (Blue Theme)
-   ========================================================================== */
-
 .site-footer {
-    background-color: #1774b4; /* Theme Blue background */
+    background-color: var(--theme-blue, #1774b4);
     color: #e9ecef; /* Lighter text color for contrast */
     padding: 40px 0 20px;
     font-size: 0.9em;
-    /* --- Sticky Footer Properties (If using JS Position Toggle) --- */
-    /* position: relative; */ /* Default state for JS toggle */
-    /* width: 100%; */
-    /* --- Sticky Footer Properties (If using Flexbox) --- */
-    /* margin-top: auto; */
-    /* flex-shrink: 0; */
+    margin-top: auto; /* Pushes footer to bottom */
+    flex-shrink: 0; /* Prevents footer from shrinking */
 }
 
-.footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-bottom: 30px; }
-.footer-column h4 { color: #ffffff; margin-bottom: 15px; font-size: 1.1em; }
-.footer-column ul { list-style: none; padding: 0; margin: 0 0 1em 0;}
-.footer-column li { margin-bottom: 8px; }
-/* --- Blue Theme: Footer Links --- */
+.footer-grid {
+    display: grid;
+    /* Arrange columns, fitting as many as possible (min 200px wide) */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.footer-column h4 {
+    color: #ffffff; /* White heading */
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1em 0; /* Reset default list styles, add bottom margin */
+}
+
+.footer-column li {
+    margin-bottom: 8px; /* Spacing between list items */
+}
+
+/* --- Footer Links --- */
 .footer-column a {
     color: #dee2e6; /* Light grey/off-white links */
-    transition: color 0.2s ease;
- }
+    /* --- Animation: Transition color and padding --- */
+    transition: color 0.2s ease, padding-left 0.3s ease;
+}
+
 .footer-column a:hover {
     color: #ffffff; /* White on hover */
     text-decoration: underline;
+    /* --- Animation: Indent link text slightly on hover --- */
+    padding-left: 5px;
 }
+
 .footer-bottom {
     text-align: center;
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px solid #4a9dcf; /* Lighter blue border */
+    margin-top: 30px; /* Space above the bottom text */
+    padding-top: 20px; /* Space below the top border */
+    border-top: 1px solid #4a9dcf;
     font-size: 0.85em;
-    color: #adb5bd; /* Slightly muted text */
+    color: #adb5bd; 
 }
 
 
-/* ==========================================================================
-   Mobile Responsive Styles
-   ========================================================================== */
 .menu-toggle { display: none; background: none; border: none; font-size: 1.8em; cursor: pointer; color: #343a40; padding: 5px; } /* Match nav text color */
 
 @media (max-width: 768px) {
@@ -390,31 +403,24 @@ ul { margin-bottom: 1em; margin-left: 20px; }
         width: 100%; /* Ensure it takes full width */
     }
 
-    /* Add an indicator (e.g., arrow) */
     .main-nav ul.active li > a[aria-haspopup="true"]::after {
-        content: '▼'; /* Down arrow for closed */
+        content: '▼'; 
         display: inline-block;
         margin-left: 8px;
         font-size: 0.8em;
         transition: transform 0.3s ease;
     }
 
-    /* Change indicator when the submenu is open */
     .main-nav ul.active li.submenu-open > a[aria-haspopup="true"]::after {
-        transform: rotate(180deg); /* Point arrow up */
+        transform: rotate(180deg);
     }
+} 
 
-} /* End Media Query */
-
-/* --- Desktop Hover Styles (Ensure these are OUTSIDE the media query) --- */
-/* Keep your existing desktop :hover styles */
-/* Example (make sure these apply only above the mobile breakpoint) */
-@media (min-width: 992px) { /* Adjust breakpoint */
+@media (min-width: 992px) { 
     .main-nav ul li:hover > .submenu {
-        display: block; /* Or however you show them on desktop */
+        display: block; 
         opacity: 1;
         visibility: visible;
-        /* Reset any mobile-specific styles if necessary */
     }
-
 }
+
