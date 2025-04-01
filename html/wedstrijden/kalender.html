@@ -653,39 +653,30 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const calendarView = document.querySelector('.calendar-view');
-            const mobileBreakpoint = 768; // Screen width below which click-to-expand is active
-
-            if (!calendarView) return; // Exit if no calendar found
-
+            const mobileBreakpoint = 768;
+    
+            if (!calendarView) {
+                console.warn("Calendar view element (.calendar-view) not found.");
+                return;
+            }
+    
             calendarView.addEventListener('click', (event) => {
-                // Only activate on smaller screens
-                if (window.innerWidth >= mobileBreakpoint) {
-                    return;
-                }
-
-                // Find the closest calendar event span that was clicked
                 const eventSpan = event.target.closest('.calendar-event');
-
                 if (!eventSpan) {
                     return;
                 }
-
-                if (event.target.tagName === 'A') {
-                     event.preventDefault(); 
-                }
-
-
-
+    
                 const isTruncated = eventSpan.scrollWidth > eventSpan.offsetWidth;
                 const isExpanded = eventSpan.classList.contains('event-expanded');
+                const shouldToggleExpansion = isExpanded || (!isExpanded && isTruncated);
 
-
+                if (shouldToggleExpansion && event.target.tagName === 'A') {
+                    event.preventDefault();
+                }
+    
                 if (isExpanded) {
                     eventSpan.classList.remove('event-expanded');
-                }
-
-                else if (isTruncated) {
-
+                } else if (isTruncated) {
                     const parentDay = eventSpan.closest('.calendar-day');
                     if (parentDay) {
                         const currentlyExpanded = parentDay.querySelector('.calendar-event.event-expanded');
@@ -693,11 +684,12 @@
                             currentlyExpanded.classList.remove('event-expanded');
                         }
                     }
+    
                     eventSpan.classList.add('event-expanded');
                 }
-
-            }); // End click listener
-        }); // End DOMContentLoaded
+    
+            }); 
+        });
     </script>
 </body>
 </html>

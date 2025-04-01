@@ -184,7 +184,6 @@
             max-width: 800px;
         }
 
-        /* --- Hero Animation --- */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -197,24 +196,24 @@
         }
 
         .hero h2, .hero p, .hero .cta-button {
-            opacity: 0; /* Start hidden */
-            animation: fadeInUp 0.8s ease-out forwards; /* Apply animation */
+            opacity: 0; 
+            animation: fadeInUp 0.8s ease-out forwards; 
         }
 
         .hero h2 {
-            font-size: 2.8em; /* Slightly larger */
+            font-size: 2.8em;
             margin-bottom: 0.5em;
             color: #ffffff;
-            animation-delay: 0.1s; /* Stagger animation */
+            animation-delay: 0.1s; 
         }
         .hero p {
-            font-size: 1.2em; /* Slightly larger */
+            font-size: 1.2em;
             margin-bottom: 1.5em;
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
             color: #e9ecef;
-            animation-delay: 0.3s; /* Stagger animation */
+            animation-delay: 0.3s; 
         }
         .cta-button {
             background-color: var(--theme-blue);
@@ -224,7 +223,7 @@
             font-size: 1em;
             font-weight: 600;
             display: inline-block;
-            transition: background-color 0.3s ease, transform 0.3s ease; /* Added transform transition */
+            transition: background-color 0.3s ease, transform 0.3s ease; 
             border: none;
             cursor: pointer;
         }
@@ -232,15 +231,15 @@
             background-color: var(--theme-blue-dark);
             text-decoration: none;
             color: #ffffff;
-            transform: scale(1.05); /* Slight scale on hover */
+            transform: scale(1.05); 
         }
         .hero .cta-button {
-             animation-delay: 0.5s; /* Stagger animation */
+             animation-delay: 0.5s;
         }
 
         @media (min-width: 768px) {
             .hero {
-                background-attachment: fixed; /* Re-enable parallax on larger screens */
+                background-attachment: fixed; 
                 min-height: 75vh;
                 padding: 120px 20px;
             }
@@ -253,22 +252,19 @@
            Main Content & Sections
            ========================================================================== */
         .main-content {
-            padding: 40px 0; /* Increased padding */
+            padding: 40px 0; 
         }
 
         .section-title {
-            font-size: 2.2em; /* Slightly larger */
+            font-size: 2.2em; 
             text-align: center;
-            margin-bottom: 50px; /* Increased margin */
+            margin-bottom: 50px;
             color: var(--dark-grey);
-            /* --- Section Title Animation --- */
-            opacity: 0; /* Start hidden */
+            opacity: 0; 
             animation: fadeInUp 0.8s ease-out forwards;
-            /* Adjust delay if needed, or trigger with JS on scroll */
-             animation-delay: 0.2s; /* Small delay after hero */
+             animation-delay: 0.2s;
         }
 
-        /* --- News Section --- */
         .news-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -282,15 +278,10 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             display: flex;
             flex-direction: column;
-             /* --- News Card Animation (can be added here or triggered by JS) --- */
-             /* Example: Add if you want them to animate on load */
-             /* opacity: 0; */
-             /* animation: fadeInUp 0.6s ease-out forwards; */
-             /* Add nth-child delays if animating on load */
         }
         .news-item:hover {
-            transform: translateY(-6px) scale(1.02); /* Enhanced hover */
-            box-shadow: 0 6px 18px rgba(0,0,0,0.15); /* Enhanced shadow */
+            transform: translateY(-6px) scale(1.02); 
+            box-shadow: 0 6px 18px rgba(0,0,0,0.15); 
         }
         .news-item img {
             display: block;
@@ -331,17 +322,17 @@
             margin-top: 15px;
             font-weight: 600;
             align-self: flex-start;
-            transition: transform 0.3s ease; /* Smoothness for potential hover effects */
+            transition: transform 0.3s ease; 
         }
          .read-more:hover {
-             transform: translateX(3px); /* Slight move on hover */
+             transform: translateX(3px); 
          }
 
         /* --- Quick Info Section --- */
         .quick-info {
             background-color: var(--medium-grey);
-            padding: 50px 0; /* Increased padding */
-            margin-top: 50px; /* Increased margin */
+            padding: 50px 0; 
+            margin-top: 50px; 
         }
         .info-columns {
             display: grid;
@@ -350,11 +341,10 @@
             text-align: center;
         }
         .info-column {
-            /* --- Quick Info Animation --- */
-            opacity: 0; /* Start hidden */
+            opacity: 0; 
             animation: fadeInUp 0.7s ease-out forwards;
         }
-        /* Stagger the animation */
+
         .info-column:nth-child(1) { animation-delay: 0.2s; }
         .info-column:nth-child(2) { animation-delay: 0.4s; }
         .info-column:nth-child(3) { animation-delay: 0.6s; }
@@ -362,9 +352,9 @@
         .info-column h3 {
             color: var(--theme-blue);
             margin-bottom: 15px;
-            font-size: 1.4em; /* Slightly larger */
+            font-size: 1.4em;
         }
-        .info-column .icon { /* Target the icon class */
+        .info-column .icon {
             font-size: 3em; /* Larger icon */
             margin-bottom: 15px;
             display: inline-block;
@@ -372,16 +362,12 @@
             transition: color 0.3s ease, transform 0.3s ease;
         }
         .info-column:hover .icon {
-            color: var(--theme-blue); /* Change icon color on column hover */
-             transform: scale(1.1); /* Scale icon on hover */
+            color: var(--theme-blue); 
+             transform: scale(1.1);
         }
         .info-column p {
-            min-height: 4.8em; /* Approx 3 lines, helps alignment */
+            min-height: 4.8em; 
         }
-
-        /* ==========================================================================
-           Footer
-           ========================================================================== */
 
         /* ==========================================================================
            Utility & Mobile
@@ -430,69 +416,24 @@
             .hero p { font-size: 1em; }
 
             .section-title { font-size: 1.8em; margin-bottom: 30px; }
-            .news-grid { grid-template-columns: 1fr; } /* Stack news items */
-            .info-columns { grid-template-columns: 1fr; gap: 25px;} /* Stack info columns */
-             .info-column p { min-height: auto; } /* Remove min-height on mobile */
+            .news-grid { grid-template-columns: 1fr; } 
+            .info-columns { grid-template-columns: 1fr; gap: 25px;}
+             .info-column p { min-height: auto; }
         }
-
-        /* ==========================================================================
-           Page Specific (Example - kept minimal)
-           ========================================================================== */
-        /* Styles for contact page image, etc. can remain here or separate file */
-        .contact-image { /* Example */
-            display: block; margin: 0 auto 15px auto; width: 150px; border-radius: 4px;
-        }
-        @media (min-width: 769px) {
-            .contact-image { float: left; margin: 0 20px 10px 0; }
-        }
-
     </style>
 
-    <!-- Remove this link if you keep the styles inside the <head> -->
     <link rel="stylesheet" href="css/style.css">
 
 </head>
 <body>
 
     <div id="header-placeholder">
-        <!-- Header content will be loaded here (ensure your JS does this) -->
-        <!-- Example basic header structure if not using JS loading -->
-        <!--
-        <header class="site-header">
-            <div class="container header-container">
-                <div class="logo">
-                    <a href="index.html">
-                        <img src="/images/website-logo.png" alt="Sparta Bornem Logo">
-                         Atletiekclub Sparta Bornem
-                    </a>
-                </div>
-                 <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
-                <nav class="main-nav">
-                    <ul id="primary-menu">
-                        <li><a href="index.html" class="active">Home</a></li>
-                        <li class="menu-item-has-children">
-                            <a href="#">Info</a>
-                            <ul class="submenu">
-                                <li><a href="/html/info/training.html">Training</a></li>
-                                <li><a href="#">Bestuur</a></li>
-                                <li><a href="#">Contact</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="/html/nieuws/nieuws.html">Nieuws</a></li>
-                        <li><a href="/html/wedstrijden/kalender.html">Kalender</a></li>
-                        <li><a href="/html/(Nieuwe) leden/aansluiten.html">Lid Worden</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </header>
-         -->
          <p style="text-align: center; padding: 10px; background-color: #eee;">Loading header...</p>
     </div>
 
     <main>
         <section class="hero">
             <div class="container">
-                <!-- Animated elements -->
                 <h2>Welkom bij Atletiekclub Sparta Bornem</h2>
                 <p>Dé plek voor atletiekplezier voor jong en oud in Bornem en omstreken. Ontdek onze trainingen, wedstrijden en clubactiviteiten.</p>
                 <a href="/html/(Nieuwe) leden/aansluiten.html" class="cta-button">Word nu lid!</a>
@@ -534,12 +475,8 @@
     </main>
 
     <div id="footer-placeholder">
-         <!-- Footer content will be loaded here (ensure your JS does this) -->
-         <p style="text-align: center; padding: 10px; background-color: #eee;">Loading footer...</p>
     </div>
 
-    <!-- Ensure your script.js is loaded last, especially if it handles menu toggling or content loading -->
     <script src="/js/script.js" defer></script>
-
 </body>
 </html>
