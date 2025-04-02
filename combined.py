@@ -791,115 +791,136 @@ class WebsiteEditorApp:
 
 
     def _git_publish(self):
-        """Runs git add, commit, push commands."""
+        """Runs git pull, add, commit, push commands, with basic conflict check."""
         print("[GIT PUBLISH] Button clicked.")
-
-        # --- Basic Checks ---
-        # 1. Is it likely a Git repo? (Check for .git directory)
         git_dir = os.path.join(APP_BASE_DIR, '.git')
         if not os.path.isdir(git_dir):
-            messagebox.showwarning("Git Error",
-                                   f"Could not find a '.git' directory in:\n{APP_BASE_DIR}\n\n"
-                                   "Ensure this application is running from the root of your Git repository.",
-                                   parent=self.root)
+            messagebox.showwarning("Git Error", f"Could not find a '.git' directory in:\n{APP_BASE_DIR}\n\nEnsure this application runs from your Git repository root.", parent=self.root)
             self.set_status("Publish failed: Not a Git repository root.", is_error=True)
             return
 
-        # 2. Confirmation
+        # --- Prompt for Commit Message ---
+        commit_msg = tk.simpledialog.askstring("Commit Message", "Enter a brief description of the changes:", parent=self.root)
+        if not commit_msg:
+            self.set_status("Git publish cancelled: No commit message entered.", duration_ms=3000)
+            return # User cancelled or entered empty message
+
+        # --- Confirmation ---
         if not messagebox.askyesno("Confirm Git Publish",
                                    "This will run the following commands:\n\n"
-                                   "1. git add .\n"
-                                   "2. git commit -m \"update\"\n"
-                                   "3. git push\n\n"
-                                   "Make sure you have saved all your changes in the editor first.\n"
+                                   "1. git pull (attempt to get latest changes)\n"
+                                   "2. git add .\n"
+                                   f"3. git commit -m \"{commit_msg}\"\n"
+                                   "4. git push\n\n"
                                    "Proceed?", parent=self.root):
             self.set_status("Git publish cancelled by user.", duration_ms=3000)
             return
 
-        # --- Execute Commands ---
-        self.git_publish_button.config(state=tk.DISABLED) # Disable button during operation
+        self.git_publish_button.config(state=tk.DISABLED)
         self.root.update_idletasks()
 
-        commands = [
-            {'cmd': ['git', 'add', '.'], 'desc': 'git add .'},
-            {'cmd': ['git', 'commit', '-m', 'update'], 'desc': 'git commit'},
-            {'cmd': ['git', 'push'], 'desc': 'git push'}
-        ]
-
-        success = True
-        error_details = ""
-
-        for item in commands:
-            command_list = item['cmd']
-            description = item['desc']
+        # --- Helper function to run commands ---
+        def run_git_command(command_list, description):
             self.set_status(f"Running {description}...")
             print(f"[GIT PUBLISH] Executing: {' '.join(command_list)} in {APP_BASE_DIR}")
             self.root.update_idletasks()
-
+            startupinfo = None
+            if sys.platform == "win32":
+                startupinfo = subprocess.STARTUPINFO()
+                startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+                startupinfo.wShowWindow = subprocess.SW_HIDE
             try:
-                # Use shell=True cautiously if needed, but direct args are safer
-                # Set check=False to handle non-zero exit codes manually
-                # Use startupinfo on Windows to hide console window
-                startupinfo = None
-                if sys.platform == "win32":
-                    startupinfo = subprocess.STARTUPINFO()
-                    startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
-                    startupinfo.wShowWindow = subprocess.SW_HIDE
-
                 result = subprocess.run(
-                    command_list,
-                    cwd=APP_BASE_DIR,
-                    capture_output=True,
-                    text=True,
-                    check=False, # Don't raise exception on error
-                    encoding='utf-8', # Explicitly set encoding
-                    errors='replace', # Handle potential decoding errors
-                    startupinfo=startupinfo
+                    command_list, cwd=APP_BASE_DIR, capture_output=True, text=True,
+                    check=False, encoding='utf-8', errors='replace', startupinfo=startupinfo
                 )
-
                 print(f"[GIT PUBLISH] Return Code: {result.returncode}")
                 if result.stdout: print(f"[GIT PUBLISH] STDOUT:\n{result.stdout.strip()}")
                 if result.stderr: print(f"[GIT PUBLISH] STDERR:\n{result.stderr.strip()}")
-
-                if result.returncode != 0:
-                    # Handle common "nothing to commit" case for commit command
-                    if description == 'git commit' and ("nothing to commit" in result.stdout or "nothing added to commit" in result.stderr):
-                         self.set_status(f"Git commit: Nothing to commit. Continuing...")
-                         print("[GIT PUBLISH] Commit skipped - nothing to commit.")
-                         # Continue to push, as there might be previous commits to push
-                         continue
-
-                    success = False
-                    error_details = f"Command Failed: {description}\n\n"
-                    error_details += f"Error Code: {result.returncode}\n\n"
-                    error_details += f"Output/Error:\n{result.stderr or result.stdout}" # Prefer stderr
-                    self.set_status(f"Error during {description}. Check console/popup.", is_error=True)
-                    break # Stop processing further commands
-
+                return result # Return the completed process object
             except FileNotFoundError:
-                success = False
-                error_details = f"Command Failed: {description}\n\nError: 'git' command not found.\nIs Git installed and in your system's PATH?"
-                self.set_status("Git command not found. Is Git installed/in PATH?", is_error=True)
-                break
+                print("[GIT PUBLISH] Git command not found error.")
+                return None # Indicate Git not found
             except Exception as e:
-                success = False
-                error_details = f"Command Failed: {description}\n\nUnexpected Python Error: {e}"
-                self.set_status(f"Unexpected error during {description}. Check console.", is_error=True)
-                break
+                 print(f"[GIT PUBLISH] Unexpected Python error running command: {e}")
+                 return False # Indicate other Python error
+
+
+        # --- Command Sequence ---
+        final_success = True
+        error_details = ""
+
+        # 1. Git Pull
+        pull_result = run_git_command(['git', 'pull'], 'git pull')
+        if pull_result is None: # Git not found
+            error_details = "Command Failed: git pull\n\nError: 'git' command not found.\nIs Git installed and in your system's PATH?"
+            final_success = False
+        elif pull_result is False: # Other Python error
+            error_details = "Command Failed: git pull\n\nAn unexpected Python error occurred."
+            final_success = False
+        elif pull_result.returncode != 0:
+            # Check for merge conflicts specifically
+            if "Merge conflict" in pull_result.stdout or "Merge conflict" in pull_result.stderr or "Automatic merge failed" in pull_result.stderr:
+                error_details = ("Merge Conflict Detected!\n\n"
+                                 "'git pull' resulted in merge conflicts.\n"
+                                 "You need to resolve these conflicts manually outside this application "
+                                 "(using standard Git tools or your code editor) before you can commit and push.\n\n"
+                                 "Publish process stopped.")
+                print("[GIT PUBLISH] Merge conflict detected during pull. Aborting publish.")
+            else:
+                # Other pull error
+                 error_details = f"Command Failed: git pull\n\nError Code: {pull_result.returncode}\n\n{pull_result.stderr or pull_result.stdout}"
+            final_success = False
+        else:
+             print("[GIT PUBLISH] git pull successful or up-to-date.")
+             self.set_status("Pull successful. Proceeding...")
+             self.root.update_idletasks()
+
+
+        # 2. Git Add (only if pull succeeded)
+        if final_success:
+            add_result = run_git_command(['git', 'add', '.'], 'git add .')
+            if add_result is None or add_result is False or add_result.returncode != 0:
+                 error_details = f"Command Failed: git add .\n\n{add_result.stderr or add_result.stdout if isinstance(add_result, subprocess.CompletedProcess) else 'Git not found or Python error'}"
+                 final_success = False
+
+        # 3. Git Commit (only if pull and add succeeded)
+        if final_success:
+            commit_result = run_git_command(['git', 'commit', '-m', commit_msg], f'git commit -m "{commit_msg}"')
+            if commit_result is None or commit_result is False:
+                 error_details = "Command Failed: git commit\n\nGit not found or Python error"
+                 final_success = False
+            elif commit_result.returncode != 0:
+                 # Allow "nothing to commit"
+                 if "nothing to commit" in commit_result.stdout or "nothing added to commit" in commit_result.stderr or "no changes added to commit" in commit_result.stdout:
+                      print("[GIT PUBLISH] Commit skipped - nothing to commit.")
+                      self.set_status("Nothing new to commit. Checking push...")
+                      self.root.update_idletasks()
+                      # Don't set final_success to False, proceed to push
+                 else:
+                      error_details = f"Command Failed: git commit\n\nError Code: {commit_result.returncode}\n\n{commit_result.stderr or commit_result.stdout}"
+                      final_success = False
+
+        # 4. Git Push (only if pull, add, commit succeeded or commit was skipped)
+        if final_success:
+             push_result = run_git_command(['git', 'push'], 'git push')
+             if push_result is None or push_result is False or push_result.returncode != 0:
+                  error_details = f"Command Failed: git push\n\nError Code: {push_result.returncode if isinstance(push_result, subprocess.CompletedProcess) else 'N/A'}\n\n{push_result.stderr or push_result.stdout if isinstance(push_result, subprocess.CompletedProcess) else 'Git not found or Python error'}"
+                  # Check for specific non-fast-forward error (means pull needed)
+                  if isinstance(push_result, subprocess.CompletedProcess) and 'rejected' in push_result.stderr and ('non-fast-forward' in push_result.stderr or 'fetch first' in push_result.stderr):
+                      error_details += "\n\nHint: Remote changes exist. Try 'git pull' manually outside the app, resolve conflicts if any, then try publishing again."
+                  final_success = False
+
 
         # --- Final Feedback ---
         self.git_publish_button.config(state=tk.NORMAL) # Re-enable button
 
-        if success:
-            messagebox.showinfo("Git Publish Successful",
-                                "Git commands executed successfully:\n\n"
-                                "- git add .\n"
-                                "- git commit -m \"update\" (or skipped if nothing to commit)\n"
-                                "- git push", parent=self.root)
+        if final_success:
+            messagebox.showinfo("Git Publish Successful", "Changes successfully pulled (if any), added, committed, and pushed.", parent=self.root)
             self.set_status("Git publish completed successfully.", duration_ms=5000)
         else:
             messagebox.showerror("Git Publish Failed", error_details, parent=self.root)
-            # Status already set during the loop
+            self.set_status("Git publish failed. See error popup.", is_error=True)
 
     def set_status(self, message, is_error=False, duration_ms=0):
         """Sets the status bar message, optionally auto-clearing after a duration."""
