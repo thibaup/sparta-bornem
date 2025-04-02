@@ -859,10 +859,9 @@ class WebsiteEditorApp:
         self.news_text_full_content = scrolledtext.ScrolledText(form_frame, width=60, height=8, wrap=tk.WORD, relief=tk.SUNKEN, borderwidth=1, font=(self.default_font_family, self.default_font_size))
         self.news_text_full_content.grid(column=1, row=row_index, columnspan=2, sticky=(tk.W, tk.E, tk.N, tk.S), padx=5, pady=2)
         row_index += 1
-        ttk.Label(form_frame, text="Basis HTML (<b>, <i>), links, enters (<br>) OK.", style="Desc.TLabel").grid(column=1, row=row_index, columnspan=2, sticky=tk.W, padx=5, pady=(0, 5))
+        ttk.Label(form_frame, text="", style="Desc.TLabel").grid(column=1, row=row_index, columnspan=2, sticky=tk.W, padx=5, pady=(0, 5))
         row_index += 1
 
-        # Form Buttons Frame
         news_button_frame = ttk.Frame(form_frame)
         news_button_frame.grid(column=0, row=row_index, columnspan=3, pady=10, sticky=tk.E)
         self.news_button_add = ttk.Button(news_button_frame, text="Voeg Artikel Toe", command=self._news_add_article)
@@ -870,8 +869,7 @@ class WebsiteEditorApp:
         self.news_button_clear = ttk.Button(news_button_frame, text="Wis Formulier", command=self._news_clear_form)
         self.news_button_clear.pack(side=tk.LEFT, padx=5)
 
-        # Add form frame to the top pane of the PanedWindow
-        pw.add(form_frame, weight=0) # Give less weight initially, let list expand
+        pw.add(form_frame, weight=0)
 
         # --- Bottom Pane: Existing Articles List ---
         list_frame = ttk.Labelframe(pw, text=" Existing Articles ", padding="10") # Use Labelframe
