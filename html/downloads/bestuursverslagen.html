@@ -1,103 +1,268 @@
 <!DOCTYPE html>
 <html lang="nl-NL">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bestuursverslagen - Atletiekclub Sparta Bornem</title>
-    <link rel="icon" type="image/png" href="/images/website-logo.png"> <!-- Update path -->
+ <head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>
+   Bestuursverslagen - Atletiekclub Sparta Bornem
+  </title>
+  <link href="/images/website-logo.png" rel="icon" type="image/png">
+  <!-- Update path -->
+  <style>
+   /* --- Basic Reset & Body Styling --- */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4; }
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
+    a { color: #1774b4; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    img { max-width: 100%; height: auto; }
+    h1, h2, h3, h4 { margin-bottom: 0.8em; color: #1a1a1a; font-weight: 600; }
+    p { margin-bottom: 1em; }
+    ul { margin-bottom: 1em; margin-left: 20px; }
 
-    <style>
-        /* --- Basic Reset & Body Styling --- */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4; }
-        .container { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
-        a { color: #1774b4; text-decoration: none; }
-        a:hover { text-decoration: underline; }
-        img { max-width: 100%; height: auto; }
-        h1, h2, h3, h4 { margin-bottom: 0.8em; color: #1a1a1a; font-weight: 600; }
-        p { margin-bottom: 1em; }
-        ul { margin-bottom: 1em; margin-left: 20px; }
-
-        /* --- Main Content Area --- */
-        .main-content { padding: 40px 0; }
-        .main-content h1 { font-size: 2.2em; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        .main-content h2 { font-size: 1.8em; margin-top: 30px; margin-bottom: 15px; color: #1774b4; }
-        .report-list li { margin-bottom: 0.5em; }
-
-    </style>
-
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
-    <div id="header-placeholder">
-        <!-- Header will be loaded here by JavaScript -->
-        <p>Loading header...</p> <!-- Optional loading message -->
-    </div>
-
-    <main class="main-content container">
-        <h1>Bestuursverslagen</h1>
-
-        <h2>Verslagen 2023</h2>
-        <ul class="report-list">
-            <!-- Update href paths to point to your local '/docs' folder -->
-            <li><a href="/docs/bestuursvergadering/bestuursvergadering-van-vrijdag-6-januari-2023.docx.pdf" target="_blank">6 januari 2023</a></li>
-            <li><a href="/docs/bestuursvergadering/bestuursvergadering-van-woensdag-8-februari.pdf" target="_blank">8 februari 2023</a></li>
-            <li><a href="/docs/bestuursvergadering/Bestuur-2023-04.pdf" target="_blank">7 april 2023</a></li>
-            <li><a href="/docs/bestuursvergadering/Bestuur-2023-05.pdf" target="_blank">5 mei 2023</a></li>
-            <li><a href="/docs/bestuursvergadering/Bestuur-2023-06.pdf" target="_blank">2 juni 2023</a></li>
-            <li><a href="/docs/bestuursvergadering/Bestuur-2023-07.pdf" target="_blank">7 juli 2023</a></li>
-            <li><a href="/docs/bestuursvergadering/Bestuur-2023-08.pdf" target="_blank">4 augustus 2023</a></li>
-            <li><a href="/docs/bestuursvergadering/Bestuur-2023-09.pdf" target="_blank">1 september 2023</a></li>
-        </ul>
-
-         <h2>Verslagen 2022</h2>
-        <ul class="report-list">
-             <li><a href="/docs/bestuursvergadering/bestuursvergadering-20220107.pdf" target="_blank">7 januari 2022</a></li>
-             <li><a href="/docs/bestuursvergadering/bestuursvergadering-20220204.pdf" target="_blank">4 februari 2022</a></li>
-             <li><a href="/docs/bestuursvergadering/bestuursvergadering-20220304.pdf" target="_blank">4 maart 2022</a></li>
-             <li><a href="/docs/bestuursvergadering/Bestuursvergadering-20220401.pdf" target="_blank">1 april 2022</a></li>
-             <li><a href="/docs/bestuursvergadering/bestuursvergadering-20220506.pdf" target="_blank">6 mei 2022</a></li>
-             <li><a href="/docs/bestuursvergadering/bestuursvergadering-van-vrijdag-1-juli.pdf" target="_blank">1 juli 2022</a></li>
-             <li><a href="/docs/bestuursvergadering/bestuursvergadering-van-vrijdag-5-augustus.pdf" target="_blank">5 augustus 2022</a></li>
-             <li><a href="/docs/bestuursvergadering/bestuursvergadering-van-vrijdag-7-oktober.pdf" target="_blank">7 oktober 2022</a></li>
-             <li><a href="/docs/bestuursvergadering/bestuursvergadering-van-vrijdag-4-november.pdf" target="_blank">4 november 2022</a></li>
-             <li><a href="/docs/bestuursvergadering/bestuursvergadering-van-vrijdag-2-december.pdf" target="_blank">2 december 2022</a></li>
-        </ul>
-
-        <h2>Verslagen 2021</h2>
-        <ul class="report-list">
-             <li><a href="/docs/bestuursvergadering/20210108-bestuursvergadering.pdf" target="_blank">8 januari 2021</a></li>
-             <li><a href="/docs/bestuursvergadering/20210205-bestuursvergadering.pdf" target="_blank">5 februari 2021</a></li>
-             <li><a href="/docs/bestuursvergadering/20210305-bestuursvergadering.pdf" target="_blank">5 maart 2021</a></li>
-             <li><a href="/docs/bestuursvergadering/bestuursvergadering-20210409.pdf" target="_blank">9 april 2021</a></li>
-             <li><a href="/docs/bestuursvergadering/bestuursvergadering-20210507.pdf" target="_blank">7 mei 2021</a></li>
-             <li><a href="/docs/bestuursvergadering/bestuursvergadering-20210604.pdf" target="_blank">4 juni 2021 (gezamenlijk bestuur/trainers)</a></li>
-             <li><a href="/docs/bestuursvergadering/20210709-bestuursvergadering.pdf" target="_blank">9 juli 2021</a></li>
-             <li><a href="/docs/bestuursvergadering/bestuursvergadering-van-vrijdag-10-september.pdf" target="_blank">10 september 2021</a></li>
-             <li><a href="/docs/bestuursvergadering/bestuursvergadering-van-vrijdag-5-november.pdf" target="_blank">5 november 2021</a></li>
-        </ul>
-
-         <h2>Verslagen 2020</h2>
-        <ul class="report-list">
-            <li><a href="/docs/bestuursvergadering/bestuursvergadering-20200103.pdf" target="_blank">3 januari 2020</a></li>
-            <li><a href="/docs/bestuursvergadering/Bestuursvergadering-20200131.pdf" target="_blank">31 januari 2020</a></li>
-            <li><a href="/docs/bestuursvergadering/bestuursvergadering-van-vrijdag-3-april.pdf" target="_blank">3 april 2020</a></li>
-            <li><a href="/docs/bestuursvergadering/bestuursvergadering-20200501.pdf" target="_blank">1 mei 2020</a></li>
-            <li><a href="/docs/bestuursvergadering/bestuursvergadering-20200605.pdf" target="_blank">5 juni 2020</a></li>
-            <li><a href="/docs/bestuursvergadering/bestuursvergadering-20200703.pdf" target="_blank">3 juli 2020 (gezamenlijk bestuur/trainers)</a></li>
-            <li><a href="/docs/bestuursvergadering/bestuursvergadering-20200807.pdf" target="_blank">7 augustus 2020</a></li>
-            <li><a href="/docs/bestuursvergadering/bestuursvergadering-20200904.pdf" target="_blank">4 september 2020</a></li>
-            <li><a href="/docs/bestuursvergadering/bestuursvergadering-20201002.pdf" target="_blank">2 oktober 2020</a></li>
-            <li><a href="/docs/bestuursvergadering/20201104-bestuursvergadering.pdf" target="_blank">6 november 2020</a></li> <!-- Date mismatch in original link, assuming 6th -->
-            <li><a href="/docs/bestuursvergadering/20201204-bestuursvergadering.pdf" target="_blank">4 december 2020</a></li>
-        </ul>
-
-    </main>
-
-    <div id="footer-placeholder">
-        <p>Loading footer...</p>
-    </div>
-
-    <script src="/js/script.js" defer></script>
-</body>
+    /* --- Main Content Area --- */
+    .main-content { padding: 40px 0; }
+    .main-content h1 { font-size: 2.2em; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+    .main-content h2 { font-size: 1.8em; margin-top: 30px; margin-bottom: 15px; color: #1774b4; }
+    .report-list li { margin-bottom: 0.5em; }
+  </style>
+  <link href="/css/style.css" rel="stylesheet">
+ </head>
+ <body>
+  <div id="header-placeholder">
+   <!-- Header will be loaded here by JavaScript -->
+   <p>
+    Loading header...
+   </p>
+   <!-- Optional loading message -->
+  </div>
+  <main class="main-content container">
+   <h1>
+    Bestuursverslagen
+   </h1>
+   <!-- ********************************************** -->
+   <!-- ** START: Reports Section Wrapper ** -->
+   <div id="reports-section">
+    <h2>
+     Verslagen 2023
+    </h2>
+    <ul class="report-list">
+     <li>
+      <a href="/docs/bestuursvergadering/bestuursvergadering-van-vrijdag-6-januari-2023.docx.pdf" target="_blank">
+       6 januari 2023
+      </a>
+     </li>
+     <li>
+      <a href="/docs/bestuursvergadering/bestuursvergadering-van-woensdag-8-februari.pdf" target="_blank">
+       8 februari 2023
+      </a>
+     </li>
+     <li>
+      <a href="/docs/bestuursvergadering/Bestuur-2023-04.pdf" target="_blank">
+       7 april 2023
+      </a>
+     </li>
+     <li>
+      <a href="/docs/bestuursvergadering/Bestuur-2023-05.pdf" target="_blank">
+       5 mei 2023
+      </a>
+     </li>
+     <li>
+      <a href="/docs/bestuursvergadering/Bestuur-2023-06.pdf" target="_blank">
+       2 juni 2023
+      </a>
+     </li>
+     <li>
+      <a href="/docs/bestuursvergadering/Bestuur-2023-07.pdf" target="_blank">
+       7 juli 2023
+      </a>
+     </li>
+     <li>
+      <a href="/docs/bestuursvergadering/Bestuur-2023-08.pdf" target="_blank">
+       4 augustus 2023
+      </a>
+     </li>
+     <li>
+      <a href="/docs/bestuursvergadering/Bestuur-2023-09.pdf" target="_blank">
+       1 september 2023
+      </a>
+     </li>
+    </ul>
+    <h2>
+     Verslagen 2022
+    </h2>
+    <ul class="report-list">
+     <li>
+      <a href="/docs/bestuursvergadering/bestuursvergadering-20220107.pdf" target="_blank">
+       7 januari 2022
+      </a>
+     </li>
+     <li>
+      <a href="/docs/bestuursvergadering/bestuursvergadering-20220204.pdf" target="_blank">
+       4 februari 2022
+      </a>
+     </li>
+     <li>
+      <a href="/docs/bestuursvergadering/bestuursvergadering-20220304.pdf" target="_blank">
+       4 maart 2022
+      </a>
+     </li>
+     <li>
+      <a href="/docs/bestuursvergadering/Bestuursvergadering-20220401.pdf" target="_blank">
+       1 april 2022
+      </a>
+     </li>
+     <li>
+      <a href="/docs/bestuursvergadering/bestuursvergadering-20220506.pdf" target="_blank">
+       6 mei 2022
+      </a>
+     </li>
+     <li>
+      <a href="/docs/bestuursvergadering/bestuursvergadering-van-vrijdag-1-juli.pdf" target="_blank">
+       1 juli 2022
+      </a>
+     </li>
+     <li>
+      <a href="/docs/bestuursvergadering/bestuursvergadering-van-vrijdag-5-augustus.pdf" target="_blank">
+       5 augustus 2022
+      </a>
+     </li>
+     <li>
+      <a href="/docs/bestuursvergadering/bestuursvergadering-van-vrijdag-7-oktober.pdf" target="_blank">
+       7 oktober 2022
+      </a>
+     </li>
+     <li>
+      <a href="/docs/bestuursvergadering/bestuursvergadering-van-vrijdag-4-november.pdf" target="_blank">
+       4 november 2022
+      </a>
+     </li>
+     <li>
+      <a href="/docs/bestuursvergadering/bestuursvergadering-van-vrijdag-2-december.pdf" target="_blank">
+       2 december 2022
+      </a>
+     </li>
+    </ul>
+    <h2>
+     Verslagen 2021
+    </h2>
+    <ul class="report-list">
+     <li>
+      <a href="/docs/bestuursvergadering/20210108-bestuursvergadering.pdf" target="_blank">
+       8 januari 2021
+      </a>
+     </li>
+     <li>
+      <a href="/docs/bestuursvergadering/20210205-bestuursvergadering.pdf" target="_blank">
+       5 februari 2021
+      </a>
+     </li>
+     <li>
+      <a href="/docs/bestuursvergadering/20210305-bestuursvergadering.pdf" target="_blank">
+       5 maart 2021
+      </a>
+     </li>
+     <li>
+      <a href="/docs/bestuursvergadering/bestuursvergadering-20210409.pdf" target="_blank">
+       9 april 2021
+      </a>
+     </li>
+     <li>
+      <a href="/docs/bestuursvergadering/bestuursvergadering-20210507.pdf" target="_blank">
+       7 mei 2021
+      </a>
+     </li>
+     <li>
+      <a href="/docs/bestuursvergadering/bestuursvergadering-20210604.pdf" target="_blank">
+       4 juni 2021 (gezamenlijk bestuur/trainers)
+      </a>
+     </li>
+     <li>
+      <a href="/docs/bestuursvergadering/20210709-bestuursvergadering.pdf" target="_blank">
+       9 juli 2021
+      </a>
+     </li>
+     <li>
+      <a href="/docs/bestuursvergadering/bestuursvergadering-van-vrijdag-10-september.pdf" target="_blank">
+       10 september 2021
+      </a>
+     </li>
+     <li>
+      <a href="/docs/bestuursvergadering/bestuursvergadering-van-vrijdag-5-november.pdf" target="_blank">
+       5 november 2021
+      </a>
+     </li>
+    </ul>
+    <h2>
+     Verslagen 2020
+    </h2>
+    <ul class="report-list">
+     <li>
+      <a href="/docs/bestuursvergadering/bestuursvergadering-20200103.pdf" target="_blank">
+       3 januari 2020
+      </a>
+     </li>
+     <li>
+      <a href="/docs/bestuursvergadering/Bestuursvergadering-20200131.pdf" target="_blank">
+       31 januari 2020
+      </a>
+     </li>
+     <li>
+      <a href="/docs/bestuursvergadering/bestuursvergadering-van-vrijdag-3-april.pdf" target="_blank">
+       3 april 2020
+      </a>
+     </li>
+     <li>
+      <a href="/docs/bestuursvergadering/bestuursvergadering-20200501.pdf" target="_blank">
+       1 mei 2020
+      </a>
+     </li>
+     <li>
+      <a href="/docs/bestuursvergadering/bestuursvergadering-20200605.pdf" target="_blank">
+       5 juni 2020
+      </a>
+     </li>
+     <li>
+      <a href="/docs/bestuursvergadering/bestuursvergadering-20200703.pdf" target="_blank">
+       3 juli 2020 (gezamenlijk bestuur/trainers)
+      </a>
+     </li>
+     <li>
+      <a href="/docs/bestuursvergadering/bestuursvergadering-20200807.pdf" target="_blank">
+       7 augustus 2020
+      </a>
+     </li>
+     <li>
+      <a href="/docs/bestuursvergadering/bestuursvergadering-20200904.pdf" target="_blank">
+       4 september 2020
+      </a>
+     </li>
+     <li>
+      <a href="/docs/bestuursvergadering/bestuursvergadering-20201002.pdf" target="_blank">
+       2 oktober 2020
+      </a>
+     </li>
+     <li>
+      <a href="/docs/bestuursvergadering/20201104-bestuursvergadering.pdf" target="_blank">
+       6 november 2020
+      </a>
+     </li>
+     <li>
+      <a href="/docs/bestuursvergadering/20201204-bestuursvergadering.pdf" target="_blank">
+       4 december 2020
+      </a>
+     </li>
+    </ul>
+   </div>
+   <!-- ** END: Reports Section Wrapper ** -->
+   <!-- ******************************************** -->
+  </main>
+  <div id="footer-placeholder">
+   <p>
+    Loading footer...
+   </p>
+  </div>
+  <script defer src="/js/script.js">
+  </script>
+ </body>
 </html>
