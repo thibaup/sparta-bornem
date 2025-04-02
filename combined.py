@@ -772,18 +772,17 @@ class WebsiteEditorApp:
         self._create_records_tab(self.records_tab_frame)
         self._create_calendar_tab(self.calendar_tab_frame)
         self._create_reports_tab(self.reports_tab_frame)
-        self._create_text_editor_tab(self.text_editor_tab_frame) # Call new method
+        self._create_text_editor_tab(self.text_editor_tab_frame)
 
         bottom_bar_frame = ttk.Frame(root)
         bottom_bar_frame.pack(side=tk.BOTTOM, fill=tk.X, padx=10, pady=(0, 5))
 
         self.status_var = tk.StringVar()
         self.status_label = ttk.Label(bottom_bar_frame, textvariable=self.status_var, relief=tk.SUNKEN, anchor=tk.W)
-        self.status_label.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=(0, 10), pady=2) # Pack left, expand
+        self.status_label.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=(0, 10), pady=2)
 
-        # --- Add Git Publish Button ---
         self.git_publish_button = ttk.Button(bottom_bar_frame, text="Publish Changes (Git)", command=self._git_publish)
-        self.git_publish_button.pack(side=tk.RIGHT, pady=2) # Pack right
+        self.git_publish_button.pack(side=tk.RIGHT, pady=2) 
 
         self.set_status("Application started. Select a tab.")
 
