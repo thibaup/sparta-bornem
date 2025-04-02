@@ -11,14 +11,15 @@ import datetime
 import json
 import shutil
 import pathlib # For safer path manipulation, especially relative paths
+import subprocess # <-- IMPORT SUBPROCESS
 
 try:
     from bs4 import BeautifulSoup, Tag, NavigableString, Comment # Added NavigableString, Comment
 except ImportError:
     print("\nERROR: BeautifulSoup4 library not found (needed for Records/Calendar/Reports/Text Editor).")
     print("Please install it using: pip install beautifulsoup4")
-    BeautifulSoup = None # Define as None so later checks fail gracefully
-    Tag = None # Define Tag as None as well
+    BeautifulSoup = None
+    Tag = None
     NavigableString = None
     Comment = None
 
@@ -773,9 +774,133 @@ class WebsiteEditorApp:
         self._create_reports_tab(self.reports_tab_frame)
         self._create_text_editor_tab(self.text_editor_tab_frame) # Call new method
 
+        bottom_bar_frame = ttk.Frame(root)
+        bottom_bar_frame.pack(side=tk.BOTTOM, fill=tk.X, padx=10, pady=(0, 5))
+
+        self.status_var = tk.StringVar()
+        self.status_label = ttk.Label(bottom_bar_frame, textvariable=self.status_var, relief=tk.SUNKEN, anchor=tk.W)
+        self.status_label.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=(0, 10), pady=2) # Pack left, expand
+
+        # --- Add Git Publish Button ---
+        self.git_publish_button = ttk.Button(bottom_bar_frame, text="Publish Changes (Git)", command=self._git_publish)
+        self.git_publish_button.pack(side=tk.RIGHT, pady=2) # Pack right
+
+        self.set_status("Application started. Select a tab.")
+
         print("[GUI INFO] Main application initialized.")
 
-    # --- Shared Status Method ---
+
+    def _git_publish(self):
+        """Runs git add, commit, push commands."""
+        print("[GIT PUBLISH] Button clicked.")
+
+        # --- Basic Checks ---
+        # 1. Is it likely a Git repo? (Check for .git directory)
+        git_dir = os.path.join(APP_BASE_DIR, '.git')
+        if not os.path.isdir(git_dir):
+            messagebox.showwarning("Git Error",
+                                   f"Could not find a '.git' directory in:\n{APP_BASE_DIR}\n\n"
+                                   "Ensure this application is running from the root of your Git repository.",
+                                   parent=self.root)
+            self.set_status("Publish failed: Not a Git repository root.", is_error=True)
+            return
+
+        # 2. Confirmation
+        if not messagebox.askyesno("Confirm Git Publish",
+                                   "This will run the following commands:\n\n"
+                                   "1. git add .\n"
+                                   "2. git commit -m \"update\"\n"
+                                   "3. git push\n\n"
+                                   "Make sure you have saved all your changes in the editor first.\n"
+                                   "Proceed?", parent=self.root):
+            self.set_status("Git publish cancelled by user.", duration_ms=3000)
+            return
+
+        # --- Execute Commands ---
+        self.git_publish_button.config(state=tk.DISABLED) # Disable button during operation
+        self.root.update_idletasks()
+
+        commands = [
+            {'cmd': ['git', 'add', '.'], 'desc': 'git add .'},
+            {'cmd': ['git', 'commit', '-m', 'update'], 'desc': 'git commit'},
+            {'cmd': ['git', 'push'], 'desc': 'git push'}
+        ]
+
+        success = True
+        error_details = ""
+
+        for item in commands:
+            command_list = item['cmd']
+            description = item['desc']
+            self.set_status(f"Running {description}...")
+            print(f"[GIT PUBLISH] Executing: {' '.join(command_list)} in {APP_BASE_DIR}")
+            self.root.update_idletasks()
+
+            try:
+                # Use shell=True cautiously if needed, but direct args are safer
+                # Set check=False to handle non-zero exit codes manually
+                # Use startupinfo on Windows to hide console window
+                startupinfo = None
+                if sys.platform == "win32":
+                    startupinfo = subprocess.STARTUPINFO()
+                    startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+                    startupinfo.wShowWindow = subprocess.SW_HIDE
+
+                result = subprocess.run(
+                    command_list,
+                    cwd=APP_BASE_DIR,
+                    capture_output=True,
+                    text=True,
+                    check=False, # Don't raise exception on error
+                    encoding='utf-8', # Explicitly set encoding
+                    errors='replace', # Handle potential decoding errors
+                    startupinfo=startupinfo
+                )
+
+                print(f"[GIT PUBLISH] Return Code: {result.returncode}")
+                if result.stdout: print(f"[GIT PUBLISH] STDOUT:\n{result.stdout.strip()}")
+                if result.stderr: print(f"[GIT PUBLISH] STDERR:\n{result.stderr.strip()}")
+
+                if result.returncode != 0:
+                    # Handle common "nothing to commit" case for commit command
+                    if description == 'git commit' and ("nothing to commit" in result.stdout or "nothing added to commit" in result.stderr):
+                         self.set_status(f"Git commit: Nothing to commit. Continuing...")
+                         print("[GIT PUBLISH] Commit skipped - nothing to commit.")
+                         # Continue to push, as there might be previous commits to push
+                         continue
+
+                    success = False
+                    error_details = f"Command Failed: {description}\n\n"
+                    error_details += f"Error Code: {result.returncode}\n\n"
+                    error_details += f"Output/Error:\n{result.stderr or result.stdout}" # Prefer stderr
+                    self.set_status(f"Error during {description}. Check console/popup.", is_error=True)
+                    break # Stop processing further commands
+
+            except FileNotFoundError:
+                success = False
+                error_details = f"Command Failed: {description}\n\nError: 'git' command not found.\nIs Git installed and in your system's PATH?"
+                self.set_status("Git command not found. Is Git installed/in PATH?", is_error=True)
+                break
+            except Exception as e:
+                success = False
+                error_details = f"Command Failed: {description}\n\nUnexpected Python Error: {e}"
+                self.set_status(f"Unexpected error during {description}. Check console.", is_error=True)
+                break
+
+        # --- Final Feedback ---
+        self.git_publish_button.config(state=tk.NORMAL) # Re-enable button
+
+        if success:
+            messagebox.showinfo("Git Publish Successful",
+                                "Git commands executed successfully:\n\n"
+                                "- git add .\n"
+                                "- git commit -m \"update\" (or skipped if nothing to commit)\n"
+                                "- git push", parent=self.root)
+            self.set_status("Git publish completed successfully.", duration_ms=5000)
+        else:
+            messagebox.showerror("Git Publish Failed", error_details, parent=self.root)
+            # Status already set during the loop
+
     def set_status(self, message, is_error=False, duration_ms=0):
         """Sets the status bar message, optionally auto-clearing after a duration."""
         # Always log the message
@@ -3183,9 +3308,8 @@ if __name__ == "__main__":
     else:
         print("\n[Check 3] Pre-flight checks passed.")
 
-    # --- Start GUI ---
     print("\n--- Initializing GUI ---")
-    root = None # Initialize root to None
+    root = None 
     try:
         root = tk.Tk()
         app = WebsiteEditorApp(root)
