@@ -31,8 +31,8 @@
         }
 
         main {
-            flex-grow: 1; 
-            padding-bottom: 60px; 
+            flex-grow: 1;
+            padding-bottom: 60px; /* Ensure space above footer */
         }
 
         .container {
@@ -74,278 +74,94 @@
         p { margin-bottom: 1em; }
         ul { margin-bottom: 1em; margin-left: 20px; }
 
+        /* --- Navigation Submenu Styles (Keep as is) --- */
         .main-nav .submenu {
-            display: none;
-            position: absolute;
-            background-color: #fff;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            list-style: none;
-            padding: 10px 0;
-            margin-top: 5px;
-            min-width: 220px;
-            left: 0;
-            z-index: 1001;
-            border-radius: 4px;
-            opacity: 0;
-            visibility: hidden;
+            display: none; position: absolute; background-color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); list-style: none;
+            padding: 10px 0; margin-top: 5px; min-width: 220px; left: 0;
+            z-index: 1001; border-radius: 4px; opacity: 0; visibility: hidden;
             transform: translateY(10px);
             transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
         }
-        .main-nav .submenu a.active {
-            color: var(--theme-blue);
-            font-weight: 600;
-            border-bottom-color: transparent !important;
-        }
+        .main-nav .submenu a.active { color: var(--theme-blue); font-weight: 600; border-bottom-color: transparent !important; }
         .main-nav .submenu li { margin: 0; position: relative; }
-        .main-nav .submenu a {
-            display: block;
-            padding: 8px 15px;
-            color: var(--dark-grey);
-            text-transform: none;
-            font-weight: 400;
-            border-bottom: none;
-            white-space: nowrap;
-            transition: background-color 0.2s ease, color 0.2s ease;
-        }
-        .main-nav .submenu a:hover {
-            background-color: #e8f1f8;
-            color: var(--theme-blue-dark);
-        }
-        .main-nav .submenu .submenu {
-            top: -10px;
-            left: 100%;
-            margin-top: 0;
-            margin-left: 1px;
-            min-width: 200px;
-        }
-        .main-nav li:hover > .submenu {
-            display: block; 
-            opacity: 1;
-            visibility: visible; 
-            transform: translateY(0); 
-        }
+        .main-nav .submenu a { display: block; padding: 8px 15px; color: var(--dark-grey); text-transform: none; font-weight: 400; border-bottom: none; white-space: nowrap; transition: background-color 0.2s ease, color 0.2s ease; }
+        .main-nav .submenu a:hover { background-color: #e8f1f8; color: var(--theme-blue-dark); }
+        .main-nav .submenu .submenu { top: -10px; left: 100%; margin-top: 0; margin-left: 1px; min-width: 200px; }
+        .main-nav li:hover > .submenu { display: block; opacity: 1; visibility: visible; transform: translateY(0); }
+        /* --- End Navigation Submenu Styles --- */
 
+
+        /* --- Hero Section Styles (Keep as is) --- */
         .hero {
             background-image: url('/images/pagina/474183398_1108689364383810_5813522470262771257_n.jpg');
-            background-size: cover;
-            background-position: center center;
-            background-repeat: no-repeat;
-            background-attachment: scroll;
-            color: #ffffff;
-            padding: 100px 20px;
-            min-height: 50vh;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            z-index: 1;
+            background-size: cover; background-position: center center; background-repeat: no-repeat;
+            background-attachment: scroll; color: #ffffff; padding: 100px 20px; min-height: 50vh;
+            text-align: center; display: flex; align-items: center; justify-content: center; position: relative; z-index: 1;
         }
-
-        .hero::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5); 
-            z-index: 2;
-        }
-
-        .hero .container {
-            position: relative;
-            z-index: 3;
-            max-width: 800px;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero h2, .hero p, .hero .cta-button {
-            opacity: 0; 
-            animation: fadeInUp 0.8s ease-out forwards; 
-        }
-
-        .hero h2 {
-            font-size: 2.8em;
-            margin-bottom: 0.5em;
-            color: #ffffff;
-            animation-delay: 0.1s; 
-        }
-        .hero p {
-            font-size: 1.2em;
-            margin-bottom: 1.5em;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            color: #e9ecef;
-            animation-delay: 0.3s; 
-        }
+        .hero::before { content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 2; }
+        .hero .container { position: relative; z-index: 3; max-width: 800px; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .hero h2, .hero p, .hero .cta-button { opacity: 0; animation: fadeInUp 0.8s ease-out forwards; }
+        .hero h2 { font-size: 2.8em; margin-bottom: 0.5em; color: #ffffff; animation-delay: 0.1s; }
+        .hero p { font-size: 1.2em; margin-bottom: 1.5em; max-width: 700px; margin-left: auto; margin-right: auto; color: #e9ecef; animation-delay: 0.3s; }
         .cta-button {
-            background-color: var(--theme-blue);
-            color: #ffffff;
-            padding: 12px 25px;
-            border-radius: 5px;
-            font-size: 1em;
-            font-weight: 600;
-            display: inline-block;
-            transition: background-color 0.3s ease, transform 0.3s ease; 
-            border: none;
-            cursor: pointer;
+            background-color: var(--theme-blue); color: #ffffff; padding: 12px 25px; border-radius: 5px;
+            font-size: 1em; font-weight: 600; display: inline-block;
+            transition: background-color 0.3s ease, transform 0.3s ease; border: none; cursor: pointer;
         }
-        .cta-button:hover {
-            background-color: var(--theme-blue-dark);
-            text-decoration: none;
-            color: #ffffff;
-            transform: scale(1.05); 
-        }
-        .hero .cta-button {
-             animation-delay: 0.5s;
-        }
-
+        .cta-button:hover { background-color: var(--theme-blue-dark); text-decoration: none; color: #ffffff; transform: scale(1.05); }
+        .hero .cta-button { animation-delay: 0.5s; }
         @media (min-width: 768px) {
-            .hero {
-                background-attachment: fixed; 
-                min-height: 75vh;
-                padding: 120px 20px;
-            }
+            .hero { background-attachment: fixed; min-height: 75vh; padding: 120px 20px; }
             .hero h2 { font-size: 3.5em; }
             .hero p { font-size: 1.3em; }
         }
+        /* --- End Hero Section Styles --- */
 
 
-        .main-content {
-            padding: 40px 0; 
-        }
-
-        .section-title {
-            font-size: 2.2em; 
-            text-align: center;
-            margin-bottom: 50px;
-            color: var(--dark-grey);
-            opacity: 0; 
-            animation: fadeInUp 0.8s ease-out forwards;
-             animation-delay: 0.2s;
-        }
-
-        .news-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        .news-item {
-            background-color: #ffffff;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-        }
-        .news-item:hover {
-            transform: translateY(-6px) scale(1.02); 
-            box-shadow: 0 6px 18px rgba(0,0,0,0.15); 
-        }
-        .news-item img {
-            display: block;
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            background-color: #eee;
-            flex-shrink: 0;
-        }
-        .news-content {
-            padding: 20px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        .news-content h3 {
-            font-size: 1.3em;
-            margin-top: 0;
-        }
-        .news-content h3 a {
-            color: #1a1a1a;
-            transition: color 0.2s ease;
-        }
-        .news-content h3 a:hover {
-            color: var(--theme-blue);
-            text-decoration: none;
-        }
-        .news-meta {
-            font-size: 0.85em;
-            color: var(--text-grey);
-            margin-bottom: 10px;
-        }
-        .news-content p {
-            flex-grow: 1;
-        }
-        .read-more {
-            display: inline-block;
-            margin-top: 15px;
-            font-weight: 600;
-            align-self: flex-start;
-            transition: transform 0.3s ease; 
-        }
-         .read-more:hover {
-             transform: translateX(3px); 
-         }
+        /* --- Main Content & News Styles (Keep as is) --- */
+        .main-content { padding: 40px 0; }
+        .section-title { font-size: 2.2em; text-align: center; margin-bottom: 50px; color: var(--dark-grey); opacity: 0; animation: fadeInUp 0.8s ease-out forwards; animation-delay: 0.2s; }
+        .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .news-item { background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; }
+        .news-item:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 6px 18px rgba(0,0,0,0.15); }
+        .news-item img { display: block; width: 100%; height: 200px; object-fit: cover; background-color: #eee; flex-shrink: 0; }
+        .news-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
+        .news-content h3 { font-size: 1.3em; margin-top: 0; }
+        .news-content h3 a { color: #1a1a1a; transition: color 0.2s ease; }
+        .news-content h3 a:hover { color: var(--theme-blue); text-decoration: none; }
+        .news-meta { font-size: 0.85em; color: var(--text-grey); margin-bottom: 10px; }
+        .news-content p { flex-grow: 1; }
+        .read-more { display: inline-block; margin-top: 15px; font-weight: 600; align-self: flex-start; transition: transform 0.3s ease; }
+        .read-more:hover { transform: translateX(3px); }
+        /* --- End Main Content & News Styles --- */
 
 
-        .quick-info {
-            background-color: var(--medium-grey);
-            padding: 50px 0; 
-            margin-top: 50px; 
-        }
-        .info-columns {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px; 
-            text-align: center;
-        }
-        .info-column {
-            opacity: 0; 
-            animation: fadeInUp 0.7s ease-out forwards;
-        }
-
+        /* --- Quick Info Styles (Keep as is) --- */
+        .quick-info { background-color: var(--medium-grey); padding: 50px 0; margin-top: 50px; }
+        .info-columns { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; text-align: center; }
+        .info-column { opacity: 0; animation: fadeInUp 0.7s ease-out forwards; }
         .info-column:nth-child(1) { animation-delay: 0.2s; }
         .info-column:nth-child(2) { animation-delay: 0.4s; }
         .info-column:nth-child(3) { animation-delay: 0.6s; }
+        .info-column h3 { color: var(--theme-blue); margin-bottom: 15px; font-size: 1.4em; }
+        .info-column .icon { font-size: 3em; margin-bottom: 15px; display: inline-block; color: var(--text-grey); transition: color 0.3s ease, transform 0.3s ease; }
+        .info-column:hover .icon { color: var(--theme-blue); transform: scale(1.1); }
+        .info-column p { min-height: 4.8em; }
+        /* --- End Quick Info Styles --- */
 
-        .info-column h3 {
-            color: var(--theme-blue);
-            margin-bottom: 15px;
-            font-size: 1.4em;
-        }
-        .info-column .icon {
-            font-size: 3em; /* Larger icon */
-            margin-bottom: 15px;
-            display: inline-block;
-            color: var(--text-grey);
-            transition: color 0.3s ease, transform 0.3s ease;
-        }
-        .info-column:hover .icon {
-            color: var(--theme-blue); 
-             transform: scale(1.1);
-        }
-        .info-column p {
-            min-height: 4.8em; 
-        }
 
         .text-center { text-align: center; }
         .menu-toggle { display: none; background: none; border: none; font-size: 1.8em; cursor: pointer; color: var(--dark-grey); padding: 5px; }
   </style>
   <link href="css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
  </head>
  <body>
   <div id="header-placeholder">
   </div>
+
   <main>
    <section class="hero">
     <div class="container">
@@ -353,18 +169,21 @@
       Welkom bij Atletiekclub Sparta Bornem
      </h2>
      <p>
-      D&eacute; plek voor atletiekplezier voor jong en oud in Bornem en omstreken. Ontdek onze trainingen, wedstrijden en clubactiviteiten.
+      Dé plek voor atletiekplezier voor jong en oud in Bornem en omstreken. Ontdek onze trainingen, wedstrijden en clubactiviteiten.
      </p>
-     <a class="cta-button" href="/html/(Nieuwe) leden/aansluiten.html">
+     <a class="cta-button" href="/html/(Nieuwe)%20leden/aansluiten.html">
       Word nu lid!
      </a>
     </div>
    </section>
+   
+
    <section class="main-content container">
     <h2 class="section-title">
      Laatste Nieuws
     </h2>
     <div class="news-grid" id="latest-news-grid">
+
     </div>
     <div class="text-center" style="margin-top: 40px;">
      <a class="cta-button" href="/html/nieuws/nieuws.html">
@@ -372,11 +191,30 @@
      </a>
     </div>
    </section>
+
+   <section class="photo-upload-section container" style="padding: 50px 20px; text-align: center;">
+    <h2 class="section-title" style="margin-bottom: 30px;">Deel Jouw Sparta Momenten!</h2>
+    <p style="max-width: 700px; margin-left: auto; margin-right: auto; margin-bottom: 25px;">
+        Heb jij leuke, mooie of spectaculaire foto's gemaakt tijdens een training, wedstrijd of ander evenement van Atletiekclub Sparta Bornem? Wij zien ze graag! Jouw beelden helpen ons de website en social media levendig te houden.
+    </p>
+    <div style="margin-bottom: 20px;">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfP8PELEWxFHIb-V2XD0-MxQKRFYTiZlBE5gVNSg9DpDz6afA/viewform?usp=dialog"
+           class="cta-button"
+           target="_blank"
+           rel="noopener noreferrer"
+           style="background-color: #28a745; border-color: #28a745;">
+           <i class="fas fa-camera" style="margin-right: 8px;"></i>Upload hier je foto's
+        </a>
+    </div>
+    <p style="font-size: 0.9em; color: var(--text-grey); max-width: 600px; margin-left: auto; margin-right: auto;">
+        <em>Door een foto te uploaden via het formulier, geef je Sparta Bornem toestemming om deze (rechtenvrij) te gebruiken op onze website, social media en ander clubmateriaal.</em>
+    </p>
+    </section>
+
    <section class="quick-info">
     <div class="container info-columns">
      <div class="info-column">
-      <i class="fas fa-person-running icon">
-      </i>
+      <i class="fas fa-person-running icon"></i>
       <h3>
        Trainingen
       </h3>
@@ -384,12 +222,11 @@
        Bekijk het actuele trainingsschema en maak kennis met onze gemotiveerde trainers.
       </p>
       <a class="read-more" href="/html/info/training.html">
-       Trainingsinfo &raquo;
+       Trainingsinfo »
       </a>
      </div>
      <div class="info-column">
-      <i class="fas fa-calendar-days icon">
-      </i>
+      <i class="fas fa-calendar-days icon"></i>
       <h3>
        Kalender
       </h3>
@@ -397,27 +234,29 @@
        Mis geen enkele wedstrijd of clubactiviteit. Bekijk hier de volledige kalender.
       </p>
       <a class="read-more" href="/html/wedstrijden/kalender.html">
-       Bekijk kalender &raquo;
+       Bekijk kalender »
       </a>
      </div>
      <div class="info-column">
-      <i class="fas fa-user-plus icon">
-      </i>
+      <i class="fas fa-user-plus icon"></i>
       <h3>
        Word Lid
       </h3>
       <p>
        Sluit je aan bij onze sportieve familie en ervaar de passie voor atletiek in Bornem.
       </p>
-      <a class="read-more" href="/html/(Nieuwe) leden/aansluiten.html">
-       Info & Aansluiten &raquo;
+      <a class="read-more" href="/html/(Nieuwe)%20leden/aansluiten.html"> <!-- Fixed URL encoding -->
+       Info & Aansluiten »
       </a>
      </div>
     </div>
    </section>
+
   </main>
+
   <div id="footer-placeholder">
   </div>
+
   <script defer src="/js/script.js">
   </script>
  </body>
