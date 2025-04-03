@@ -3,6 +3,12 @@
 // --- Global Scope Variables and Functions for Footer Positioning ---
 let resizeTimerFooter; // Timer variable for debouncing resize
 
+/**
+ * Checks page height vs viewport height and sets footer position accordingly.
+ * Switches between CSS default (relative) and absolute positioning.
+ * Assumes CSS sets body { position: relative; min-height: 100vh; }
+ * and .site-footer { position: relative; width: 100%; } as default.
+ */
 function adjustFooterPosition() {
     const footerElement = document.querySelector('.site-footer'); // Target the actual footer
     const body = document.body;
@@ -37,7 +43,7 @@ function adjustFooterPosition() {
             footerElement.style.width = '';
             footerElement.style.bottom = '';
         }
-    }, 10); // Small delay (10ms) - adjust if necessary
+    }, 100); // Small delay (10ms) - adjust if necessary
 
 }
 

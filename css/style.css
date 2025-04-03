@@ -9,7 +9,7 @@
 }
 
 html {
-    /* height: 100%; */ /* Removed for sticky footer */
+    height: 100%;
 }
 
 body {
@@ -17,19 +17,10 @@ body {
     line-height: 1.6;
     color: #333;
     background-color: #f8f9fa;
-    /* --- STICKY FOOTER & LAYOUT FIXES (Kept from revision) --- */
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    overflow-x: hidden; /* Prevent horizontal body scroll */
 }
 
 main {
-     /* padding-bottom: 60px; */ /* REMOVED */
-     flex-grow: 1;             /* Keep: Allow main content to expand */
-     width: 100%;              /* Keep: Ensure main takes full width */
-     padding-bottom: 60px;     /* ADDED BACK: Restore original main bottom padding */
-                               /* NOTE: If footer overlap occurs, adjust this or footer padding */
+     padding-bottom: 60px; 
 }
 
 
@@ -37,11 +28,10 @@ main {
     max-width: 1140px;
     margin: 0 auto;
     padding: 0 20px;
-    width: 100%; /* Keep: Ensure container doesn't exceed parent */
 }
 
 a {
-    color: #1774b4;
+    color: #1774b4; 
     text-decoration: none;
     transition: color 0.3s ease;
 }
@@ -63,7 +53,7 @@ p { margin-bottom: 1em; }
 ul { margin-bottom: 1em; margin-left: 20px; }
 
 
-/* ========== HEADER STYLES WITH ANIMATIONS (Reverted to Original) ========== */
+/* ========== HEADER STYLES WITH ANIMATIONS ========== */
 .site-header {
     background-color: #ffffff;
     padding: 15px 0;
@@ -71,8 +61,8 @@ ul { margin-bottom: 1em; margin-left: 20px; }
     position: sticky;
     top: 0;
     z-index: 1000;
-    flex-shrink: 0; /* Keep: Good practice for flex item */
-    min-width: 280px; /* Restored original min-width */
+    flex-shrink: 0;
+    min-width: 280px;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
@@ -81,50 +71,19 @@ ul { margin-bottom: 1em; margin-left: 20px; }
     transform: translateY(-2px);
 }
 
-/* Reverted: Using .container for width control */
 .header-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start; /* Put items at the start (left) */
     align-items: center;
     flex-wrap: wrap;
-    /* Removed max-width, margin, padding from revised version */
-    /* relies on being inside a .container in the HTML */
-    /* If header-container is NOT inside .container, add these back: */
-    /* max-width: 1140px; margin: 0 auto; padding: 0 20px; width: 100%; */
 }
 
-/* Logo animations (Original) */
-.logo h1 {
-    margin: 0;
-    font-size: 1.8em;
+/* Navigation animations */
+.main-nav {
+    margin-left: 30px; /* Add space between logo and nav */
+     /* Keep other styles if they exist */
 }
 
-.logo a {
-    position: relative;
-    display: inline-block;
-    color: #212529;
-    text-decoration: none;
-    font-weight: 700;
-    transition: transform 0.3s ease, color 0.3s ease;
-    transform-origin: left center;
-}
-
-.logo a:hover {
-    transform: scale(1.05);
-    color: #1774b4;
-    text-decoration: none;
-}
-
-.logo img {
-    max-height: 50px;
-    transition: transform 0.3s ease;
-}
-
-.logo img:hover {
-    transform: scale(1.05);
-}
-
-/* Navigation animations (Original) */
 .main-nav ul {
     list-style: none;
     padding: 0;
@@ -132,11 +91,49 @@ ul { margin-bottom: 1em; margin-left: 20px; }
     display: flex;
 }
 
-.main-nav li {
-    margin-left: 25px;
-    position: relative;
+/* Logo animations */
+.logo h1 { 
+    margin: 0; 
+    font-size: 1.8em; 
 }
-/* Removed :first-child margin rule from revised version */
+
+.logo a { 
+    position: relative;
+    display: inline-block;
+    color: #212529; 
+    text-decoration: none; 
+    font-weight: 700;
+    transition: transform 0.3s ease, color 0.3s ease;
+    transform-origin: left center;
+}
+
+.logo a:hover { 
+    transform: scale(1.05);
+    color: #1774b4;
+    text-decoration: none;
+}
+
+.logo img { 
+    max-height: 50px; 
+    transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+    transform: scale(1.05);
+}
+
+/* Navigation animations */
+.main-nav ul { 
+    list-style: none; 
+    padding: 0; 
+    margin: 0; 
+    display: flex; 
+}
+
+.main-nav li { 
+    margin-left: 25px; 
+    position: relative; 
+}
 
 .main-nav a {
     color: #343a40;
@@ -147,23 +144,22 @@ ul { margin-bottom: 1em; margin-left: 20px; }
     border-bottom: 2px solid transparent;
     transition: color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
     position: relative;
-    /* Removed white-space: nowrap from revised version */
 }
 
 .main-nav a:hover,
 .main-nav a.active {
-    color: #1774b4;
+    color: #1774b4; 
     border-bottom-color: #1774b4;
     transform: translateY(-2px);
     text-decoration: none;
 }
 
-/* Submenu animations (Original) */
+/* Submenu animations */
 .main-nav .submenu {
-    display: block; /* Reverted */
+    display: block;
     position: absolute;
     background-color: #fff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
     list-style: none;
     padding: 10px 0;
     margin-top: 5px;
@@ -174,19 +170,18 @@ ul { margin-bottom: 1em; margin-left: 20px; }
     opacity: 0;
     visibility: hidden;
     transform: translateY(10px);
-    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease; /* Reverted transition */
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
 }
 
 .main-nav li:hover > .submenu {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
-    display: block; /* Reverted */
-    /* Removed specific hover transition from revised version */
+    display: block;
 }
 
 .main-nav .submenu a.active {
-   color: #1774b4;
+   color: #1774b4; 
    font-weight: 600;
    border-bottom-color: transparent !important;
 }
@@ -199,7 +194,7 @@ ul { margin-bottom: 1em; margin-left: 20px; }
 .main-nav .submenu a {
    display: block;
    padding: 8px 15px;
-   color: #343a40;
+   color: #343a40; 
    text-transform: none;
    font-weight: 400;
    border-bottom: none;
@@ -208,12 +203,11 @@ ul { margin-bottom: 1em; margin-left: 20px; }
 }
 
 .main-nav .submenu a:hover {
-   background-color: #e8f1f8;
+   background-color: #e8f1f8; 
    color: #125a8c;
    transform: translateX(3px);
 }
 
-/* Nested submenu positioning (Original) */
 .main-nav .submenu .submenu {
    top: -10px;
    left: 100%;
@@ -222,7 +216,6 @@ ul { margin-bottom: 1em; margin-left: 20px; }
    min-width: 200px;
 }
 
-/* Arrows for dropdowns (Original) */
 .main-nav > ul > li.menu-item-has-children > a::after {
    content: ' ▼';
    font-size: 0.7em;
@@ -237,190 +230,169 @@ ul { margin-bottom: 1em; margin-left: 20px; }
     transform: rotate(180deg);
 }
 
-/* Original Submenu Arrow Styles */
 .main-nav .submenu li.menu-item-has-children > a::after {
    content: ' ▶';
    font-size: 0.7em;
    display: inline-block;
    margin-left: 4px;
-   position: absolute; /* Reverted */
-   right: 15px; /* Reverted */
-   top: 50%; /* Reverted */
-   transform: translateY(-50%); /* Reverted */
+   position: absolute;
+   right: 15px;
+   top: 50%;
+   transform: translateY(-50%);
    color: #6c757d;
    transition: transform 0.3s ease;
 }
 
-.main-nav .submenu li.menu-item-has-children > a {
-   padding-right: 30px; /* Reverted */
-   /* Removed display:flex from revised version */
-}
-
 .main-nav .submenu li.menu-item-has-children:hover > a::after {
-   transform: translateY(-50%) rotate(90deg); /* Reverted */
+   transform: translateY(-50%) rotate(90deg);
 }
 
+.main-nav .submenu li.menu-item-has-children > a {
+   padding-right: 30px;
+}
 
-.menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    font-size: 1.8em;
-    cursor: pointer;
-    color: #343a40;
+.menu-toggle { 
+    display: none; 
+    background: none; 
+    border: none; 
+    font-size: 1.8em; 
+    cursor: pointer; 
+    color: #343a40; 
     padding: 5px;
     transition: transform 0.3s ease, color 0.3s ease;
 }
 
-/* Mobile menu animations & Styles (Reverted to Original) */
+/* Mobile menu animations */
 @media (max-width: 768px) {
-    .header-container { position: relative; flex-wrap: wrap; } /* Reverted */
-    .logo { flex-basis: 80%; } /* Reverted */
-    .menu-toggle { display: block; position: absolute; top: 15px; right: 20px; } /* Reverted */
-    .main-nav { width: 100%; margin-top: 15px; /* Reverted */ }
-
-    .main-nav ul {
-        flex-direction: column;
+    .header-container { position: relative; flex-wrap: wrap; }
+    .logo { flex-basis: 80%; }
+    .menu-toggle { display: block; position: absolute; top: 15px; right: 20px; }
+    .main-nav {
         width: 100%;
-        display: none; /* Reverted */
-        background-color: #fff;
+        margin-top: 15px;
+        margin-left: 0; /* Reset margin for mobile */
+    }
+    
+    .main-nav ul { 
+        flex-direction: column; 
+        width: 100%; 
+        display: none; 
+        background-color: #fff; 
         box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        opacity: 0; /* Reverted animation */
-        transform: translateY(-10px); /* Reverted animation */
-        transition: opacity 0.3s ease, transform 0.3s ease; /* Reverted animation */
-        /* Removed max-height animation */
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
-    .main-nav ul.active {
-        display: block; /* Reverted */
-        opacity: 1; /* Reverted animation */
-        transform: translateY(0); /* Reverted animation */
-        /* Removed max-height animation */
+    .main-nav ul.active { 
+        display: block;
+        opacity: 1;
+        transform: translateY(0);
     }
-
+    
     .main-nav li { margin: 0; border-bottom: 1px solid #e9ecef; }
     .main-nav li:last-child { border-bottom: none; }
-    .main-nav a { display: block; padding: 12px 20px; text-align: left; border-bottom: none; /* Removed white-space: normal */ }
-
-    /* Blue Theme: Mobile Active Link (Original) */
+    .main-nav a { display: block; padding: 12px 20px; text-align: left; border-bottom: none; }
+    
+    /* Blue Theme: Mobile Active Link */
     .main-nav a.active {
         color: #1774b4;
         background-color: #e8f1f8;
-        border-bottom-color: transparent !important; /* Keep override */
     }
-
-    /* Mobile Dropdown Adjustments (Original Logic/Structure) */
-    /* Note: JS might need changes if it relied on the max-height/submenu-active classes */
-    .main-nav .submenu {
+    
+    /* Mobile Dropdown Adjustments */
+    .main-nav ul.active .submenu {
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        visibility: hidden;
+        transition: max-height 0.5s ease, opacity 0.3s ease, visibility 0.3s ease;
+    }
+    
+    .main-nav ul.active .submenu.submenu-active {
+        max-height: 1000px;
+        opacity: 1;
+        visibility: visible;
+        transition: max-height 0.5s ease, opacity 0.3s ease, visibility 0.3s ease;
+    }
+    
+    .main-nav .submenu, .main-nav .submenu .submenu {
         position: static;
-        display: block; /* Reverted */
+        display: block;
         box-shadow: none;
         background-color: transparent;
         padding: 0;
         margin-top: 0;
         min-width: auto;
         margin-left: 0;
-        /* Revert animation/visibility properties to non-animated */
-        opacity: 1;
-        visibility: visible;
-        transform: none;
-        transition: none;
-        border-top: none; /* Added for clarity */
+        border-top: none;
     }
-
-     /* Original display logic for submenus (likely controlled by JS directly toggling display or a class) */
-     /* Assuming JS toggles a class like 'submenu-open' on the LI or similar */
-     /* It's difficult to perfectly replicate the *exact* original display without seeing the original JS */
-     /* We'll hide them initially and assume JS shows them */
-    .main-nav ul.active .submenu {
-        display: none; /* Hide initially, JS needs to show it */
-    }
-    .main-nav ul.active li.submenu-open > ul.submenu {
-         display: block; /* Example: JS adds submenu-open to LI to show direct child UL */
-    }
-    /* END - Submenu display logic might need JS adjustment */
-
-
-    /* Remove desktop hover effects */
-    .main-nav li:hover > .submenu,
-    .main-nav .submenu li:hover > .submenu {
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(10px);
-        /* display: none; */ /* Maybe add display none if visibility isn't enough */
-    }
-
-
-    /* Original styling for nested mobile menus */
+    
     .main-nav ul ul li {
         border-bottom: 1px dotted #ced4da;
         background-color: #f8f9fa;
     }
+    
     .main-nav ul ul ul li {
         background-color: #e9ecef;
         border-bottom: 1px dotted #adb5bd;
     }
+    
     .main-nav ul ul li:last-child { border-bottom: none; }
-
+    
     .main-nav ul ul a {
         padding-left: 35px;
         background-color: transparent;
     }
+    
     .main-nav ul ul ul a {
         padding-left: 50px;
         background-color: transparent;
     }
+    
     .main-nav .submenu a.active {
-       color: #1774b4;
+       color: #1774b4; 
        background-color: #ddeafa;
        font-weight: 600;
     }
 
-    /* Original Mobile Arrow Handling */
     .main-nav > ul > li.menu-item-has-children:hover > a::after {
-        transform: rotate(0deg); /* Reverted */
-        color : #1774b4; /* Reverted */
+        transform: rotate(0deg);
+        color : #1774b4;
     }
+    
     .main-nav .submenu li.menu-item-has-children:hover > a::after {
-        transform: translateY(-50%) rotate(0deg); /* Reverted */
-        color: #1774b4; /* Reverted */
+        transform: translateY(-50%) rotate(0deg);
+        color: #1774b4;
     }
-
-    /* Original arrow display logic */
-    .main-nav ul li > a[aria-haspopup="true"] {
-        /* Original didn't have flex display */
-        display: block; /* Revert */
-        position: relative; /* Needed for absolute positioned arrow */
+    
+    .main-nav ul.active li > a[aria-haspopup="true"] {
+        display: flex; 
+        justify-content: space-between;
+        align-items: center;
         width: 100%;
     }
-    .main-nav ul li > a[aria-haspopup="true"]::after {
-        content: '▼';
+    
+    .main-nav ul.active li > a[aria-haspopup="true"]::after {
+        content: '▼'; 
         display: inline-block;
         margin-left: 8px;
         font-size: 0.8em;
         transition: transform 0.3s ease;
-        color: #6c757d; /* Reverted */
-        /* Positioning might need adjustment depending on exact layout */
-         position: absolute;
-         right: 20px; /* Adjust as needed */
-         top: 50%;
-         transform: translateY(-50%); /* Center vertically */
     }
-    /* Keep JS class based rotation - assumes JS adds 'submenu-open' to LI */
-    .main-nav ul li.submenu-open > a[aria-haspopup="true"]::after {
-        transform: translateY(-50%) rotate(180deg); /* Adjust transform origin if needed */
+
+    .main-nav ul.active li.submenu-open > a[aria-haspopup="true"]::after {
+        transform: rotate(180deg);
     }
 }
 
-/* ========== FOOTER STYLES (Kept from revision) ========== */
 .site-footer {
     background-color: var(--theme-blue, #1774b4);
     color: #e9ecef;
     padding: 40px 0 20px;
     font-size: 0.9em;
-    /* margin-top: auto; */ /* REMOVED */
-    flex-shrink: 0; /* Keep */
-    width: 100%;    /* Keep */
+    margin-top: auto;
+    flex-shrink: 0;
 }
 
 .footer-grid {
@@ -428,16 +400,10 @@ ul { margin-bottom: 1em; margin-left: 20px; }
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 30px;
     margin-bottom: 30px;
-    /* Keep centering/padding */
-    max-width: 1140px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0 20px;
-    width: 100%;
 }
 
 .footer-column h4 {
-    color: #ffffff;
+    color: #ffffff; 
     margin-bottom: 15px;
     font-size: 1.1em;
 }
@@ -445,7 +411,7 @@ ul { margin-bottom: 1em; margin-left: 20px; }
 .footer-column ul {
     list-style: none;
     padding: 0;
-    margin: 0 0 1em 0;
+    margin: 0 0 1em 0; 
 }
 
 .footer-column li {
@@ -453,7 +419,7 @@ ul { margin-bottom: 1em; margin-left: 20px; }
 }
 
 .footer-column a {
-    color: #dee2e6;
+    color: #dee2e6; 
     transition: color 0.2s ease, padding-left 0.3s ease;
 }
 
@@ -465,27 +431,19 @@ ul { margin-bottom: 1em; margin-left: 20px; }
 
 .footer-bottom {
     text-align: center;
-    margin-top: 30px;
-    padding-top: 20px;
+    margin-top: 30px; 
+    padding-top: 20px; 
     border-top: 1px solid #4a9dcf;
     font-size: 0.85em;
-    color: #adb5bd;
-    /* Keep centering/padding */
-    max-width: 1140px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 20px;
-    padding-right: 20px;
-    width: 100%;
+    color: #adb5bd; 
 }
 
-/* ========== MAIN CONTENT STYLES (Kept from revision) ========== */
+/* ========== MAIN CONTENT STYLES ========== */
 .main-content .contact-image {
     float: none;
     display: block;
     margin: 0 auto 15px auto;
-    max-width: 150px;
-    width: 100%;
+    width: 150px;
     border-radius: 4px;
 }
 
@@ -493,48 +451,44 @@ ul { margin-bottom: 1em; margin-left: 20px; }
     .main-content .contact-image {
         float: left;
         margin: 0 20px 10px 0;
-        max-width: 150px;
     }
-    /* Optional: Add clearfix to parent of floated image if layout breaks */
-    /* .parent-of-contact-image::after { content: ""; display: table; clear: both; } */
 }
 
 .table-responsive {
-    overflow-x: auto; /* Keep */
+    overflow-x: auto;
     margin-top: 20px;
     margin-bottom: 30px;
-    border: 1px solid #dee2e6;
+    border: 1px solid #dee2e6; 
     border-radius: 5px;
-    width: 100%; /* Keep */
 }
 
 .records-table {
     width: 100%;
     border-collapse: collapse;
-    min-width: 600px; /* Keep */
+    min-width: 600px; 
     font-size: 0.95em;
 }
 
 .records-table th,
 .records-table td {
     border: 1px solid #dee2e6;
-    padding: 10px 12px;
+    padding: 10px 12px; 
     text-align: left;
-    vertical-align: top;
+    vertical-align: top; 
 }
 
 .records-table th {
-    background-color: #e9ecef;
+    background-color: #e9ecef; 
     font-weight: 600;
     white-space: nowrap;
 }
 
 .records-table tbody tr:nth-child(even) {
-    background-color: #f8f9fa;
+    background-color: #f8f9fa; 
 }
 
 .records-table tbody tr:hover {
-    background-color: #e8f1f8;
+    background-color: #e8f1f8; 
 }
 
 .record-notice {
@@ -542,7 +496,7 @@ ul { margin-bottom: 1em; margin-left: 20px; }
     padding: 15px;
     background-color: #fff3cd;
     border: 1px solid #ffeeba;
-    border-left: 5px solid #ffc107;
+    border-left: 5px solid #ffc107; 
     border-radius: 4px;
     font-size: 0.9em;
 }
@@ -551,9 +505,44 @@ ul { margin-bottom: 1em; margin-left: 20px; }
 }
 
 [contenteditable="true"] {
-    outline: 2px dashed #1774b4;
-    background-color: #f0f8ff;
+    outline: 2px dashed #1774b4; 
+    background-color: #f0f8ff; 
     cursor: text;
 }
 
-/* Removed redundant media queries from original */
+@media (max-width: 991px) {
+    .main-nav ul.active .submenu {
+        display: none; /* Hide initially */
+    }
+
+    .main-nav ul.active li.submenu-open > ul.submenu.submenu-active {
+        display: block; 
+    }
+
+    .main-nav ul.active li > a[aria-haspopup="true"] {
+        display: flex; 
+        justify-content: space-between;
+        align-items: center;
+        width: 100%; /* Ensure it takes full width */
+    }
+
+    .main-nav ul.active li > a[aria-haspopup="true"]::after {
+        content: '▼'; 
+        display: inline-block;
+        margin-left: 8px;
+        font-size: 0.8em;
+        transition: transform 0.3s ease;
+    }
+
+    .main-nav ul.active li.submenu-open > a[aria-haspopup="true"]::after {
+        transform: rotate(180deg);
+    }
+} 
+
+@media (min-width: 992px) { 
+    .main-nav ul li:hover > .submenu {
+        display: block; 
+        opacity: 1;
+        visibility: visible;
+    }
+}
