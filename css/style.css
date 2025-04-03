@@ -9,39 +9,27 @@
 }
 
 html {
-   /* Optional: height: 100%; */ /* Can sometimes help ensure body fills html */
+    /* height: 100%; */ /* Removed for sticky footer */
 }
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: #333;
-    background-color: #f8f9fa; /* Consistent background color */
-
-    /* --- Core Sticky Footer Rules --- */
-    display: flex;             /* 1. Establish flex container */
-    flex-direction: column;    /* 2. Arrange children vertically */
-    min-height: 100vh;         /* 3. Ensure body is at least viewport height */
-    overflow-x: hidden;        /* Prevent accidental horizontal scroll */
+    background-color: #f8f9fa;
+    /* --- STICKY FOOTER & LAYOUT FIXES (Kept from revision) --- */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden; /* Prevent horizontal body scroll */
 }
 
-/* Target your main content element(s) */
-main,
-.main-content /* Apply to both if you use either <main> or <div class="main-content"> */ {
-    flex-grow: 1;              /* 4. Allow main content to expand and push footer down */
-    width: 100%;               /* Good practice for flex item */
-    padding-bottom: 60px;      /* Your desired space above footer */
-    /* Reset potential conflicting fixed heights */
-    height: auto;
-    max-height: none;
-}
-
-
-/* Target your header and footer elements */
-.site-header,
-.site-footer {
-    flex-shrink: 0;            /* 5. Prevent header/footer from shrinking */
-    width: 100%;               /* Ensure full width */
+main {
+     /* padding-bottom: 60px; */ /* REMOVED */
+     flex-grow: 1;             /* Keep: Allow main content to expand */
+     width: 100%;              /* Keep: Ensure main takes full width */
+     padding-bottom: 60px;     /* ADDED BACK: Restore original main bottom padding */
+                               /* NOTE: If footer overlap occurs, adjust this or footer padding */
 }
 
 
@@ -49,6 +37,7 @@ main,
     max-width: 1140px;
     margin: 0 auto;
     padding: 0 20px;
+    width: 100%; /* Keep: Ensure container doesn't exceed parent */
 }
 
 a {
@@ -74,15 +63,16 @@ p { margin-bottom: 1em; }
 ul { margin-bottom: 1em; margin-left: 20px; }
 
 
-/* ========== HEADER STYLES WITH ANIMATIONS ========== */
+/* ========== HEADER STYLES WITH ANIMATIONS (Reverted to Original) ========== */
 .site-header {
     background-color: #ffffff;
     padding: 15px 0;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
-    position: sticky; /* Keep sticky if desired */
+    position: sticky;
     top: 0;
     z-index: 1000;
-    min-width: 280px;
+    flex-shrink: 0; /* Keep: Good practice for flex item */
+    min-width: 280px; /* Restored original min-width */
     transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
@@ -91,64 +81,119 @@ ul { margin-bottom: 1em; margin-left: 20px; }
     transform: translateY(-2px);
 }
 
+/* Reverted: Using .container for width control */
 .header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    /* If this container isn't inside .container, add max-width/margin/padding */
-    /* max-width: 1140px; margin: 0 auto; padding: 0 20px; */
+    /* Removed max-width, margin, padding from revised version */
+    /* relies on being inside a .container in the HTML */
+    /* If header-container is NOT inside .container, add these back: */
+    /* max-width: 1140px; margin: 0 auto; padding: 0 20px; width: 100%; */
 }
 
-/* Logo */
-.logo h1 { margin: 0; font-size: 1.8em; }
-.logo a { position: relative; display: inline-block; color: #212529; text-decoration: none; font-weight: 700; transition: transform 0.3s ease, color 0.3s ease; transform-origin: left center; }
-.logo a:hover { transform: scale(1.05); color: #1774b4; text-decoration: none; }
-.logo img { max-height: 50px; transition: transform 0.3s ease; }
-.logo img:hover { transform: scale(1.05); }
+/* Logo animations (Original) */
+.logo h1 {
+    margin: 0;
+    font-size: 1.8em;
+}
 
-/* ========== NAVIGATION ========== */
-.main-nav ul { list-style: none; padding: 0; margin: 0; display: flex; }
-.main-nav li { margin-left: 25px; position: relative; }
-.main-nav a { color: #343a40; text-transform: uppercase; font-weight: 600; font-size: 0.95em; padding-bottom: 5px; border-bottom: 2px solid transparent; transition: color 0.3s ease, border-color 0.3s ease, transform 0.2s ease; position: relative; }
-.main-nav a:hover, .main-nav a.active { color: #1774b4; border-bottom-color: #1774b4; transform: translateY(-2px); text-decoration: none; }
+.logo a {
+    position: relative;
+    display: inline-block;
+    color: #212529;
+    text-decoration: none;
+    font-weight: 700;
+    transition: transform 0.3s ease, color 0.3s ease;
+    transform-origin: left center;
+}
 
-/* Submenu Base */
+.logo a:hover {
+    transform: scale(1.05);
+    color: #1774b4;
+    text-decoration: none;
+}
+
+.logo img {
+    max-height: 50px;
+    transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+    transform: scale(1.05);
+}
+
+/* Navigation animations (Original) */
+.main-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.main-nav li {
+    margin-left: 25px;
+    position: relative;
+}
+/* Removed :first-child margin rule from revised version */
+
+.main-nav a {
+    color: #343a40;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 0.95em;
+    padding-bottom: 5px;
+    border-bottom: 2px solid transparent;
+    transition: color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+    position: relative;
+    /* Removed white-space: nowrap from revised version */
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+    color: #1774b4;
+    border-bottom-color: #1774b4;
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+/* Submenu animations (Original) */
 .main-nav .submenu {
-    display: block; /* Use visibility/opacity for transitions */
+    display: block; /* Reverted */
     position: absolute;
     background-color: #fff;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     list-style: none;
     padding: 10px 0;
-    margin-top: 5px; /* Space below parent */
-    min-width: 220px; /* Adjust as needed */
-    left: 0; /* Default position */
+    margin-top: 5px;
+    min-width: 220px;
+    left: 0;
     z-index: 1001;
     border-radius: 4px;
     opacity: 0;
     visibility: hidden;
     transform: translateY(10px);
-    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.3s; /* Delay hiding */
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease; /* Reverted transition */
 }
 
-/* Submenu show on hover */
 .main-nav li:hover > .submenu {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
-    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0s; /* Show immediately */
+    display: block; /* Reverted */
+    /* Removed specific hover transition from revised version */
 }
 
 .main-nav .submenu a.active {
    color: #1774b4;
    font-weight: 600;
-   border-bottom-color: transparent !important; /* Consider removing !important if possible */
+   border-bottom-color: transparent !important;
 }
 
 .main-nav .submenu li {
     margin: 0;
-    position: relative; /* Needed for nested submenu positioning */
+    position: relative;
 }
 
 .main-nav .submenu a {
@@ -168,25 +213,16 @@ ul { margin-bottom: 1em; margin-left: 20px; }
    transform: translateX(3px);
 }
 
-/* Nested submenu positioning (Level 3+) - Default Right */
+/* Nested submenu positioning (Original) */
 .main-nav .submenu .submenu {
-   top: -10px; /* Adjust vertical alignment as needed */
-   left: 100%; /* Start at the right edge of the parent LI */
-   margin-left: 1px; /* Small gap */
-   min-width: 200px; /* Or adjust as needed */
-   /* Inherits common styles like position absolute, background, shadow, transitions etc. */
+   top: -10px;
+   left: 100%;
+   margin-top: 0;
+   margin-left: 1px;
+   min-width: 200px;
 }
 
-/* Nested submenu positioning - Opening Left (JS adds submenu-pull-left to parent LI) */
-.main-nav .submenu li.submenu-pull-left > .submenu {
-    left: auto;    /* Override the default left: 100% */
-    right: 100%;   /* Anchor right edge of submenu to the left edge of parent li */
-    margin-left: 0;
-    margin-right: 1px; /* Optional gap on the left */
-}
-
-/* Arrows for dropdowns */
-/* Top Level Arrow */
+/* Arrows for dropdowns (Original) */
 .main-nav > ul > li.menu-item-has-children > a::after {
    content: ' ▼';
    font-size: 0.7em;
@@ -196,58 +232,32 @@ ul { margin-bottom: 1em; margin-left: 20px; }
    color: #6c757d;
    transition: transform 0.3s ease;
 }
+
 .main-nav > ul > li.menu-item-has-children:hover > a::after {
     transform: rotate(180deg);
 }
 
-/* Nested Submenu Link Base Styling */
-.main-nav .submenu li.menu-item-has-children > a {
-    position: relative; /* Containing block for arrow */
-    /* Default padding for right arrow */
-    padding-left: 15px; /* Original left padding */
-    padding-right: 30px; /* Make space for arrow on the right */
-    transition: padding 0s; /* Prevent padding transition */
-}
-
-/* Nested Submenu Arrow Base */
+/* Original Submenu Arrow Styles */
 .main-nav .submenu li.menu-item-has-children > a::after {
-   content: ' ▶'; /* Default Right Arrow */
+   content: ' ▶';
    font-size: 0.7em;
    display: inline-block;
-   position: absolute;
-   right: 15px; /* Default position */
-   left: auto; /* Ensure left is auto by default */
-   top: 50%;
-   transform: translateY(-50%);
+   margin-left: 4px;
+   position: absolute; /* Reverted */
+   right: 15px; /* Reverted */
+   top: 50%; /* Reverted */
+   transform: translateY(-50%); /* Reverted */
    color: #6c757d;
-   transition: transform 0.3s ease, content 0s, left 0s, right 0s; /* Animate transform only */
+   transition: transform 0.3s ease;
 }
 
-/* Nested Submenu Arrow Hover (Default Right Opening) */
+.main-nav .submenu li.menu-item-has-children > a {
+   padding-right: 30px; /* Reverted */
+   /* Removed display:flex from revised version */
+}
+
 .main-nav .submenu li.menu-item-has-children:hover > a::after {
-   transform: translateY(-50%) rotate(90deg); /* Rotate right arrow */
-}
-
-
-/* Nested Submenu Arrow Styling when Opening Left */
-
-/* Adjust padding on the link when opening left */
-.main-nav .submenu li.submenu-pull-left > a {
-    padding-left: 30px;  /* Make space on the left for arrow */
-    padding-right: 15px; /* Restore default right padding */
-}
-
-/* Style the arrow itself when opening left */
-.main-nav .submenu li.submenu-pull-left > a::after {
-    content: '◀ '; /* Change arrow character AND ADD SPACE AFTER */
-    right: auto;   /* Remove right positioning */
-    left: 15px;    /* Position on the left */
-    /* Vertical position (top/transform) remains the same */
-}
-
-/* Override Hover Rotation when Opening Left */
-.main-nav .submenu li.submenu-pull-left:hover > a::after {
-    transform: translateY(-50%) rotate(0deg); /* Keep left arrow pointing left, no rotation */
+   transform: translateY(-50%) rotate(90deg); /* Reverted */
 }
 
 
@@ -262,174 +272,155 @@ ul { margin-bottom: 1em; margin-left: 20px; }
     transition: transform 0.3s ease, color 0.3s ease;
 }
 
-/* ========== Mobile Menu Styles ========== */
-@media (max-width: 768px) { /* Adjust breakpoint if needed */
-    .header-container { position: relative; flex-wrap: wrap; }
-    .logo { flex-basis: 80%; } /* Adjust as needed */
-    .menu-toggle { display: block; position: absolute; top: 15px; right: 20px; } /* Adjust position */
-    .main-nav { width: 100%; margin-top: 15px; }
+/* Mobile menu animations & Styles (Reverted to Original) */
+@media (max-width: 768px) {
+    .header-container { position: relative; flex-wrap: wrap; } /* Reverted */
+    .logo { flex-basis: 80%; } /* Reverted */
+    .menu-toggle { display: block; position: absolute; top: 15px; right: 20px; } /* Reverted */
+    .main-nav { width: 100%; margin-top: 15px; /* Reverted */ }
 
     .main-nav ul {
         flex-direction: column;
         width: 100%;
-        display: none;
+        display: none; /* Reverted */
         background-color: #fff;
         box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        opacity: 0;
-        transform: translateY(-10px);
-        transition: opacity 0.3s ease, transform 0.3s ease;
+        opacity: 0; /* Reverted animation */
+        transform: translateY(-10px); /* Reverted animation */
+        transition: opacity 0.3s ease, transform 0.3s ease; /* Reverted animation */
+        /* Removed max-height animation */
     }
 
     .main-nav ul.active {
-        display: block;
-        opacity: 1;
-        transform: translateY(0);
+        display: block; /* Reverted */
+        opacity: 1; /* Reverted animation */
+        transform: translateY(0); /* Reverted animation */
+        /* Removed max-height animation */
     }
 
     .main-nav li { margin: 0; border-bottom: 1px solid #e9ecef; }
     .main-nav li:last-child { border-bottom: none; }
-    .main-nav a { display: block; padding: 12px 20px; text-align: left; border-bottom: none; }
+    .main-nav a { display: block; padding: 12px 20px; text-align: left; border-bottom: none; /* Removed white-space: normal */ }
 
+    /* Blue Theme: Mobile Active Link (Original) */
     .main-nav a.active {
         color: #1774b4;
         background-color: #e8f1f8;
         border-bottom-color: transparent !important; /* Keep override */
     }
 
-    /* Mobile submenus become static blocks */
+    /* Mobile Dropdown Adjustments (Original Logic/Structure) */
+    /* Note: JS might need changes if it relied on the max-height/submenu-active classes */
     .main-nav .submenu {
         position: static;
-        display: block; /* Always block, JS controls visibility below */
+        display: block; /* Reverted */
         box-shadow: none;
         background-color: transparent;
         padding: 0;
         margin-top: 0;
         min-width: auto;
         margin-left: 0;
+        /* Revert animation/visibility properties to non-animated */
         opacity: 1;
         visibility: visible;
         transform: none;
         transition: none;
-        border-top: none;
-        border-radius: 0;
+        border-top: none; /* Added for clarity */
     }
 
-     /* JS controls display of mobile submenus via submenu-open class on LI */
-     /* Hide submenus by default when mobile menu is active */
+     /* Original display logic for submenus (likely controlled by JS directly toggling display or a class) */
+     /* Assuming JS toggles a class like 'submenu-open' on the LI or similar */
+     /* It's difficult to perfectly replicate the *exact* original display without seeing the original JS */
+     /* We'll hide them initially and assume JS shows them */
     .main-nav ul.active .submenu {
-        display: none;
+        display: none; /* Hide initially, JS needs to show it */
     }
-    /* Show the direct submenu when parent LI has .submenu-open */
     .main-nav ul.active li.submenu-open > ul.submenu {
-         display: block;
+         display: block; /* Example: JS adds submenu-open to LI to show direct child UL */
     }
+    /* END - Submenu display logic might need JS adjustment */
 
-    /* Remove desktop hover effects on mobile */
+
+    /* Remove desktop hover effects */
     .main-nav li:hover > .submenu,
     .main-nav .submenu li:hover > .submenu {
-        opacity: 0; /* Reset hover effects */
+        opacity: 0;
         visibility: hidden;
         transform: translateY(10px);
+        /* display: none; */ /* Maybe add display none if visibility isn't enough */
     }
 
-    /* Nested mobile menu styling */
+
+    /* Original styling for nested mobile menus */
     .main-nav ul ul li {
         border-bottom: 1px dotted #ced4da;
-        background-color: #f8f9fa; /* Indent visually */
+        background-color: #f8f9fa;
     }
     .main-nav ul ul ul li {
-        background-color: #e9ecef; /* Deeper indent */
+        background-color: #e9ecef;
         border-bottom: 1px dotted #adb5bd;
     }
     .main-nav ul ul li:last-child { border-bottom: none; }
 
     .main-nav ul ul a {
-        padding-left: 35px; /* Indent text */
-        background-color: transparent; /* Override parent BGs */
+        padding-left: 35px;
+        background-color: transparent;
     }
     .main-nav ul ul ul a {
-        padding-left: 50px; /* Deeper indent text */
+        padding-left: 50px;
         background-color: transparent;
     }
     .main-nav .submenu a.active {
        color: #1774b4;
-       background-color: #ddeafa; /* Different active BG for submenus */
+       background-color: #ddeafa;
        font-weight: 600;
     }
 
-    /* Mobile Arrow Handling - Reset Desktop Hovers & Pull Left */
+    /* Original Mobile Arrow Handling */
     .main-nav > ul > li.menu-item-has-children:hover > a::after {
-        transform: rotate(0deg); /* Reset hover */
-        color : #1774b4; /* Reset hover */
+        transform: rotate(0deg); /* Reverted */
+        color : #1774b4; /* Reverted */
     }
-    /* Reset arrow style for nested items specifically on mobile */
     .main-nav .submenu li.menu-item-has-children:hover > a::after {
-        transform: translateY(-50%) rotate(0deg); /* Reset hover rotation */
-        color: #1774b4; /* Reset hover color */
-        content: '▼'; /* Ensure correct mobile arrow */
-    }
-    /* Reset pull-left styles back to mobile defaults */
-    .main-nav .submenu li.submenu-pull-left:hover > a::after {
-        transform: translateY(-50%) rotate(0deg); /* No hover rotation */
-        color: #1774b4; /* Reset color */
-        content: '▼'; /* Use mobile arrow */
-    }
-    .main-nav .submenu li.submenu-pull-left > a {
-        padding-left: 15px; /* Use standard mobile padding */
-        padding-right: 40px; /* Standard mobile padding for arrow */
-    }
-    .main-nav .submenu li.submenu-pull-left > a::after {
-        left: auto; /* Use standard mobile positioning */
-        right: 20px;
-        content: '▼'; /* Use standard mobile arrow */
+        transform: translateY(-50%) rotate(0deg); /* Reverted */
+        color: #1774b4; /* Reverted */
     }
 
-    /* Mobile Arrow Base */
+    /* Original arrow display logic */
     .main-nav ul li > a[aria-haspopup="true"] {
-        display: block;
-        position: relative;
+        /* Original didn't have flex display */
+        display: block; /* Revert */
+        position: relative; /* Needed for absolute positioned arrow */
         width: 100%;
     }
     .main-nav ul li > a[aria-haspopup="true"]::after {
-        content: '▼'; /* Default arrow down */
+        content: '▼';
         display: inline-block;
-        margin-left: 8px; /* Space from text if needed */
+        margin-left: 8px;
         font-size: 0.8em;
         transition: transform 0.3s ease;
-        color: #6c757d;
-        /* Position arrow to the right */
-        position: absolute;
-        right: 20px; /* Adjust as needed */
-        top: 50%;
-        transform: translateY(-50%); /* Center vertically */
+        color: #6c757d; /* Reverted */
+        /* Positioning might need adjustment depending on exact layout */
+         position: absolute;
+         right: 20px; /* Adjust as needed */
+         top: 50%;
+         transform: translateY(-50%); /* Center vertically */
     }
-    /* JS controls arrow rotation via submenu-open class on LI */
+    /* Keep JS class based rotation - assumes JS adds 'submenu-open' to LI */
     .main-nav ul li.submenu-open > a[aria-haspopup="true"]::after {
-        transform: translateY(-50%) rotate(180deg); /* Point up when open */
+        transform: translateY(-50%) rotate(180deg); /* Adjust transform origin if needed */
     }
-    /* Ensure correct padding for nested mobile arrows */
-     .main-nav ul ul li.menu-item-has-children > a {
-        padding-right: 40px; /* Ensure space for arrow */
-     }
-     /* Ensure correct arrow for nested mobile */
-     .main-nav ul ul li.menu-item-has-children > a::after {
-        content: '▼';
-     }
-     /* Ensure correct rotation for nested mobile */
-     .main-nav ul ul li.submenu-open > a::after {
-          transform: translateY(-50%) rotate(180deg);
-     }
 }
 
-/* ========== FOOTER STYLES ========== */
+/* ========== FOOTER STYLES (Kept from revision) ========== */
 .site-footer {
     background-color: var(--theme-blue, #1774b4);
     color: #e9ecef;
     padding: 40px 0 20px;
     font-size: 0.9em;
-    position: relative; /* Ensure footer position is not absolute/fixed */
-    /* flex-shrink: 0; is defined above */
-    /* width: 100%; is defined above */
+    /* margin-top: auto; */ /* REMOVED */
+    flex-shrink: 0; /* Keep */
+    width: 100%;    /* Keep */
 }
 
 .footer-grid {
@@ -437,6 +428,7 @@ ul { margin-bottom: 1em; margin-left: 20px; }
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 30px;
     margin-bottom: 30px;
+    /* Keep centering/padding */
     max-width: 1140px;
     margin-left: auto;
     margin-right: auto;
@@ -478,6 +470,7 @@ ul { margin-bottom: 1em; margin-left: 20px; }
     border-top: 1px solid #4a9dcf;
     font-size: 0.85em;
     color: #adb5bd;
+    /* Keep centering/padding */
     max-width: 1140px;
     margin-left: auto;
     margin-right: auto;
@@ -486,8 +479,7 @@ ul { margin-bottom: 1em; margin-left: 20px; }
     width: 100%;
 }
 
-/* ========== MAIN CONTENT AREA STYLES ========== */
-
+/* ========== MAIN CONTENT STYLES (Kept from revision) ========== */
 .main-content .contact-image {
     float: none;
     display: block;
@@ -508,18 +500,18 @@ ul { margin-bottom: 1em; margin-left: 20px; }
 }
 
 .table-responsive {
-    overflow-x: auto; /* Allow table to scroll horizontally */
+    overflow-x: auto; /* Keep */
     margin-top: 20px;
     margin-bottom: 30px;
     border: 1px solid #dee2e6;
     border-radius: 5px;
-    width: 100%; /* Prevent container from exceeding parent */
+    width: 100%; /* Keep */
 }
 
 .records-table {
-    width: 100%; /* Table takes width of its container */
+    width: 100%;
     border-collapse: collapse;
-    min-width: 600px; /* Force horizontal scroll if container is narrower */
+    min-width: 600px; /* Keep */
     font-size: 0.95em;
 }
 
@@ -564,4 +556,4 @@ ul { margin-bottom: 1em; margin-left: 20px; }
     cursor: text;
 }
 
-/* END OF FILE */
+/* Removed redundant media queries from original */
