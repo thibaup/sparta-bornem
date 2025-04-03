@@ -19,17 +19,6 @@
             scroll-behavior: smooth; /* Optional: Smooth scrolling for anchor links */
         }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f8f9fa;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow-x: hidden;
-        }
-
         main {
             flex-grow: 1;
             padding-bottom: 60px; /* Ensure space above footer */
@@ -73,23 +62,6 @@
         }
         p { margin-bottom: 1em; }
         ul { margin-bottom: 1em; margin-left: 20px; }
-
-        /* --- Navigation Submenu Styles (Keep as is) --- */
-        .main-nav .submenu {
-            display: none; position: absolute; background-color: #fff;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); list-style: none;
-            padding: 10px 0; margin-top: 5px; min-width: 220px; left: 0;
-            z-index: 1001; border-radius: 4px; opacity: 0; visibility: hidden;
-            transform: translateY(10px);
-            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
-        }
-        .main-nav .submenu a.active { color: var(--theme-blue); font-weight: 600; border-bottom-color: transparent !important; }
-        .main-nav .submenu li { margin: 0; position: relative; }
-        .main-nav .submenu a { display: block; padding: 8px 15px; color: var(--dark-grey); text-transform: none; font-weight: 400; border-bottom: none; white-space: nowrap; transition: background-color 0.2s ease, color 0.2s ease; }
-        .main-nav .submenu a:hover { background-color: #e8f1f8; color: var(--theme-blue-dark); }
-        .main-nav .submenu .submenu { top: -10px; left: 100%; margin-top: 0; margin-left: 1px; min-width: 200px; }
-        .main-nav li:hover > .submenu { display: block; opacity: 1; visibility: visible; transform: translateY(0); }
-        /* --- End Navigation Submenu Styles --- */
 
 
         /* --- Hero Section Styles (Keep as is) --- */
@@ -202,7 +174,7 @@
            class="cta-button"
            target="_blank"
            rel="noopener noreferrer"
-           style="background-color: #28a745; border-color: #28a745;">
+           style="background-color: #1774b4; border-color: #1774b4;">
            <i class="fas fa-camera" style="margin-right: 8px;"></i>Upload hier je foto's
         </a>
     </div>
@@ -245,7 +217,7 @@
       <p>
        Sluit je aan bij onze sportieve familie en ervaar de passie voor atletiek in Bornem.
       </p>
-      <a class="read-more" href="/html/(Nieuwe)%20leden/aansluiten.html"> <!-- Fixed URL encoding -->
+      <a class="read-more" href="/html/(Nieuwe)%20leden/aansluiten.html">
        Info & Aansluiten »
       </a>
      </div>

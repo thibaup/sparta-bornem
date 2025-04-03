@@ -1,58 +1,4 @@
-// js/scripts.js
-
-// --- Global Scope Variables and Functions for Footer Positioning ---
-let resizeTimerFooter; // Timer variable for debouncing resize
-
-/**
- * Checks page height vs viewport height and sets footer position accordingly.
- * Switches between CSS default (relative) and absolute positioning.
- * Assumes CSS sets body { position: relative; min-height: 100vh; }
- * and .site-footer { position: relative; width: 100%; } as default.
- */
-function adjustFooterPosition() {
-    const footerElement = document.querySelector('.site-footer'); // Target the actual footer
-    const body = document.body;
-    const html = document.documentElement;
-
-    if (!footerElement) {
-        // console.warn("adjustFooterPosition: Footer element (.site-footer) not found.");
-        return; // Exit if footer isn't in the DOM yet
-    }
-
-    // Adding a small delay can sometimes help ensure layout calculations are complete
-    setTimeout(() => {
-        const totalPageHeight = Math.max( body.scrollHeight, body.offsetHeight,
-                               html.clientHeight, html.scrollHeight, html.offsetHeight );
-        const viewportHeight = window.innerHeight;
-
-        // console.log(`DEBUG: Page Height: ${totalPageHeight}, Viewport Height: ${viewportHeight}`);
-
-        if (totalPageHeight <= viewportHeight) {
-            // Page content is short: Stick footer absolutely
-            // console.log("DEBUG: Setting footer to absolute");
-            footerElement.style.position = 'absolute';
-            footerElement.style.left = '0';
-            footerElement.style.width = '100%';
-            footerElement.style.bottom = '0';
-        } else {
-            // Page content is long: Revert footer to CSS default (relative)
-            // console.log("DEBUG: Reverting footer to CSS default position");
-            footerElement.style.position = ''; // Let CSS handle 'relative'
-            footerElement.style.left = '';
-            footerElement.style.width = '';
-            footerElement.style.bottom = '';
-        }
-    }, 10); // Small delay (10ms) - adjust if necessary
-
-}
-
-/**
- * Debounce function to limit how often adjustFooterPosition runs on resize.
- */
-function debounceFooterAdjust() {
-    clearTimeout(resizeTimerFooter);
-    resizeTimerFooter = setTimeout(adjustFooterPosition, 150); // 150ms delay
-}
+// js/script.js
 
 /**
  * Fetches news data, sorts it, takes the latest items, and displays them.
@@ -82,19 +28,20 @@ async function loadLatestNews(count = 3, containerId = 'latest-news-grid', loadi
         }
         const newsData = await response.json();
 
+        // Ensure data is sorted by date descending
         newsData.sort((a, b) => new Date(b.date) - new Date(a.date));
 
         const latestNews = newsData.slice(0, count);
 
-        if (loadingMessage) loadingMessage.remove();
-        newsContainer.innerHTML = '';
+        if (loadingMessage) loadingMessage.remove(); // Remove loading message
+        newsContainer.innerHTML = ''; // Clear container
 
         if (latestNews.length === 0) {
             newsContainer.innerHTML = '<p style="grid-column: 1 / -1; text-align: center;">Geen nieuwsberichten gevonden.</p>';
-            return; 
+            return;
         }
 
-        const referrerPath = window.location.pathname;
+        const referrerPath = window.location.pathname; // Get current page path for backlink
 
         latestNews.forEach(item => {
             const itemDate = new Date(item.date);
@@ -102,18 +49,23 @@ async function loadLatestNews(count = 3, containerId = 'latest-news-grid', loadi
                 day: 'numeric', month: 'long', year: 'numeric'
             });
 
-            let finalImageUrl = '/images/nieuws/placeholder-news.png'; 
-            if (item.image) { 
+            // Construct image URL, assuming images are in /images/nieuws/ unless full URL
+            let finalImageUrl = '/images/nieuws/placeholder-news.png'; // Default placeholder
+            if (item.image) {
                 if (!item.image.startsWith('http://') && !item.image.startsWith('https://')) {
+                    // Assume relative path, prepend the base image path
                     finalImageUrl = `/images/nieuws/${item.image.trim()}`;
                 } else {
+                    // Use the full URL provided
                     finalImageUrl = item.image.trim();
                 }
             }
 
-            const summaryText = item.summary || '';
+            const summaryText = item.summary || ''; // Use summary if available
+            // Construct link to the full article page, passing ID and referrer
             const itemLink = `/html/nieuws/artikel.html?id=${item.id || ''}&ref=${encodeURIComponent(referrerPath)}`;
 
+            // Generate HTML differently based on whether there's a summary
             let articleHtml;
             if (summaryText) {
                 articleHtml = `
@@ -147,42 +99,67 @@ async function loadLatestNews(count = 3, containerId = 'latest-news-grid', loadi
         console.error('Error loading or processing latest news data:', error);
         const displayError = `<p style="color:red; text-align:center; grid-column: 1 / -1;">Kon laatste nieuws niet laden. (${error.message})</p>`;
         if(loadingMessage) {
-            loadingMessage.innerHTML = displayError;
+            loadingMessage.innerHTML = displayError; // Show error in loading message spot
         } else if(newsContainer) {
-             newsContainer.innerHTML = displayError;
+             newsContainer.innerHTML = displayError; // Show error in news container
         }
     }
 }
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    const headerPlaceholder = document.getElementById('header-placeholder');
-    const footerPlaceholder = document.getElementById('footer-placeholder');
-
     // --- Page Info ---
     const currentPagePath = window.location.pathname;
 
-
     // --- Function Definitions within DOMContentLoaded Scope ---
-    const loadHTML = async (url, placeholder) => {
+
+    /**
+     * Fetches HTML from a URL and REPLACES a placeholder element with the fetched content's main element.
+     * @param {string} placeholderId - The ID of the element to replace.
+     * @param {string} url - The URL to fetch the HTML from (root-relative assumed).
+     * @returns {Promise<Element|null>} A promise that resolves with the newly added element or null on failure.
+     */
+    const loadAndReplace = async (placeholderId, url) => {
+        const placeholder = document.getElementById(placeholderId);
+        if (!placeholder) {
+            // console.warn(`Placeholder element #${placeholderId} not found.`);
+            return null;
+        }
+        if (!placeholder.parentNode) {
+            console.error(`Placeholder #${placeholderId} has no parent node, cannot replace.`);
+            return null;
+        }
+
         const rootRelativeUrl = url.startsWith('/') ? url : '/' + url;
 
         try {
             const response = await fetch(rootRelativeUrl);
             if (!response.ok) {
-                console.error(`HTTP error! status: ${response.status} for ${rootRelativeUrl}`);
-                placeholder.innerHTML = `<p style="color: red; text-align: center;">Error: Could not load ${url}. Check path.</p>`;
-                return false;
+                throw new Error(`HTTP error! status: ${response.status} for ${rootRelativeUrl}`);
             }
             const html = await response.text();
-            placeholder.innerHTML = html;
-            return true;
+            const tempContainer = document.createElement('div');
+            tempContainer.innerHTML = html.trim();
+
+            // Adjust this selector if _header.html/_footer.html have extra wrappers
+            const actualElement = tempContainer.firstChild;
+
+            if (actualElement && actualElement.nodeType === Node.ELEMENT_NODE) {
+                placeholder.parentNode.replaceChild(actualElement, placeholder);
+                console.log(`Successfully replaced #${placeholderId} with content from ${url}`);
+                return actualElement;
+            } else {
+                console.error(`Could not find a valid element node in fetched HTML for ${url}. Found:`, actualElement);
+                placeholder.innerHTML = `<p style="color: red;">Error: Invalid content loaded from ${url}.</p>`;
+                return null;
+            }
         } catch (error) {
-            console.error(`Could not load HTML from ${rootRelativeUrl}:`, error);
+            console.error(`Could not load and replace HTML from ${rootRelativeUrl}:`, error);
             placeholder.innerHTML = `<p style="color: red; text-align: center;">Error loading content from ${url}.</p>`;
-            return false;
+            return null;
         }
     };
+
 
     /**
      * Initializes Header Functionality (Mobile Toggle, Accordion, Active Links)
@@ -190,54 +167,58 @@ document.addEventListener('DOMContentLoaded', function() {
     const initializeHeader = () => {
         const menuToggle = document.querySelector('.menu-toggle');
         const mainNavUl = document.querySelector('.main-nav > ul');
-        const mobileBreakpoint = 992;
+
+        if (!mainNavUl) {
+            console.warn("initializeHeader: .main-nav > ul not found. Cannot initialize header.");
+            return;
+        }
+
+        const mobileBreakpoint = 768; // Match your CSS breakpoint
 
         // --- Mobile Menu Toggle Logic ---
-        if (menuToggle && mainNavUl) {
+        if (menuToggle) {
             menuToggle.addEventListener('click', () => {
-                const isActive = mainNavUl.classList.toggle('active'); 
-                menuToggle.innerHTML = isActive ? '✕' : '☰'; 
+                const isActive = mainNavUl.classList.toggle('active');
+                menuToggle.innerHTML = isActive ? '✕' : '☰';
                 menuToggle.setAttribute('aria-expanded', isActive);
 
-                // Reset any open submenus when the main menu is closed
+                // Reset open submenus when main menu closes
                 if (!isActive) {
                     mainNavUl.querySelectorAll('li.submenu-open').forEach(li => {
                         li.classList.remove('submenu-open');
                         const sub = li.querySelector(':scope > ul.submenu');
-                        if (sub) {
-                            sub.classList.remove('submenu-active');
-                        }
+                        if (sub) sub.classList.remove('submenu-active');
                         const parentLink = li.querySelector(':scope > a');
-                        if (parentLink) {
-                            parentLink.setAttribute('aria-expanded', 'false');
-                        }
+                        if (parentLink) parentLink.setAttribute('aria-expanded', 'false');
                     });
                 }
             });
-        } else {
-            console.warn("Header initialization warning: Menu toggle button or nav UL not found.");
         }
 
+        // --- Mobile Accordion & Desktop Hover Setup ---
         const menuItems = mainNavUl.querySelectorAll(':scope > li');
 
         menuItems.forEach(li => {
             const parentLink = li.querySelector(':scope > a');
-            const submenu = li.querySelector(':scope > ul.submenu'); 
+            const submenu = li.querySelector(':scope > ul.submenu');
 
             if (parentLink && submenu) {
                  parentLink.setAttribute('aria-haspopup', 'true');
                  parentLink.setAttribute('aria-expanded', 'false');
 
+                // Click listener handles mobile accordion
                 parentLink.addEventListener('click', (event) => {
-                    const isMobileView = window.innerWidth < mobileBreakpoint && getComputedStyle(menuToggle).display !== 'none';
+                    const isMobileView = window.innerWidth <= mobileBreakpoint && menuToggle && window.getComputedStyle(menuToggle).display !== 'none';
 
                     if (isMobileView) {
+                        // Prevent default link behavior only on mobile if it's a real link
                         if(parentLink.getAttribute('href') && parentLink.getAttribute('href') !== '#') {
                              event.preventDefault();
                         }
 
                         const isOpening = !li.classList.contains('submenu-open');
 
+                        // Close siblings at the same level
                          if (isOpening) {
                              li.parentElement.querySelectorAll(':scope > li.submenu-open').forEach(otherLi => {
                                  if (otherLi !== li) {
@@ -245,21 +226,20 @@ document.addEventListener('DOMContentLoaded', function() {
                                      const otherSubmenu = otherLi.querySelector(':scope > ul.submenu');
                                      if (otherSubmenu) otherSubmenu.classList.remove('submenu-active');
                                      const otherLink = otherLi.querySelector(':scope > a');
-                                      if(otherLink) {
-                                         otherLink.setAttribute('aria-expanded', 'false');
-                                      }
+                                     if(otherLink) otherLink.setAttribute('aria-expanded', 'false');
                                  }
                              });
                          }
 
-                        // Now toggle the current item
+                        // Toggle current item
                         li.classList.toggle('submenu-open', isOpening);
-                        submenu.classList.toggle('submenu-active', isOpening);
+                        submenu.classList.toggle('submenu-active', isOpening); // Ensure submenu display class is toggled
                         parentLink.setAttribute('aria-expanded', isOpening);
 
-                    }
-                });
+                    } // end if(isMobileView)
+                }); // end parentLink click listener
 
+                 // --- Handle Nested Submenus (Accordion style on mobile) ---
                  const nestedSubmenuItems = submenu.querySelectorAll(':scope > li');
                  nestedSubmenuItems.forEach(nestedLi => {
                      const nestedParentLink = nestedLi.querySelector(':scope > a');
@@ -270,13 +250,14 @@ document.addEventListener('DOMContentLoaded', function() {
                          nestedParentLink.setAttribute('aria-expanded', 'false');
 
                          nestedParentLink.addEventListener('click', (event) => {
-                             const isMobileView = window.innerWidth < mobileBreakpoint && getComputedStyle(menuToggle).display !== 'none';
+                             const isMobileView = window.innerWidth <= mobileBreakpoint && menuToggle && window.getComputedStyle(menuToggle).display !== 'none';
                              if (isMobileView) {
-                                 if(nestedParentLink.getAttribute('href') && nestedParentLink.getAttribute('href') !== '#') {
+                                  if(nestedParentLink.getAttribute('href') && nestedParentLink.getAttribute('href') !== '#') {
                                       event.preventDefault();
                                  }
                                  const isNestedOpening = !nestedLi.classList.contains('submenu-open');
 
+                                 // Close siblings
                                  if (isNestedOpening) {
                                     nestedLi.parentElement.querySelectorAll(':scope > li.submenu-open').forEach(otherNestedLi => {
                                         if(otherNestedLi !== nestedLi) {
@@ -289,120 +270,111 @@ document.addEventListener('DOMContentLoaded', function() {
                                     });
                                  }
 
+                                 // Toggle current
                                  nestedLi.classList.toggle('submenu-open', isNestedOpening);
-                                 nestedSubmenu.classList.toggle('submenu-active', isNestedOpening);
+                                 nestedSubmenu.classList.toggle('submenu-active', isNestedOpening); // Toggle display class
                                  nestedParentLink.setAttribute('aria-expanded', isNestedOpening);
-                             }
-                         });
-                     }
-                 });
-
-
+                             } // end if(isMobileView)
+                         }); // end nestedParentLink click listener
+                     } // end if (nestedParentLink && nestedSubmenu)
+                 }); // end nestedSubmenuItems.forEach
             } // End if (parentLink && submenu)
         }); // End menuItems.forEach
 
-
         // --- Active Page Link Highlighting Logic ---
-        const navLinks = mainNavUl.querySelectorAll('a[href]'); // Select all links with href within the main nav UL
+        const navLinks = mainNavUl.querySelectorAll('a[href]');
 
-        /**
-         * Normalizes a URL path for comparison.
-         * Removes trailing index/home.html, removes trailing .html,
-         * removes trailing slash (unless root), decodes URI components,
-         * converts to lowercase.
-         * @param {string} path - The URL path to normalize.
-         * @returns {string} The normalized path.
-         */
         const normalizePath = (path) => {
-            if (!path) return '/'; // Handle null/undefined path
-
-             // 1. Decode URI component first (handles spaces %20 etc.)
-             try {
-                path = decodeURIComponent(path);
-            } catch (e) {
-                 console.warn("Could not decode path component:", path, e);
-                 // Continue with the potentially encoded path if decoding fails
-            }
-
-            // 2. Remove index.html or home.html from the end
-            if (path.endsWith('/index.html')) {
-                path = path.substring(0, path.length - 'index.html'.length);
-            } else if (path.endsWith('/home.html')) {
-                 path = path.substring(0, path.length - 'home.html'.length);
-            }
-
-            // 3. Remove .html extension from the end (Key fix for Netlify Pretty URLs)
-            if (path.endsWith('.html')) {
-                path = path.substring(0, path.length - '.html'.length);
-            }
-
-            // 4. Remove trailing slash unless it's the root '/'
-            if (path !== '/' && path.endsWith('/')) {
-                path = path.substring(0, path.length - 1);
-            }
-
-            // 5. Ensure root path is consistently just '/' after modifications
-            if (path === '') {
-                path = '/';
-            }
-
-            // 6. Convert to lowercase for case-insensitive comparison (Fix for Netlify)
-             path = path.toLowerCase(); // <<< THIS LINE IS NOW ACTIVE
-
+            if (!path) return '/';
+             try { path = decodeURIComponent(path); } catch (e) { console.warn("Decode path failed:", path, e); }
+            if (path.endsWith('/index.html')) path = path.substring(0, path.length - 'index.html'.length);
+            if (path.endsWith('/home.html')) path = path.substring(0, path.length - 'home.html'.length);
+            if (path.endsWith('.html')) path = path.substring(0, path.length - '.html'.length);
+            if (path !== '/' && path.endsWith('/')) path = path.substring(0, path.length - 1);
+            if (path === '') path = '/';
+            path = path.toLowerCase();
             return path;
         };
 
-
-        // Normalize the current page's path ONCE
         const normalizedCurrentPath = normalizePath(currentPagePath);
 
-        // Iterate through navigation links
         navLinks.forEach(link => {
             const linkHref = link.getAttribute('href');
-            if (!linkHref || linkHref === '#') return; // Skip non-links or placeholder links
+            if (!linkHref || linkHref === '#') return;
 
             let linkPath;
-            try {
-                // Construct absolute URL's path to handle relative paths correctly
-                linkPath = new URL(linkHref, window.location.origin).pathname;
-            } catch (e) {
-                console.warn(`Invalid URL encountered in navigation: ${linkHref}`);
-                return; // Skip invalid URLs
-            }
+            try { linkPath = new URL(linkHref, window.location.origin).pathname; }
+            catch (e) { console.warn(`Invalid nav URL: ${linkHref}`); return; }
 
-            // Normalize the link's path
             const normalizedLinkPath = normalizePath(linkPath);
 
-            // Check for active state using the normalized paths
             if (normalizedCurrentPath === normalizedLinkPath) {
                 link.classList.add('active');
-
-                // Traverse up the DOM to add active classes to parent menu items
-                let currentElement = link.parentElement; // Start with the LI containing the link
-                while (currentElement && currentElement.matches('.main-nav li, .main-nav ul')) {
+                let currentElement = link.parentElement;
+                while (currentElement && currentElement.closest('.main-nav')) {
                     if (currentElement.tagName === 'LI') {
-                        currentElement.classList.add('active-ancestor'); // Add class to the parent LI
-
-                        // Find the direct anchor link within that LI (the parent menu item trigger)
+                        currentElement.classList.add('active-ancestor');
                         const parentTriggerLink = currentElement.querySelector(':scope > a');
-                        if (parentTriggerLink) {
-                             // console.log("Adding 'active' to parent link:", parentTriggerLink); // Optional debug
-                            parentTriggerLink.classList.add('active'); // Highlight the trigger link
+                        if (parentTriggerLink && !parentTriggerLink.classList.contains('active')) {
+                            parentTriggerLink.classList.add('active');
                         }
-                    }
-                    // Move up to the parent UL, then its parent LI
-                     const parentUl = currentElement.closest('ul.submenu'); // Look specifically for submenu ULs
-                     if (parentUl) { // If we are inside a submenu UL
-                         currentElement = parentUl.parentElement; // Go to the LI containing this submenu
-                     } else {
-                         break; // Stop if we reach the main nav UL or something else
-                     }
+                        const parentSubmenu = currentElement.closest('ul.submenu');
+                        if (parentSubmenu) {
+                            currentElement = parentSubmenu.parentElement;
+                        } else { break; }
+                    } else { break; }
                 }
-            } // End if active
-        }); // End navLinks.forEach
-
-
+            }
+        });
     }; // End initializeHeader
+
+    /**
+     * --- NEW --- Initializes Submenu Positioning (Checks for Overflow)
+     */
+    function initializeSubmenuPositioning() {
+        // Select list items within level 2+ submenus that HAVE further nested submenus
+        const nestedSubmenuParents = document.querySelectorAll('.main-nav .submenu > li.menu-item-has-children');
+
+        nestedSubmenuParents.forEach(li => {
+            const submenu = li.querySelector(':scope > ul.submenu'); // Get the direct child submenu (Level 3+)
+
+            if (!submenu) return; // Skip if no submenu found
+
+            li.addEventListener('mouseenter', () => {
+                // Use setTimeout to allow CSS transition to potentially start making submenu visible
+                setTimeout(() => {
+                    const parentRect = li.getBoundingClientRect();
+                    const submenuRect = submenu.getBoundingClientRect(); // Get submenu size
+                    const viewportWidth = window.innerWidth;
+
+                    // Check if submenu is actually rendered (width > 0) before calculating
+                    if (submenuRect.width > 0) {
+                        const predictedRightEdge = parentRect.right + submenuRect.width;
+                        const buffer = 10; // Small buffer from edge
+
+                        // console.log(`DEBUG: Parent right: ${parentRect.right.toFixed(0)}, Submenu width: ${submenuRect.width.toFixed(0)}, Predicted right: ${predictedRightEdge.toFixed(0)}, Viewport width: ${viewportWidth}`);
+
+                        if (predictedRightEdge > (viewportWidth - buffer)) {
+                            // console.log("DEBUG: Adding submenu-pull-left");
+                            li.classList.add('submenu-pull-left');
+                        } else {
+                            // console.log("DEBUG: Removing submenu-pull-left");
+                            li.classList.remove('submenu-pull-left');
+                        }
+                    } else {
+                        // Submenu might not be rendered yet or has no width, remove class just in case
+                        li.classList.remove('submenu-pull-left');
+                    }
+                }, 50); // 50ms delay
+            });
+
+            // Remove class on mouseleave for cleanliness
+            li.addEventListener('mouseleave', () => {
+                 li.classList.remove('submenu-pull-left');
+            });
+        });
+    } // End initializeSubmenuPositioning
+
 
     /**
      * Initializes Footer Functionality (Year)
@@ -416,66 +388,43 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     /**
-     * Orchestrates the loading and initialization of header and footer,
-     * loads news, and checks footer position.
+     * Orchestrates the loading and initialization.
      */
     const loadAll = async () => {
-        let headerLoaded = false;
-        let footerLoaded = false;
+        const headerPlaceholderId = 'header-placeholder';
+        const footerPlaceholderId = 'footer-placeholder';
+        const headerPath = '/_header.html'; // Adjust path if needed
+        const footerPath = '/_footer.html'; // Adjust path if needed
 
-        const headerPath = '/_header.html'; // Use root-relative path
-        const footerPath = '/_footer.html'; // Use root-relative path
+        // Load Header and Footer Concurrently
+        await Promise.all([
+            loadAndReplace(headerPlaceholderId, headerPath),
+            loadAndReplace(footerPlaceholderId, footerPath)
+        ]);
 
-        // --- Load Header ---
-        if (headerPlaceholder) {
-            headerLoaded = await loadHTML(headerPath, headerPlaceholder);
-        }
-        // Initialize header AFTER potential loading OR if it exists statically
+        // Initialize AFTER replacements are done
         if (document.querySelector('.site-header')) {
              initializeHeader();
+             initializeSubmenuPositioning(); // << Initialize submenu check AFTER header structure is ready
         } else {
-            console.warn("loadAll: .site-header not found after attempting load/checking static.");
+            console.warn("loadAll: .site-header not found after load attempt.");
         }
 
-
-        // --- Load Footer ---
-        if (footerPlaceholder) {
-             footerLoaded = await loadHTML(footerPath, footerPlaceholder);
-        }
-         // Initialize footer AFTER potential loading OR if it exists statically
-         if (document.querySelector('.site-footer')) {
+        if (document.querySelector('.site-footer')) {
              initializeFooter();
-             adjustFooterPosition(); // Adjust position after footer content is known
-         } else {
-             console.warn("loadAll: .site-footer not found after attempting load/checking static.");
-             // Attempt initial adjust anyway in case footer is static but not loaded via placeholder
-             adjustFooterPosition();
-         }
+        } else {
+             console.warn("loadAll: .site-footer not found after load attempt.");
+        }
 
-
-        // --- Load Latest News ---
+        // Load Latest News (can run independently)
         if (typeof loadLatestNews === 'function') {
-           await loadLatestNews(); // Load news if container exists on the page
+           await loadLatestNews();
         }
 
-
-        // --- Final Footer Position Check ---
-        if (typeof adjustFooterPosition === 'function') {
-            setTimeout(adjustFooterPosition, 100); // Slightly longer delay after potential layout shifts
-        }
-
-    }; // End loadAll
+        console.log("Initial content loading and initialization finished.");
+    };
 
     // --- Start Execution ---
     loadAll();
 
 }); // End DOMContentLoaded
-
-
-// --- Global Event Listeners ---
-
-// Adjust footer position when all resources are loaded (images etc.)
-window.addEventListener('load', adjustFooterPosition);
-
-// Adjust footer position on window resize (debounced)
-window.addEventListener('resize', debounceFooterAdjust);

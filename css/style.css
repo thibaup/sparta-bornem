@@ -9,18 +9,39 @@
 }
 
 html {
-    height: 100%;
+   /* Optional: height: 100%; */ /* Can sometimes help ensure body fills html */
 }
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: #333;
-    background-color: #f8f9fa;
+    background-color: #f8f9fa; /* Consistent background color */
+
+    /* --- Core Sticky Footer Rules --- */
+    display: flex;             /* 1. Establish flex container */
+    flex-direction: column;    /* 2. Arrange children vertically */
+    min-height: 100vh;         /* 3. Ensure body is at least viewport height */
+    overflow-x: hidden;        /* Prevent accidental horizontal scroll */
 }
 
-main {
-     padding-bottom: 60px; 
+/* Target your main content element(s) */
+main,
+.main-content /* Apply to both if you use either <main> or <div class="main-content"> */ {
+    flex-grow: 1;              /* 4. Allow main content to expand and push footer down */
+    width: 100%;               /* Good practice for flex item */
+    padding-bottom: 60px;      /* Your desired space above footer */
+    /* Reset potential conflicting fixed heights */
+    height: auto;
+    max-height: none;
+}
+
+
+/* Target your header and footer elements */
+.site-header,
+.site-footer {
+    flex-shrink: 0;            /* 5. Prevent header/footer from shrinking */
+    width: 100%;               /* Ensure full width */
 }
 
 
@@ -31,7 +52,7 @@ main {
 }
 
 a {
-    color: #1774b4; 
+    color: #1774b4;
     text-decoration: none;
     transition: color 0.3s ease;
 }
@@ -58,10 +79,9 @@ ul { margin-bottom: 1em; margin-left: 20px; }
     background-color: #ffffff;
     padding: 15px 0;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
-    position: sticky;
+    position: sticky; /* Keep sticky if desired */
     top: 0;
     z-index: 1000;
-    flex-shrink: 0;
     min-width: 280px;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
@@ -71,117 +91,70 @@ ul { margin-bottom: 1em; margin-left: 20px; }
     transform: translateY(-2px);
 }
 
-.header-container { 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    flex-wrap: wrap; 
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    /* If this container isn't inside .container, add max-width/margin/padding */
+    /* max-width: 1140px; margin: 0 auto; padding: 0 20px; */
 }
 
-/* Logo animations */
-.logo h1 { 
-    margin: 0; 
-    font-size: 1.8em; 
-}
+/* Logo */
+.logo h1 { margin: 0; font-size: 1.8em; }
+.logo a { position: relative; display: inline-block; color: #212529; text-decoration: none; font-weight: 700; transition: transform 0.3s ease, color 0.3s ease; transform-origin: left center; }
+.logo a:hover { transform: scale(1.05); color: #1774b4; text-decoration: none; }
+.logo img { max-height: 50px; transition: transform 0.3s ease; }
+.logo img:hover { transform: scale(1.05); }
 
-.logo a { 
-    position: relative;
-    display: inline-block;
-    color: #212529; 
-    text-decoration: none; 
-    font-weight: 700;
-    transition: transform 0.3s ease, color 0.3s ease;
-    transform-origin: left center;
-}
+/* ========== NAVIGATION ========== */
+.main-nav ul { list-style: none; padding: 0; margin: 0; display: flex; }
+.main-nav li { margin-left: 25px; position: relative; }
+.main-nav a { color: #343a40; text-transform: uppercase; font-weight: 600; font-size: 0.95em; padding-bottom: 5px; border-bottom: 2px solid transparent; transition: color 0.3s ease, border-color 0.3s ease, transform 0.2s ease; position: relative; }
+.main-nav a:hover, .main-nav a.active { color: #1774b4; border-bottom-color: #1774b4; transform: translateY(-2px); text-decoration: none; }
 
-.logo a:hover { 
-    transform: scale(1.05);
-    color: #1774b4;
-    text-decoration: none;
-}
-
-.logo img { 
-    max-height: 50px; 
-    transition: transform 0.3s ease;
-}
-
-.logo img:hover {
-    transform: scale(1.05);
-}
-
-/* Navigation animations */
-.main-nav ul { 
-    list-style: none; 
-    padding: 0; 
-    margin: 0; 
-    display: flex; 
-}
-
-.main-nav li { 
-    margin-left: 25px; 
-    position: relative; 
-}
-
-.main-nav a {
-    color: #343a40;
-    text-transform: uppercase;
-    font-weight: 600;
-    font-size: 0.95em;
-    padding-bottom: 5px;
-    border-bottom: 2px solid transparent;
-    transition: color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
-    position: relative;
-}
-
-.main-nav a:hover,
-.main-nav a.active {
-    color: #1774b4; 
-    border-bottom-color: #1774b4;
-    transform: translateY(-2px);
-    text-decoration: none;
-}
-
-/* Submenu animations */
+/* Submenu Base */
 .main-nav .submenu {
-    display: block;
+    display: block; /* Use visibility/opacity for transitions */
     position: absolute;
     background-color: #fff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     list-style: none;
     padding: 10px 0;
-    margin-top: 5px;
-    min-width: 220px;
-    left: 0;
+    margin-top: 5px; /* Space below parent */
+    min-width: 220px; /* Adjust as needed */
+    left: 0; /* Default position */
     z-index: 1001;
     border-radius: 4px;
     opacity: 0;
     visibility: hidden;
     transform: translateY(10px);
-    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.3s; /* Delay hiding */
 }
 
+/* Submenu show on hover */
 .main-nav li:hover > .submenu {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
-    display: block;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0s; /* Show immediately */
 }
 
 .main-nav .submenu a.active {
-   color: #1774b4; 
+   color: #1774b4;
    font-weight: 600;
-   border-bottom-color: transparent !important;
+   border-bottom-color: transparent !important; /* Consider removing !important if possible */
 }
 
 .main-nav .submenu li {
     margin: 0;
-    position: relative;
+    position: relative; /* Needed for nested submenu positioning */
 }
 
 .main-nav .submenu a {
    display: block;
    padding: 8px 15px;
-   color: #343a40; 
+   color: #343a40;
    text-transform: none;
    font-weight: 400;
    border-bottom: none;
@@ -190,19 +163,30 @@ ul { margin-bottom: 1em; margin-left: 20px; }
 }
 
 .main-nav .submenu a:hover {
-   background-color: #e8f1f8; 
+   background-color: #e8f1f8;
    color: #125a8c;
    transform: translateX(3px);
 }
 
+/* Nested submenu positioning (Level 3+) - Default Right */
 .main-nav .submenu .submenu {
-   top: -10px;
-   left: 100%;
-   margin-top: 0;
-   margin-left: 1px;
-   min-width: 200px;
+   top: -10px; /* Adjust vertical alignment as needed */
+   left: 100%; /* Start at the right edge of the parent LI */
+   margin-left: 1px; /* Small gap */
+   min-width: 200px; /* Or adjust as needed */
+   /* Inherits common styles like position absolute, background, shadow, transitions etc. */
 }
 
+/* Nested submenu positioning - Opening Left (JS adds submenu-pull-left to parent LI) */
+.main-nav .submenu li.submenu-pull-left > .submenu {
+    left: auto;    /* Override the default left: 100% */
+    right: 100%;   /* Anchor right edge of submenu to the left edge of parent li */
+    margin-left: 0;
+    margin-right: 1px; /* Optional gap on the left */
+}
+
+/* Arrows for dropdowns */
+/* Top Level Arrow */
 .main-nav > ul > li.menu-item-has-children > a::after {
    content: ' ▼';
    font-size: 0.7em;
@@ -212,170 +196,240 @@ ul { margin-bottom: 1em; margin-left: 20px; }
    color: #6c757d;
    transition: transform 0.3s ease;
 }
-
 .main-nav > ul > li.menu-item-has-children:hover > a::after {
     transform: rotate(180deg);
 }
 
+/* Nested Submenu Link Base Styling */
+.main-nav .submenu li.menu-item-has-children > a {
+    position: relative; /* Containing block for arrow */
+    /* Default padding for right arrow */
+    padding-left: 15px; /* Original left padding */
+    padding-right: 30px; /* Make space for arrow on the right */
+    transition: padding 0s; /* Prevent padding transition */
+}
+
+/* Nested Submenu Arrow Base */
 .main-nav .submenu li.menu-item-has-children > a::after {
-   content: ' ▶';
+   content: ' ▶'; /* Default Right Arrow */
    font-size: 0.7em;
    display: inline-block;
-   margin-left: 4px;
    position: absolute;
-   right: 15px;
+   right: 15px; /* Default position */
+   left: auto; /* Ensure left is auto by default */
    top: 50%;
    transform: translateY(-50%);
    color: #6c757d;
-   transition: transform 0.3s ease;
+   transition: transform 0.3s ease, content 0s, left 0s, right 0s; /* Animate transform only */
 }
 
+/* Nested Submenu Arrow Hover (Default Right Opening) */
 .main-nav .submenu li.menu-item-has-children:hover > a::after {
-   transform: translateY(-50%) rotate(90deg);
+   transform: translateY(-50%) rotate(90deg); /* Rotate right arrow */
 }
 
-.main-nav .submenu li.menu-item-has-children > a {
-   padding-right: 30px;
+
+/* Nested Submenu Arrow Styling when Opening Left */
+
+/* Adjust padding on the link when opening left */
+.main-nav .submenu li.submenu-pull-left > a {
+    padding-left: 30px;  /* Make space on the left for arrow */
+    padding-right: 15px; /* Restore default right padding */
 }
 
-.menu-toggle { 
-    display: none; 
-    background: none; 
-    border: none; 
-    font-size: 1.8em; 
-    cursor: pointer; 
-    color: #343a40; 
+/* Style the arrow itself when opening left */
+.main-nav .submenu li.submenu-pull-left > a::after {
+    content: '◀ '; /* Change arrow character AND ADD SPACE AFTER */
+    right: auto;   /* Remove right positioning */
+    left: 15px;    /* Position on the left */
+    /* Vertical position (top/transform) remains the same */
+}
+
+/* Override Hover Rotation when Opening Left */
+.main-nav .submenu li.submenu-pull-left:hover > a::after {
+    transform: translateY(-50%) rotate(0deg); /* Keep left arrow pointing left, no rotation */
+}
+
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.8em;
+    cursor: pointer;
+    color: #343a40;
     padding: 5px;
     transition: transform 0.3s ease, color 0.3s ease;
 }
 
-/* Mobile menu animations */
-@media (max-width: 768px) {
+/* ========== Mobile Menu Styles ========== */
+@media (max-width: 768px) { /* Adjust breakpoint if needed */
     .header-container { position: relative; flex-wrap: wrap; }
-    .logo { flex-basis: 80%; }
-    .menu-toggle { display: block; position: absolute; top: 15px; right: 20px; }
+    .logo { flex-basis: 80%; } /* Adjust as needed */
+    .menu-toggle { display: block; position: absolute; top: 15px; right: 20px; } /* Adjust position */
     .main-nav { width: 100%; margin-top: 15px; }
-    
-    .main-nav ul { 
-        flex-direction: column; 
-        width: 100%; 
-        display: none; 
-        background-color: #fff; 
+
+    .main-nav ul {
+        flex-direction: column;
+        width: 100%;
+        display: none;
+        background-color: #fff;
         box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         opacity: 0;
         transform: translateY(-10px);
         transition: opacity 0.3s ease, transform 0.3s ease;
     }
-    
-    .main-nav ul.active { 
+
+    .main-nav ul.active {
         display: block;
         opacity: 1;
         transform: translateY(0);
     }
-    
+
     .main-nav li { margin: 0; border-bottom: 1px solid #e9ecef; }
     .main-nav li:last-child { border-bottom: none; }
     .main-nav a { display: block; padding: 12px 20px; text-align: left; border-bottom: none; }
-    
-    /* Blue Theme: Mobile Active Link */
+
     .main-nav a.active {
         color: #1774b4;
         background-color: #e8f1f8;
+        border-bottom-color: transparent !important; /* Keep override */
     }
-    
-    /* Mobile Dropdown Adjustments */
-    .main-nav ul.active .submenu {
-        max-height: 0;
-        overflow: hidden;
-        opacity: 0;
-        visibility: hidden;
-        transition: max-height 0.5s ease, opacity 0.3s ease, visibility 0.3s ease;
-    }
-    
-    .main-nav ul.active .submenu.submenu-active {
-        max-height: 1000px;
-        opacity: 1;
-        visibility: visible;
-        transition: max-height 0.5s ease, opacity 0.3s ease, visibility 0.3s ease;
-    }
-    
-    .main-nav .submenu, .main-nav .submenu .submenu {
+
+    /* Mobile submenus become static blocks */
+    .main-nav .submenu {
         position: static;
-        display: block;
+        display: block; /* Always block, JS controls visibility below */
         box-shadow: none;
         background-color: transparent;
         padding: 0;
         margin-top: 0;
         min-width: auto;
         margin-left: 0;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        transition: none;
         border-top: none;
+        border-radius: 0;
     }
-    
+
+     /* JS controls display of mobile submenus via submenu-open class on LI */
+     /* Hide submenus by default when mobile menu is active */
+    .main-nav ul.active .submenu {
+        display: none;
+    }
+    /* Show the direct submenu when parent LI has .submenu-open */
+    .main-nav ul.active li.submenu-open > ul.submenu {
+         display: block;
+    }
+
+    /* Remove desktop hover effects on mobile */
+    .main-nav li:hover > .submenu,
+    .main-nav .submenu li:hover > .submenu {
+        opacity: 0; /* Reset hover effects */
+        visibility: hidden;
+        transform: translateY(10px);
+    }
+
+    /* Nested mobile menu styling */
     .main-nav ul ul li {
         border-bottom: 1px dotted #ced4da;
-        background-color: #f8f9fa;
+        background-color: #f8f9fa; /* Indent visually */
     }
-    
     .main-nav ul ul ul li {
-        background-color: #e9ecef;
+        background-color: #e9ecef; /* Deeper indent */
         border-bottom: 1px dotted #adb5bd;
     }
-    
     .main-nav ul ul li:last-child { border-bottom: none; }
-    
+
     .main-nav ul ul a {
-        padding-left: 35px;
-        background-color: transparent;
+        padding-left: 35px; /* Indent text */
+        background-color: transparent; /* Override parent BGs */
     }
-    
     .main-nav ul ul ul a {
-        padding-left: 50px;
+        padding-left: 50px; /* Deeper indent text */
         background-color: transparent;
     }
-    
     .main-nav .submenu a.active {
-       color: #1774b4; 
-       background-color: #ddeafa;
+       color: #1774b4;
+       background-color: #ddeafa; /* Different active BG for submenus */
        font-weight: 600;
     }
 
+    /* Mobile Arrow Handling - Reset Desktop Hovers & Pull Left */
     .main-nav > ul > li.menu-item-has-children:hover > a::after {
-        transform: rotate(0deg);
-        color : #1774b4;
+        transform: rotate(0deg); /* Reset hover */
+        color : #1774b4; /* Reset hover */
     }
-    
+    /* Reset arrow style for nested items specifically on mobile */
     .main-nav .submenu li.menu-item-has-children:hover > a::after {
-        transform: translateY(-50%) rotate(0deg);
-        color: #1774b4;
+        transform: translateY(-50%) rotate(0deg); /* Reset hover rotation */
+        color: #1774b4; /* Reset hover color */
+        content: '▼'; /* Ensure correct mobile arrow */
     }
-    
-    .main-nav ul.active li > a[aria-haspopup="true"] {
-        display: flex; 
-        justify-content: space-between;
-        align-items: center;
+    /* Reset pull-left styles back to mobile defaults */
+    .main-nav .submenu li.submenu-pull-left:hover > a::after {
+        transform: translateY(-50%) rotate(0deg); /* No hover rotation */
+        color: #1774b4; /* Reset color */
+        content: '▼'; /* Use mobile arrow */
+    }
+    .main-nav .submenu li.submenu-pull-left > a {
+        padding-left: 15px; /* Use standard mobile padding */
+        padding-right: 40px; /* Standard mobile padding for arrow */
+    }
+    .main-nav .submenu li.submenu-pull-left > a::after {
+        left: auto; /* Use standard mobile positioning */
+        right: 20px;
+        content: '▼'; /* Use standard mobile arrow */
+    }
+
+    /* Mobile Arrow Base */
+    .main-nav ul li > a[aria-haspopup="true"] {
+        display: block;
+        position: relative;
         width: 100%;
     }
-    
-    .main-nav ul.active li > a[aria-haspopup="true"]::after {
-        content: '▼'; 
+    .main-nav ul li > a[aria-haspopup="true"]::after {
+        content: '▼'; /* Default arrow down */
         display: inline-block;
-        margin-left: 8px;
+        margin-left: 8px; /* Space from text if needed */
         font-size: 0.8em;
         transition: transform 0.3s ease;
+        color: #6c757d;
+        /* Position arrow to the right */
+        position: absolute;
+        right: 20px; /* Adjust as needed */
+        top: 50%;
+        transform: translateY(-50%); /* Center vertically */
     }
-
-    .main-nav ul.active li.submenu-open > a[aria-haspopup="true"]::after {
-        transform: rotate(180deg);
+    /* JS controls arrow rotation via submenu-open class on LI */
+    .main-nav ul li.submenu-open > a[aria-haspopup="true"]::after {
+        transform: translateY(-50%) rotate(180deg); /* Point up when open */
     }
+    /* Ensure correct padding for nested mobile arrows */
+     .main-nav ul ul li.menu-item-has-children > a {
+        padding-right: 40px; /* Ensure space for arrow */
+     }
+     /* Ensure correct arrow for nested mobile */
+     .main-nav ul ul li.menu-item-has-children > a::after {
+        content: '▼';
+     }
+     /* Ensure correct rotation for nested mobile */
+     .main-nav ul ul li.submenu-open > a::after {
+          transform: translateY(-50%) rotate(180deg);
+     }
 }
 
+/* ========== FOOTER STYLES ========== */
 .site-footer {
     background-color: var(--theme-blue, #1774b4);
     color: #e9ecef;
     padding: 40px 0 20px;
     font-size: 0.9em;
-    margin-top: auto;
-    flex-shrink: 0;
+    position: relative; /* Ensure footer position is not absolute/fixed */
+    /* flex-shrink: 0; is defined above */
+    /* width: 100%; is defined above */
 }
 
 .footer-grid {
@@ -383,10 +437,15 @@ ul { margin-bottom: 1em; margin-left: 20px; }
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 30px;
     margin-bottom: 30px;
+    max-width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 20px;
+    width: 100%;
 }
 
 .footer-column h4 {
-    color: #ffffff; 
+    color: #ffffff;
     margin-bottom: 15px;
     font-size: 1.1em;
 }
@@ -394,7 +453,7 @@ ul { margin-bottom: 1em; margin-left: 20px; }
 .footer-column ul {
     list-style: none;
     padding: 0;
-    margin: 0 0 1em 0; 
+    margin: 0 0 1em 0;
 }
 
 .footer-column li {
@@ -402,7 +461,7 @@ ul { margin-bottom: 1em; margin-left: 20px; }
 }
 
 .footer-column a {
-    color: #dee2e6; 
+    color: #dee2e6;
     transition: color 0.2s ease, padding-left 0.3s ease;
 }
 
@@ -414,19 +473,27 @@ ul { margin-bottom: 1em; margin-left: 20px; }
 
 .footer-bottom {
     text-align: center;
-    margin-top: 30px; 
-    padding-top: 20px; 
+    margin-top: 30px;
+    padding-top: 20px;
     border-top: 1px solid #4a9dcf;
     font-size: 0.85em;
-    color: #adb5bd; 
+    color: #adb5bd;
+    max-width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 100%;
 }
 
-/* ========== MAIN CONTENT STYLES ========== */
+/* ========== MAIN CONTENT AREA STYLES ========== */
+
 .main-content .contact-image {
     float: none;
     display: block;
     margin: 0 auto 15px auto;
-    width: 150px;
+    max-width: 150px;
+    width: 100%;
     border-radius: 4px;
 }
 
@@ -434,44 +501,48 @@ ul { margin-bottom: 1em; margin-left: 20px; }
     .main-content .contact-image {
         float: left;
         margin: 0 20px 10px 0;
+        max-width: 150px;
     }
+    /* Optional: Add clearfix to parent of floated image if layout breaks */
+    /* .parent-of-contact-image::after { content: ""; display: table; clear: both; } */
 }
 
 .table-responsive {
-    overflow-x: auto;
+    overflow-x: auto; /* Allow table to scroll horizontally */
     margin-top: 20px;
     margin-bottom: 30px;
-    border: 1px solid #dee2e6; 
+    border: 1px solid #dee2e6;
     border-radius: 5px;
+    width: 100%; /* Prevent container from exceeding parent */
 }
 
 .records-table {
-    width: 100%;
+    width: 100%; /* Table takes width of its container */
     border-collapse: collapse;
-    min-width: 600px; 
+    min-width: 600px; /* Force horizontal scroll if container is narrower */
     font-size: 0.95em;
 }
 
 .records-table th,
 .records-table td {
     border: 1px solid #dee2e6;
-    padding: 10px 12px; 
+    padding: 10px 12px;
     text-align: left;
-    vertical-align: top; 
+    vertical-align: top;
 }
 
 .records-table th {
-    background-color: #e9ecef; 
+    background-color: #e9ecef;
     font-weight: 600;
     white-space: nowrap;
 }
 
 .records-table tbody tr:nth-child(even) {
-    background-color: #f8f9fa; 
+    background-color: #f8f9fa;
 }
 
 .records-table tbody tr:hover {
-    background-color: #e8f1f8; 
+    background-color: #e8f1f8;
 }
 
 .record-notice {
@@ -479,7 +550,7 @@ ul { margin-bottom: 1em; margin-left: 20px; }
     padding: 15px;
     background-color: #fff3cd;
     border: 1px solid #ffeeba;
-    border-left: 5px solid #ffc107; 
+    border-left: 5px solid #ffc107;
     border-radius: 4px;
     font-size: 0.9em;
 }
@@ -488,44 +559,9 @@ ul { margin-bottom: 1em; margin-left: 20px; }
 }
 
 [contenteditable="true"] {
-    outline: 2px dashed #1774b4; 
-    background-color: #f0f8ff; 
+    outline: 2px dashed #1774b4;
+    background-color: #f0f8ff;
     cursor: text;
 }
 
-@media (max-width: 991px) {
-    .main-nav ul.active .submenu {
-        display: none; /* Hide initially */
-    }
-
-    .main-nav ul.active li.submenu-open > ul.submenu.submenu-active {
-        display: block; 
-    }
-
-    .main-nav ul.active li > a[aria-haspopup="true"] {
-        display: flex; 
-        justify-content: space-between;
-        align-items: center;
-        width: 100%; /* Ensure it takes full width */
-    }
-
-    .main-nav ul.active li > a[aria-haspopup="true"]::after {
-        content: '▼'; 
-        display: inline-block;
-        margin-left: 8px;
-        font-size: 0.8em;
-        transition: transform 0.3s ease;
-    }
-
-    .main-nav ul.active li.submenu-open > a[aria-haspopup="true"]::after {
-        transform: rotate(180deg);
-    }
-} 
-
-@media (min-width: 992px) { 
-    .main-nav ul li:hover > .submenu {
-        display: block; 
-        opacity: 1;
-        visibility: visible;
-    }
-}
+/* END OF FILE */
