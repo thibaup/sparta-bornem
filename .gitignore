@@ -1,12 +1,14 @@
 # Executables and Build Artifacts
 *.exe
 *.pyc
+.py
 *.spec
 dist/
 build/
 
 # Python cache
 __pycache__/
+tabs/
 
 # Virtual environment folders (common names)
 venv/
