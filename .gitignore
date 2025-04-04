@@ -1,7 +1,7 @@
 # Executables and Build Artifacts
 *.exe
 *.pyc
-.py
+*.py
 *.spec
 dist/
 build/
