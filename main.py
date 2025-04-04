@@ -86,7 +86,7 @@ if __name__ == "__main__":
         try:
             root_fatal = tk.Tk() if root is None else root; root_fatal.withdraw()
             messagebox.showerror("Fatale Runtime Fout", f"Een onverwachte fout is opgetreden:\n{e}\nControleer console.", parent=root_fatal)
-            if root_fatal and not root: root_fatal.destroy() # Destroy only if we created it here
+            if root_fatal and not root: root_fatal.destroy()
         except Exception as me: pass
         input("\nDruk op Enter om af te sluiten...")
         sys.exit(1)
