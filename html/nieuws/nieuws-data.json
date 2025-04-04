@@ -1,5 +1,14 @@
 [
   {
+    "id": "cmd",
+    "date": "2025-04-04",
+    "title": "CMD Foto",
+    "category": "Kaas",
+    "image": "actua.png",
+    "summary": "Dit is een nieuwsartikel over de CMD.",
+    "full_content": "Dit is een nieuwsartikel over de CMD."
+  },
+  {
     "id": "veldloop-2025",
     "date": "2025-01-03",
     "title": "Parcours 33ste Veldloop Bornem",
