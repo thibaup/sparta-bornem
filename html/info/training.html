@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="nl-NL">
  <head>
   <meta charset="utf-8">
@@ -10,77 +9,536 @@
   <!-- Update path -->
   <style>
    /* --- Basic Reset & Body Styling --- */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4; }
-        .container { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
-        a { color: #1774b4; text-decoration: none; }
-        a:hover { text-decoration: underline; }
-        img { max-width: 100%; height: auto; }
-        h1, h2, h3, h4 { margin-bottom: 0.8em; color: #1a1a1a; font-weight: 600; }
-        p { margin-bottom: 1em; }
-        ul { margin-bottom: 1em; margin-left: 20px; } /* Basic list styling */
-
-        /* --- Main Content Area --- */
-        .main-content { padding: 40px 0; }
-        .main-content h1 { font-size: 2.2em; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        .main-content h2 { font-size: 1.8em; margin-top: 30px; margin-bottom: 15px; color: #1774b4; }
-        .main-content h3 { font-size: 1.4em; margin-top: 25px; margin-bottom: 10px; }
-        .main-content h4 { font-size: 1.2em; margin-top: 20px; margin-bottom: 10px; color: #555; }
-
-        /* Training Table Styling */
-        .training-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 30px;
-            background-color: #fff;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-        .training-table th, .training-table td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-            vertical-align: top;
-        }
-        .training-table th {
-            background-color: #f9f9f9;
-            font-weight: 600;
-        }
-        .training-table td ul { margin: 0; padding-left: 0; list-style: none; } /* Reset list style inside table */
-        .training-table td li { margin-bottom: 5px; }
-
-        /* Person Info Box */
-        .person-info {
-            background-color: #f9f9f9;
-            border: 1px solid #eee;
-            border-left: 5px solid #1774b4;
-            padding: 15px;
-            margin-bottom: 20px;
-            overflow: hidden; /* Clear floats */
-        }
-        .person-info img {
-            float: right;
-            width: 80px; /* Smaller image */
-            height: 80px;
-            margin-left: 15px;
-            border-radius: 50%; /* Circular images */
-            object-fit: cover;
-        }
-        .person-info p {
-             margin-bottom: 0.5em;
-        }
-        .person-info a {
-             word-break: break-all; /* Prevent long emails breaking layout */
-        }
+          * { box-sizing: border-box; margin: 0; padding: 0; }
+          body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4; }
+          .container { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
+          a { color: #1774b4; text-decoration: none; }
+          a:hover { text-decoration: underline; }
+          img { max-width: 100%; height: auto; }
+          h1, h2, h3, h4 { margin-bottom: 0.8em; color: #1a1a1a; font-weight: 600; }
+          p { margin-bottom: 1em; }
+          ul { margin-bottom: 1em; margin-left: 20px; } /* Basic list styling */
+  
+          /* --- Main Content Area --- */
+          .main-content { padding: 40px 0; }
+          .main-content h1 { font-size: 2.2em; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+          .main-content h2 { font-size: 1.8em; margin-top: 30px; margin-bottom: 15px; color: #1774b4; }
+          .main-content h3 { font-size: 1.4em; margin-top: 25px; margin-bottom: 10px; }
+          .main-content h4 { font-size: 1.2em; margin-top: 20px; margin-bottom: 10px; color: #555; }
+  
+          /* Training Table Styling */
+          .training-table {
+              width: 100%;
+              border-collapse: collapse;
+              margin-bottom: 30px;
+              background-color: #fff;
+              box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+          }
+          .training-table th, .training-table td {
+              border: 1px solid #ddd;
+              padding: 12px;
+              text-align: left;
+              vertical-align: top;
+          }
+          .training-table th {
+              background-color: #f9f9f9;
+              font-weight: 600;
+          }
+          .training-table td ul { margin: 0; padding-left: 0; list-style: none; } /* Reset list style inside table */
+          .training-table td li { margin-bottom: 5px; }
+  
+          /* Person Info Box */
+          .person-info {
+              background-color: #f9f9f9;
+              border: 1px solid #eee;
+              border-left: 5px solid #1774b4;
+              padding: 15px;
+              margin-bottom: 20px;
+              overflow: hidden; /* Clear floats */
+          }
+          .person-info img {
+              float: right;
+              width: 80px; /* Smaller image */
+              height: 80px;
+              margin-left: 15px;
+              border-radius: 50%; /* Circular images */
+              object-fit: cover;
+          }
+          .person-info p {
+               margin-bottom: 0.5em;
+          }
+          .person-info a {
+               word-break: break-all; /* Prevent long emails breaking layout */
+          }
   </style>
   <link href="/css/style.css" rel="stylesheet">
  </head>
  <body>
   <div id="header-placeholder">
-   <!-- Header will be loaded here by JavaScript -->
-   <p>
-    Loading header...
-   </p>
-   <!-- Optional loading message -->
+   <header class="site-header">
+    <div class="container header-container">
+     <div class="logo">
+      <a href="/index.html">
+       <img alt="Sparta Bornem Logo" src="/images/website-logo.png">
+      </a>
+     </div>
+     <button aria-label="Toggle Menu" class="menu-toggle">
+      ☰
+     </button>
+     <nav class="main-nav">
+      <ul>
+       <li>
+        <a href="/index.html">
+         Home
+        </a>
+       </li>
+       <li class="menu-item-has-children">
+        <!-- MOVED HERE -->
+        <a aria-expanded="false" aria-haspopup="true">
+         Clubrecords
+        </a>
+        <ul class="submenu">
+         <li class="menu-item-has-children">
+          <a aria-expanded="false" aria-haspopup="true">
+           Records outdoor dames
+          </a>
+          <ul class="submenu">
+           <!-- Level 3 -->
+           <li>
+            <a href="/html/clubrecords/Records outdoor dames/benjamins dames.html">
+             benjamins dames
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records outdoor dames/pupillen dames.html">
+             pupillen dames
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records outdoor dames/miniemen dames.html">
+             miniemen dames
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records outdoor dames/cadetten dames.html">
+             cadetten dames
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records outdoor dames/scholieren dames.html">
+             scholieren dames
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records outdoor dames/juniores dames.html">
+             juniores dames
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records outdoor dames/seniors dames.html">
+             seniors dames
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records outdoor dames/masters dames 35+.html">
+             masters dames 35+
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records outdoor dames/master dames 40+.html">
+             master dames 40+
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records outdoor dames/master dames 45+.html">
+             master dames 45+
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records outdoor dames/master dames 50+.html">
+             master dames 50+
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records outdoor dames/masters dames 55+.html">
+             masters dames 55+
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records outdoor dames/masters dames 60+.html">
+             masters dames 60+
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records outdoor dames/masters dames 65+.html">
+             masters dames 65+
+            </a>
+           </li>
+          </ul>
+         </li>
+         <li class="menu-item-has-children">
+          <a aria-expanded="false" aria-haspopup="true">
+           Records outdoor heren
+          </a>
+          <ul class="submenu">
+           <!-- Level 3 -->
+           <li>
+            <a href="/html/clubrecords/Records outdoor heren/benjamins heren.html">
+             benjamins heren
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records outdoor heren/pupillen heren.html">
+             pupillen heren
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records outdoor heren/miniemen heren.html">
+             miniemen heren
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records outdoor heren/cadetten heren.html">
+             cadetten heren
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records outdoor heren/scholieren heren.html">
+             scholieren heren
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records outdoor heren/juniores heren.html">
+             juniores heren
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records outdoor heren/seniors heren.html">
+             seniors heren
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records outdoor heren/masters heren 35+.html">
+             masters heren 35+
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records outdoor heren/masters heren 40+.html">
+             masters heren 40+
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records outdoor heren/masters heren 45+.html">
+             masters heren 45+
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records outdoor heren/masters heren 50+.html">
+             masters heren 50+
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records outdoor heren/masters heren 55+.html">
+             masters heren 55+
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records outdoor heren/masters heren 60+.html">
+             masters heren 60+
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records outdoor heren/masters heren 65+.html">
+             masters heren 65+
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records outdoor heren/masters heren 70+.html">
+             masters heren 70+
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records outdoor heren/masters heren 75+.html">
+             masters heren 75+
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records outdoor heren/masters heren 90+.html">
+             masters heren 90+
+            </a>
+           </li>
+          </ul>
+         </li>
+         <li class="menu-item-has-children">
+          <a aria-expanded="false" aria-haspopup="true">
+           Records indoor dames
+          </a>
+          <ul class="submenu">
+           <!-- Level 3 -->
+           <li>
+            <a href="/html/clubrecords/Records indoor dames/benjamins dames.html">
+             benjamins dames
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records indoor dames/pupillen dames.html">
+             pupillen dames
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records indoor dames/miniemen dames.html">
+             miniemen dames
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records indoor dames/cadetten dames.html">
+             cadetten dames
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records indoor dames/scholieren dames.html">
+             scholieren dames
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records indoor dames/juniores dames.html">
+             juniores dames
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records indoor dames/seniors dames.html">
+             seniors dames
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records indoor dames/masters dames 35+.html">
+             masters dames 35+
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records indoor dames/master dames 40+.html">
+             master dames 40+
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records indoor dames/master dames 45+.html">
+             master dames 45+
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records indoor dames/master dames 50+.html">
+             master dames 50+
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records indoor dames/masters dames 55+.html">
+             masters dames 55+
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records indoor dames/masters dames 60+.html">
+             masters dames 60+
+            </a>
+           </li>
+          </ul>
+         </li>
+         <li class="menu-item-has-children">
+          <a aria-expanded="false" aria-haspopup="true">
+           Records indoor heren
+          </a>
+          <ul class="submenu">
+           <!-- Level 3 -->
+           <li>
+            <a href="/html/clubrecords/Records indoor heren/benjamins heren.html">
+             benjamins heren
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records indoor heren/pupillen heren.html">
+             pupillen heren
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records indoor heren/miniemen heren.html">
+             miniemen heren
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records indoor heren/cadetten heren.html">
+             cadetten heren
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records indoor heren/scholieren heren.html">
+             scholieren heren
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records indoor heren/juniores heren.html">
+             juniores heren
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records indoor heren/seniors heren.html">
+             seniors heren
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records indoor heren/masters heren 35+.html">
+             masters heren 35+
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records indoor heren/masters heren 40+.html">
+             masters heren 40+
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records indoor heren/masters heren 45+.html">
+             masters heren 45+
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records indoor heren/masters heren 50+.html">
+             masters heren 50+
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records indoor heren/masters heren 55+.html">
+             masters heren 55+
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records indoor heren/masters heren 60+.html">
+             masters heren 60+
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records indoor heren/masters heren 65+.html">
+             masters heren 65+
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records indoor heren/masters heren 70+.html">
+             masters heren 70+
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records indoor heren/masters heren 75+.html">
+             masters heren 75+
+            </a>
+           </li>
+           <li>
+            <a href="/html/clubrecords/Records indoor heren/masters heren 90+.html">
+             masters heren 90+
+            </a>
+           </li>
+          </ul>
+         </li>
+        </ul>
+       </li>
+       <li class="active-ancestor">
+        <a aria-expanded="false" aria-haspopup="true" class="active">
+         Info
+        </a>
+        <ul class="submenu">
+         <li>
+          <a href="/html/info/clubkledij.html">
+           Clubkledij
+          </a>
+         </li>
+         <li class="active-ancestor">
+          <a class="active" href="/html/info/training.html">
+           Training & Trainers
+          </a>
+         </li>
+         <li>
+          <a href="/html/info/bestuur.html">
+           Bestuur
+          </a>
+         </li>
+         <li>
+          <a href="/html/info/puntensysteem.html">
+           Puntensysteem & Benny-bons
+          </a>
+         </li>
+         <li>
+          <a href="/html/info/hoofdsponsors.html">
+           Hoofdsponsors
+          </a>
+         </li>
+         <li>
+          <a href="/html/info/grotesponsors.html">
+           Grote Sponsors
+          </a>
+         </li>
+         <li>
+          <a href="/html/info/sponsors.html">
+           Sponsors
+          </a>
+         </li>
+         <li>
+          <a href="/html/info/vertrouwenspersoon.html">
+           Vertrouwenspersoon
+          </a>
+         </li>
+        </ul>
+       </li>
+       <li>
+        <a aria-expanded="false" aria-haspopup="true">
+         (Nieuwe) leden
+        </a>
+        <ul class="submenu">
+         <li>
+          <a href="/html/(Nieuwe) leden/aansluiten.html">
+           Aansluiten
+          </a>
+         </li>
+         <li>
+          <a href="/html/(Nieuwe) leden/leeftijden.html">
+           Leeftijdscategorie&euml;n
+          </a>
+         </li>
+        </ul>
+       </li>
+       <li>
+        <a aria-expanded="false" aria-haspopup="true">
+         Wedstrijden
+        </a>
+        <ul class="submenu">
+         <li>
+          <a href="/html/wedstrijden/kalender.html">
+           Kalender
+          </a>
+         </li>
+         <li>
+          <a href="/html/wedstrijden/wedstrijdinfo.html">
+           Wedstrijdinfo
+          </a>
+         </li>
+        </ul>
+       </li>
+       <li>
+        <a aria-expanded="false" aria-haspopup="true">
+         Downloads
+        </a>
+        <ul class="submenu">
+         <li>
+          <a href="/html/downloads/bestuursverslagen.html">
+           Bestuursverslagen
+          </a>
+         </li>
+         <li>
+          <a href="/html/downloads/downloads.html">
+           Downloads
+          </a>
+         </li>
+        </ul>
+       </li>
+      </ul>
+     </nav>
+    </div>
+   </header>
   </div>
   <main class="main-content container">
    <h1>
@@ -115,13 +573,13 @@
        <ul>
         <li>
          <strong>
-          Woensdag:
+          Vrijdag:
          </strong>
          18:00u - 19:15u
         </li>
         <li>
          <strong>
-          Vrijdag:
+          Woensdag:
          </strong>
          18:00u - 19:15u
         </li>
@@ -138,13 +596,13 @@
        <ul>
         <li>
          <strong>
-          Woensdag:
+          Vrijdag:
          </strong>
          18:00u - 19:15u
         </li>
         <li>
          <strong>
-          Vrijdag:
+          Woensdag:
          </strong>
          18:00u - 19:15u
         </li>
@@ -170,13 +628,13 @@
        <ul>
         <li>
          <strong>
-          Woensdag:
+          Vrijdag:
          </strong>
          18:00u - 19:15u
         </li>
         <li>
          <strong>
-          Vrijdag:
+          Woensdag:
          </strong>
          18:00u - 19:15u
         </li>
@@ -195,9 +653,8 @@
      <tr>
       <td>
        <strong>
-        Fond, 1/2 fond
+        Fond, 1/2 fond (vanaf cadetten)
        </strong>
-       (vanaf cadetten)
       </td>
       <td>
        <ul>
@@ -209,13 +666,13 @@
         </li>
         <li>
          <strong>
-          Woensdag:
+          Vrijdag:
          </strong>
          18:00u - 19:30u
         </li>
         <li>
          <strong>
-          Vrijdag:
+          Woensdag:
          </strong>
          18:00u - 19:30u
         </li>
@@ -231,9 +688,8 @@
      <tr>
       <td>
        <strong>
-        Spurt
+        Spurt (vanaf cadetten)
        </strong>
-       (vanaf cadetten)
       </td>
       <td>
        <ul>
@@ -248,13 +704,13 @@
         </li>
         <li>
          <strong>
-          Woensdag:
+          Vrijdag:
          </strong>
          18:00u - 20:00u
         </li>
         <li>
          <strong>
-          Vrijdag:
+          Woensdag:
          </strong>
          18:00u - 20:00u
         </li>
@@ -270,9 +726,8 @@
      <tr>
       <td>
        <strong>
-        Springen
+        Springen (vanaf cadetten)
        </strong>
-       (vanaf cadetten)
       </td>
       <td>
        <ul>
@@ -287,13 +742,13 @@
         </li>
         <li>
          <strong>
-          Woensdag:
+          Vrijdag:
          </strong>
          18:00u - 20:00u
         </li>
         <li>
          <strong>
-          Vrijdag:
+          Woensdag:
          </strong>
          18:00u - 20:00u
         </li>
@@ -309,9 +764,8 @@
      <tr>
       <td>
        <strong>
-        Werpen
+        Werpen (vanaf cadetten)
        </strong>
-       (vanaf cadetten)
       </td>
       <td>
        <ul>
@@ -326,13 +780,13 @@
         </li>
         <li>
          <strong>
-          Woensdag:
+          Vrijdag:
          </strong>
          18:00u - 20:00u
         </li>
         <li>
          <strong>
-          Vrijdag:
+          Woensdag:
          </strong>
          18:00u - 20:00u
         </li>
@@ -348,21 +802,20 @@
      <tr>
       <td>
        <strong>
-        Joggers
+        Joggers (vanaf cadetten)
        </strong>
-       (vanaf cadetten)
       </td>
       <td>
        <ul>
         <li>
          <strong>
-          Woensdag:
+          Vrijdag:
          </strong>
          18:00u - 19:30u
         </li>
         <li>
          <strong>
-          Vrijdag:
+          Woensdag:
          </strong>
          18:00u - 19:30u
         </li>
@@ -469,19 +922,22 @@
    </h3>
    <ul>
     <li>
-     De Bouw Ellen:
+     De Bouw Ellen
+     :
      <a href="mailto:ellen.de.bouw@gmail.com">
       ellen.de.bouw@gmail.com
      </a>
     </li>
     <li>
-     Inze Nick:
+     Inze Nick
+     :
      <a href="mailto:nick.inze@telenet.be">
       nick.inze@telenet.be
      </a>
     </li>
     <li>
-     De Leeuw Hilde:
+     De Leeuw Hilde
+     :
      <a href="mailto:jeugdcoordinator@spartabornem.be">
       jeugdcoordinator@spartabornem.be
      </a>
@@ -501,7 +957,8 @@
    </h3>
    <ul>
     <li>
-     Spiessens Koen:
+     Spiessens Koen
+     :
      <a href="mailto:koen.spiessens@telenet.be">
       koen.spiessens@telenet.be
      </a>
@@ -512,13 +969,15 @@
    </h4>
    <ul>
     <li>
-     De Bouw Ellen:
+     De Bouw Ellen
+     :
      <a href="mailto:ellen.de.bouw@gmail.com">
       ellen.de.bouw@gmail.com
      </a>
     </li>
     <li>
-     Inze Nick:
+     Inze Nick
+     :
      <a href="mailto:nick.inze@telenet.be">
       nick.inze@telenet.be
      </a>
@@ -529,20 +988,23 @@
    </h3>
    <ul>
     <li>
-     Permentier Johan:
+     Permentier Johan
+     :
      <a href="mailto:j_permentier@hotmail.com">
       j_permentier@hotmail.com
      </a>
     </li>
     <li>
-     De Leeuw Marliese:
+     De Leeuw Marliese
+     :
      <a href="mailto:marliese.de.leeuw@skynet.be">
       marliese.de.leeuw@skynet.be
      </a>
      | 0473/88 40 39
     </li>
     <li>
-     Vandenkerckhove Peter:
+     Vandenkerckhove Peter
+     :
      <a href="mailto:Peter.vdk@hotmail.com">
       Peter.vdk@hotmail.com
      </a>
@@ -569,9 +1031,112 @@
    </ul>
   </main>
   <div id="footer-placeholder">
-   <p>
-    Loading footer...
-   </p>
+   <footer class="site-footer">
+    <div class="container">
+     <div class="footer-grid">
+      <div class="footer-column">
+       <h4>
+        Sparta Bornem
+       </h4>
+       <p>
+        Atletiekclub Sparta Bornem VZW
+        <br>
+        Albertstraat 64
+        <br>
+        2880 Bornem
+        <br>
+        Belgi&euml;
+       </p>
+       <p>
+        BTW BE0430 537 864
+       </p>
+      </div>
+      <div class="footer-column">
+       <h4>
+        Snelle Links
+       </h4>
+       <ul>
+        <li>
+         <a href="/html/info/clubkledij.html">
+          Club Kledij
+         </a>
+        </li>
+        <li>
+         <a href="/html/(Nieuwe) leden/aansluiten.html">
+          aansluiten
+         </a>
+        </li>
+        <li>
+         <a href="/html/info/training.html">
+          Training & Trainers
+         </a>
+        </li>
+        <li>
+         <a href="/html/wedstrijden/wedstrijdinfo.html">
+          Wedstrijdinfo
+         </a>
+        </li>
+        <li>
+         <a href="/html/info/bestuur.html">
+          Bestuur
+         </a>
+        </li>
+       </ul>
+      </div>
+      <div class="footer-column">
+       <h4>
+        Info & Contact
+       </h4>
+       <ul>
+        <li>
+         <a href="/html/extra/contact.html">
+          Contacteer Ons
+         </a>
+        </li>
+        <li>
+         <a href="/html/extra/ligging.html">
+          Ligging & Route
+         </a>
+        </li>
+        <li>
+         <a href="/html/extra/privacy.html">
+          Privacyverklaring
+         </a>
+        </li>
+        <li>
+         <a href="/html/extra/visie.html">
+          Onze Visie
+         </a>
+        </li>
+       </ul>
+      </div>
+      <div class="footer-column">
+       <h4>
+        Volg Ons
+       </h4>
+       <ul>
+        <li>
+         <a href="https://www.facebook.com/spartabornem" rel="noopener noreferrer" target="_blank">
+          Facebook
+         </a>
+        </li>
+        <li>
+         <a href="https://www.instagram.com/spartabornem/" rel="noopener noreferrer" target="_blank">
+          Instagram
+         </a>
+        </li>
+       </ul>
+      </div>
+     </div>
+     <div class="footer-bottom">
+      &copy;
+      <span id="current-year">
+       2025
+      </span>
+      Atletiekclub Sparta Bornem VZW. Alle rechten voorbehouden.
+     </div>
+    </div>
+   </footer>
   </div>
   <script defer src="/js/script.js">
   </script>
