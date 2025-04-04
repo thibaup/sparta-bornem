@@ -1,0 +1,21 @@
+# Executables and Build Artifacts
+*.exe
+*.pyc
+*.spec
+dist/
+build/
+
+# Python cache
+__pycache__/
+
+# Virtual environment folders (common names)
+venv/
+env/
+.venv/
+*/venv/
+*/env/
+*/.venv/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
