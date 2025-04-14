@@ -187,18 +187,11 @@
 
     </main>
     <script>
-        /**
-         * Loads and displays a single news article based on the 'id' URL parameter.
-         * Fetches data from a JSON file, populates title, meta, image, and body content.
-         * Constructs image URLs relative to /images/ if not a full URL.
-         * Sets the "Back" link based on the 'ref' URL parameter.
-         */
         async function loadSingleArticle() {
             const params = new URLSearchParams(window.location.search);
-            const articleId = params.get('id'); // Get 'id' from "?id=..."
-            const referrerUrl = params.get('ref'); // Get 'ref' from "&ref=..."
+            const articleId = params.get('id'); 
+            const referrerUrl = params.get('ref'); 
 
-            // Get references to DOM elements
             const titleEl = document.getElementById('article-title');
             const metaEl = document.getElementById('article-meta');
             const imageContainer = document.getElementById('article-image-container');
@@ -210,7 +203,7 @@
             titleEl.textContent = "Artikel Laden...";
             if (loadingEl) loadingEl.style.display = 'block';
             if (errorEl) errorEl.style.display = 'none';
-            bodyEl.innerHTML = ''; // Clear previous content
+            bodyEl.innerHTML = ''; 
             imageContainer.innerHTML = '';
             metaEl.textContent = '';
 
@@ -221,8 +214,7 @@
                     try {
                         const decodedRef = decodeURIComponent(referrerUrl);
                         backLink.href = decodedRef;
-                        // Set text based on referrer
-                        if (decodedRef.includes('nieuws.html')) {
+                        if (decodedRef.includes('nieuws.html') || decodedRef.includes('%2Fhtml%2Fnieuws%2Fnieuws')) {
                             backLink.textContent = '« Terug naar Nieuwsoverzicht';
                         } else if (decodedRef === '/' || decodedRef.includes('home.html') || decodedRef.includes('index.html')) {
                             backLink.textContent = '« Terug naar Home';
@@ -231,26 +223,23 @@
                         }
                     } catch (e) {
                         console.error("Error decoding referrer URL:", e);
-                        backLink.href = defaultBackHref; // Fallback on error
+                        backLink.href = defaultBackHref
                         backLink.textContent = defaultBackText;
                     }
                 } else {
-                    // Default if no referrer was passed
                     backLink.href = defaultBackHref;
                     backLink.textContent = defaultBackText;
                 }
-                backLink.style.display = 'inline-block'; // Ensure it's visible initially
+                backLink.style.display = 'inline-block'; 
             }
-            // ------------------------
 
-            // --- Validate Article ID ---
             if (!articleId) {
                 titleEl.textContent = "Fout";
                 if (loadingEl) loadingEl.style.display = 'none';
                 errorEl.textContent = "Geen artikel ID gevonden in de URL.";
                 errorEl.style.display = 'block';
-                if (backLink) backLink.style.display = 'inline-block'; // Keep back link visible
-                return; // Stop execution
+                if (backLink) backLink.style.display = 'inline-block'; 
+                return;
             }
             const newsDataUrl = '/html/nieuws/nieuws-data.json'; 
 
@@ -261,22 +250,18 @@
                 }
                 const allNewsData = await response.json();
 
-                // Find the specific article by ID
                 const articleData = allNewsData.find(item => item.id === articleId);
 
                 if (!articleData) {
                     throw new Error(`Artikel met ID '${articleId}' niet gevonden in JSON data.`);
                 }
 
-                // --- Populate the Page Content ---
-                document.title = `${articleData.title} - Sparta Bornem`; // Set browser tab title
+                document.title = `${articleData.title} - Sparta Bornem`;
                 titleEl.textContent = articleData.title;
 
                 const itemDate = new Date(articleData.date);
                 metaEl.textContent = `${itemDate.toLocaleDateString('nl-BE', { day: 'numeric', month: 'long', year: 'numeric' })} | ${articleData.category || 'Algemeen'}`;
 
-
-                // ... inside loadSingleArticle function, after finding articleData ...
 
                 if (articleData.image) {
                     let finalImageUrl = articleData.image;
@@ -312,7 +297,6 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            // No need for setTimeout if the main script uses 'defer'
             loadSingleArticle();
         });
     </script>

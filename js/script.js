@@ -1,80 +1,51 @@
-// js/scripts.js
 
-// --- Global Scope Variables and Functions for Footer Positioning ---
-let resizeTimerFooter; // Timer variable for debouncing resize
 
-/**
- * Checks page height vs viewport height and sets footer position accordingly.
- * Switches between CSS default (relative) and absolute positioning.
- * Assumes CSS sets body { position: relative; min-height: 100vh; }
- * and .site-footer { position: relative; width: 100%; } as default.
- */
+let resizeTimerFooter; 
+
 function adjustFooterPosition() {
-    const footerElement = document.querySelector('.site-footer'); // Target the actual footer
+    const footerElement = document.querySelector('.site-footer');
     const body = document.body;
     const html = document.documentElement;
 
     if (!footerElement) {
-        // console.warn("adjustFooterPosition: Footer element (.site-footer) not found.");
-        return; // Exit if footer isn't in the DOM yet
+        return;
     }
 
-    // Adding a small delay can sometimes help ensure layout calculations are complete
     setTimeout(() => {
         const totalPageHeight = Math.max( body.scrollHeight, body.offsetHeight,
                                html.clientHeight, html.scrollHeight, html.offsetHeight );
         const viewportHeight = window.innerHeight;
 
-        // console.log(`DEBUG: Page Height: ${totalPageHeight}, Viewport Height: ${viewportHeight}`);
-        
-        console.log(totalPageHeight, viewportHeight)
         if (totalPageHeight <= viewportHeight) {
-            // Page content is short: Stick footer absolutely
-            // console.log("DEBUG: Setting footer to absolute");
+
             footerElement.style.position = 'absolute';
             footerElement.style.left = '0';
             footerElement.style.width = '100%';
             footerElement.style.bottom = '0';
         } else {
-            // Page content is long: Revert footer to CSS default (relative)
-            // console.log("DEBUG: Reverting footer to CSS default position");
-            footerElement.style.position = ''; // Let CSS handle 'relative'
+            footerElement.style.position = ''; 
             footerElement.style.left = '';
             footerElement.style.width = '';
             footerElement.style.bottom = '';
         }
-    }, 100); // Small delay (10ms) - adjust if necessary
-
+    }, 10);
 }
 
-/**
- * Debounce function to limit how often adjustFooterPosition runs on resize.
- */
+
 function debounceFooterAdjust() {
     clearTimeout(resizeTimerFooter);
-    resizeTimerFooter = setTimeout(adjustFooterPosition, 150); // 150ms delay
+    resizeTimerFooter = setTimeout(adjustFooterPosition, 150);
 }
 
-/**
- * Fetches news data, sorts it, takes the latest items, and displays them.
- * Constructs image URLs relative to /images/ if not a full URL.
- * Includes referrer URL in the article link.
- * @param {number} [count=3] - The number of latest news items to display.
- * @param {string} [containerId='latest-news-grid'] - The ID of the container element for the news grid.
- * @param {string} [loadingId='latest-news-loading'] - The ID of the loading message element.
- */
 async function loadLatestNews(count = 3, containerId = 'latest-news-grid', loadingId = 'latest-news-loading') {
     const newsContainer = document.getElementById(containerId);
     const loadingMessage = document.getElementById(loadingId);
 
-    // Exit if the target container element doesn't exist on the current page
     if (!newsContainer) {
-        // console.log(`DEBUG: News container #${containerId} not found. Skipping latest news load.`);
         return;
     }
 
-    // *** IMPORTANT: Ensure this path correctly points to your JSON file ***
-    const newsDataUrl = '/html/nieuws/nieuws-data.json'; // Assuming JSON is in /nieuws/ folder at root
+    const newsDataUrl = '/html/nieuws/nieuws-data.json';
 
     try {
         const response = await fetch(newsDataUrl);
@@ -160,11 +131,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const headerPlaceholder = document.getElementById('header-placeholder');
     const footerPlaceholder = document.getElementById('footer-placeholder');
 
-    // --- Page Info ---
     const currentPagePath = window.location.pathname;
 
 
-    // --- Function Definitions within DOMContentLoaded Scope ---
     const loadHTML = async (url, placeholder) => {
         const rootRelativeUrl = url.startsWith('/') ? url : '/' + url;
 
@@ -185,22 +154,18 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    /**
-     * Initializes Header Functionality (Mobile Toggle, Accordion, Active Links)
-     */
+
     const initializeHeader = () => {
         const menuToggle = document.querySelector('.menu-toggle');
         const mainNavUl = document.querySelector('.main-nav > ul');
         const mobileBreakpoint = 992;
 
-        // --- Mobile Menu Toggle Logic ---
         if (menuToggle && mainNavUl) {
             menuToggle.addEventListener('click', () => {
                 const isActive = mainNavUl.classList.toggle('active'); 
                 menuToggle.innerHTML = isActive ? '✕' : '☰'; 
                 menuToggle.setAttribute('aria-expanded', isActive);
 
-                // Reset any open submenus when the main menu is closed
                 if (!isActive) {
                     mainNavUl.querySelectorAll('li.submenu-open').forEach(li => {
                         li.classList.remove('submenu-open');
@@ -253,7 +218,7 @@ document.addEventListener('DOMContentLoaded', function() {
                              });
                          }
 
-                        // Now toggle the current item
+                        
                         li.classList.toggle('submenu-open', isOpening);
                         submenu.classList.toggle('submenu-active', isOpening);
                         parentLink.setAttribute('aria-expanded', isOpening);
@@ -299,115 +264,86 @@ document.addEventListener('DOMContentLoaded', function() {
                  });
 
 
-            } // End if (parentLink && submenu)
-        }); // End menuItems.forEach
+            } 
+        });
 
+        const navLinks = mainNavUl.querySelectorAll('a[href]'); 
 
-        // --- Active Page Link Highlighting Logic ---
-        const navLinks = mainNavUl.querySelectorAll('a[href]'); // Select all links with href within the main nav UL
-
-        /**
-         * Normalizes a URL path for comparison.
-         * Removes trailing index/home.html, removes trailing .html,
-         * removes trailing slash (unless root), decodes URI components,
-         * converts to lowercase.
-         * @param {string} path - The URL path to normalize.
-         * @returns {string} The normalized path.
-         */
         const normalizePath = (path) => {
-            if (!path) return '/'; // Handle null/undefined path
+            if (!path) return '/'; 
 
-             // 1. Decode URI component first (handles spaces %20 etc.)
              try {
                 path = decodeURIComponent(path);
             } catch (e) {
                  console.warn("Could not decode path component:", path, e);
-                 // Continue with the potentially encoded path if decoding fails
             }
 
-            // 2. Remove index.html or home.html from the end
             if (path.endsWith('/index.html')) {
                 path = path.substring(0, path.length - 'index.html'.length);
             } else if (path.endsWith('/home.html')) {
                  path = path.substring(0, path.length - 'home.html'.length);
             }
 
-            // 3. Remove .html extension from the end (Key fix for Netlify Pretty URLs)
             if (path.endsWith('.html')) {
                 path = path.substring(0, path.length - '.html'.length);
             }
 
-            // 4. Remove trailing slash unless it's the root '/'
             if (path !== '/' && path.endsWith('/')) {
                 path = path.substring(0, path.length - 1);
             }
 
-            // 5. Ensure root path is consistently just '/' after modifications
             if (path === '') {
                 path = '/';
             }
 
-            // 6. Convert to lowercase for case-insensitive comparison (Fix for Netlify)
-             path = path.toLowerCase(); // <<< THIS LINE IS NOW ACTIVE
+            path = path.toLowerCase();
 
             return path;
         };
 
 
-        // Normalize the current page's path ONCE
         const normalizedCurrentPath = normalizePath(currentPagePath);
 
-        // Iterate through navigation links
         navLinks.forEach(link => {
             const linkHref = link.getAttribute('href');
-            if (!linkHref || linkHref === '#') return; // Skip non-links or placeholder links
+            if (!linkHref || linkHref === '#') return;
 
             let linkPath;
             try {
-                // Construct absolute URL's path to handle relative paths correctly
                 linkPath = new URL(linkHref, window.location.origin).pathname;
             } catch (e) {
                 console.warn(`Invalid URL encountered in navigation: ${linkHref}`);
-                return; // Skip invalid URLs
+                return;
             }
 
-            // Normalize the link's path
             const normalizedLinkPath = normalizePath(linkPath);
 
-            // Check for active state using the normalized paths
             if (normalizedCurrentPath === normalizedLinkPath) {
                 link.classList.add('active');
 
-                // Traverse up the DOM to add active classes to parent menu items
-                let currentElement = link.parentElement; // Start with the LI containing the link
+                let currentElement = link.parentElement;
                 while (currentElement && currentElement.matches('.main-nav li, .main-nav ul')) {
                     if (currentElement.tagName === 'LI') {
-                        currentElement.classList.add('active-ancestor'); // Add class to the parent LI
+                        currentElement.classList.add('active-ancestor'); 
 
-                        // Find the direct anchor link within that LI (the parent menu item trigger)
                         const parentTriggerLink = currentElement.querySelector(':scope > a');
                         if (parentTriggerLink) {
-                             // console.log("Adding 'active' to parent link:", parentTriggerLink); // Optional debug
-                            parentTriggerLink.classList.add('active'); // Highlight the trigger link
+                            parentTriggerLink.classList.add('active');
                         }
                     }
-                    // Move up to the parent UL, then its parent LI
-                     const parentUl = currentElement.closest('ul.submenu'); // Look specifically for submenu ULs
-                     if (parentUl) { // If we are inside a submenu UL
-                         currentElement = parentUl.parentElement; // Go to the LI containing this submenu
+                     const parentUl = currentElement.closest('ul.submenu');
+                     if (parentUl) {
+                         currentElement = parentUl.parentElement;
                      } else {
-                         break; // Stop if we reach the main nav UL or something else
+                         break; 
                      }
                 }
-            } // End if active
-        }); // End navLinks.forEach
+            } 
+        });
 
 
-    }; // End initializeHeader
+    }; 
 
-    /**
-     * Initializes Footer Functionality (Year)
-     */
     const initializeFooter = () => {
          const yearSpan = document.getElementById('current-year');
          if (yearSpan) {
@@ -416,67 +352,49 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
 
-    /**
-     * Orchestrates the loading and initialization of header and footer,
-     * loads news, and checks footer position.
-     */
     const loadAll = async () => {
         let headerLoaded = false;
         let footerLoaded = false;
 
-        const headerPath = '/_header.html'; // Use root-relative path
-        const footerPath = '/_footer.html'; // Use root-relative path
+        const headerPath = '/_header.html'; 
+        const footerPath = '/_footer.html';
 
-        // --- Load Header ---
         if (headerPlaceholder) {
             headerLoaded = await loadHTML(headerPath, headerPlaceholder);
         }
-        // Initialize header AFTER potential loading OR if it exists statically
         if (document.querySelector('.site-header')) {
              initializeHeader();
         } else {
             console.warn("loadAll: .site-header not found after attempting load/checking static.");
         }
 
-
-        // --- Load Footer ---
         if (footerPlaceholder) {
              footerLoaded = await loadHTML(footerPath, footerPlaceholder);
         }
-         // Initialize footer AFTER potential loading OR if it exists statically
+
          if (document.querySelector('.site-footer')) {
              initializeFooter();
-             adjustFooterPosition(); // Adjust position after footer content is known
+             adjustFooterPosition();
          } else {
-             console.warn("loadAll: .site-footer not found after attempting load/checking static.");
-             // Attempt initial adjust anyway in case footer is static but not loaded via placeholder
+             console.warn("loadAll: .site-footer not found after attempting load/checking static.");r
              adjustFooterPosition();
          }
 
 
-        // --- Load Latest News ---
         if (typeof loadLatestNews === 'function') {
-           await loadLatestNews(); // Load news if container exists on the page
+           await loadLatestNews(); 
         }
 
 
-        // --- Final Footer Position Check ---
         if (typeof adjustFooterPosition === 'function') {
-            setTimeout(adjustFooterPosition, 100); // Slightly longer delay after potential layout shifts
+            setTimeout(adjustFooterPosition, 100);
         }
 
-    }; // End loadAll
+    }; 
 
-    // --- Start Execution ---
     loadAll();
 
-}); // End DOMContentLoaded
+}); 
 
-
-// --- Global Event Listeners ---
-
-// Adjust footer position when all resources are loaded (images etc.)
 window.addEventListener('load', adjustFooterPosition);
-
-// Adjust footer position on window resize (debounced)
 window.addEventListener('resize', debounceFooterAdjust);

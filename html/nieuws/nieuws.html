@@ -280,20 +280,47 @@
         const noResultsEl = document.getElementById('news-no-results');
         const newsDataUrl = '/html/nieuws/nieuws-data.json';
 
-        /**
-         * Renders a list of news articles into the placeholder.
-         * @param {Array} articlesToRender - The array of article objects to display.
-         */
+        function AdjustFooter() {
+            const footerElement = document.querySelector('.site-footer'); 
+            const body = document.body;
+            const html = document.documentElement;
+            
+            if (!footerElement) {
+                return;
+            }
+
+            setTimeout(() => {
+                const totalPageHeight = Math.max( body.scrollHeight, body.offsetHeight,
+                                    html.clientHeight, html.scrollHeight, html.offsetHeight );
+                const viewportHeight = window.innerHeight;
+                
+                console.log(totalPageHeight, viewportHeight)
+                if (totalPageHeight <= viewportHeight) {
+
+                    footerElement.style.position = 'absolute';
+                    footerElement.style.left = '0';
+                    footerElement.style.width = '100%';
+                    footerElement.style.bottom = '0';
+                } else {
+                    footerElement.style.position = ''; 
+                    footerElement.style.left = '';
+                    footerElement.style.width = '';
+                    footerElement.style.bottom = '';
+                }
+            }, 10);
+        }
+
         function renderNewsArticles(articlesToRender) {
             newsPlaceholder.innerHTML = ''; // Clear previous results
             noResultsEl.style.display = 'none'; // Hide no results message initially
 
             if (articlesToRender.length === 0) {
                 noResultsEl.style.display = 'block'; // Show no results message
+                AdjustFooter()
                 return;
             }
 
-            const referrerPath = window.location.pathname; // Needed for backlink
+            const referrerPath = window.location.pathname; 
 
             articlesToRender.forEach(item => {
                 const itemDate = new Date(item.date);
@@ -301,7 +328,6 @@
                     day: 'numeric', month: 'long', year: 'numeric'
                 });
 
-                // Image path logic
                 let finalImageUrl = '/images/nieuws/placeholder-news.png';
                 if (item.image) {
                     if (!item.image.startsWith('http://') && !item.image.startsWith('https://')) {
@@ -314,7 +340,6 @@
                 const summaryText = item.summary || '';
                 const itemLink = `/html/nieuws/artikel.html?id=${item.id || ''}&ref=${encodeURIComponent(referrerPath)}`;
 
-                // Generate HTML
                 const articleHtml = `
                     <article class="news-item" id="news-${item.id || ''}">
                         <a href="${itemLink}" class="news-item-image-link" aria-hidden="true" tabindex="-1">
@@ -331,20 +356,19 @@
 
                 newsPlaceholder.insertAdjacentHTML('beforeend', articleHtml);
             });
+
+            AdjustFooter()
         }
 
-        /**
-         * Handles the search input event, filters articles, and re-renders.
-         */
+
+        
         function handleSearch() {
             const searchTerm = searchInput.value.trim().toLowerCase();
 
             const filteredArticles = allNewsArticles.filter(item => {
                 const titleMatch = item.title?.toLowerCase().includes(searchTerm);
                 const summaryMatch = item.summary?.toLowerCase().includes(searchTerm);
-                // Optional: Add category match?
-                // const categoryMatch = item.category?.toLowerCase().includes(searchTerm);
-                return titleMatch || summaryMatch; // || categoryMatch;
+                return titleMatch || summaryMatch;
             });
 
             renderNewsArticles(filteredArticles);
@@ -365,13 +389,10 @@
                     throw new Error("Gedownloade nieuwsdata is geen geldige lijst.");
                 }
 
-                // Sort data by date descending
                 allNewsArticles = newsData.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-                // Remove loading message container
                 if (loadingContainer) loadingContainer.remove();
 
-                // Initial render of all articles
                 renderNewsArticles(allNewsArticles);
 
                 // Add search event listener *after* data is loaded
@@ -389,6 +410,8 @@
                  searchInput.placeholder = "Nieuws laden mislukt";
             }
         }
+
+        
 
         document.addEventListener('DOMContentLoaded', loadInitialNews);
     </script>
