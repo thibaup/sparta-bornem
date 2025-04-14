@@ -1231,9 +1231,7 @@
    document.addEventListener('DOMContentLoaded', () => {
             const calendarView = document.querySelector('.calendar-view');
             const popup = document.getElementById('event-popup');
-            // Only proceed if popup structure exists
             if (!calendarView || !popup) {
-                // console.warn("Calendar view or popup element not found for JS interaction.");
                 return;
             }
             const popupTitle = popup.querySelector('.popup-title');
@@ -1241,26 +1239,22 @@
             const popupDetails = popup.querySelector('.popup-details');
             const popupLink = popup.querySelector('.popup-link');
             const closeButton = popup.querySelector('.close-btn');
-            const mobileBreakpoint = 768; // Match CSS media query
+            const mobileBreakpoint = 768;
 
-            // --- Function to Show Popup ---
             const showPopup = (eventElement, clickEvent) => {
                 const title = eventElement.getAttribute('title') || eventElement.innerText;
                 const info = eventElement.dataset.info;
                 const location = eventElement.dataset.location;
                 const category = eventElement.dataset.category;
                 const url = eventElement.dataset.url;
-
-                // Only show if there's actual popup content
-                if (!info && !location && !category && !url) {
-                    // If no popup data, check if the span itself has a URL to navigate to
+                
+                if (!info && !location && !category && !url && !title) {
                     if (eventElement.dataset.url && eventElement.dataset.url !== '#') {
                         window.location.href = eventElement.dataset.url;
                     }
-                    return; // Don't show empty popup
+                    return;
                 }
 
-                // Populate Popup Content
                 popupTitle.textContent = title;
                 popupInfo.textContent = info || '';
                 popupInfo.style.display = info ? 'block' : 'none';
@@ -1279,12 +1273,10 @@
                     popupLink.style.display = 'none';
                 }
 
-                // --- Positioning ---
                 const isMobile = window.innerWidth <= mobileBreakpoint;
                 if (isMobile) {
                     document.body.classList.add('popup-open');
-                    // Ensure inline styles are removed/reset for mobile
-                    popup.style.position = ''; // Let CSS handle fixed
+                    popup.style.position = '';
                     popup.style.top = '';
                     popup.style.left = '';
                 } else {
@@ -1292,55 +1284,45 @@
                     const rect = eventElement.getBoundingClientRect();
                     const clickY = clickEvent.clientY; const clickX = clickEvent.clientX;
 
-                    // Temporarily show popup off-screen to measure its dimensions accurately
                     popup.style.visibility = 'hidden';
-                    popup.style.position = 'absolute'; // Ensure absolute for measurement
+                    popup.style.position = 'absolute'; 
                     popup.style.display = 'block';
                     const popupHeight = popup.offsetHeight;
                     const popupWidth = popup.offsetWidth;
-                    popup.style.display = 'none'; // Hide again before final positioning
+                    popup.style.display = 'none'; 
                     popup.style.visibility = 'visible';
 
                     const viewportWidth = window.innerWidth; const viewportHeight = window.innerHeight;
                     const scrollX = window.scrollX; const scrollY = window.scrollY;
                     let top = clickY + scrollY + 10; let left = clickX + scrollX + 10;
 
-                    // Adjust if popup goes off-screen (with small buffer)
                     const buffer = 10;
                     if (clickY + popupHeight + buffer > viewportHeight) top = clickY + scrollY - popupHeight - buffer;
                     if (clickX + popupWidth + buffer > viewportWidth) left = clickX + scrollX - popupWidth - buffer;
                     if (left < scrollX + buffer) left = scrollX + buffer;
                     if (top < scrollY + buffer) top = scrollY + buffer;
 
-                    popup.style.position = 'absolute'; // Explicitly set for desktop
+                    popup.style.position = 'absolute';
                     popup.style.top = `${top}px`; popup.style.left = `${left}px`;
                 }
-                popup.style.display = 'block'; // Make it visible *after* positioning
+                popup.style.display = 'block'; 
             };
 
-            // --- Function to Hide Popup ---
             const hidePopup = () => {
                 if (popup) popup.style.display = 'none';
                 document.body.classList.remove('popup-open');
             };
 
-            // --- Event Listener for Clicks on Calendar Events ---
             calendarView.addEventListener('click', (event) => {
                 const eventElement = event.target.closest('.calendar-event');
                 if (eventElement) {
-                    const hasPopupData = eventElement.dataset.info || eventElement.dataset.location || eventElement.dataset.category || eventElement.dataset.url;
-                    if (hasPopupData) {
-                        event.preventDefault();
-                        showPopup(eventElement, event);
-                    }
-                    // Allow default navigation if no popup data
+                    event.preventDefault();
+                    showPopup(eventElement, event);
                 }
             });
 
-            // --- Event Listener for Closing Popup ---
             if (closeButton) closeButton.addEventListener('click', hidePopup);
 
-            // --- Event Listener to Close Popup When Clicking Outside ---
             document.addEventListener('click', (event) => {
                 if (popup && popup.style.display === 'block' &&
                     !popup.contains(event.target) &&
@@ -1348,7 +1330,7 @@
                     hidePopup();
                 }
             });
-            // --- Event Listener for Escape Key ---
+
              document.addEventListener('keydown', (event) => {
                  if (event.key === 'Escape' && popup && popup.style.display === 'block') {
                      hidePopup();
