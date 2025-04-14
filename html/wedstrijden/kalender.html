@@ -9,236 +9,118 @@
   <link href="/images/website-logo.png" rel="icon" type="image/png">
   <link href="/css/style.css" rel="stylesheet">
   <style>
-   body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f4f4f4;
-            margin: 0;
-        }
-        .container {
-            max-width: 1140px;
-            margin: 20px auto;
-            padding: 0 20px;
-        }
-        .main-content {
-            padding-top: 20px;
-            padding-bottom: 40px;
-        }
-        .main-content h1 {
-            color: #1774b4;
-            margin-bottom: 20px;
-            font-size: clamp(2em, 5vw, 2.8em);
-            border-bottom: 2px solid #eee;
-            padding-bottom: 15px;
-        }
-        a {
-            color: #1774b4;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
+   /* === CALENDAR STYLES (Keep existing) === */
+    .calendar-view { margin-top: 30px; }
+    .month-grid { margin-bottom: 50px; background-color: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.08); }
+    .month-title { text-align: center; font-size: clamp(1.6em, 4vw, 2em); color: #1774b4; margin-bottom: 25px; }
+    .calendar-header { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; font-weight: 600; color: #6c757d; padding-bottom: 10px; margin-bottom: 10px; border-bottom: 1px solid #dee2e6; font-size: 0.9rem; }
+    .calendar-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
+    .calendar-day { border: 1px solid #f1f1f1; aspect-ratio: 1 / 1; padding: 5px; font-size: 0.85rem; position: relative; background-color: #fff; transition: background-color 0.2s ease; display: flex; flex-direction: column; overflow: hidden; }
+    .calendar-day.padding-day { background-color: #f8f9fa; opacity: 0.6; border-color: transparent; }
+    .calendar-day.padding-day .day-number { color: #adb5bd; }
+    .day-number { font-weight: bold; color: #343a40; margin-bottom: 2px; display: block; text-align: right; font-size: 0.8em; align-self: flex-end; }
+    .calendar-event { display: block; font-size: 0.8em; padding: 2px 4px; margin-bottom: 2px; border-radius: 3px; line-height: 1.2; border-left: 3px solid transparent; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer; /* Make all events clickable */ position: relative; }
+    .calendar-event a { text-decoration: none; color: inherit; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .calendar-event a:hover { text-decoration: underline; }
+    /* --- Removed expansion styles --- */
+    .event-green { border-left-color: #28a745; background-color: rgba(40, 167, 69, 0.1); }
+    .event-blue { border-left-color: #007bff; background-color: rgba(0, 123, 255, 0.1); }
+    .event-red { border-left-color: #dc3545; background-color: rgba(220, 53, 69, 0.1); }
+    .event-black { border-left-color: #343a40; background-color: rgba(52, 58, 64, 0.1); }
 
-        /* ==========================================================================
-        Calendar Styling
-        ========================================================================== */
+    /* === LEGEND STYLES (Keep existing) === */
+    .legend { margin-bottom: 30px; padding: 20px; background-color: #f8f9fa; border-radius: 5px; border: 1px solid #dee2e6; }
+    .legend h2 { margin-top: 0; margin-bottom: 15px; font-size: 1.4em; border-bottom: 1px solid #ced4da; padding-bottom: 10px; color: #495057; }
+    .legend p { margin-bottom: 0.8em; font-size: 0.95em; line-height: 1.5; }
+    .legend span { font-weight: bold; }
+    .legend .legend-green { color: #28a745; }
+    .legend .legend-blue { color: #007bff; }
+    .legend .legend-red { color: #dc3545; }
+    .legend .legend-black { color: #343a40; }
 
-        .calendar-view {
-            margin-top: 30px;
+    /* ==========================================================================
+       POPUP STYLING
+       ========================================================================== */
+    .event-popup {
+        position: absolute; /* Default for desktop, JS calculates top/left */
+        display: none; /* Hidden by default */
+        background-color: white;
+        border: 1px solid #ccc;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        padding: 15px 20px;
+        border-radius: 6px;
+        z-index: 1050; /* Ensure it's above other elements */
+        max-width: 300px;
+        min-width: 200px;
+        font-size: 0.9em;
+        line-height: 1.5;
+        pointer-events: auto;
+        transform: none; /* Reset transform for desktop */
+    }
+    .event-popup .close-btn {
+        position: absolute; top: 5px; right: 10px; background: none; border: none;
+        font-size: 1.8em; line-height: 1; cursor: pointer; color: #aaa; padding: 0; font-weight: bold;
+    }
+    .event-popup .close-btn:hover { color: #555; }
+    .event-popup h4 { margin-top: 0; margin-bottom: 12px; font-size: 1.15em; color: #1774b4; border-bottom: 1px solid #eee; padding-bottom: 8px; }
+    .event-popup p { margin-top: 0; margin-bottom: 8px; }
+    .event-popup p:last-child { margin-bottom: 0; }
+    .event-popup strong { color: #555; margin-right: 5px; }
+    .event-popup .popup-link a { color: #1774b4; text-decoration: underline; font-weight: 500; }
+    .event-popup .popup-link a:hover { color: #105a8b; }
+
+    /* === RESPONSIVE CALENDAR STYLES (Keep Existing) === */
+    @media (max-width: 768px) {
+        .month-grid { padding: 15px; }
+        .calendar-header { font-size: 0.75rem; padding-bottom: 6px; margin-bottom: 6px; }
+        .calendar-day { padding: 4px; font-size: 0.75rem; }
+        .day-number { font-size: 0.8em; }
+        .calendar-event { font-size: 0.75em; padding: 1px 3px; }
+        .month-title { font-size: clamp(1.4em, 3.5vw, 1.8em); }
+        .legend h2 { font-size: 1.3em; }
+        .legend p { font-size: 0.9em; }
+    }
+    @media (max-width: 600px) {
+        .calendar-header { font-size: 0.7rem; font-weight: 500; border-bottom: none; margin-bottom: 3px; }
+        .calendar-days { gap: 2px; }
+        .calendar-day { padding: 3px; font-size: 0.7rem; border-width: 1px; }
+        .day-number { font-size: 0.75em; margin-bottom: 1px; }
+        .calendar-event, .calendar-event a { font-size: 0.75em; padding: 1px 2px; margin-bottom: 1px; border-left-width: 2px; }
+    }
+    @media (max-width: 400px) {
+        .calendar-header { font-size: 0.65rem; }
+        .calendar-day { font-size: 0.65rem; padding: 2px; }
+        .day-number { font-size: 0.7em; }
+        .calendar-event, .calendar-event a { font-size: 0.7em; }
+    }
+
+    /* ==========================================================================
+       MOBILE POPUP OVERRIDES
+       ========================================================================== */
+    @media (max-width: 768px) {
+        .event-popup {
+            position: fixed;     /* Fixed to viewport */
+            top: 50%;            /* Center vertically */
+            left: 50%;           /* Center horizontally */
+            transform: translate(-50%, -50%); /* Adjust position */
+            max-width: 90%;      /* Limit width */
+            width: auto;         /* Auto width up to max */
+            max-height: 80vh;    /* Limit height */
+            overflow-y: auto;    /* Scroll tall content */
+            /* Ensure these are reset for fixed positioning */
+            right: auto;
+            bottom: auto;
         }
-
-        .month-grid {
-            margin-bottom: 50px;
-            background-color: #fff;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-        }
-
-        .month-title {
-            text-align: center;
-            font-size: clamp(1.6em, 4vw, 2em);
-            color: #1774b4;
-            margin-bottom: 25px;
-        }
-
-        .calendar-header {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            text-align: center;
-            font-weight: 600;
-            color: #6c757d;
-            padding-bottom: 10px;
-            margin-bottom: 10px;
-            border-bottom: 1px solid #dee2e6;
-            font-size: 0.9rem;
-        }
-
-        .calendar-days {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 5px; 
-        }
-
-        .calendar-day {
-            border: 1px solid #f1f1f1;
-            aspect-ratio: 1 / 1;
-            padding: 5px; 
-            font-size: 0.85rem;
-            position: relative;
-            background-color: #fff;
-            transition: background-color 0.2s ease;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden; 
-        }
-
-        .calendar-day.padding-day {
-            background-color: #f8f9fa;
-            opacity: 0.6;
-            border-color: transparent;
-        }
-        .calendar-day.padding-day .day-number {
-            color: #adb5bd;
-        }
-
-        .day-number {
-            font-weight: bold;
-            color: #343a40;
-            margin-bottom: 2px;
-            display: block;
-            text-align: right;
-            font-size: 0.8em; 
-            align-self: flex-end;
-        }
-
-        .calendar-event {
-            display: block;
-            font-size: 0.8em;
-            padding: 2px 4px; 
-            margin-bottom: 2px; 
-            border-radius: 3px;
-            line-height: 1.2; 
-            border-left: 3px solid transparent;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            cursor: default;
-            position: relative;
-        }
-
-        .calendar-event a {
-            text-decoration: none;
-            color: inherit;
-            display: block;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .calendar-event a:hover {
-            text-decoration: underline;
-        }
-
-        .calendar-event.event-expanded {
-            white-space: normal;
-            overflow: visible;
-            text-overflow: clip;
-            z-index: 5;
-            background-color: #fff; 
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            cursor: default;
-            position: absolute;
-            left: 0;
-            right: 0;
-            width: auto;
-            min-height: fit-content;
-            border-left-width: 3px; 
-            padding: 3px 5px;
-        }
-
-        .calendar-event.event-expanded a {
-            white-space: normal;
-            overflow: visible;
-            text-overflow: clip;
-        }
-
-        .event-green { border-left-color: #28a745; background-color: rgba(40, 167, 69, 0.1); }
-        .event-blue { border-left-color: #007bff; background-color: rgba(0, 123, 255, 0.1); }
-        .event-red { border-left-color: #dc3545; background-color: rgba(220, 53, 69, 0.1); }
-        .event-black { border-left-color: #343a40; background-color: rgba(52, 58, 64, 0.1); }
-
-        .legend {
-            margin-bottom: 30px;
-            padding: 20px;
-            background-color: #f8f9fa;
-            border-radius: 5px;
-            border: 1px solid #dee2e6;
-        }
-        .legend h2 {
-            margin-top: 0;
-            margin-bottom: 15px;
-            font-size: 1.4em;
-            border-bottom: 1px solid #ced4da;
-            padding-bottom: 10px;
-            color: #495057;
-        }
-        .legend p { margin-bottom: 0.8em; font-size: 0.95em; line-height: 1.5; }
-        .legend span { font-weight: bold; }
-        .legend .legend-green { color: #28a745; }
-        .legend .legend-blue { color: #007bff; }
-        .legend .legend-red { color: #dc3545; }
-        .legend .legend-black { color: #343a40; }
-
-
-        @media (max-width: 768px) {
-            .month-grid { padding: 15px; } 
-            .calendar-header { font-size: 0.75rem; padding-bottom: 6px; margin-bottom: 6px; }
-            .calendar-day {
-                padding: 4px; 
-                font-size: 0.75rem; 
-            }
-            .day-number { font-size: 0.8em; }
-
-            .calendar-event {
-                font-size: 0.75em;
-                padding: 1px 3px;
-                cursor: pointer;
-            }
-            .month-title { font-size: clamp(1.4em, 3.5vw, 1.8em); }
-            .legend h2 { font-size: 1.3em; }
-            .legend p { font-size: 0.9em; }
-        }
-
-        @media (max-width: 600px) {
-            .calendar-header { font-size: 0.7rem; font-weight: 500; border-bottom: none; margin-bottom: 3px; }
-            .calendar-days { gap: 2px; }
-            .calendar-day {
-                padding: 3px; 
-                font-size: 0.7rem;
-                border-width: 1px;
-            }
-            .day-number { font-size: 0.75em; margin-bottom: 1px; }
-
-            .calendar-event,
-            .calendar-event a {
-                font-size: 0.75em;
-                padding: 1px 2px;
-                margin-bottom: 1px;
-                border-left-width: 2px;
-            }
-            .calendar-event.event-expanded { padding: 2px 4px; }
-        }
-
-        @media (max-width: 400px) {
-            .calendar-header { font-size: 0.65rem; }
-            .calendar-day { font-size: 0.65rem; padding: 2px; }
-            .day-number { font-size: 0.7em; }
-            .calendar-event,
-            .calendar-event a {
-                font-size: 0.7em;
-            }
-        }
+        /* Dark overlay for mobile */
+        body.popup-open::before {
+             content: "";
+             position: fixed;
+             top: 0; left: 0; width: 100%; height: 100%;
+             background-color: rgba(0,0,0,0.4);
+             z-index: 1040; /* Below popup */
+             pointer-events: none; /* Don't block clicks */
+         }
+    }
   </style>
  </head>
  <body>
@@ -484,7 +366,6 @@
       </div>
      </div>
     </section>
-    <!-- === FEBRUARI 2025 === -->
     <section class="month-grid">
      <h2 class="month-title">
       Februari 2025
@@ -687,7 +568,6 @@
       </div>
      </div>
     </section>
-    <!-- === MAART 2025 === -->
     <section class="month-grid">
      <h2 class="month-title">
       Maart 2025
@@ -907,7 +787,6 @@
       </div>
      </div>
     </section>
-    <!-- === APRIL 2025 === -->
     <section class="month-grid">
      <h2 class="month-title">
       April 2025
@@ -1113,7 +992,6 @@
       </div>
      </div>
     </section>
-    <!-- === MEI 2025 === -->
     <section class="month-grid">
      <h2 class="month-title">
       Mei 2025
@@ -1209,9 +1087,7 @@
         BVV AC
        </span>
        <span class="calendar-event event-green" title="Flanders CUP - Lokeren">
-        <a href="https://www.atletiek.nu/wedstrijd/main/42247/">
-         Flanders CUP - Lokeren
-        </a>
+        Flanders CUP - Lokeren
        </span>
       </div>
       <div class="calendar-day">
@@ -1321,7 +1197,6 @@
       </div>
      </div>
     </section>
-    <!-- === JUNI 2025 === -->
     <section class="month-grid">
      <h2 class="month-title">
       Juni 2025
@@ -1538,7 +1413,6 @@
       </div>
      </div>
     </section>
-    <!-- === AUGUSTUS 2025 === -->
     <section class="month-grid">
      <h2 class="month-title">
       Augustus 2025
@@ -1756,7 +1630,6 @@
       </div>
      </div>
     </section>
-    <!-- === SEPTEMBER 2025 === -->
     <section class="month-grid">
      <h2 class="month-title">
       September 2025
@@ -1950,51 +1823,163 @@
       </div>
      </div>
     </section>
+    <!-- === SEPTEMBER 2025 === -->
+    <!-- === AUGUSTUS 2025 === -->
+    <!-- === JUNI 2025 === -->
+    <!-- === MEI 2025 === -->
+    <!-- === APRIL 2025 === -->
+    <!-- === MAART 2025 === -->
+    <!-- === FEBRUARI 2025 === -->
    </div>
   </main>
   <div id="footer-placeholder">
+  </div>
+  <div class="event-popup" id="event-popup">
+   <button aria-label="Sluiten" class="close-btn">
+    &times;
+   </button>
+   <h4 class="popup-title">
+    Event Title
+   </h4>
+   <p class="popup-info">
+    Extra information about the event goes here.
+   </p>
+   <p class="popup-details">
+   </p>
+   <!-- For Location/Category -->
+   <p class="popup-link">
+   </p>
+   <!-- For optional link -->
   </div>
   <script defer src="/js/script.js">
   </script>
   <script>
    document.addEventListener('DOMContentLoaded', () => {
             const calendarView = document.querySelector('.calendar-view');
-            const mobileBreakpoint = 768;
-    
-            if (!calendarView) {
-                console.warn("Calendar view element (.calendar-view) not found.");
+            const popup = document.getElementById('event-popup');
+            // Only proceed if popup structure exists
+            if (!calendarView || !popup) {
+                // console.warn("Calendar view or popup element not found for JS interaction.");
                 return;
             }
-    
-            calendarView.addEventListener('click', (event) => {
-                const eventSpan = event.target.closest('.calendar-event');
-                if (!eventSpan) {
-                    return;
-                }
-    
-                const isTruncated = eventSpan.scrollWidth > eventSpan.offsetWidth;
-                const isExpanded = eventSpan.classList.contains('event-expanded');
-                const shouldToggleExpansion = isExpanded || (!isExpanded && isTruncated);
+            const popupTitle = popup.querySelector('.popup-title');
+            const popupInfo = popup.querySelector('.popup-info');
+            const popupDetails = popup.querySelector('.popup-details');
+            const popupLink = popup.querySelector('.popup-link');
+            const closeButton = popup.querySelector('.close-btn');
+            const mobileBreakpoint = 768; // Match CSS media query
 
-                if (shouldToggleExpansion && event.target.tagName === 'A') {
-                    event.preventDefault();
-                }
-    
-                if (isExpanded) {
-                    eventSpan.classList.remove('event-expanded');
-                } else if (isTruncated) {
-                    const parentDay = eventSpan.closest('.calendar-day');
-                    if (parentDay) {
-                        const currentlyExpanded = parentDay.querySelector('.calendar-event.event-expanded');
-                        if (currentlyExpanded && currentlyExpanded !== eventSpan) {
-                            currentlyExpanded.classList.remove('event-expanded');
-                        }
+            // --- Function to Show Popup ---
+            const showPopup = (eventElement, clickEvent) => {
+                const title = eventElement.getAttribute('title') || eventElement.innerText;
+                const info = eventElement.dataset.info;
+                const location = eventElement.dataset.location;
+                const category = eventElement.dataset.category;
+                const url = eventElement.dataset.url;
+
+                // Only show if there's actual popup content
+                if (!info && !location && !category && !url) {
+                    // If no popup data, check if the span itself has a URL to navigate to
+                    if (eventElement.dataset.url && eventElement.dataset.url !== '#') {
+                        window.location.href = eventElement.dataset.url;
                     }
-    
-                    eventSpan.classList.add('event-expanded');
+                    return; // Don't show empty popup
                 }
-    
-            }); 
+
+                // Populate Popup Content
+                popupTitle.textContent = title;
+                popupInfo.textContent = info || '';
+                popupInfo.style.display = info ? 'block' : 'none';
+
+                let detailsHTML = '';
+                if (location) detailsHTML += `<strong>Locatie:</strong> ${location}<br>`;
+                if (category) detailsHTML += `<strong>Categorie:</strong> ${category}`;
+                popupDetails.innerHTML = detailsHTML;
+                popupDetails.style.display = detailsHTML ? 'block' : 'none';
+
+                if (url && url !== '#') {
+                    popupLink.innerHTML = `<a href="${url}" target="_blank" rel="noopener noreferrer">Meer Info / Inschrijven</a>`;
+                    popupLink.style.display = 'block';
+                } else {
+                    popupLink.innerHTML = '';
+                    popupLink.style.display = 'none';
+                }
+
+                // --- Positioning ---
+                const isMobile = window.innerWidth <= mobileBreakpoint;
+                if (isMobile) {
+                    document.body.classList.add('popup-open');
+                    // Ensure inline styles are removed/reset for mobile
+                    popup.style.position = ''; // Let CSS handle fixed
+                    popup.style.top = '';
+                    popup.style.left = '';
+                } else {
+                    document.body.classList.remove('popup-open');
+                    const rect = eventElement.getBoundingClientRect();
+                    const clickY = clickEvent.clientY; const clickX = clickEvent.clientX;
+
+                    // Temporarily show popup off-screen to measure its dimensions accurately
+                    popup.style.visibility = 'hidden';
+                    popup.style.position = 'absolute'; // Ensure absolute for measurement
+                    popup.style.display = 'block';
+                    const popupHeight = popup.offsetHeight;
+                    const popupWidth = popup.offsetWidth;
+                    popup.style.display = 'none'; // Hide again before final positioning
+                    popup.style.visibility = 'visible';
+
+                    const viewportWidth = window.innerWidth; const viewportHeight = window.innerHeight;
+                    const scrollX = window.scrollX; const scrollY = window.scrollY;
+                    let top = clickY + scrollY + 10; let left = clickX + scrollX + 10;
+
+                    // Adjust if popup goes off-screen (with small buffer)
+                    const buffer = 10;
+                    if (clickY + popupHeight + buffer > viewportHeight) top = clickY + scrollY - popupHeight - buffer;
+                    if (clickX + popupWidth + buffer > viewportWidth) left = clickX + scrollX - popupWidth - buffer;
+                    if (left < scrollX + buffer) left = scrollX + buffer;
+                    if (top < scrollY + buffer) top = scrollY + buffer;
+
+                    popup.style.position = 'absolute'; // Explicitly set for desktop
+                    popup.style.top = `${top}px`; popup.style.left = `${left}px`;
+                }
+                popup.style.display = 'block'; // Make it visible *after* positioning
+            };
+
+            // --- Function to Hide Popup ---
+            const hidePopup = () => {
+                if (popup) popup.style.display = 'none';
+                document.body.classList.remove('popup-open');
+            };
+
+            // --- Event Listener for Clicks on Calendar Events ---
+            calendarView.addEventListener('click', (event) => {
+                const eventElement = event.target.closest('.calendar-event');
+                if (eventElement) {
+                    const hasPopupData = eventElement.dataset.info || eventElement.dataset.location || eventElement.dataset.category || eventElement.dataset.url;
+                    if (hasPopupData) {
+                        event.preventDefault();
+                        showPopup(eventElement, event);
+                    }
+                    // Allow default navigation if no popup data
+                }
+            });
+
+            // --- Event Listener for Closing Popup ---
+            if (closeButton) closeButton.addEventListener('click', hidePopup);
+
+            // --- Event Listener to Close Popup When Clicking Outside ---
+            document.addEventListener('click', (event) => {
+                if (popup && popup.style.display === 'block' &&
+                    !popup.contains(event.target) &&
+                    !event.target.closest('.calendar-event')) {
+                    hidePopup();
+                }
+            });
+            // --- Event Listener for Escape Key ---
+             document.addEventListener('keydown', (event) => {
+                 if (event.key === 'Escape' && popup && popup.style.display === 'block') {
+                     hidePopup();
+                 }
+             });
         });
   </script>
  </body>
