@@ -209,21 +209,28 @@
 
             const defaultBackHref = '/html/nieuws/nieuws.html';
             const defaultBackText = '« Terug naar Nieuwsoverzicht';
+
             if (backLink) {
-                if (referrerUrl) {
+                 if (referrerUrl) {
                     try {
                         const decodedRef = decodeURIComponent(referrerUrl);
-                        backLink.href = decodedRef;
-                        if (decodedRef.includes('nieuws.html') || decodedRef.includes('%2Fhtml%2Fnieuws%2Fnieuws')) {
+
+                        const refUrl = new URL(decodedRef, window.location.origin);
+                        const refPathnameLower = refUrl.pathname.toLowerCase();
+
+                        if (refPathnameLower.includes('/html/nieuws/nieuws') || refPathnameLower.endsWith('/nieuws/')) {
                             backLink.textContent = '« Terug naar Nieuwsoverzicht';
-                        } else if (decodedRef === '/' || decodedRef.includes('home.html') || decodedRef.includes('index.html')) {
+                            backLink.href = decodedRef;
+                        } else if (refPathnameLower === '/' || refPathnameLower.endsWith('/home.html') || refPathnameLower.endsWith('/index.html')) {
                             backLink.textContent = '« Terug naar Home';
+                            backLink.href = decodedRef;
                         } else {
                             backLink.textContent = '« Terug naar Vorige';
+                            backLink.href = decodedRef;
                         }
                     } catch (e) {
-                        console.error("Error decoding referrer URL:", e);
-                        backLink.href = defaultBackHref
+                        console.error("Error processing referrer URL:", e, "Referrer:", referrerUrl);
+                        backLink.href = defaultBackHref; 
                         backLink.textContent = defaultBackText;
                     }
                 } else {
