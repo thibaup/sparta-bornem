@@ -3,189 +3,389 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Title will be set dynamically by JS -->
     <title>Nieuwsartikel - Sparta Bornem</title>
-    <link rel="icon" type="image/png" href="/images/website-logo.png"> <!-- Assuming favicon in root -->
-    <link rel="stylesheet" href="/css/style.css"> <!-- Link main CSS -->
+    <link rel="icon" type="image/png" href="/images/website-logo.png">
+    <link rel="stylesheet" href="/css/style.css">
 
-    <!-- Specific Styles for Single Article Page -->
     <style>
-        /* --- Basic Reset & Body Styling --- */
+        /* --- Improved Reset & Base Styling --- */
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4; }
-        /* Ensure container respects max-width and has horizontal padding */
-        .container { max-width: 1140px; margin: 20px auto; padding: 0 20px; } /* Added top/bottom margin */
-        a { color: #1774b4; text-decoration: none; }
-        a:hover { text-decoration: underline; }
-        img { max-width: 100%; height: auto; display: block; /* Prevent potential bottom space */ }
-        h1, h2, h3, h4 { margin-bottom: 0.8em; color: #1a1a1a; font-weight: 600; }
-        p { margin-bottom: 1em; }
-        ul { margin-bottom: 1em; margin-left: 20px; }
-        mark { background-color: #ffe066; padding: 0.1em 0.3em; border-radius: 3px; }
-        strong, b { font-weight: 600; }
-
+        
+        :root {
+            --primary-color: #1774b4;
+            --text-color: #333;
+            --light-gray: #f4f4f4;
+            --medium-gray: #6c757d;
+            --border-color: #eee;
+            --shadow-color: rgba(0,0,0,0.08);
+            --card-bg: #ffffff;
+            --content-max-width: 820px;
+        }
+        
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            line-height: 1.6; 
+            color: var(--text-color); 
+            background-color: var(--light-gray);
+            font-size: 16px;
+        }
+        
+        /* Improved container responsiveness */
+        .container { 
+            width: 100%;
+            max-width: 1140px; 
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        a { 
+            color: var(--primary-color); 
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        
+        a:hover { 
+            text-decoration: underline; 
+            color: #125a8c;
+        }
+        
+        img { 
+            max-width: 100%; 
+            height: auto; 
+            display: block;
+        }
+        
+        h1, h2, h3, h4 { 
+            margin-bottom: 0.8em; 
+            color: #1a1a1a; 
+            font-weight: 600;
+            line-height: 1.3;
+        }
+        
+        p { margin-bottom: 1.2em; }
+        ul { margin-bottom: 1.2em; margin-left: 20px; }
+        
         /* --- Main Content Area Wrapper --- */
         .main-content {
-            /* This container already has max-width and padding from .container */
-            padding-top: 20px;    /* Add space below header */
-            padding-bottom: 40px; /* Add space above footer */
+            padding: 20px 0 40px;
         }
 
-        /* --- Single Article Styling --- */
+        /* --- Improved Article Container --- */
         .article-container {
-            background-color: #ffffff;
-            /* Increased padding for more whitespace */
-            padding: 30px 40px 40px 40px; /* Added bottom padding */
-            border-radius: 8px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08); /* Slightly deeper shadow */
-            margin-bottom: 40px; /* Space below article box before back link */
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 4px 16px var(--shadow-color);
+            margin-bottom: 30px;
+            overflow: hidden; /* Keep content inside radius */
+            max-width: var(--content-max-width);
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Article header section */
+        .article-header {
+            padding: 30px 40px 20px;
+        }
+
+        /* Article content section */
+        .article-content {
+            padding: 0 40px 40px;
+        }
+
+        @media (max-width: 768px) {
+            .article-header,
+            .article-content {
+                padding: 20px 25px;
+            }
         }
 
         #article-title {
-            color: #1774b4;
+            color: var(--primary-color);
             margin-top: 0;
-            margin-bottom: 10px; /* Space below title */
-            font-size: clamp(1.8em, 4vw, 2.5em); /* Responsive title size */
-            line-height: 1.3;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 15px; /* More space below border */
+            margin-bottom: 15px;
+            font-size: clamp(1.6em, 5vw, 2.5em);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 15px;
         }
 
         .article-meta {
             display: block;
-            color: #6c757d;
-            font-size: 0.9em;
-            margin-bottom: 25px; /* Space below meta */
+            color: var(--medium-gray);
+            font-size: 0.95em;
+            margin-bottom: 25px;
+            font-style: italic;
         }
 
-        /* Style image container, not just image, if needed */
+        /* Improved image container */
         #article-image-container {
-            text-align: center; /* Center the image within this div */
-            margin-bottom: 30px; /* Space below image */
+            margin: 0 -40px 30px; /* Negative margin to extend full width */
+            max-height: 60vh; /* Limit height on large screens */
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        #article-image-container::after {
+            content: "🔍";
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 16px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        #article-image-container:hover::after {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            #article-image-container {
+                margin: 0 -25px 20px;
+            }
         }
 
         .article-image {
-            /* Max width to prevent huge images, but allow smaller ones */
-            max-width: 100%;
-            width: auto; /* Let image scale naturally up to max-width */
-            max-height: 500px; /* Optional: Prevent overly tall images */
+            width: 100%;
             height: auto;
-            border-radius: 5px;
-            display: inline-block; /* Allows centering via text-align on parent */
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
         }
 
+        #article-image-container:hover .article-image {
+            transform: scale(1.02);
+        }
+
+        /* Lightbox Styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .lightbox-image {
+            max-width: 100%;
+            max-height: 85vh; /* Limit height to 85% of viewport height */
+            object-fit: contain;
+            border: 4px solid white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-caption {
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 1rem;
+            max-width: 80%;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+            background: transparent;
+            border: none;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+
+        .lightbox-close:hover {
+            transform: scale(1.2);
+        }
+
+        /* Full-width image option */
+        .full-width-image #article-image-container {
+            margin-left: 0;
+            margin-right: 0;
+            border-radius: 0;
+        }
+
+        /* Responsive content fixes */
         .article-full-content {
             line-height: 1.7;
-            font-size: 1.05em; /* Slightly larger body text */
-            /* --- FIX FOR TEXT OVERFLOW --- */
-            overflow-wrap: break-word; /* Standard property */
-            word-wrap: break-word;     /* Older browsers fallback */
-            word-break: break-word;    /* Helps break long words/URLs */
-            /* Ensure child elements don't cause overflow if they have fixed widths */
-            overflow: hidden; /* Added: Hide potential overflow from child elements */
-        }
-
-        .article-full-content p {
-            margin-bottom: 1.2em;
-        }
-        .article-full-content a {
-            font-weight: 500;
-            /* Ensure links also break if very long */
+            font-size: 1.05em;
             overflow-wrap: break-word;
             word-wrap: break-word;
             word-break: break-word;
-            /* Maybe slightly different color? */
-            /* color: #125a8c; */
+            overflow: hidden;
+            max-width: 100%;
         }
+
+        .article-full-content p {
+            margin-bottom: 1.5em;
+        }
+
+        .article-full-content a {
+            font-weight: 500;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            word-break: break-word;
+            color: #125a8c;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
         .article-full-content a:hover {
-            text-decoration: none;
-        }
-        /* Add styles for other potential elements if needed */
-        .article-full-content ul,
-        .article-full-content ol {
-            margin-left: 25px;
-            margin-bottom: 1.2em;
-        }
-        .article-full-content li {
-            margin-bottom: 0.5em;
-        }
-        .article-full-content blockquote {
-            border-left: 4px solid #eee;
-            padding-left: 15px;
-            margin: 1.5em 0;
-            color: #666;
-            font-style: italic;
-        }
-        .article-full-content code { /* Basic styling for code */
-            background-color: #f1f1f1;
-            padding: 0.2em 0.4em;
-            border-radius: 3px;
-            font-family: monospace;
-            font-size: 0.9em;
-            /* Code can overflow easily */
-            white-space: pre-wrap; /* Wrap code but preserve whitespace */
-            word-break: break-all; /* Allow breaking anywhere in code */
-        }
-        .article-full-content pre { /* Styling for preformatted blocks */
-            background-color: #f1f1f1;
-            padding: 15px;
-            border-radius: 4px;
-            overflow-x: auto; /* Add scrollbar if code block is too wide */
-            margin: 1.5em 0;
-        }
-        .article-full-content pre code {
-            background-color: transparent; /* Reset code style inside pre */
-            padding: 0;
-            white-space: pre; /* Preserve whitespace exactly as is */
-            word-break: normal; /* Don't break words inside pre */
+            color: var(--primary-color);
         }
 
-
-        /* Loading/Error messages */
-        #article-loading, #article-error {
-            text-align: center; padding: 40px 20px; font-style: italic; font-size: 1.1em; color: #6c757d;
+        /* Loading/Error messages with improved visuals */
+        #article-loading, 
+        #article-error {
+            text-align: center; 
+            padding: 40px 20px; 
+            font-style: italic; 
+            font-size: 1.1em; 
+            color: var(--medium-gray);
         }
-        #article-error { color: #dc3545; font-weight: 500; }
+        
+        #article-error { 
+            color: #dc3545; 
+            font-weight: 500;
+            padding: 20px;
+            border: 1px solid #f8d7da;
+            background-color: #fff5f5;
+            border-radius: 5px;
+        }
 
-        /* Back link styling */
+        /* Improved back link */
+        .back-link-container {
+            text-align: center;
+            margin-bottom: 40px;
+            max-width: var(--content-max-width);
+            margin-left: auto;
+            margin-right: auto;
+        }
+
         .back-link {
             display: inline-block;
-            /* No top margin needed here, use margin on .article-container */
             font-weight: 600;
-            color: #1774b4;
+            color: var(--primary-color);
             text-decoration: none;
-            padding: 8px 15px;
-            border: 1px solid #1774b4;
-            border-radius: 4px;
-            transition: background-color 0.2s ease, color 0.2s ease;
+            padding: 12px 24px;
+            border: 2px solid var(--primary-color);
+            border-radius: 50px;
+            transition: all 0.3s ease;
         }
+        
         .back-link:hover {
-            background-color: #1774b4;
+            background-color: var(--primary-color);
             color: #fff;
             text-decoration: none;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(23, 116, 180, 0.2);
+        }
+        
+        .back-link:active {
+            transform: translateY(0);
+        }
+
+        /* Makes overscroll smoother in browsers that support it */
+        @supports (overscroll-behavior: contain) {
+            html, body {
+                overscroll-behavior: contain;
+            }
+            .lightbox {
+                overscroll-behavior: contain;
+            }
+        }
+
+        /* Handle keyboard navigation - focus styles */
+        .lightbox-close:focus {
+            outline: 2px solid white;
+            outline-offset: 2px;
+        }
+
+        /* Screen reader only text */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
         }
     </style>
 </head>
 <body>
 
-    <!-- Use main tag with container and main-content classes -->
     <main class="container main-content">
 
         <div class="article-container">
-            <article>
+            <div class="article-header">
                 <h1 id="article-title">Artikel Laden...</h1>
                 <span id="article-meta" class="article-meta"></span>
-                <div id="article-image-container"></div>
+            </div>
+            
+            <div id="article-image-container"></div>
+            
+            <div class="article-content">
                 <div id="article-body" class="article-full-content">
                     <p id="article-loading">Artikel laden...</p>
                     <p id="article-error" style="display: none;">Artikel kon niet worden geladen of gevonden.</p>
                 </div>
-            </article>
-        </div> <!-- End article-container -->
+            </div>
+        </div>
 
-        <a href="/html/nieuws/nieuws.html" class="back-link" id="back-link">« Terug naar Nieuwsoverzicht</a>
+        <div class="back-link-container">
+            <a href="/html/nieuws/nieuws.html" class="back-link" id="back-link">« Terug naar Nieuwsoverzicht</a>
+        </div>
 
     </main>
+    
+    <!-- Lightbox Element -->
+    <div id="image-lightbox" class="lightbox">
+        <div class="lightbox-content">
+            <button id="lightbox-close" class="lightbox-close" aria-label="Sluiten">×</button>
+            <img id="lightbox-image" class="lightbox-image" src="" alt="">
+            <div id="lightbox-caption" class="lightbox-caption"></div>
+        </div>
+    </div>
+    
     <script>
         async function loadSingleArticle() {
             const params = new URLSearchParams(window.location.search);
@@ -269,15 +469,26 @@
                 const itemDate = new Date(articleData.date);
                 metaEl.textContent = `${itemDate.toLocaleDateString('nl-BE', { day: 'numeric', month: 'long', year: 'numeric' })} | ${articleData.category || 'Algemeen'}`;
 
-
                 if (articleData.image) {
                     let finalImageUrl = articleData.image;
-                     if (!finalImageUrl.startsWith('http://') && !finalImageUrl.startsWith('https://')) {
-                         finalImageUrl = `/images/nieuws/${finalImageUrl.replace(/^\//, '')}`;
-                     }
-                    imageContainer.innerHTML = `<img class="article-image" src="${finalImageUrl}" alt="${articleData.alt || articleData.title}" loading="lazy">`;
+                    if (!finalImageUrl.startsWith('http://') && !finalImageUrl.startsWith('https://')) {
+                        finalImageUrl = `/images/nieuws/${finalImageUrl.replace(/^\//, '')}`;
+                    }
+                    
+                    // Add image with click functionality
+                    imageContainer.innerHTML = `
+                        <img class="article-image" 
+                             src="${finalImageUrl}" 
+                             alt="${articleData.alt || articleData.title}" 
+                             loading="lazy"
+                             title="Klik om de volledige afbeelding te bekijken">
+                        <span class="sr-only">Klik op de afbeelding om te vergroten</span>
+                    `;
+                    
+                    // Initialize lightbox functionality for this image
+                    setupLightbox(imageContainer, finalImageUrl, articleData.alt || articleData.title);
                 } else {
-                    imageContainer.innerHTML = '';
+                    imageContainer.style.display = 'none';
                 }
 
                 if (articleData.full_content) {
@@ -293,13 +504,61 @@
                 console.error(`Error loading article ${articleId}:`, error);
                 titleEl.textContent = "Fout bij Laden";
                 bodyEl.innerHTML = '';
-                imageContainer.innerHTML = ''; // Clear image
-                metaEl.textContent = ''; // Clear meta
+                imageContainer.innerHTML = ''; 
+                imageContainer.style.display = 'none';
+                metaEl.textContent = ''; 
                 if (loadingEl) loadingEl.style.display = 'none';
                 errorEl.textContent = `Fout: ${error.message}`;
                 errorEl.style.display = 'block';
 
                 if (backLink) backLink.style.display = 'inline-block';
+            }
+        }
+        
+        // Lightbox functionality
+        function setupLightbox(imageContainer, imageUrl, imageAlt) {
+            const lightbox = document.getElementById('image-lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            const lightboxCaption = document.getElementById('lightbox-caption');
+            const lightboxClose = document.getElementById('lightbox-close');
+            
+            // Set click handler on image container
+            imageContainer.addEventListener('click', function() {
+                lightboxImage.src = imageUrl;
+                lightboxImage.alt = imageAlt;
+                lightboxCaption.textContent = imageAlt;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+                
+                // Focus on the close button for accessibility
+                setTimeout(() => lightboxClose.focus(), 100);
+            });
+            
+            // Close lightbox on button click
+            lightboxClose.addEventListener('click', closeLightbox);
+            
+            // Close lightbox when clicking outside the image
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+            
+            // Close on ESC key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                    closeLightbox();
+                }
+            });
+            
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = ''; 
+                setTimeout(() => {
+                    if (!lightbox.classList.contains('active')) {
+                        lightboxImage.src = '';
+                    }
+                }, 300);
             }
         }
 
