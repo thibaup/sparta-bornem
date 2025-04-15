@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="nl-NL">
  <head>
   <meta charset="utf-8">
@@ -12,25 +13,25 @@
   <style>
    /* Keep styles specifically needed ONLY for this page, if any. */
         /* Otherwise, ensure all styles below are in your /css/style.css file */
-  
+
         /* --- Basic Reset & Body Styling (Should be in style.css) --- */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4; }
         .container { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
         a { color: #1774b4; text-decoration: none; }
         a:hover { text-decoration: underline; }
-        img { max-width: 100%; height: auto; display: block; } /* Added display: block */
+        img { max-width: 100%; height: auto; display: block; }
         h1, h2, h3, h4 { margin-bottom: 0.8em; color: #1a1a1a; font-weight: 600; }
         p { margin-bottom: 1em; }
         ul { margin-bottom: 1em; margin-left: 20px; }
-  
+
         /* --- Main Content Area (Should be in style.css) --- */
         .main-content { padding: 40px 0; }
         .main-content h1 { font-size: 2.2em; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
         .main-content h2 { font-size: 1.8em; margin-top: 30px; margin-bottom: 15px; color: #1774b4; }
         .main-content h3 { font-size: 1.4em; margin-top: 25px; margin-bottom: 10px; }
         .main-content h4 { font-size: 1.2em; margin-top: 20px; margin-bottom: 10px; color: #555; }
-  
+
         /* Training Table Styling (Should be in style.css) */
         .training-table {
             width: 100%;
@@ -51,7 +52,7 @@
         }
         .training-table td ul { margin: 0; padding-left: 0; list-style: none; }
         .training-table td li { margin-bottom: 5px; }
-  
+
         /* Person Info Box (Should be in style.css) */
         .person-info {
             background-color: #f9f9f9;
@@ -75,9 +76,8 @@
         .person-info a {
              word-break: break-all;
         }
-  
+
         /* ========== IMAGE LAYOUT WITH TEXT & THUMBNAILS ========== */
-        /* Ensure this block is in your /css/style.css file */
         .main-content .image-layout-container {
             margin-top: 20px;
             margin-bottom: 30px;
@@ -106,95 +106,178 @@
             flex: 1;
             min-width: 180px;
         }
-         .main-content .text-left { /* Added rule for potential left text */
+         .main-content .text-left {
              order: 1;
              text-align: right;
          }
         .main-content .image-center {
-            order: 2; /* Make image column central if both text columns exist */
+            order: 2;
             flex-shrink: 0;
             text-align: center;
-            max-width: 400px; /* Constrain image column width */
-            margin: 0 auto; /* Help centering when wrapping */
+            max-width: 400px;
+            margin: 0 auto;
         }
-        .main-content .image-center img.main-photo {
-            max-width: 100%; /* Let image fill its container */
-            width: auto; /* Use auto width if max-width is set on container */
+        /* --- Style images to be clickable for lightbox --- */
+        .main-content .image-center img.main-photo,
+        .main-content .extra-content-below .thumbnail {
+            max-width: 100%;
             height: auto;
-            display: block;
-            margin: 0 auto 10px auto;
+            display: block; /* Consistent display */
+            margin: 0 auto 10px auto; /* Center main photo, consistent bottom margin */
             border: 1px solid #eee;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            cursor: pointer; /* Added for lightbox */
+            cursor: pointer; /* Indicate clickable */
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
-         .main-content .image-center img.main-photo:hover {
+         .main-content .image-center img.main-photo:hover,
+         .main-content .extra-content-below .thumbnail:hover {
              transform: scale(1.02);
              box-shadow: 0 4px 8px rgba(0,0,0,0.15);
          }
-        .main-content .text-right {
-            order: 3; /* Make right text last if both text columns exist */
-            text-align: left;
-        }
-        .main-content .extra-content-below {
+         /* --- Specific style adjustments for thumbnails --- */
+         .main-content .extra-content-below {
             text-align: center;
             margin-top: 10px;
             line-height: 0;
         }
-        .main-content .extra-content-below .thumbnail,
-        .main-content .extra-content-below .thumbnail-video {
-            width: 100px;  /* Adjusted thumbnail size */
-            height: 100px; /* Adjusted thumbnail size */
+        .main-content .extra-content-below .thumbnail {
+            width: 100px;
+            height: 100px;
             object-fit: cover;
-            margin: 5px;
-            display: inline-block;
+            margin: 5px; /* Space around thumbnails */
+            display: inline-block; /* Display thumbnails inline */
             vertical-align: middle;
             border: 1px solid #ccc;
-            transition: transform 0.2s ease;
-             cursor: pointer; /* Added for lightbox */
+            /* transition and cursor already defined above */
         }
-        .main-content .extra-content-below .thumbnail:hover,
-        .main-content .extra-content-below .thumbnail-video:hover {
-            transform: scale(1.05);
+
+        .main-content .text-right {
+            order: 3;
+            text-align: left;
         }
+
         @media (max-width: 768px) {
             .main-content .image-layout-container { padding: 15px; }
             .main-content .flex-content-wrapper { gap: 15px; }
             .main-content .text-left, .main-content .text-right {
                 text-align: center; order: 0; flex-basis: 100%; min-width: 0;
             }
-            .main-content .image-center { order: 0; flex-basis: 100%; max-width: 90%; } /* Adjust max-width */
+            .main-content .image-center { order: 0; flex-basis: 100%; max-width: 90%; }
             .main-content .image-layout-container h2 { font-size: 1.4em; margin-bottom: 10px; padding-bottom: 8px; }
+            .main-content .extra-content-below .thumbnail { width: 80px; height: 80px; }
         }
-  
-        /* ========== SIMPLE IMAGE LIGHTBOX STYLES ========== */
-        /* Ensure this block is in your /css/style.css file */
-        .lightbox-overlay {
-          display: none; position: fixed; z-index: 1001; padding-top: 50px;
-          left: 0; top: 0; width: 100%; height: 100%; overflow: auto;
-          background-color: rgba(0, 0, 0, 0.85);
-          justify-content: center; align-items: center;
+
+        /* ========== NEW LIGHTBOX STYLES (FROM NIEUWS-ARTIKEL) ========== */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
         }
+
+        .lightbox.active {
+            display: flex;
+            opacity: 1;
+            pointer-events: auto;
+        }
+
         .lightbox-content {
-          margin: auto; display: block; max-width: 85%; max-height: 80vh;
-          animation-name: zoom; animation-duration: 0.4s;
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        @keyframes zoom { from {transform: scale(0.5)} to {transform: scale(1)} }
+
+        .lightbox-image {
+            max-width: 100%;
+            max-height: 85vh;
+            object-fit: contain;
+            border: 4px solid white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        /* --- Hide the caption element --- */
+        .lightbox-caption {
+            display: none;
+            /* Other styles kept for reference but not visible */
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 1rem;
+            max-width: 80%;
+        }
+
         .lightbox-close {
-          position: absolute; top: 15px; right: 35px; color: #f1f1f1;
-          font-size: 40px; font-weight: bold; transition: 0.3s;
-          cursor: pointer; user-select: none;
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+            background: transparent;
+            border: none;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+            -webkit-appearance: none;
+            appearance: none;
         }
-        .lightbox-close:hover, .lightbox-close:focus { color: #bbb; text-decoration: none; }
-        @media (max-width: 700px){
-          .lightbox-content { max-width: 95%; }
-          .lightbox-close { font-size: 30px; top: 10px; right: 20px; }
+
+        .lightbox-close:hover {
+            transform: scale(1.2);
         }
+
+        /* Handle keyboard navigation - focus styles */
+        .lightbox-close:focus {
+             outline: none; /* Remove the focus outline */
+        }
+
+        /* Makes overscroll smoother */
+        @supports (overscroll-behavior: contain) {
+            .lightbox {
+                overscroll-behavior: contain;
+            }
+        }
+        /* Screen reader only text */
+        .sr-only {
+             position: absolute;
+             width: 1px;
+             height: 1px;
+             padding: 0;
+             margin: -1px;
+             overflow: hidden;
+             clip: rect(0, 0, 0, 0);
+             white-space: nowrap;
+             border-width: 0;
+        }
+
   </style>
  </head>
- <body style="overflow: auto;">
+ <body style="overflow: auto;"> <!-- Start with body overflow auto -->
+
   <div id="header-placeholder">
+   <!-- Header loaded via script.js -->
   </div>
+
   <main class="main-content container">
    <h1>
     Training & Trainers
@@ -204,512 +287,136 @@
    </h2>
    <!-- Training Table -->
    <table class="training-table">
-    <!-- Table content as previously provided -->
     <thead>
-     <tr>
-      <th>
-       Categorie
-      </th>
-      <th>
-       Trainingsdagen & Uren
-      </th>
-     </tr>
+     <tr><th>Categorie</th><th>Trainingsdagen & Uren</th></tr>
     </thead>
     <tbody>
-     <tr>
-      <td>
-       <strong>
-        Kangoeroes
-       </strong>
-       &
-       <strong>
-        Benjamins
-       </strong>
-      </td>
-      <td>
-       <ul>
-        <li>
-         <strong>
-          Vrijdag:
-         </strong>
-         18:00u - 19:15u
-        </li>
-        <li>
-         <strong>
-          Woensdag:
-         </strong>
-         18:00u - 19:15u
-        </li>
-       </ul>
-      </td>
-     </tr>
-     <tr>
-      <td>
-       <strong>
-        Pupillen
-       </strong>
-      </td>
-      <td>
-       <ul>
-        <li>
-         <strong>
-          Vrijdag:
-         </strong>
-         18:00u - 19:15u
-        </li>
-        <li>
-         <strong>
-          Woensdag:
-         </strong>
-         18:00u - 19:15u
-        </li>
-        <li>
-         <strong>
-          Zondag:
-         </strong>
-         10:00u - 11:30u
-         <em>
-          (Enkel bij verwittiging van de trainers)
-         </em>
-        </li>
-       </ul>
-      </td>
-     </tr>
-     <tr>
-      <td>
-       <strong>
-        Miniemen
-       </strong>
-      </td>
-      <td>
-       <ul>
-        <li>
-         <strong>
-          Vrijdag:
-         </strong>
-         18:00u - 19:15u
-        </li>
-        <li>
-         <strong>
-          Woensdag:
-         </strong>
-         18:00u - 19:15u
-        </li>
-        <li>
-         <strong>
-          Zondag:
-         </strong>
-         10:00u - 11:30u
-         <em>
-          (Enkel bij verwittiging van de trainers)
-         </em>
-        </li>
-       </ul>
-      </td>
-     </tr>
-     <tr>
-      <td>
-       <strong>
-        Fond, 1/2 fond (vanaf cadetten)
-       </strong>
-      </td>
-      <td>
-       <ul>
-        <li>
-         <strong>
-          Maandag:
-         </strong>
-         18:30u - 19:30u
-        </li>
-        <li>
-         <strong>
-          Vrijdag:
-         </strong>
-         18:00u - 19:30u
-        </li>
-        <li>
-         <strong>
-          Woensdag:
-         </strong>
-         18:00u - 19:30u
-        </li>
-        <li>
-         <strong>
-          Zondag:
-         </strong>
-         10:00u - 11:30u
-        </li>
-       </ul>
-      </td>
-     </tr>
-     <tr>
-      <td>
-       <strong>
-        Spurt (vanaf cadetten)
-       </strong>
-      </td>
-      <td>
-       <ul>
-        <li>
-         <strong>
-          Dinsdag:
-         </strong>
-         19:00u - 21:00u
-         <em>
-          (enkel tijdens vakanties en verwittiging van de trainer)
-         </em>
-        </li>
-        <li>
-         <strong>
-          Vrijdag:
-         </strong>
-         18:00u - 20:00u
-        </li>
-        <li>
-         <strong>
-          Woensdag:
-         </strong>
-         18:00u - 20:00u
-        </li>
-        <li>
-         <strong>
-          Zondag:
-         </strong>
-         10:00u - 12:00u
-        </li>
-       </ul>
-      </td>
-     </tr>
-     <tr>
-      <td>
-       <strong>
-        Springen (vanaf cadetten)
-       </strong>
-      </td>
-      <td>
-       <ul>
-        <li>
-         <strong>
-          Dinsdag:
-         </strong>
-         19:00u - 21:00u
-         <em>
-          (enkel tijdens vakanties en verwittiging van de trainer)
-         </em>
-        </li>
-        <li>
-         <strong>
-          Vrijdag:
-         </strong>
-         18:00u - 20:00u
-        </li>
-        <li>
-         <strong>
-          Woensdag:
-         </strong>
-         18:00u - 20:00u
-        </li>
-        <li>
-         <strong>
-          Zondag:
-         </strong>
-         10:00u - 12:00u
-        </li>
-       </ul>
-      </td>
-     </tr>
-     <tr>
-      <td>
-       <strong>
-        Werpen (vanaf cadetten)
-       </strong>
-      </td>
-      <td>
-       <ul>
-        <li>
-         <strong>
-          Dinsdag:
-         </strong>
-         19:00u - 21:00u
-         <em>
-          (enkel tijdens vakanties en verwittiging van de trainer)
-         </em>
-        </li>
-        <li>
-         <strong>
-          Vrijdag:
-         </strong>
-         18:00u - 20:00u
-        </li>
-        <li>
-         <strong>
-          Woensdag:
-         </strong>
-         18:00u - 20:00u
-        </li>
-        <li>
-         <strong>
-          Zondag:
-         </strong>
-         10:00u - 12:00u
-        </li>
-       </ul>
-      </td>
-     </tr>
-     <tr>
-      <td>
-       <strong>
-        Joggers (vanaf cadetten)
-       </strong>
-      </td>
-      <td>
-       <ul>
-        <li>
-         <strong>
-          Vrijdag:
-         </strong>
-         18:00u - 19:30u
-         <em>
-          (Duurloop)
-         </em>
-        </li>
-        <li>
-         <strong>
-          Woensdag:
-         </strong>
-         18:00u - 19:30u
-         <em>
-          (Piste)
-         </em>
-        </li>
-        <li>
-         <strong>
-          Zondag:
-         </strong>
-         10:00u - 11:30u
-         <em>
-          (Geen begeleiding)
-         </em>
-        </li>
-       </ul>
-      </td>
-     </tr>
+     <tr><td><strong>Kangoeroes</strong> & <strong>Benjamins</strong></td><td><ul><li><strong>Vrijdag:</strong> 18:00u - 19:15u</li><li><strong>Woensdag:</strong> 18:00u - 19:15u</li></ul></td></tr>
+     <tr><td><strong>Pupillen</strong></td><td><ul><li><strong>Vrijdag:</strong> 18:00u - 19:15u</li><li><strong>Woensdag:</strong> 18:00u - 19:15u</li><li><strong>Zondag:</strong> 10:00u - 11:30u <em>(Enkel bij verwittiging van de trainers)</em></li></ul></td></tr>
+     <tr><td><strong>Miniemen</strong></td><td><ul><li><strong>Vrijdag:</strong> 18:00u - 19:15u</li><li><strong>Woensdag:</strong> 18:00u - 19:15u</li><li><strong>Zondag:</strong> 10:00u - 11:30u <em>(Enkel bij verwittiging van de trainers)</em></li></ul></td></tr>
+     <tr><td><strong>Fond, 1/2 fond (vanaf cadetten)</strong></td><td><ul><li><strong>Maandag:</strong> 18:30u - 19:30u</li><li><strong>Vrijdag:</strong> 18:00u - 19:30u</li><li><strong>Woensdag:</strong> 18:00u - 19:30u</li><li><strong>Zondag:</strong> 10:00u - 11:30u</li></ul></td></tr>
+     <tr><td><strong>Spurt (vanaf cadetten)</strong></td><td><ul><li><strong>Dinsdag:</strong> 19:00u - 21:00u <em>(enkel tijdens vakanties en verwittiging van de trainer)</em></li><li><strong>Vrijdag:</strong> 18:00u - 20:00u</li><li><strong>Woensdag:</strong> 18:00u - 20:00u</li><li><strong>Zondag:</strong> 10:00u - 12:00u</li></ul></td></tr>
+     <tr><td><strong>Springen (vanaf cadetten)</strong></td><td><ul><li><strong>Dinsdag:</strong> 19:00u - 21:00u <em>(enkel tijdens vakanties en verwittiging van de trainer)</em></li><li><strong>Vrijdag:</strong> 18:00u - 20:00u</li><li><strong>Woensdag:</strong> 18:00u - 20:00u</li><li><strong>Zondag:</strong> 10:00u - 12:00u</li></ul></td></tr>
+     <tr><td><strong>Werpen (vanaf cadetten)</strong></td><td><ul><li><strong>Dinsdag:</strong> 19:00u - 21:00u <em>(enkel tijdens vakanties en verwittiging van de trainer)</em></li><li><strong>Vrijdag:</strong> 18:00u - 20:00u</li><li><strong>Woensdag:</strong> 18:00u - 20:00u</li><li><strong>Zondag:</strong> 10:00u - 12:00u</li></ul></td></tr>
+     <tr><td><strong>Joggers (vanaf cadetten)</strong></td><td><ul><li><strong>Vrijdag:</strong> 18:00u - 19:30u <em>(Duurloop)</em></li><li><strong>Woensdag:</strong> 18:00u - 19:30u <em>(Piste)</em></li><li><strong>Zondag:</strong> 10:00u - 11:30u <em>(Geen begeleiding)</em></li></ul></td></tr>
     </tbody>
    </table>
+
    <!-- Vertrouwenspersoon -->
    <h2>
     Vertrouwenspersoon
    </h2>
    <div class="person-info">
     <img alt="Foto Britta Vincke" src="/images/personen/Britta_klein.jpg">
-    <p>
-     <strong>
-      Britta Vincke
-     </strong>
-    </p>
-    <p>
-     E-mail:
-     <a href="mailto:britta_vincke@skynet.be">
-      britta_vincke@skynet.be
-     </a>
-    </p>
-    <p>
-     Tel: 03 889 70 33
-    </p>
+    <p><strong>Britta Vincke</strong></p>
+    <p>E-mail: <a href="mailto:britta_vincke@skynet.be">britta_vincke@skynet.be</a></p>
+    <p>Tel: 03 889 70 33</p>
    </div>
+
    <!-- Jeugdcoördinator -->
    <h2>
-    Jeugdco&ouml;rdinator
+    Jeugdcoördinator
    </h2>
    <div class="person-info">
     <img alt="Foto Hilde De Leeuw" src="/images/personen/trainer-leeg.png">
-    <!-- Placeholder -->
-    <p>
-     <strong>
-      Hilde De Leeuw
-     </strong>
-    </p>
-    <p>
-     E-mail:
-     <a href="mailto:jeugdcoordinator@spartabornem.be">
-      jeugdcoordinator@spartabornem.be
-     </a>
-    </p>
+    <p><strong>Hilde De Leeuw</strong></p>
+    <p>E-mail: <a href="mailto:jeugdcoordinator@spartabornem.be">jeugdcoordinator@spartabornem.be</a></p>
    </div>
+
    <!-- Info Groepen Title -->
    <h1>
     Info groepen & Trainers
    </h1>
+
+   <!-- Kangoeroes & Benjamins -->
    <div class="image-layout-container">
-    <h2>
-     Kangoeroes & Benjamins
-    </h2>
+    <h2>Kangoeroes & Benjamins</h2>
     <div class="flex-content-wrapper">
      <div class="image-center">
-      <img alt="Foto Kangoeroes en Benjamins" class="main-photo" src="/images/personen/placeholder_kangben_main.jpg">
+      <img alt="Foto Kangoeroes en Benjamins Groep" class="main-photo" src="/images/personen/placeholder_kangben_main.jpg">
       <div class="extra-content-below">
-       <img alt="Kleine foto 1" class="thumbnail" src="/images/personen/placeholder_kangben_thumb1.jpg">
-       <img alt="Kleine foto 2" class="thumbnail" src="/images/personen/placeholder_kangben_thumb2.jpg">
-       <img alt="Kleine foto 3" class="thumbnail" src="/images/personen/placeholder_kangben_thumb3.jpg">
-       <img alt="Kleine foto 4" class="thumbnail" src="/images/personen/placeholder_kangben_thumb4.jpg">
-       <img alt="Kleine foto 5" class="thumbnail" src="/images/personen/placeholder_kangben_thumb5.jpg">
+       <img alt="Kangoeroes Actie 1" class="thumbnail" src="/images/personen/placeholder_kangben_thumb1.jpg">
+       <img alt="Kangoeroes Actie 2" class="thumbnail" src="/images/personen/placeholder_kangben_thumb2.jpg">
+       <img alt="Benjamins Actie 1" class="thumbnail" src="/images/personen/placeholder_kangben_thumb3.jpg">
+       <img alt="Benjamins Actie 2" class="thumbnail" src="/images/personen/placeholder_kangben_thumb4.jpg">
+       <img alt="Kangoeroes en Benjamins Plezier" class="thumbnail" src="/images/personen/placeholder_kangben_thumb5.jpg">
       </div>
      </div>
      <div class="text-description text-right">
-      <p>
-       Voor de allerkleinsten (Kangoeroes: 6 jaar, Benjamins: 7-8 jaar). Spelenderwijs kennismaken met alle basisvormen van atletiek: lopen, springen en werpen. Plezier staat voorop!
-      </p>
-      <h3>
-       Trainers Kangoeroes & Benjamins:
-      </h3>
-      <ul>
-       <li>
-        De Bisschop Wendy
-       </li>
-       <li>
-        Genijn Lisa
-       </li>
-       <li>
-        Duysters Sara-Lise
-       </li>
-       <li>
-        Van Aken Jena
-       </li>
-       <li>
-        Dalemans Marie
-       </li>
-       <li>
-        Lambrechts Jo&euml;lle
-       </li>
-       <li>
-        De Smet Wiebe
-       </li>
-      </ul>
+      <p>Voor de allerkleinsten (Kangoeroes: 6 jaar, Benjamins: 7-8 jaar). Spelenderwijs kennismaken met alle basisvormen van atletiek: lopen, springen en werpen. Plezier staat voorop!</p>
+      <h3>Trainers Kangoeroes & Benjamins:</h3>
+      <ul><li>De Bisschop Wendy</li><li>Genijn Lisa</li><li>Duysters Sara-Lise</li><li>Van Aken Jena</li><li>Dalemans Marie</li><li>Lambrechts Joëlle</li><li>De Smet Wiebe</li></ul>
      </div>
     </div>
    </div>
-   <div class="image-layout-container">
-    <h2>
-     Pupillen
-    </h2>
+
+   <!-- Pupillen -->
+    <div class="image-layout-container">
+    <h2>Pupillen</h2>
     <div class="flex-content-wrapper">
      <div class="image-center">
-      <img alt="Foto Pupillen" class="main-photo" src="/images/personen/placeholder_pup_main.jpg">
+      <img alt="Foto Pupillen Groep" class="main-photo" src="/images/personen/placeholder_pup_main.jpg">
       <div class="extra-content-below">
-       <img alt="Kleine foto 1" class="thumbnail" src="/images/personen/placeholder_pup_thumb1.jpg">
-       <img alt="Kleine foto 2" class="thumbnail" src="/images/personen/placeholder_pup_thumb2.jpg">
-       <img alt="Kleine foto 3" class="thumbnail" src="/images/personen/placeholder_pup_thumb3.jpg">
-       <img alt="Kleine foto 4" class="thumbnail" src="/images/personen/placeholder_pup_thumb4.jpg">
-       <img alt="Kleine foto 5" class="thumbnail" src="/images/personen/placeholder_pup_thumb5.jpg">
+       <img alt="Pupillen Lopen" class="thumbnail" src="/images/personen/placeholder_pup_thumb1.jpg">
+       <img alt="Pupillen Springen" class="thumbnail" src="/images/personen/placeholder_pup_thumb2.jpg">
+       <img alt="Pupillen Werpen" class="thumbnail" src="/images/personen/placeholder_pup_thumb3.jpg">
+       <img alt="Pupillen Estafette" class="thumbnail" src="/images/personen/placeholder_pup_thumb4.jpg">
+       <img alt="Pupillen Plezier" class="thumbnail" src="/images/personen/placeholder_pup_thumb5.jpg">
       </div>
      </div>
      <div class="text-description text-right">
-      <p>
-       Voor kinderen van 9-10 jaar. Hier worden de basisvaardigheden verder ontwikkeld en maken ze kennis met de verschillende atletiekdisciplines op een leuke en uitdagende manier.
-      </p>
-      <h3>
-       Trainers Pupillen:
-      </h3>
-      <ul>
-       <li>
-        Janssens Els
-       </li>
-       <li>
-        Bernard Jolan
-       </li>
-       <li>
-        Biesemans Fien
-       </li>
-       <li>
-        Joos Els
-       </li>
-      </ul>
+      <p>Voor kinderen van 9-10 jaar. Hier worden de basisvaardigheden verder ontwikkeld en maken ze kennis met de verschillende atletiekdisciplines op een leuke en uitdagende manier.</p>
+      <h3>Trainers Pupillen:</h3>
+      <ul><li>Janssens Els</li><li>Bernard Jolan</li><li>Biesemans Fien</li><li>Joos Els</li></ul>
      </div>
     </div>
    </div>
+
+   <!-- Miniemen -->
    <div class="image-layout-container">
-    <h2>
-     Miniemen
-    </h2>
+    <h2>Miniemen</h2>
     <div class="flex-content-wrapper">
      <div class="image-center">
-      <img alt="Foto Miniemen" class="main-photo" src="/images/personen/placeholder_min_main.jpg">
+      <img alt="Foto Miniemen Groep" class="main-photo" src="/images/personen/placeholder_min_main.jpg">
       <div class="extra-content-below">
-       <img alt="Kleine foto 1" class="thumbnail" src="/images/personen/placeholder_min_thumb1.jpg">
-       <img alt="Kleine foto 2" class="thumbnail" src="/images/personen/placeholder_min_thumb2.jpg">
-       <img alt="Kleine foto 3" class="thumbnail" src="/images/personen/placeholder_min_thumb3.jpg">
-       <img alt="Kleine foto 4" class="thumbnail" src="/images/personen/placeholder_min_thumb4.jpg">
-       <img alt="Kleine foto 5" class="thumbnail" src="/images/personen/placeholder_min_thumb5.jpg">
+       <img alt="Miniemen Horden" class="thumbnail" src="/images/personen/placeholder_min_thumb1.jpg">
+       <img alt="Miniemen Verspringen" class="thumbnail" src="/images/personen/placeholder_min_thumb2.jpg">
+       <img alt="Miniemen Kogelstoten" class="thumbnail" src="/images/personen/placeholder_min_thumb3.jpg">
+       <img alt="Miniemen Hoogspringen" class="thumbnail" src="/images/personen/placeholder_min_thumb4.jpg">
+       <img alt="Miniemen Team" class="thumbnail" src="/images/personen/placeholder_min_thumb5.jpg">
       </div>
      </div>
      <div class="text-description text-right">
-      <p>
-       Voor kinderen van 11-12 jaar. De training wordt specifieker en technischer. Atleten worden voorbereid op de latere specialisatie en leren hun eigen sterktes ontdekken.
-      </p>
-      <h3>
-       Trainers Miniemen:
-      </h3>
-      <ul>
-       <li>
-        De Bouw Ellen
-        :
-        <a href="mailto:ellen.de.bouw@gmail.com">
-         ellen.de.bouw@gmail.com
-        </a>
-       </li>
-       <li>
-        De Groote Fenne
-       </li>
-       <li>
-        Biesemans Fien
-       </li>
-       <li>
-        Bernard Jolan
-       </li>
-       <li>
-        De Leeuw Hilde
-        :
-        <a href="mailto:jeugdcoordinator@spartabornem.be">
-         jeugdcoordinator@spartabornem.be
-        </a>
-       </li>
-       <li>
-        Inze Nick
-        :
-        <a href="mailto:nick.inze@telenet.be">
-         nick.inze@telenet.be
-        </a>
-       </li>
-      </ul>
+      <p>Voor kinderen van 11-12 jaar. De training wordt specifieker en technischer. Atleten worden voorbereid op de latere specialisatie en leren hun eigen sterktes ontdekken.</p>
+      <h3>Trainers Miniemen:</h3>
+      <ul><li>De Bouw Ellen: <a href="mailto:ellen.de.bouw@gmail.com">ellen.de.bouw@gmail.com</a></li><li>De Groote Fenne</li><li>Biesemans Fien</li><li>Bernard Jolan</li><li>De Leeuw Hilde: <a href="mailto:jeugdcoordinator@spartabornem.be">jeugdcoordinator@spartabornem.be</a></li><li>Inze Nick: <a href="mailto:nick.inze@telenet.be">nick.inze@telenet.be</a></li></ul>
      </div>
     </div>
    </div>
-   <div class="image-layout-container">
-    <h2>
-     TF Running Team (fond, 1/2 fond)
-    </h2>
+
+   <!-- TF Running Team -->
+    <div class="image-layout-container">
+    <h2>TF Running Team (fond, 1/2 fond)</h2>
     <div class="flex-content-wrapper">
      <div class="image-center">
       <img alt="Foto TF Running Team" class="main-photo" src="/images/personen/placeholder_tfr_main.jpg">
       <div class="extra-content-below">
-       <img alt="Kleine foto 1" class="thumbnail" src="/images/personen/placeholder_tfr_thumb1.jpg">
-       <img alt="Kleine foto 2" class="thumbnail" src="/images/personen/placeholder_tfr_thumb2.jpg">
-       <img alt="Kleine foto 3" class="thumbnail" src="/images/personen/placeholder_tfr_thumb3.jpg">
-       <img alt="Kleine foto 4" class="thumbnail" src="/images/personen/placeholder_tfr_thumb4.jpg">
-       <img alt="Kleine foto 5" class="thumbnail" src="/images/personen/placeholder_tfr_thumb5.jpg">
+       <img alt="TF Running Team Lopers" class="thumbnail" src="/images/personen/placeholder_tfr_thumb1.jpg">
+       <img alt="TF Running Team Veldloop" class="thumbnail" src="/images/personen/placeholder_tfr_thumb2.jpg">
+       <img alt="TF Running Team Piste" class="thumbnail" src="/images/personen/placeholder_tfr_thumb3.jpg">
+       <img alt="TF Running Team Bosloop" class="thumbnail" src="/images/personen/placeholder_tfr_thumb4.jpg">
+       <img alt="TF Running Team Groep" class="thumbnail" src="/images/personen/placeholder_tfr_thumb5.jpg">
       </div>
      </div>
      <div class="text-description text-right">
-      <p>
-       Gerichte training voor langeafstandslopers (vanaf cadetten). Focus op uithouding, looptechniek en wedstrijdvoorbereiding voor 800m en langer, inclusief veldlopen.
-      </p>
+      <p>Gerichte training voor langeafstandslopers (vanaf cadetten). Focus op uithouding, looptechniek en wedstrijdvoorbereiding voor 800m en langer, inclusief veldlopen.</p>
      </div>
     </div>
    </div>
+
+   <!-- BST Team -->
    <div class="image-layout-container">
-    <h2>
-     BST Team (sprint, springen, meerkamp)
-    </h2>
+    <h2>BST Team (sprint, springen, meerkamp)</h2>
     <div class="flex-content-wrapper">
      <div class="image-center">
       <img alt="Foto trainers BST" class="main-photo" src="/images/personen/trainersBST.jpg">
@@ -722,170 +429,151 @@
       </div>
      </div>
      <div class="text-description text-right">
-      <p>
-       Het BST Team is speciaal opgezet voor atleten die zich willen verdiepen en specialiseren in de disciplines sprint, springen (hoogspringen, verspringen, hinkstapspringen, polsstokhoogspringen) en/of meerkamp. Onder deskundige begeleiding wordt er gewerkt aan techniek, snelheid, kracht en uithouding, specifiek gericht op het maximaliseren van de prestaties in deze explosieve en veelzijdige onderdelen.
-      </p>
-      <h3>
-       Trainers BST Team (sprint, springen, meerkamp):
-      </h3>
-      <ul>
-       <li>
-        Permentier Johan
-        :
-        <a href="mailto:j_permentier@hotmail.com">
-         j_permentier@hotmail.com
-        </a>
-       </li>
-       <li>
-        De Leeuw Marliese
-        : marliese.de.leeuw@skynet.be
-        :
-        <a href="mailto:marliese.de.leeuw@skynet.be">
-         marliese.de.leeuw@skynet.be
-        </a>
-        |
-        0473/88 40 39
-       </li>
-       <li>
-        Vandenkerckhove Peter
-        :
-        <a href="mailto:Peter.vdk@hotmail.com">
-         Peter.vdk@hotmail.com
-        </a>
-       </li>
-      </ul>
+      <p>Het BST Team is speciaal opgezet voor atleten die zich willen verdiepen en specialiseren in de disciplines sprint, springen (hoogspringen, verspringen, hinkstapspringen, polsstokhoogspringen) en/of meerkamp. Onder deskundige begeleiding wordt er gewerkt aan techniek, snelheid, kracht en uithouding, specifiek gericht op het maximaliseren van de prestaties in deze explosieve en veelzijdige onderdelen.</p>
+      <h3>Trainers BST Team (sprint, springen, meerkamp):</h3>
+      <ul><li>Permentier Johan: <a href="mailto:j_permentier@hotmail.com">j_permentier@hotmail.com</a></li><li>De Leeuw Marliese: <a href="mailto:marliese.de.leeuw@skynet.be">marliese.de.leeuw@skynet.be</a> | 0473/88 40 39</li><li>Vandenkerckhove Peter: <a href="mailto:Peter.vdk@hotmail.com">Peter.vdk@hotmail.com</a></li></ul>
      </div>
     </div>
    </div>
+
+   <!-- Recreanten / Joggers -->
    <div class="image-layout-container">
-    <h2>
-     Recreanten / Joggers
-    </h2>
+    <h2>Recreanten / Joggers</h2>
     <div class="flex-content-wrapper">
      <div class="image-center">
-      <img alt="Foto Recreanten / Joggers" class="main-photo" src="/images/personen/placeholder_rec_main.jpg">
+      <img alt="Foto Recreanten / Joggers Groep" class="main-photo" src="/images/personen/placeholder_rec_main.jpg">
       <div class="extra-content-below">
-       <img alt="Kleine foto 1" class="thumbnail" src="/images/personen/placeholder_rec_thumb1.jpg">
-       <img alt="Kleine foto 2" class="thumbnail" src="/images/personen/placeholder_rec_thumb2.jpg">
-       <img alt="Kleine foto 3" class="thumbnail" src="/images/personen/placeholder_rec_thumb3.jpg">
-       <img alt="Kleine foto 4" class="thumbnail" src="/images/personen/placeholder_rec_thumb4.jpg">
-       <img alt="Kleine foto 5" class="thumbnail" src="/images/personen/placeholder_rec_thumb5.jpg">
+       <img alt="Joggers op de piste" class="thumbnail" src="/images/personen/placeholder_rec_thumb1.jpg">
+       <img alt="Joggers duurloop" class="thumbnail" src="/images/personen/placeholder_rec_thumb2.jpg">
+       <img alt="Joggers oefeningen" class="thumbnail" src="/images/personen/placeholder_rec_thumb3.jpg">
+       <img alt="Joggers groepssfeer" class="thumbnail" src="/images/personen/placeholder_rec_thumb4.jpg">
+       <img alt="Joggers stretchen" class="thumbnail" src="/images/personen/placeholder_rec_thumb5.jpg">
       </div>
      </div>
      <div class="text-description text-right">
-      <p>
-       Voor volwassenen die op een ontspannen manier willen lopen en werken aan hun conditie. Trainingen omvatten zowel duurloop als oefeningen op de piste. Gezelligheid en gezondheid staan centraal.
-      </p>
-      <h3>
-       Trainers Recreanten / Joggers:
-      </h3>
-      <ul>
-       <li>
-        D&rsquo;Hont Tom
-       </li>
-       <li>
-        Smet Erlinda
-       </li>
-      </ul>
+      <p>Voor volwassenen die op een ontspannen manier willen lopen en werken aan hun conditie. Trainingen omvatten zowel duurloop als oefeningen op de piste. Gezelligheid en gezondheid staan centraal.</p>
+      <h3>Trainers Recreanten / Joggers:</h3>
+      <ul><li>D’Hont Tom</li><li>Smet Erlinda</li></ul>
      </div>
     </div>
    </div>
+
+   <!-- Boomerangs -->
    <div class="image-layout-container">
-    <h2>
-     Boomerangs (werpen)
-    </h2>
+    <h2>Boomerangs (werpen)</h2>
     <div class="flex-content-wrapper">
      <div class="image-center">
-      <img alt="Foto Boomerangs" class="main-photo" src="/images/personen/placeholder_boom_main.jpg">
+      <img alt="Foto Boomerangs Werpers" class="main-photo" src="/images/personen/placeholder_boom_main.jpg">
       <div class="extra-content-below">
-       <img alt="Kleine foto 1" class="thumbnail" src="/images/personen/placeholder_boom_thumb1.jpg">
-       <img alt="Kleine foto 2" class="thumbnail" src="/images/personen/placeholder_boom_thumb2.jpg">
-       <img alt="Kleine foto 3" class="thumbnail" src="/images/personen/placeholder_boom_thumb3.jpg">
-       <img alt="Kleine foto 4" class="thumbnail" src="/images/personen/placeholder_boom_thumb4.jpg">
-       <img alt="Kleine foto 5" class="thumbnail" src="/images/personen/placeholder_boom_thumb5.jpg">
+       <img alt="Boomerangs Kogelstoten" class="thumbnail" src="/images/personen/placeholder_boom_thumb1.jpg">
+       <img alt="Boomerangs Discuswerpen" class="thumbnail" src="/images/personen/placeholder_boom_thumb2.jpg">
+       <img alt="Boomerangs Speerwerpen" class="thumbnail" src="/images/personen/placeholder_boom_thumb3.jpg">
+       <img alt="Boomerangs Hamerslingeren" class="thumbnail" src="/images/personen/placeholder_boom_thumb4.jpg">
+       <img alt="Boomerangs Krachttraining" class="thumbnail" src="/images/personen/placeholder_boom_thumb5.jpg">
       </div>
      </div>
      <div class="text-description text-right">
-      <p>
-       Specialisatiegroep gericht op de werpdisciplines (kogelstoten, discuswerpen, speerwerpen, hamerslingeren) voor oudere jeugd en volwassenen. Focus op techniek en kracht.
-      </p>
+      <p>Specialisatiegroep gericht op de werpdisciplines (kogelstoten, discuswerpen, speerwerpen, hamerslingeren) voor oudere jeugd en volwassenen. Focus op techniek en kracht.</p>
      </div>
     </div>
    </div>
-   <!-- START: Kangoeroes/Benjamins Group -->
-   <!-- END: Kangoeroes/Benjamins Group -->
-   <!-- START: Pupillen Group -->
-   <!-- END: Pupillen Group -->
-   <!-- START: Miniemen Group -->
-   <!-- END: Miniemen Group -->
-   <!-- START: TF Running Team Group -->
-   <!-- END: TF Running Team Group -->
-   <!-- START: BST Team Group (Your existing detailed block) -->
-   <!-- END: BST Team Group -->
-   <!-- START: Recreanten Group -->
-   <!-- END: Recreanten Group -->
-   <!-- START: Boomerangs Group -->
-  </main>
+
+  </main> <!-- End main-content -->
+
   <div id="footer-placeholder">
+   <!-- Footer loaded via script.js -->
   </div>
-  <div class="lightbox-overlay" id="imageLightbox" style="display: none;">
-   <span class="lightbox-close" title="Sluiten">
-    &times;
-   </span>
-   <img alt="BST groep 1" class="lightbox-content" id="lightboxImg" src="https://sparta-bornem.pages.dev/images/personen/333145274_218619830678271_2553016165337705398_n.jpg">
+
+  <!-- ======== NEW LIGHTBOX HTML STRUCTURE ======== -->
+  <div id="image-lightbox" class="lightbox">
+      <div class="lightbox-content">
+          <button id="lightbox-close" class="lightbox-close" aria-label="Sluiten">×</button>
+          <img id="lightbox-image" class="lightbox-image" src="" alt="">
+          <!-- Caption div is present but hidden by CSS -->
+          <div id="lightbox-caption" class="lightbox-caption"></div>
+      </div>
   </div>
-  <script defer src="/js/script.js">
-  </script>
+  <!-- ======== END NEW LIGHTBOX HTML STRUCTURE ======== -->
+
+  <!-- Load Header/Footer -->
+  <script defer src="/js/script.js"> </script>
+
+  <!-- ======== NEW LIGHTBOX JAVASCRIPT (Caption assignment removed) ======== -->
   <script>
    document.addEventListener('DOMContentLoaded', function() {
-          // console.log("DOM loaded. Setting up lightbox..."); // Uncomment for debugging
-  
-          const lightbox = document.getElementById('imageLightbox');
-          const lightboxImg = document.getElementById('lightboxImg');
-          const closeBtn = lightbox ? lightbox.querySelector('.lightbox-close') : null;
-  
-          if (!lightbox || !lightboxImg || !closeBtn) {
-              console.error("Lightbox HTML elements missing! Aborting script.");
-              return;
-          }
-          // console.log("Lightbox elements found:", { lightbox, lightboxImg, closeBtn }); // Uncomment for debugging
-  
-          const clickableImages = document.querySelectorAll(
-              '.main-content .image-layout-container .flex-content-wrapper .image-center img.main-photo, ' +
-              '.main-content .image-layout-container .flex-content-wrapper .extra-content-below img.thumbnail'
-          );
-  
-          // console.log(`Found ${clickableImages.length} clickable images.`); // Uncomment for debugging
-  
-          if (clickableImages.length > 0) {
-              clickableImages.forEach(image => {
-                   image.style.cursor = 'pointer'; // Add pointer cursor
-                   image.addEventListener('click', function() {
-                      // console.log("Image clicked:", this.src); // Uncomment for debugging
-                      lightbox.style.display = 'flex';
-                      lightboxImg.src = this.src;
-                      lightboxImg.alt = this.alt;
-                      document.body.style.overflow = 'hidden';
-                  });
-              });
-              // console.log("Click listeners added."); // Uncomment for debugging
-          } else {
-              // console.warn("No clickable images found for lightbox."); // Uncomment for debugging
-          }
-  
-          function closeLightbox() {
-              // console.log("Closing lightbox..."); // Uncomment for debugging
-              lightbox.style.display = 'none';
-              document.body.style.overflow = 'auto';
-          }
-  
-          closeBtn.addEventListener('click', closeLightbox);
-          lightbox.addEventListener('click', function(event) { if (event.target === lightbox) { closeLightbox(); } });
-          document.addEventListener('keydown', function(event) { if (event.key === 'Escape' && lightbox.style.display === 'flex') { closeLightbox(); } });
-  
-          // console.log("Lightbox setup complete."); // Uncomment for debugging
-  
-      }); // End DOMContentLoaded
+        // --- Get Lightbox Elements ---
+        const lightbox = document.getElementById('image-lightbox');
+        const lightboxImage = document.getElementById('lightbox-image');
+        const lightboxCaption = document.getElementById('lightbox-caption'); // Reference still useful for completeness or future changes
+        const lightboxClose = document.getElementById('lightbox-close');
+
+        // --- Check if elements exist ---
+        if (!lightbox || !lightboxImage || !lightboxCaption || !lightboxClose) {
+            console.error("Lightbox HTML elements (image-lightbox, lightbox-image, lightbox-caption, lightbox-close) not found!");
+            return;
+        }
+
+        // --- Find all clickable images ---
+        const clickableImages = document.querySelectorAll(
+            '.main-content .image-layout-container img.main-photo, ' +
+            '.main-content .image-layout-container .extra-content-below img.thumbnail'
+        );
+
+        // --- Function to Open Lightbox ---
+        function openLightbox(event) {
+            const clickedImage = event.currentTarget;
+            const imageUrl = clickedImage.src;
+            const imageAlt = clickedImage.alt || "Afbeelding"; // Still set alt on lightbox image
+
+            lightboxImage.src = imageUrl;
+            lightboxImage.alt = imageAlt;
+            // lightboxCaption.textContent = imageAlt; // <<< Line Removed: Don't display caption text
+
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            setTimeout(() => {
+                lightboxClose.focus({ preventScroll: true });
+            }, 100);
+        }
+
+        // --- Function to Close Lightbox ---
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scroll
+
+             setTimeout(() => {
+                 if (!lightbox.classList.contains('active')) {
+                     lightboxImage.src = '';
+                     lightboxImage.alt = '';
+                     // lightboxCaption.textContent = ''; // <<< Line Removed: No caption text to clear
+                 }
+             }, 300);
+        }
+
+        // --- Add Click Listeners to Images ---
+        if (clickableImages.length > 0) {
+            clickableImages.forEach(image => {
+                image.addEventListener('click', openLightbox);
+            });
+        } else {
+            console.warn("No images found for lightbox (.main-photo or .thumbnail in .image-layout-container)");
+        }
+
+        // --- Add Listeners for Closing ---
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', function(event) {
+            if (event.target === lightbox) {
+                closeLightbox();
+            }
+        });
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && lightbox.classList.contains('active')) {
+                closeLightbox();
+            }
+        });
+
+    });
   </script>
  </body>
 </html>
