@@ -1,4 +1,5 @@
-<!-- Inside nieuwsarchief.html -->
+<!DOCTYPE html>
+<html lang="nl-NL">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -56,7 +57,7 @@
             gap: 30px;
             padding-top: 20px;
             align-items: stretch;
-            margin-bottom: 40px;
+            margin-bottom: 40px; /* Space above footer */
         }
 
         .news-item {
@@ -71,23 +72,19 @@
             flex-shrink: 1;
             flex-basis: 300px;
             min-width: 280px;
-            /* Default max-width (2 columns) */
             max-width: calc(50% - 15px);
-            /* Child image link needs block display */
         }
          .news-item > .news-item-image-link {
              display: block;
              line-height: 0;
          }
-         /* Ensure images inside news items behave correctly */
          .news-item img {
              width: 100%;
              aspect-ratio: 16 / 9;
              object-fit: cover;
              border-bottom: 1px solid #eee;
-             display: block; /* Make sure it's block */
+             display: block;
          }
-
 
         .news-item:hover {
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
@@ -109,21 +106,20 @@
         }
 
         .news-title {
-            font-size: 1.2em; /* Reduced slightly */
+            font-size: 1.2em;
             margin-bottom: 10px;
             line-height: 1.3;
-             /* Ensure H3 styles don't conflict badly with global H3 if any */
-             color: #1a1a1a; /* Or specific title color */
-             font-weight: 600; /* Or specific weight */
+            color: #1a1a1a;
+            font-weight: 600;
         }
 
         .news-title a {
-            color: #1774b4; /* Use theme link color */
+            color: #1774b4;
             text-decoration: none;
             transition: color 0.2s ease;
         }
          .news-title a:hover {
-             color: #125a8c; /* Darker theme blue */
+             color: #125a8c;
              text-decoration: underline;
          }
 
@@ -131,29 +127,31 @@
             font-size: 0.95em;
             color: #495057;
             line-height: 1.6;
-            flex-grow: 1;
+            flex-grow: 1; 
             margin-bottom: 15px;
+            line-clamp: 3;
+            -webkit-line-clamp: 3;
+
             display: -webkit-box;
             -webkit-box-orient: vertical;
             overflow: hidden;
             text-overflow: ellipsis;
-            max-height: 4.8em; /* 1.6 * 3 */
-             /* Ensure P styles don't conflict badly */
-             margin-bottom: 15px; /* Override global p margin if needed */
+
+            max-height: 4.8em;
         }
 
         .read-more {
             margin-top: auto;
-            align-self: flex-start;
+            align-self: flex-start; 
             font-size: 0.9em;
             font-weight: 600;
-            color: #1774b4; /* Use theme link color */
+            color: #1774b4;
             text-decoration: none;
             transition: color 0.2s ease;
             padding: 5px 0;
         }
          .read-more:hover {
-             color: #125a8c; /* Darker theme blue */
+             color: #125a8c;
              text-decoration: underline;
          }
 
@@ -164,12 +162,11 @@
             padding: 30px;
             font-style: italic;
             color: #6c757d;
-            
         }
 
         #news-no-results {
             display: none;
-            margin-bottom: 40px;
+            margin-bottom: 40px; /* Space above footer */
         }
 
         .visually-hidden {
@@ -196,7 +193,6 @@
     </style>
 </head>
 <body>
-    <!-- The rest of your nieuwsarchief.html body -->
     <div id="header-placeholder"></div>
 
     <main class="container main-content"> <!-- These classes get styled by style.css -->
@@ -218,16 +214,15 @@
         </div>
 
         <section id="news-archive-placeholder" class="news-archive-grid">
-             <!-- News items will be loaded here -->
         </section>
-        <!-- End news specific elements -->
 
     </main>
 
     <div id="footer-placeholder"></div>
     <script src="/js/script.js" defer></script>
     <script>
-        let allNewsArticles = []; 
+        // --- JavaScript remains the same ---
+        let allNewsArticles = [];
         const newsPlaceholder = document.getElementById('news-archive-placeholder');
         const loadingContainer = document.getElementById('news-loading-container');
         const searchInput = document.getElementById('news-search-input');
@@ -256,14 +251,14 @@
                     const neededMargin = viewportHeight - contentHeight;
                     footerElement.style.marginTop = `${neededMargin}px`;
                 } else {
-                    footerElement.style.marginTop = ''; 
+                    footerElement.style.marginTop = '';
                 }
-             }, 10); 
+             }, 10);
         }
 
          function renderNewsArticles(articlesToRender) {
             newsPlaceholder.innerHTML = '';
-            noResultsEl.style.display = 'none'; 
+            noResultsEl.style.display = 'none';
 
             if (articlesToRender.length === 0 && allNewsArticles.length > 0) {
                 noResultsEl.style.display = 'block';
@@ -323,7 +318,7 @@
             const filteredArticles = allNewsArticles.filter(item => {
                 const titleMatch = item.title?.toLowerCase().includes(searchTerm);
                 const summaryMatch = item.summary?.toLowerCase().includes(searchTerm);
-                return titleMatch || summaryMatch; 
+                return titleMatch || summaryMatch;
             });
 
             renderNewsArticles(filteredArticles);

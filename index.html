@@ -26,7 +26,7 @@
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
-            background-attachment: scroll; 
+            background-attachment: scroll;
             color: #ffffff;
             padding: 100px 20px;
             min-height: 50vh;
@@ -41,44 +41,39 @@
             content: "";
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5); /* Overlay */
+            background-color: rgba(0, 0, 0, 0.5);
             z-index: 2;
         }
-        .hero .container { /* Ensure container is above overlay */
+        .hero .container {
              position: relative;
              z-index: 3;
-             max-width: 800px; /* Limit content width */
+             max-width: 800px;
          }
 
-        /* Animation */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
         .hero h2, .hero p, .hero .cta-button {
-            opacity: 0; /* Start hidden for animation */
+            opacity: 0;
             animation: fadeInUp 0.8s ease-out forwards;
         }
         .hero h2 {
             font-size: 2.8em;
             margin-bottom: 0.5em;
-            color: #ffffff; /* Ensure white text */
+            color: #ffffff;
             animation-delay: 0.1s;
         }
         .hero p {
             font-size: 1.2em;
             margin-bottom: 1.5em;
-            max-width: 700px; /* Limit paragraph width */
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
-            color: #e9ecef; /* Light text */
+            color: #e9ecef;
             animation-delay: 0.3s;
         }
-        /* --- End Hero Section Styles --- */
 
-
-        /* --- CTA Button Styles (If different from global style.css) --- */
-        /* If this is the SAME as in style.css, you can remove it */
         .cta-button {
             background-color: var(--theme-blue);
             color: #ffffff;
@@ -93,27 +88,23 @@
         }
         .cta-button:hover {
             background-color: var(--theme-blue-dark);
-            text-decoration: none; /* Redundant if default link style handles it */
-            color: #ffffff; /* Ensure color stays white */
+            text-decoration: none;
+            color: #ffffff;
             transform: scale(1.05);
         }
         .hero .cta-button {
-            animation-delay: 0.5s; /* Specific delay for hero button */
+            animation-delay: 0.5s;
         }
-        /* --- End CTA Button Styles --- */
 
-
-        /* --- General Content Styles Specific to Homepage (if any) --- */
-        .main-content { /* Assuming style.css might have padding, add specific homepage padding if needed */
+        .main-content {
              padding-top: 40px;
-             padding-bottom: 40px; /* Space before next section or footer */
+             padding-bottom: 40px;
         }
         .section-title {
             font-size: 2.2em;
             text-align: center;
             margin-bottom: 50px;
             color: var(--dark-grey);
-            /* Optional animation */
             opacity: 0;
             animation: fadeInUp 0.8s ease-out forwards;
             animation-delay: 0.2s;
@@ -122,8 +113,6 @@
              text-align: center;
         }
 
-
-        /* --- Homepage News Grid & Item Styles --- */
         .news-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -135,104 +124,94 @@
             overflow: hidden;
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex; /* Use flexbox for vertical layout */
+            display: flex;
             flex-direction: column;
-             /* Ensure image link behaves */
-             & > a:first-of-type {
-                 display: block;
-                 line-height: 0;
-             }
+        }
+        .news-item > a:first-of-type {
+             display: block;
+             line-height: 0;
         }
         .news-item:hover {
-            transform: translateY(-6px) scale(1.02); /* Slightly different hover? */
+            transform: translateY(-6px) scale(1.02);
             box-shadow: 0 6px 18px rgba(0,0,0,0.15);
         }
-        .news-item img { /* Image styling */
+        .news-item img {
              display: block;
              width: 100%;
-             height: 200px; /* Fixed height for homepage previews */
-             object-fit: cover; /* Cover the area */
-             background-color: #eee; /* Placeholder color */
-             flex-shrink: 0; /* Prevent image shrinking */
-         }
-        .news-content { /* Internal content area */
+             height: 200px;
+             object-fit: cover;
+             background-color: #eee;
+             flex-shrink: 0;
+        }
+        .news-content {
              padding: 20px;
-             flex-grow: 1; /* Allow content to grow */
+             flex-grow: 1;
              display: flex;
-             flex-direction: column; /* Stack elements vertically */
-         }
+             flex-direction: column;
+        }
         .news-content h3 {
              font-size: 1.3em;
-             margin-top: 0; /* Reset top margin */
-             margin-bottom: 0.5em; /* Space below title */
+             margin-top: 0;
+             margin-bottom: 0.5em;
              line-height: 1.3;
-         }
+        }
         .news-content h3 a {
-             color: #1a1a1a; /* Use default heading color or theme dark */
+             color: #1a1a1a;
              transition: color 0.2s ease;
              text-decoration: none;
-         }
+        }
         .news-content h3 a:hover {
              color: var(--theme-blue);
              text-decoration: none;
-         }
+        }
         .news-meta {
              font-size: 0.85em;
              color: var(--text-grey);
-             margin-bottom: 10px; /* Space below meta */
-         }
+             margin-bottom: 10px;
+        }
 
-        /* === FIX FOR SCALING ISSUE === */
-        .news-content p { /* The summary paragraph */
-             flex-grow: 1; /* Allow paragraph to grow */
-             margin-bottom: 15px; /* Space before read-more */
-             color: #333; /* Or specific text color */
-             line-height: 1.6; /* Ensure consistent line height */
-             font-size: 0.95em; /* Slightly smaller font for summary */
-
-             /* Clamping styles */
+        .news-content p {
+             flex-grow: 1;
+             margin-bottom: 15px;
+             color: #333;
+             line-height: 1.6;
+             font-size: 0.95em;
              display: -webkit-box;
              -webkit-box-orient: vertical;
+             -webkit-line-clamp: 3;
+             line-clamp: 3;
              overflow: hidden;
              text-overflow: ellipsis;
-             /* Add max-height as fallback - calculate: line-height * font-size * lines */
-             /* 1.6 * 3 = 4.8em (assuming 1em font-size base, adjust if needed) */
-             max-height: calc(1.6em * 3 * 0.95); /* More precise: 1.6 * 0.95em * 3 = 4.56em */
-             /* Use max-height: 4.6em; for safety buffer */
-         }
-        /* === END FIX === */
-
+             max-height: calc(1.6em * 3 * 0.95);
+        }
         .read-more {
              display: inline-block;
-             margin-top: auto; /* Push to bottom */
+             margin-top: auto;
              font-weight: 600;
-             color: var(--theme-blue); /* Use theme color */
-             align-self: flex-start; /* Align left */
+             color: var(--theme-blue);
+             align-self: flex-start;
              transition: transform 0.3s ease;
-             padding: 5px 0; /* Clickable area */
+             padding: 5px 0;
              text-decoration: none;
-         }
+        }
         .read-more:hover {
              transform: translateX(3px);
-             color: var(--theme-blue-dark); /* Use theme color */
+             color: var(--theme-blue-dark);
              text-decoration: underline;
-         }
-        /* --- End Homepage News Styles --- */
+        }
 
-
-        /* --- Photo Upload Section Styles --- */
         .photo-upload-section {
             padding: 50px 20px;
             text-align: center;
-            background-color: var(--light-grey); /* Optional light background */
+            background-color: var(--light-grey);
             border-top: 1px solid var(--medium-grey);
             border-bottom: 1px solid var(--medium-grey);
-            margin-top: 60px; /* Space above this section */
+            margin-top: 60px;
         }
-        .photo-upload-section .section-title { /* Override general section title margin */
+        .photo-upload-section .section-title {
             margin-bottom: 30px;
         }
-        .photo-upload-section p { /* Style paragraphs within this section */
+        .photo-upload-section p {
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
@@ -242,22 +221,18 @@
         .photo-upload-section .cta-button i {
             margin-right: 8px;
         }
-        .photo-upload-section p em { /* Style the notice */
+        .photo-upload-section p em {
             font-size: 0.9em;
             color: var(--text-grey);
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
-            display: block; /* Ensure it takes block space */
+            display: block;
         }
-        /* --- End Photo Upload Section Styles --- */
 
-
-        /* --- Quick Info Styles --- */
         .quick-info {
-            background-color: var(--medium-grey); /* Use variable */
+            background-color: var(--medium-grey);
             padding: 50px 0;
-            /* margin-top: 50px; /* Removed, handled by photo section bottom padding/margin */
         }
         .info-columns {
             display: grid;
@@ -266,11 +241,9 @@
             text-align: center;
         }
         .info-column {
-            /* Animation */
             opacity: 0;
             animation: fadeInUp 0.7s ease-out forwards;
         }
-        /* Stagger animation delays */
         .info-column:nth-child(1) { animation-delay: 0.2s; }
         .info-column:nth-child(2) { animation-delay: 0.4s; }
         .info-column:nth-child(3) { animation-delay: 0.6s; }
@@ -292,14 +265,13 @@
             transform: scale(1.1);
         }
         .info-column p {
-            min-height: 4.8em; /* Ensure ~3 lines of space */
-            color: var(--dark-grey); /* Use darker text color */
+            min-height: 4.8em;
+            color: var(--dark-grey);
         }
 
-        /* --- Responsive Adjustments --- */
         @media (min-width: 768px) {
             .hero {
-                background-attachment: fixed; /* Parallax effect on desktop */
+                background-attachment: fixed;
                 min-height: 75vh;
                 padding: 120px 20px;
             }
@@ -310,18 +282,16 @@
                 font-size: 1.3em;
             }
         }
-        /* Add other responsive adjustments for homepage elements if needed */
 
   </style>
  </head>
  <body>
   <div id="header-placeholder">
-   <!-- Header loaded via script.js, styled by style.css -->
   </div>
 
-  <main> <!-- Let style.css handle base main styles -->
+  <main>
    <section class="hero">
-    <div class="container"> <!-- Let style.css handle .container -->
+    <div class="container">
      <h2>
       Welkom bij Atletiekclub Sparta Bornem
      </h2>
@@ -334,24 +304,11 @@
     </div>
    </section>
 
-   <section class="main-content container"> <!-- Add container class here -->
+   <section class="main-content container">
     <h2 class="section-title">
      Laatste Nieuws
     </h2>
-    <!-- Grid for latest news -->
     <div class="news-grid" id="latest-news-grid">
-     <!-- News items will be loaded here by script.js -->
-     <!-- Example Structure (will be replaced):
-     <article class="news-item">
-         <a href="#"><img src="/images/nieuws/placeholder-news.png" alt=""></a>
-         <div class="news-content">
-             <h3><a href="#">Titel van Nieuwsbericht</a></h3>
-             <p class="news-meta">1 Januari 2024 | Categorie</p>
-             <p>Dit is een korte samenvatting van het nieuwsbericht. Het vertelt waar het over gaat...</p>
-             <a href="#" class="read-more">Lees meer »</a>
-         </div>
-     </article>
-     -->
     </div>
     <div class="text-center" style="margin-top: 40px;">
      <a class="cta-button" href="/html/nieuws/nieuws.html">
@@ -360,8 +317,8 @@
     </div>
    </section>
 
-   <section class="photo-upload-section"> <!-- Background color spans full width -->
-        <div class="container"> <!-- Container limits content width -->
+   <section class="photo-upload-section">
+        <div class="container">
             <h2 class="section-title" style="margin-bottom: 30px;">
              Deel Jouw Sparta Momenten!
             </h2>
@@ -382,8 +339,8 @@
        </div>
    </section>
 
-   <section class="quick-info"> <!-- Background color spans full width -->
-    <div class="container info-columns"> <!-- Container limits content width -->
+   <section class="quick-info">
+    <div class="container info-columns">
      <div class="info-column">
       <i class="fas fa-person-running icon">
       </i>
