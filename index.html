@@ -193,7 +193,6 @@
              /* Clamping styles */
              display: -webkit-box;
              -webkit-box-orient: vertical;
-             -webkit-line-clamp: 3; /* Limit to 3 lines */
              overflow: hidden;
              text-overflow: ellipsis;
              /* Add max-height as fallback - calculate: line-height * font-size * lines */
@@ -240,12 +239,9 @@
             margin-bottom: 25px;
             color: var(--dark-grey);
         }
-        .photo-upload-section .cta-button { /* Style button within this section */
-            /* Add specific styles if needed, e.g., icon spacing */
+        .photo-upload-section .cta-button i {
+            margin-right: 8px;
         }
-         .photo-upload-section .cta-button i {
-             margin-right: 8px;
-         }
         .photo-upload-section p em { /* Style the notice */
             font-size: 0.9em;
             color: var(--text-grey);
@@ -299,11 +295,6 @@
             min-height: 4.8em; /* Ensure ~3 lines of space */
             color: var(--dark-grey); /* Use darker text color */
         }
-        .info-column .read-more {
-            /* Inherits .read-more styles, add specifics if needed */
-        }
-        /* --- End Quick Info Styles --- */
-
 
         /* --- Responsive Adjustments --- */
         @media (min-width: 768px) {
