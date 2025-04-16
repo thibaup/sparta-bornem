@@ -1,3 +1,42 @@
+
+
+let resizeTimerFooter; 
+
+function adjustFooterPosition() {
+    const footerElement = document.querySelector('.site-footer');
+    const body = document.body;
+    const html = document.documentElement;
+
+    if (!footerElement) {
+        return;
+    }
+
+    setTimeout(() => {
+        const totalPageHeight = Math.max( body.scrollHeight, body.offsetHeight,
+                               html.clientHeight, html.scrollHeight, html.offsetHeight );
+        const viewportHeight = window.innerHeight;
+
+        if (totalPageHeight <= viewportHeight) {
+
+            footerElement.style.position = 'absolute';
+            footerElement.style.left = '0';
+            footerElement.style.width = '100%';
+            footerElement.style.bottom = '0';
+        } else {
+            footerElement.style.position = ''; 
+            footerElement.style.left = '';
+            footerElement.style.width = '';
+            footerElement.style.bottom = '';
+        }
+    }, 10);
+}
+
+
+function debounceFooterAdjust() {
+    clearTimeout(resizeTimerFooter);
+    resizeTimerFooter = setTimeout(adjustFooterPosition, 150);
+}
+
 async function loadLatestNews(count = 3, containerId = 'latest-news-grid', loadingId = 'latest-news-loading') {
     const newsContainer = document.getElementById(containerId);
     const loadingMessage = document.getElementById(loadingId);
@@ -335,8 +374,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
          if (document.querySelector('.site-footer')) {
              initializeFooter();
+             adjustFooterPosition();
          } else {
              console.warn("loadAll: .site-footer not found after attempting load/checking static.");r
+             adjustFooterPosition();
          }
 
 
@@ -348,8 +389,12 @@ document.addEventListener('DOMContentLoaded', function() {
         if (typeof adjustFooterPosition === 'function') {
             setTimeout(adjustFooterPosition, 100);
         }
+
     }; 
 
     loadAll();
+
 }); 
 
+window.addEventListener('load', adjustFooterPosition);
+window.addEventListener('resize', debounceFooterAdjust);

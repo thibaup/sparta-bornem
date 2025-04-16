@@ -271,19 +271,49 @@
     <script src="/js/script.js" defer></script> <!-- Assume this loads header/footer -->
 
     <script>
-        let allNewsArticles = [];
+        let allNewsArticles = []; // To store the original full list
         const newsPlaceholder = document.getElementById('news-archive-placeholder');
         const loadingContainer = document.getElementById('news-loading-container');
         const searchInput = document.getElementById('news-search-input');
         const noResultsEl = document.getElementById('news-no-results');
         const newsDataUrl = '/html/nieuws/nieuws-data.json';
 
+        function AdjustFooter() {
+            const footerElement = document.querySelector('.site-footer'); 
+            const body = document.body;
+            const html = document.documentElement;
+            
+            if (!footerElement) {
+                return;
+            }
+
+            setTimeout(() => {
+                const totalPageHeight = Math.max( body.scrollHeight, body.offsetHeight,
+                                    html.clientHeight, html.scrollHeight, html.offsetHeight );
+                const viewportHeight = window.innerHeight;
+                
+                console.log(totalPageHeight, viewportHeight)
+                if (totalPageHeight <= viewportHeight) {
+
+                    footerElement.style.position = 'absolute';
+                    footerElement.style.left = '0';
+                    footerElement.style.width = '100%';
+                    footerElement.style.bottom = '0';
+                } else {
+                    footerElement.style.position = ''; 
+                    footerElement.style.left = '';
+                    footerElement.style.width = '';
+                    footerElement.style.bottom = '';
+                }
+            }, 10);
+        }
+
         function renderNewsArticles(articlesToRender) {
-            newsPlaceholder.innerHTML = '';
-            noResultsEl.style.display = 'none'; 
+            newsPlaceholder.innerHTML = ''; // Clear previous results
+            noResultsEl.style.display = 'none'; // Hide no results message initially
 
             if (articlesToRender.length === 0) {
-                noResultsEl.style.display = 'block'; 
+                noResultsEl.style.display = 'block'; // Show no results message
                 AdjustFooter()
                 return;
             }
@@ -324,6 +354,8 @@
 
                 newsPlaceholder.insertAdjacentHTML('beforeend', articleHtml);
             });
+
+            AdjustFooter()
         }
 
 
@@ -340,7 +372,9 @@
             renderNewsArticles(filteredArticles);
         }
 
-
+        /**
+         * Fetches, sorts, stores, and initially displays all news articles.
+         */
         async function loadInitialNews() {
             try {
                 const response = await fetch(newsDataUrl + '?t=' + Date.now());
@@ -374,6 +408,8 @@
                  searchInput.placeholder = "Nieuws laden mislukt";
             }
         }
+
+        
 
         document.addEventListener('DOMContentLoaded', loadInitialNews);
     </script>

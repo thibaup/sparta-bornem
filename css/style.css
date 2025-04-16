@@ -17,22 +17,12 @@ body {
     line-height: 1.6;
     color: #333;
     background-color: #f8f9fa;
-
-    /* === CSS Sticky Footer (Flexbox) START === */
-    display: flex;           /* Make body a flex container */
-    flex-direction: column;  /* Stack children vertically (header, main, footer) */
-    min-height: 100%;        /* Ensure body takes at least full viewport height */
-    /* === CSS Sticky Footer (Flexbox) END === */
+    min-height: 100%;       
 }
 
 main {
-     /* === CSS Sticky Footer (Flexbox) START === */
-     flex-grow: 1;           /* Allow main content to grow and fill space */
-     /* === CSS Sticky Footer (Flexbox) END === */
-
-     /* Removed old padding-bottom: 60px; */
+    flex-grow: 1;      
 }
-
 
 .container {
     max-width: 1140px;
