@@ -1,72 +1,18 @@
-<!DOCTYPE html>
-<html lang="nl-NL">
+<!-- Inside nieuwsarchief.html -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nieuwsarchief - Atletiekclub Sparta Bornem</title>
     <link rel="icon" type="image/png" href="/images/website-logo.png">
+    <!-- Link the GLOBAL stylesheet FIRST -->
     <link rel="stylesheet" href="/css/style.css">
+    <!-- Add ONLY the PAGE-SPECIFIC styles here -->
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f4f4f4; /* Consistent background */
-        }
-
-        a {
-            color: #1774b4; /* Theme blue */
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block; /* Prevent potential bottom space */
-        }
-
-        .container {
-            max-width: 1140px;
-            margin: 20px auto; /* Center container and add top/bottom margin */
-            padding: 0 20px;   /* Side padding */
-        }
-
-        /* Styles for main content area, like padding below header / above footer */
-        .main-content {
-            padding-top: 20px;
-            padding-bottom: 40px;
-        }
-
-        .main-content h1 {
-            color: #1774b4; /* Theme blue for main page title */
-            margin-bottom: 10px; /* Space below H1 */
-            font-size: 2.5em; /* Larger page title */
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-        }
-
-        /* Style the intro paragraph on pages like the archive */
-        .main-content > p:first-of-type {
-            margin-top: 10px;
-            margin-bottom: 25px; /* Space below intro p */
-            font-size: 1.1em;
-            color: #555;
-        }
-
+        /* Keep ONLY styles specific to the News Archive page layout */
 
         /* ==========================================================================
-        News Search Bar Styling
-        ========================================================================== */
+           News Search Bar Styling
+           ========================================================================== */
         .news-search-container {
             margin-bottom: 30px; /* Space below search bar */
             position: relative; /* For potential future icons */
@@ -89,32 +35,28 @@
             outline: none; /* Remove default outline */
         }
 
-        /* Style the placeholder text */
         #news-search-input::placeholder {
             color: #999;
             opacity: 1; /* Firefox */
         }
 
-        /* Clear button (X) for search inputs in WebKit browsers */
         #news-search-input::-webkit-search-cancel-button,
         #news-search-input::-webkit-search-decoration {
-        -webkit-appearance: none;
-        appearance: none; /* Remove default styling */
-        /* Add custom styling for clear button if desired */
+           -webkit-appearance: none;
+           appearance: none;
         }
 
-
         /* ==========================================================================
-        News Grid & Item Styling (Using Flexbox Wrap)
-        ========================================================================== */
+           News Grid & Item Styling
+           ========================================================================== */
 
-        /* --- News Grid Layout (Using Flexbox) --- */
         .news-archive-grid {
-            display: flex;      /* CHANGED: Use Flexbox */
-            flex-wrap: wrap;    /* CHANGED: Allow items to wrap to the next line */
-            gap: 30px;          /* Keep the gap between items */
-            padding-top: 20px;  /* Keep space below intro text/search */
-            align-items: stretch; /* ADDED: Makes items in the same row have equal height */
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            padding-top: 20px;
+            align-items: stretch;
+            margin-bottom: 40px;
         }
 
         .news-item {
@@ -125,36 +67,38 @@
             display: flex;
             flex-direction: column;
             transition: box-shadow 0.3s ease, transform 0.3s ease;
-
             flex-grow: 1;
+            flex-shrink: 1;
             flex-basis: 300px;
             min-width: 280px;
-
-            max-width: calc(50% - 15px); 
+            /* Default max-width (2 columns) */
+            max-width: calc(50% - 15px);
+            /* Child image link needs block display */
         }
+         .news-item > .news-item-image-link {
+             display: block;
+             line-height: 0;
+         }
+         /* Ensure images inside news items behave correctly */
+         .news-item img {
+             width: 100%;
+             aspect-ratio: 16 / 9;
+             object-fit: cover;
+             border-bottom: 1px solid #eee;
+             display: block; /* Make sure it's block */
+         }
+
+
         .news-item:hover {
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
             transform: translateY(-3px);
         }
 
-        .news-item-image-link {
-            display: block;
-            line-height: 0;
-        }
-
-        .news-item img {
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            object-fit: cover;
-            border-bottom: 1px solid #eee;
-        }
-
-        /* --- News Item Content Area --- */
         .news-content {
             padding: 20px;
             display: flex;
             flex-direction: column;
-            flex-grow: 1; /* Pushes read-more down */
+            flex-grow: 1;
         }
 
         .news-meta {
@@ -165,62 +109,67 @@
         }
 
         .news-title {
-            font-size: 1.2em;
+            font-size: 1.2em; /* Reduced slightly */
             margin-bottom: 10px;
             line-height: 1.3;
+             /* Ensure H3 styles don't conflict badly with global H3 if any */
+             color: #1a1a1a; /* Or specific title color */
+             font-weight: 600; /* Or specific weight */
         }
 
         .news-title a {
-            color: #1774b4;
+            color: #1774b4; /* Use theme link color */
             text-decoration: none;
             transition: color 0.2s ease;
         }
-
-        .news-title a:hover {
-            color: #125a8c;
-            text-decoration: underline;
-        }
+         .news-title a:hover {
+             color: #125a8c; /* Darker theme blue */
+             text-decoration: underline;
+         }
 
         .news-summary {
             font-size: 0.95em;
             color: #495057;
             line-height: 1.6;
-            flex-grow: 1; /* Allows summary to push read-more down */
+            flex-grow: 1;
             margin-bottom: 15px;
-
-            /* Clamp summary text */
             display: -webkit-box;
             -webkit-box-orient: vertical;
             overflow: hidden;
             text-overflow: ellipsis;
-            min-height: calc(1.6em * 3 * 0.95); /* Approximate min height for clamping */
+            max-height: 4.8em; /* 1.6 * 3 */
+             /* Ensure P styles don't conflict badly */
+             margin-bottom: 15px; /* Override global p margin if needed */
         }
 
         .read-more {
-            margin-top: auto; /* Pushes to bottom */
-            align-self: flex-start; /* Aligns left */
+            margin-top: auto;
+            align-self: flex-start;
             font-size: 0.9em;
             font-weight: 600;
-            color: #1774b4;
+            color: #1774b4; /* Use theme link color */
             text-decoration: none;
             transition: color 0.2s ease;
-            padding: 5px 0; /* Clickable area */
+            padding: 5px 0;
         }
+         .read-more:hover {
+             color: #125a8c; /* Darker theme blue */
+             text-decoration: underline;
+         }
 
-        .read-more:hover {
-            color: #125a8c;
-            text-decoration: underline;
-        }
-
-        /* --- "No Results" Message Styling --- */
-        #news-no-results {
-            width: 100%; /* Takes full width */
+        #news-no-results,
+        #news-loading-container {
+            width: 100%;
             text-align: center;
             padding: 30px;
             font-style: italic;
             color: #6c757d;
-            display: none; /* Initially hidden */
-            /* grid-column removed */
+            
+        }
+
+        #news-no-results {
+            display: none;
+            margin-bottom: 40px;
         }
 
         .visually-hidden {
@@ -228,50 +177,57 @@
             height: 1px; width: 1px;
             overflow: hidden;
             clip: rect(1px, 1px, 1px, 1px);
-            white-space: nowrap; /* Prevent wrapping */
+            white-space: nowrap;
         }
 
-        /* Add other specific styles for other pages/components as needed */
+        /* Responsive adjustments specifically FOR NEWS ITEMS */
+        @media (min-width: 992px) {
+            .news-item {
+                 max-width: calc(33.333% - 20px); /* 3 columns */
+            }
+        }
+
+        @media (max-width: 600px) {
+            .news-item {
+                 max-width: 100%; /* 1 column */
+            }
+        }
+
     </style>
 </head>
 <body>
+    <!-- The rest of your nieuwsarchief.html body -->
     <div id="header-placeholder"></div>
 
-    <main class="container main-content">
-        <h1>Nieuwsarchief</h1>
-        <p>Bekijk hier alle nieuwsberichten van Sparta Bornem.</p>
+    <main class="container main-content"> <!-- These classes get styled by style.css -->
+        <h1>Nieuwsarchief</h1> <!-- Styled by style.css -->
+        <p>Bekijk hier alle nieuwsberichten van Sparta Bornem.</p> <!-- Styled by style.css -->
 
-        <!-- ======================== -->
-        <!-- === ADD SEARCH BAR === -->
-        <!-- ======================== -->
+        <!-- News specific elements -->
         <div class="news-search-container">
              <label for="news-search-input" class="visually-hidden">Zoek nieuws:</label>
              <input type="search" id="news-search-input" placeholder="Zoek op titel of samenvatting...">
         </div>
-        <!-- ======================== -->
 
-        <!-- Add a loading message container for better control -->
         <div id="news-loading-container" style="text-align: center; padding: 30px; font-style: italic;">
             <p id="news-loading">Nieuws wordt geladen...</p>
         </div>
 
-        <!-- Add a container for displaying "no results" message -->
         <div id="news-no-results" style="display: none; text-align: center; padding: 30px; font-style: italic; color: #6c757d;">
             <p>Geen nieuwsberichten gevonden die voldoen aan uw zoekopdracht.</p>
         </div>
 
-
-        <!-- The grid itself -->
         <section id="news-archive-placeholder" class="news-archive-grid">
              <!-- News items will be loaded here -->
         </section>
+        <!-- End news specific elements -->
+
     </main>
 
     <div id="footer-placeholder"></div>
-    <script src="/js/script.js" defer></script> <!-- Assume this loads header/footer -->
-
+    <script src="/js/script.js" defer></script>
     <script>
-        let allNewsArticles = []; // To store the original full list
+        let allNewsArticles = []; 
         const newsPlaceholder = document.getElementById('news-archive-placeholder');
         const loadingContainer = document.getElementById('news-loading-container');
         const searchInput = document.getElementById('news-search-input');
@@ -279,46 +235,43 @@
         const newsDataUrl = '/html/nieuws/nieuws-data.json';
 
         function AdjustFooter() {
-            const footerElement = document.querySelector('.site-footer'); 
-            const body = document.body;
-            const html = document.documentElement;
-            
-            if (!footerElement) {
-                return;
-            }
-
             setTimeout(() => {
-                const totalPageHeight = Math.max( body.scrollHeight, body.offsetHeight,
-                                    html.clientHeight, html.scrollHeight, html.offsetHeight );
-                const viewportHeight = window.innerHeight;
-                
-                console.log(totalPageHeight, viewportHeight)
-                if (totalPageHeight <= viewportHeight) {
+                const footerElement = document.querySelector('.site-footer') || document.querySelector('#footer-placeholder footer'); // Try to find footer
+                const body = document.body;
+                const html = document.documentElement;
 
-                    footerElement.style.position = 'absolute';
-                    footerElement.style.left = '0';
-                    footerElement.style.width = '100%';
-                    footerElement.style.bottom = '0';
-                } else {
-                    footerElement.style.position = ''; 
-                    footerElement.style.left = '';
-                    footerElement.style.width = '';
-                    footerElement.style.bottom = '';
+                if (!footerElement) {
+                    return;
                 }
-            }, 10);
+
+                const mainContentHeight = document.querySelector('main.main-content')?.offsetHeight || 0;
+                const headerHeight = document.querySelector('.site-header')?.offsetHeight || 0;
+                const footerHeight = footerElement.offsetHeight;
+                const contentHeight = headerHeight + mainContentHeight + footerHeight;
+
+                const viewportHeight = window.innerHeight;
+
+
+                if (contentHeight < viewportHeight) {
+                    const neededMargin = viewportHeight - contentHeight;
+                    footerElement.style.marginTop = `${neededMargin}px`;
+                } else {
+                    footerElement.style.marginTop = ''; 
+                }
+             }, 10); 
         }
 
-        function renderNewsArticles(articlesToRender) {
-            newsPlaceholder.innerHTML = ''; // Clear previous results
-            noResultsEl.style.display = 'none'; // Hide no results message initially
+         function renderNewsArticles(articlesToRender) {
+            newsPlaceholder.innerHTML = '';
+            noResultsEl.style.display = 'none'; 
 
-            if (articlesToRender.length === 0) {
-                noResultsEl.style.display = 'block'; // Show no results message
+            if (articlesToRender.length === 0 && allNewsArticles.length > 0) {
+                noResultsEl.style.display = 'block';
                 AdjustFooter()
                 return;
             }
 
-            const referrerPath = window.location.pathname; 
+            const referrerPath = window.location.pathname;
 
             articlesToRender.forEach(item => {
                 const itemDate = new Date(item.date);
@@ -328,10 +281,14 @@
 
                 let finalImageUrl = '/images/nieuws/placeholder-news.png';
                 if (item.image) {
-                    if (!item.image.startsWith('http://') && !item.image.startsWith('https://')) {
-                        finalImageUrl = `/images/nieuws/${item.image.replace(/^\//, '')}`;
-                    } else {
-                        finalImageUrl = item.image;
+                    // Basic check if it's a full URL or relative path
+                    if (!item.image.startsWith('http://') && !item.image.startsWith('https://') && !item.image.startsWith('/')) {
+                         finalImageUrl = `/images/nieuws/${item.image}`; // Assume relative to /images/nieuws/
+                    } else if (item.image.startsWith('/')) {
+                         finalImageUrl = item.image; // Assume relative to site root
+                    }
+                    else {
+                        finalImageUrl = item.image; // Assume full URL
                     }
                 }
 
@@ -355,28 +312,30 @@
                 newsPlaceholder.insertAdjacentHTML('beforeend', articleHtml);
             });
 
-            AdjustFooter()
+            AdjustFooter() // Call after rendering articles
         }
 
-
-        
         function handleSearch() {
             const searchTerm = searchInput.value.trim().toLowerCase();
+
+            if (!allNewsArticles) return; // Guard clause
 
             const filteredArticles = allNewsArticles.filter(item => {
                 const titleMatch = item.title?.toLowerCase().includes(searchTerm);
                 const summaryMatch = item.summary?.toLowerCase().includes(searchTerm);
-                return titleMatch || summaryMatch;
+                return titleMatch || summaryMatch; 
             });
 
             renderNewsArticles(filteredArticles);
         }
 
-        /**
-         * Fetches, sorts, stores, and initially displays all news articles.
-         */
         async function loadInitialNews() {
+             if (loadingContainer) loadingContainer.style.display = 'block'; // Show loading
+             if (noResultsEl) noResultsEl.style.display = 'none'; // Hide no results
+             newsPlaceholder.innerHTML = ''; // Clear placeholder
+
             try {
+                // Add cache-busting query parameter
                 const response = await fetch(newsDataUrl + '?t=' + Date.now());
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -389,29 +348,41 @@
 
                 allNewsArticles = newsData.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-                if (loadingContainer) loadingContainer.remove();
+                if (loadingContainer) loadingContainer.style.display = 'none'; // Hide loading on success
 
                 renderNewsArticles(allNewsArticles);
 
-                // Add search event listener *after* data is loaded
-                searchInput.addEventListener('input', handleSearch);
+                // Add search event listener *after* data is loaded and rendered initially
+                if (searchInput) {
+                     searchInput.addEventListener('input', handleSearch);
+                     searchInput.disabled = false; // Ensure enabled
+                     searchInput.placeholder = "Zoek op titel of samenvatting...";
+                }
+
 
             } catch (error) {
                 console.error('Error loading initial news data:', error);
-                const displayError = `<p style="color:red; text-align:center;">Kon nieuws niet laden. (${error.message})</p>`;
+                const displayError = `<p style="color:red; text-align:center;">Kon nieuws niet laden. Vernieuw de pagina of probeer het later opnieuw. (${error.message})</p>`;
                 if (loadingContainer) {
-                    loadingContainer.innerHTML = displayError;
+                     loadingContainer.innerHTML = displayError;
+                     loadingContainer.style.display = 'block'; // Ensure error is visible
                 } else if (newsPlaceholder) {
+                    // If loading container was removed or missing, show error in placeholder
                     newsPlaceholder.innerHTML = `<div style="grid-column: 1 / -1;">${displayError}</div>`;
                 }
-                 searchInput.disabled = true;
-                 searchInput.placeholder = "Nieuws laden mislukt";
+                 if (searchInput) {
+                    searchInput.disabled = true;
+                    searchInput.placeholder = "Nieuws laden mislukt";
+                 }
+                 AdjustFooter(); // Adjust footer even on error
             }
         }
 
-        
+        document.addEventListener('DOMContentLoaded', () => {
+            loadInitialNews();
+        });
 
-        document.addEventListener('DOMContentLoaded', loadInitialNews);
+        window.addEventListener('resize', AdjustFooter);
     </script>
 </body>
 </html>
