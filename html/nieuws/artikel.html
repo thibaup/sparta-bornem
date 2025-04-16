@@ -388,9 +388,9 @@
     <script>
         async function loadSingleArticle() {
             const params = new URLSearchParams(window.location.search);
-            const articleId = params.get('id'); 
-            const referrerUrl = params.get('ref'); 
-
+            const articleId = params.get('id');
+            const referrerUrl = params.get('ref');
+            
             const titleEl = document.getElementById('article-title');
             const metaEl = document.getElementById('article-meta');
             const imageContainer = document.getElementById('article-image-container');
@@ -403,39 +403,62 @@
             if (loadingEl) loadingEl.style.display = 'block';
             if (errorEl) errorEl.style.display = 'none';
             bodyEl.innerHTML = ''; 
-            imageContainer.innerHTML = '';
+            imageContainer.innerHTML = ''; 
             metaEl.textContent = '';
 
             const defaultBackHref = '/html/nieuws/nieuws.html';
             const defaultBackText = '« Terug naar Nieuwsoverzicht';
 
             if (backLink) {
-                 if (referrerUrl) {
+                let finalHref = defaultBackHref;
+                let finalText = defaultBackText;
+                let refProcessed = false; 
+
+                if (referrerUrl) {
+                    refProcessed = true;
+                    let isValidRef = false;
+                    let decodedRef = '';
                     try {
-                        const decodedRef = decodeURIComponent(referrerUrl);
+                        decodedRef = decodeURIComponent(referrerUrl); 
+                        const parsedRefUrl = new URL(decodedRef, window.location.origin); 
 
-                        const refUrl = new URL(decodedRef, window.location.origin);
-                        const refPathnameLower = refUrl.pathname.toLowerCase();
-
-                        if (refPathnameLower.includes('/html/nieuws/nieuws') || refPathnameLower.endsWith('/nieuws/')) {
-                            backLink.textContent = '« Terug naar Nieuwsoverzicht';
-                            backLink.href = decodedRef;
-                        } else if (refPathnameLower === '/' || refPathnameLower.endsWith('/home.html') || refPathnameLower.endsWith('/index.html')) {
-                            backLink.textContent = '« Terug naar Home';
-                            backLink.href = decodedRef;
+                        if (['http:', 'https:'].includes(parsedRefUrl.protocol.toLowerCase()) &&
+                            parsedRefUrl.origin === window.location.origin)
+                        {
+                            isValidRef = true;
+                            console.log("Referrer URL is valid and internal:", decodedRef);
                         } else {
-                            backLink.textContent = '« Terug naar Vorige';
-                            backLink.href = decodedRef;
+                            console.warn("Rejected referrer URL due to protocol or origin mismatch:", decodedRef);
                         }
+
                     } catch (e) {
-                        console.error("Error processing referrer URL:", e, "Referrer:", referrerUrl);
-                        backLink.href = defaultBackHref; 
-                        backLink.textContent = defaultBackText;
+                        isValidRef = false;
+                        console.warn("Error processing or invalid structure for referrer URL:", referrerUrl, e);
+                    }
+
+                    if (isValidRef) {
+                        finalHref = decodedRef;
+                        try {
+                            const refPathnameLower = new URL(decodedRef, window.location.origin).pathname.toLowerCase();
+                            if (refPathnameLower.includes('/html/nieuws/nieuws') || refPathnameLower.endsWith('/nieuws/')) {
+                                finalText = '« Terug naar Nieuwsoverzicht';
+                            } else if (refPathnameLower === '/' || refPathnameLower.endsWith('/home.html') || refPathnameLower.endsWith('/index.html')) {
+                                finalText = '« Terug naar Home';
+                            } else {
+                                finalText = '« Terug naar Vorige'; 
+                            }
+                        } catch {
+                            finalText = defaultBackText;
+                        }
+                    } else {
+                        console.warn(`Rejected potentially unsafe referrer URL, using default: ${referrerUrl}`);
                     }
                 } else {
-                    backLink.href = defaultBackHref;
-                    backLink.textContent = defaultBackText;
+                    console.log("No 'ref' parameter found, using default back link.");
                 }
+
+                backLink.href = finalHref;
+                backLink.textContent = finalText;
                 backLink.style.display = 'inline-block'; 
             }
 
@@ -447,7 +470,8 @@
                 if (backLink) backLink.style.display = 'inline-block'; 
                 return;
             }
-            const newsDataUrl = '/html/nieuws/nieuws-data.json'; 
+
+            const newsDataUrl = '/html/nieuws/nieuws-data.json';
 
             try {
                 const response = await fetch(newsDataUrl);
@@ -463,8 +487,7 @@
                 }
 
                 document.title = `${articleData.title} - Sparta Bornem`;
-                titleEl.textContent = articleData.title;
-
+                titleEl.textContent = articleData.title; 
                 const itemDate = new Date(articleData.date);
                 metaEl.textContent = `${itemDate.toLocaleDateString('nl-BE', { day: 'numeric', month: 'long', year: 'numeric' })} | ${articleData.category || 'Algemeen'}`;
 
@@ -473,93 +496,90 @@
                     if (!finalImageUrl.startsWith('http://') && !finalImageUrl.startsWith('https://')) {
                         finalImageUrl = `/images/nieuws/${finalImageUrl.replace(/^\//, '')}`;
                     }
-                    
-                    // Add image with click functionality
+
                     imageContainer.innerHTML = `
-                        <img class="article-image" 
-                             src="${finalImageUrl}" 
-                             alt="${articleData.alt || articleData.title}" 
-                             loading="lazy"
-                             title="Klik om de volledige afbeelding te bekijken">
+                        <img class="article-image"
+                            src="${finalImageUrl}"
+                            alt="${articleData.alt || articleData.title}"
+                            loading="lazy"
+                            title="Klik om de volledige afbeelding te bekijken">
                         <span class="sr-only">Klik op de afbeelding om te vergroten</span>
                     `;
-                    
-                    // Initialize lightbox functionality for this image
                     setupLightbox(imageContainer, finalImageUrl, articleData.alt || articleData.title);
+                    imageContainer.style.display = '';
                 } else {
-                    imageContainer.style.display = 'none';
+                    imageContainer.style.display = 'none'; 
                 }
 
                 if (articleData.full_content) {
                     const paragraphs = articleData.full_content.split('\\n')
-                                        .map(p => p.trim()) 
-                                        .filter(p => p.length > 0);
+                                                .map(p => p.trim())
+                                                .filter(p => p.length > 0);
                     bodyEl.innerHTML = paragraphs.map(p => `<p>${p}</p>`).join('');
-                } 
+                } else {
+                    bodyEl.innerHTML = '';
+                }
 
-                if (loadingEl) loadingEl.style.display = 'none';
+                if (loadingEl) loadingEl.style.display = 'none'; 
 
             } catch (error) {
                 console.error(`Error loading article ${articleId}:`, error);
                 titleEl.textContent = "Fout bij Laden";
-                bodyEl.innerHTML = '';
-                imageContainer.innerHTML = ''; 
+                bodyEl.innerHTML = ''; 
+                imageContainer.innerHTML = '';
                 imageContainer.style.display = 'none';
-                metaEl.textContent = ''; 
+                metaEl.textContent = '';
                 if (loadingEl) loadingEl.style.display = 'none';
                 errorEl.textContent = `Fout: ${error.message}`;
                 errorEl.style.display = 'block';
-
                 if (backLink) backLink.style.display = 'inline-block';
             }
         }
-        
-        // Lightbox functionality
+
         function setupLightbox(imageContainer, imageUrl, imageAlt) {
             const lightbox = document.getElementById('image-lightbox');
             const lightboxImage = document.getElementById('lightbox-image');
             const lightboxCaption = document.getElementById('lightbox-caption');
             const lightboxClose = document.getElementById('lightbox-close');
-            
-            // Set click handler on image container
-            imageContainer.addEventListener('click', function() {
+
+            if (!lightbox || !lightboxImage || !lightboxCaption || !lightboxClose) {
+                console.error("Lightbox elements not found!");
+                return;
+            }
+
+            function openLightbox() {
                 lightboxImage.src = imageUrl;
                 lightboxImage.alt = imageAlt;
                 lightboxCaption.textContent = imageAlt;
                 lightbox.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Prevent scrolling
-                
-                // Focus on the close button for accessibility
+                document.body.style.overflow = 'hidden'; 
                 setTimeout(() => lightboxClose.focus(), 100);
-            });
-            
-            // Close lightbox on button click
-            lightboxClose.addEventListener('click', closeLightbox);
-            
-            // Close lightbox when clicking outside the image
-            lightbox.addEventListener('click', function(e) {
-                if (e.target === lightbox) {
-                    closeLightbox();
-                }
-            });
-            
-            // Close on ESC key
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-                    closeLightbox();
-                }
-            });
-            
+            }
+
             function closeLightbox() {
                 lightbox.classList.remove('active');
-                document.body.style.overflow = ''; // Restore scrolling
-                // Clear src after transition for better performance
+                document.body.style.overflow = ''; 
                 setTimeout(() => {
                     if (!lightbox.classList.contains('active')) {
                         lightboxImage.src = '';
                     }
                 }, 300);
             }
+
+            imageContainer.addEventListener('click', openLightbox);
+
+            lightboxClose.addEventListener('click', closeLightbox);
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                    closeLightbox();
+                }
+            });
         }
 
         document.addEventListener('DOMContentLoaded', () => {
