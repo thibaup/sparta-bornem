@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="nl-NL">
- <head>
+<head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title id="page-title">Kalender - Atletiekclub Sparta Bornem</title>
   <link href="/images/website-logo.png" rel="icon" type="image/png">
   <link href="/css/style.css" rel="stylesheet">
-      <style>
-    /* === CALENDAR STYLES (Keep existing) === */
+  <style>
+    /* === CALENDAR STYLES (your original) === */
     .calendar-view { margin-top: 30px; }
     .month-grid { margin-bottom: 50px; background-color: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.08); }
     .month-title { text-align: center; font-size: clamp(1.6em, 4vw, 2em); color: #1774b4; margin-bottom: 25px; }
@@ -17,69 +17,38 @@
     .calendar-day.padding-day { background-color: #f8f9fa; opacity: 0.6; border-color: transparent; }
     .calendar-day.padding-day .day-number { color: #adb5bd; }
     .day-number { font-weight: bold; color: #343a40; margin-bottom: 2px; display: block; text-align: right; font-size: 0.8em; align-self: flex-end; }
-
-    /* === UPDATED EVENT TEXT SIZING === */
-    .calendar-event {
-      display: block;
-      /* even smaller: min 0.6rem, ideal 1vw, max 0.8rem */
-      font-size: clamp(0.6rem, 1vw, 0.8rem);
-      padding: 2px 4px;
-      margin-bottom: 2px;
-      border-radius: 3px;
-      line-height: 1.2;
-      border-left: 3px solid transparent;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      cursor: pointer;
-      position: relative;
-    }
-    .calendar-event a {
-      text-decoration: none;
-      color: inherit;
-      display: block;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
+    .calendar-event { display: block; font-size: 1em; padding: 2px 4px; margin-bottom: 2px; border-radius: 3px; line-height: 1.2; border-left: 3px solid transparent; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer; position: relative; }
+    .calendar-event a { text-decoration: none; color: inherit; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .calendar-event a:hover { text-decoration: underline; }
-
-    /* Expanding / colouring styles */
     .event-green { border-left-color: #28a745; background-color: rgba(40, 167, 69, 0.1); }
-    .event-blue { border-left-color: #007bff; background-color: rgba(0, 123, 255, 0.1); }
-    .event-red { border-left-color: #dc3545; background-color: rgba(220, 53, 69, 0.1); }
+    .event-blue  { border-left-color: #007bff; background-color: rgba(0, 123, 255, 0.1); }
+    .event-red   { border-left-color: #dc3545; background-color: rgba(220, 53, 69, 0.1); }
     .event-black { border-left-color: #343a40; background-color: rgba(52, 58, 64, 0.1); }
 
-    /* === LEGEND STYLES (Keep existing) === */
+    /* === LEGEND STYLES (original) === */
     .legend { margin-bottom: 30px; padding: 20px; background-color: #f8f9fa; border-radius: 5px; border: 1px solid #dee2e6; }
     .legend h2 { margin-top: 0; margin-bottom: 15px; font-size: 1.4em; border-bottom: 1px solid #ced4da; padding-bottom: 10px; color: #495057; }
     .legend p { margin-bottom: 0.8em; font-size: 0.95em; line-height: 1.5; }
     .legend span { font-weight: bold; }
     .legend .legend-green { color: #28a745; }
-    .legend .legend-blue { color: #007bff; }
-    .legend .legend-red { color: #dc3545; }
+    .legend .legend-blue  { color: #007bff; }
+    .legend .legend-red   { color: #dc3545; }
     .legend .legend-black { color: #343a40; }
 
-    /* POPUP STYLES (Keep existing) */
+    /* === POPUP STYLES (original) === */
     .event-popup {
-      position: absolute;
-      display: none;
-      background-color: white;
-      border: 1px solid #ccc;
+      position: absolute; display: none;
+      background-color: white; border: 1px solid #ccc;
       box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-      padding: 15px 20px;
-      border-radius: 6px;
-      z-index: 1050;
-      max-width: 300px;
-      min-width: 200px;
-      font-size: 0.9em;
-      line-height: 1.5;
-      pointer-events: auto;
-      transform: none;
+      padding: 15px 20px; border-radius: 6px; z-index: 1050;
+      max-width: 300px; min-width: 200px;
+      font-size: 0.9em; line-height: 1.5; pointer-events: auto;
     }
     .event-popup .close-btn {
-      position: absolute; top: 5px; right: 10px; background: none; border: none;
-      font-size: 1.8em; line-height: 1; cursor: pointer; color: #aaa; padding: 0; font-weight: bold;
+      position: absolute; top: 5px; right: 10px;
+      background: none; border: none;
+      font-size: 1.8em; line-height: 1; cursor: pointer;
+      color: #aaa; padding: 0; font-weight: bold;
     }
     .event-popup .close-btn:hover { color: #555; }
     .event-popup h4 { margin-top: 0; margin-bottom: 12px; font-size: 1.15em; color: #1774b4; border-bottom: 1px solid #eee; padding-bottom: 8px; }
@@ -89,218 +58,162 @@
     .event-popup .popup-link a { color: #1774b4; text-decoration: underline; font-weight: 500; }
     .event-popup .popup-link a:hover { color: #105a8b; }
 
-    /* === RESPONSIVE ADJUSTMENTS === */
+    /* === RESPONSIVE (original) === */
     @media (max-width: 768px) {
       .month-grid { padding: 15px; }
       .calendar-header { font-size: 0.75rem; padding-bottom: 6px; margin-bottom: 6px; }
       .calendar-day { padding: 4px; font-size: 0.75rem; }
       .day-number { font-size: 0.8em; }
-      /* mobile event text never below 0.65rem, ideal 1.8vw, cap at 0.8rem */
-      .calendar-event, .calendar-event a {
-        font-size: clamp(0.65rem, 1.8vw, 0.8rem);
-        padding: 1px 3px;
-        margin-bottom: 1px;
-        border-left-width: 2px;
-      }
+      .calendar-event { font-size: 0.75em; padding: 1px 3px; }
       .month-title { font-size: clamp(1.4em, 3.5vw, 1.8em); }
       .legend h2 { font-size: 1.3em; }
       .legend p { font-size: 0.9em; }
-      .event-popup {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        max-width: 90%;
-        width: auto;
-        max-height: 80vh;
-        overflow-y: auto;
-        right: auto;
-        bottom: auto;
-      }
-      body.popup-open::before {
-        content: "";
-        position: fixed;
-        top: 0; left: 0; width: 100%; height: 100%;
-        background-color: rgba(0,0,0,0.4);
-        z-index: 1040;
-        pointer-events: none;
-      }
     }
     @media (max-width: 600px) {
       .calendar-header { font-size: 0.7rem; font-weight: 500; border-bottom: none; margin-bottom: 3px; }
       .calendar-days { gap: 2px; }
       .calendar-day { padding: 3px; font-size: 0.7rem; border-width: 1px; }
       .day-number { font-size: 0.75em; margin-bottom: 1px; }
-      /* reinforce floor on small phones */
-      .calendar-event, .calendar-event a {
-        font-size: clamp(0.7rem, 2vw, 0.8rem);
-        padding: 1px 2px;
-        margin-bottom: 1px;
-        border-left-width: 2px;
-      }
+      .calendar-event, .calendar-event a { font-size: 0.85em; padding: 1px 2px; margin-bottom: 1px; border-left-width: 2px; }
     }
     @media (max-width: 400px) {
       .calendar-header { font-size: 0.65rem; }
       .calendar-day { font-size: 0.65rem; padding: 2px; }
       .day-number { font-size: 0.7em; }
-      .calendar-event,
-      .calendar-event a {
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;    /* max two lines */
-        overflow: hidden;
-        white-space: normal;      /* allow wrapping */
-        text-overflow: ellipsis;
-        font-size: clamp(0.7rem, 2.2vw, 0.8rem);
-        padding: 2px 3px;
+      .calendar-event, .calendar-event a { font-size: 0.85em; }
+    }
+    @media (max-width: 768px) {
+      .event-popup {
+        position: fixed; top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 90%; width: auto; max-height: 80vh; overflow-y: auto;
+      }
+      body.popup-open::before {
+        content: "";
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background-color: rgba(0,0,0,0.4); z-index: 1040;
+        pointer-events: none;
       }
     }
   </style>
- </head>
- <body>
+</head>
+<body>
   <div id="header-placeholder"></div>
 
   <main class="container main-content">
-   <h1 id="main-heading">Wedstrijden Kalender</h1>
+    <h1 id="main-heading">Wedstrijden Kalender</h1>
 
-   <section class="legend" id="calendar-legend">
-    <h2 id="legend-title">Legende</h2>
-   </section>
+    <section class="legend" id="calendar-legend">
+      <h2 id="legend-title">Legende</h2>
+    </section>
 
-   <div class="calendar-view" id="calendar-view-container">
-    <p style="text-align: center; padding: 20px;">Kalender wordt geladen...</p>
-   </div>
+    <div class="calendar-view" id="calendar-view-container">
+      <p style="text-align:center; padding:20px;">Kalender wordt geladen...</p>
+    </div>
   </main>
 
   <div id="footer-placeholder"></div>
 
   <div class="event-popup" id="event-popup">
-   <button aria-label="Sluiten" class="close-btn">×</button>
-   <h4 class="popup-title">Event Title</h4>
-   <p class="popup-info">Extra information about the event goes here.</p>
-   <p class="popup-details"></p>
-   <p class="popup-link"></p>
+    <button aria-label="Sluiten" class="close-btn">×</button>
+    <h4 class="popup-title">Event Title</h4>
+    <p class="popup-info">Extra information about the event goes here.</p>
+    <p class="popup-details"></p>
+    <p class="popup-link"></p>
   </div>
 
+  <!-- your two scripts, unchanged -->
   <script defer src="/js/script.js"></script>
   <script defer src="/html/wedstrijden/js/kalender.js"></script>
-  <!-- Popup JavaScript -->
-  <script>
-   document.addEventListener('DOMContentLoaded', () => {
-        const calendarViewContainer = document.getElementById('calendar-view-container');
-        const popup = document.getElementById('event-popup');
+  <!-- replace your inline popup code with this single file: -->
+  <script defer>
+    document.addEventListener('DOMContentLoaded', () => {
+  const container = document.getElementById('calendar-view-container');
+  const popup     = document.getElementById('event-popup');
+  const titleEl   = popup.querySelector('.popup-title');
+  const infoEl    = popup.querySelector('.popup-info');
+  const detailsEl = popup.querySelector('.popup-details');
+  const linkEl    = popup.querySelector('.popup-link');
+  const closeBtn  = popup.querySelector('.close-btn');
+  const mobileBP  = 768;
 
-        if (!calendarViewContainer || !popup) {
-            console.warn("Calendar view or popup element not found. Popup functionality will be disabled.");
-            return;
-        }
-        const popupTitle = popup.querySelector('.popup-title');
-        const popupInfo = popup.querySelector('.popup-info');
-        const popupDetails = popup.querySelector('.popup-details');
-        const popupLink = popup.querySelector('.popup-link');
-        const closeButton = popup.querySelector('.close-btn');
+  function showPopup(evSpan, ev) {
+    // Fill content
+    titleEl.textContent   = evSpan.title || evSpan.textContent;
+    infoEl.textContent    = evSpan.dataset.info || '';
+    infoEl.style.display  = evSpan.dataset.info ? 'block' : 'none';
 
-        if (!popupTitle || !popupInfo || !popupDetails || !popupLink || !closeButton) {
-            console.warn("One or more inner popup elements (title, info, details, link, close-btn) not found.");
-            // Allow script to continue if main popup exists, but log warning.
-        }
+    let html = '';
+    if (evSpan.dataset.location) html += `<strong>Locatie:</strong> ${evSpan.dataset.location}<br>`;
+    if (evSpan.dataset.category) html += `<strong>Categorie:</strong> ${evSpan.dataset.category}`;
+    detailsEl.innerHTML    = html;
+    detailsEl.style.display = html ? 'block' : 'none';
 
-        const mobileBreakpoint = 768;
+    if (evSpan.dataset.url && evSpan.dataset.url !== '#') {
+      linkEl.innerHTML      = `<a href="${evSpan.dataset.url}" target="_blank" rel="noopener noreferrer">Meer Info / Inschrijven</a>`;
+      linkEl.style.display  = 'block';
+    } else {
+      linkEl.style.display  = 'none';
+    }
 
-        const showPopup = (eventElement, clickEvent) => {
-            if (!popup || !popupTitle || !popupInfo || !popupDetails || !popupLink) return; 
+    // Position
+    const isMobile = window.innerWidth <= mobileBP;
+    if (isMobile) {
+      document.body.classList.add('popup-open');
+      popup.style.position = 'fixed';
+      popup.style.top      = '50%';
+      popup.style.left     = '50%';
+      popup.style.transform= 'translate(-50%,-50%)';
+    } else {
+      document.body.classList.remove('popup-open');
+      // Temporarily show to measure
+      popup.style.visibility = 'hidden';
+      popup.style.display    = 'block';
+      const pw = popup.offsetWidth, ph = popup.offsetHeight;
+      popup.style.display    = 'none';
+      popup.style.visibility = 'visible';
 
-            const title = eventElement.getAttribute('title') || eventElement.innerText;
-            const info = eventElement.dataset.info;
-            const location = eventElement.dataset.location;
-            const category = eventElement.dataset.category;
-            const url = eventElement.dataset.url;
+      let top  = ev.clientY + window.scrollY + 10;
+      let left = ev.clientX + window.scrollX + 10;
+      const buf = 10;
+      if (ev.clientY + ph + buf > window.innerHeight) top  = ev.clientY + window.scrollY - ph - buf;
+      if (ev.clientX + pw + buf > window.innerWidth ) left = ev.clientX + window.scrollX - pw - buf;
 
-            const hasPopupContent = info || location || category;
+      popup.style.position   = 'absolute';
+      popup.style.top        = `${top}px`;
+      popup.style.left       = `${left}px`;
+      popup.style.transform  = 'none';
+    }
+    popup.style.display = 'block';
+  }
 
-            popupTitle.textContent = title;
-            popupInfo.textContent = info || '';
-            popupInfo.style.display = info ? 'block' : 'none';
+  function hidePopup() {
+    popup.style.display = 'none';
+    document.body.classList.remove('popup-open');
+  }
 
-            let detailsHTML = '';
-            if (location) detailsHTML += `<strong>Locatie:</strong> ${location}<br>`;
-            if (category) detailsHTML += `<strong>Categorie:</strong> ${category}`;
-            popupDetails.innerHTML = detailsHTML;
-            popupDetails.style.display = detailsHTML.trim() ? 'block' : 'none';
+  // Delegate clicks
+  container.addEventListener('click', e => {
+    const span = e.target.closest('.calendar-event');
+    if (!span) return;
+    e.preventDefault();
+    showPopup(span, e);
+  });
 
-            if (url && url !== '#') {
-                popupLink.innerHTML = `<a href="${url}" target="_blank" rel="noopener noreferrer">Meer Info / Inschrijven</a>`;
-                popupLink.style.display = 'block';
-            } else {
-                popupLink.innerHTML = '';
-                popupLink.style.display = 'none';
-            }
-            
-            const isMobile = window.innerWidth <= mobileBreakpoint;
-            if (isMobile) {
-                document.body.classList.add('popup-open');
-                popup.style.position = 'fixed'; popup.style.top = '50%'; popup.style.left = '50%';
-                popup.style.transform = 'translate(-50%, -50%)';
-            } else {
-                document.body.classList.remove('popup-open');
-                const rect = eventElement.getBoundingClientRect();
-                const clickY = clickEvent.clientY; const clickX = clickEvent.clientX;
-                popup.style.visibility = 'hidden'; popup.style.position = 'absolute'; popup.style.display = 'block';
-                const popupHeight = popup.offsetHeight; const popupWidth = popup.offsetWidth;
-                popup.style.display = 'none'; popup.style.visibility = 'visible';
-                const viewportWidth = window.innerWidth; const viewportHeight = window.innerHeight;
-                const scrollX = window.scrollX; const scrollY = window.scrollY;
-                let top = clickY + scrollY + 10; let left = clickX + scrollX + 10;
-                const buffer = 10;
-                if (clickY + popupHeight + buffer > viewportHeight) top = clickY + scrollY - popupHeight - buffer;
-                if (clickX + popupWidth + buffer > viewportWidth) left = clickX + scrollX - popupWidth - buffer;
-                if (left < scrollX + buffer) left = scrollX + buffer;
-                if (top < scrollY + buffer) top = scrollY + buffer;
-                popup.style.top = `${top}px`; popup.style.left = `${left}px`;
-                popup.style.transform = 'none';
-            }
-            popup.style.display = 'block';
-        };
-
-        const hidePopup = () => {
-            if (popup) popup.style.display = 'none';
-            document.body.classList.remove('popup-open');
-        };
-
-        calendarViewContainer.addEventListener('click', (event) => {
-            const clickedElement = event.target;
-            const eventSpanElement = clickedElement.closest('.calendar-event');
-
-            if (eventSpanElement) {
-                event.preventDefault(); 
-                showPopup(eventSpanElement, event);
-            }
-        });
-
-        if (closeButton) {
-            closeButton.addEventListener('click', (event) => {
-                event.stopPropagation(); // Prevent click from bubbling to document listener
-                hidePopup();
-            });
-        }
-
-        document.addEventListener('click', (event) => {
-            if (popup && popup.style.display === 'block') { // If popup is visible
-                const isClickInsidePopup = popup.contains(event.target);
-                const isClickOnAnEventSpan = event.target.closest('.calendar-event');
-                
-                if (!isClickInsidePopup && !isClickOnAnEventSpan) {
-                    hidePopup();
-                }
-            }
-        });
-
-        document.addEventListener('keydown', (event) => {
-            if (event.key === 'Escape' && popup && popup.style.display === 'block') {
-                hidePopup();
-            }
-        });
-    });
+  closeBtn.addEventListener('click', hidePopup);
+  document.addEventListener('click', e => {
+    if (popup.style.display === 'block'
+        && !popup.contains(e.target)
+        && !e.target.closest('.calendar-event')) {
+      hidePopup();
+    }
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && popup.style.display === 'block') {
+      hidePopup();
+    }
+  });
+});
   </script>
- </body>
+</body>
 </html>
