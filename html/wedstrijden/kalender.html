@@ -6,7 +6,7 @@
   <title id="page-title">Kalender - Atletiekclub Sparta Bornem</title>
   <link href="/images/website-logo.png" rel="icon" type="image/png">
   <link href="/css/style.css" rel="stylesheet">
-    <style>
+      <style>
     /* === CALENDAR STYLES (Keep existing) === */
     .calendar-view { margin-top: 30px; }
     .month-grid { margin-bottom: 50px; background-color: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.08); }
@@ -17,9 +17,33 @@
     .calendar-day.padding-day { background-color: #f8f9fa; opacity: 0.6; border-color: transparent; }
     .calendar-day.padding-day .day-number { color: #adb5bd; }
     .day-number { font-weight: bold; color: #343a40; margin-bottom: 2px; display: block; text-align: right; font-size: 0.8em; align-self: flex-end; }
-    .calendar-event { display: block; font-size: 0.8em; padding: 2px 4px; margin-bottom: 2px; border-radius: 3px; line-height: 1.2; border-left: 3px solid transparent; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer; position: relative; }
-    .calendar-event a { text-decoration: none; color: inherit; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    /* === UPDATED EVENT TEXT SIZING === */
+    .calendar-event {
+      display: block;
+      /* even smaller: min 0.6rem, ideal 1vw, max 0.8rem */
+      font-size: clamp(0.6rem, 1vw, 0.8rem);
+      padding: 2px 4px;
+      margin-bottom: 2px;
+      border-radius: 3px;
+      line-height: 1.2;
+      border-left: 3px solid transparent;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      cursor: pointer;
+      position: relative;
+    }
+    .calendar-event a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
     .calendar-event a:hover { text-decoration: underline; }
+
     /* Expanding / colouring styles */
     .event-green { border-left-color: #28a745; background-color: rgba(40, 167, 69, 0.1); }
     .event-blue { border-left-color: #007bff; background-color: rgba(0, 123, 255, 0.1); }
@@ -38,24 +62,24 @@
 
     /* POPUP STYLES (Keep existing) */
     .event-popup {
-        position: absolute;
-        display: none;
-        background-color: white;
-        border: 1px solid #ccc;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        padding: 15px 20px;
-        border-radius: 6px;
-        z-index: 1050;
-        max-width: 300px;
-        min-width: 200px;
-        font-size: 0.9em;
-        line-height: 1.5;
-        pointer-events: auto;
-        transform: none;
+      position: absolute;
+      display: none;
+      background-color: white;
+      border: 1px solid #ccc;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      padding: 15px 20px;
+      border-radius: 6px;
+      z-index: 1050;
+      max-width: 300px;
+      min-width: 200px;
+      font-size: 0.9em;
+      line-height: 1.5;
+      pointer-events: auto;
+      transform: none;
     }
     .event-popup .close-btn {
-        position: absolute; top: 5px; right: 10px; background: none; border: none;
-        font-size: 1.8em; line-height: 1; cursor: pointer; color: #aaa; padding: 0; font-weight: bold;
+      position: absolute; top: 5px; right: 10px; background: none; border: none;
+      font-size: 1.8em; line-height: 1; cursor: pointer; color: #aaa; padding: 0; font-weight: bold;
     }
     .event-popup .close-btn:hover { color: #555; }
     .event-popup h4 { margin-top: 0; margin-bottom: 12px; font-size: 1.15em; color: #1774b4; border-bottom: 1px solid #eee; padding-bottom: 8px; }
@@ -67,61 +91,71 @@
 
     /* === RESPONSIVE ADJUSTMENTS === */
     @media (max-width: 768px) {
-        .month-grid { padding: 15px; }
-        .calendar-header { font-size: 0.75rem; padding-bottom: 6px; margin-bottom: 6px; }
-        .calendar-day { padding: 4px; font-size: 0.75rem; }
-        .day-number { font-size: 0.8em; }
-        .calendar-event { font-size: 0.75rem; padding: 1px 3px; }
-        .month-title { font-size: clamp(1.4em, 3.5vw, 1.8em); }
-        .legend h2 { font-size: 1.3em; }
-        .legend p { font-size: 0.9em; }
-        .event-popup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            max-width: 90%;
-            width: auto;
-            max-height: 80vh;
-            overflow-y: auto;
-            right: auto;
-            bottom: auto;
-        }
-        body.popup-open::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.4);
-            z-index: 1040;
-            pointer-events: none;
-        }
+      .month-grid { padding: 15px; }
+      .calendar-header { font-size: 0.75rem; padding-bottom: 6px; margin-bottom: 6px; }
+      .calendar-day { padding: 4px; font-size: 0.75rem; }
+      .day-number { font-size: 0.8em; }
+      /* mobile event text never below 0.65rem, ideal 1.8vw, cap at 0.8rem */
+      .calendar-event, .calendar-event a {
+        font-size: clamp(0.65rem, 1.8vw, 0.8rem);
+        padding: 1px 3px;
+        margin-bottom: 1px;
+        border-left-width: 2px;
+      }
+      .month-title { font-size: clamp(1.4em, 3.5vw, 1.8em); }
+      .legend h2 { font-size: 1.3em; }
+      .legend p { font-size: 0.9em; }
+      .event-popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 90%;
+        width: auto;
+        max-height: 80vh;
+        overflow-y: auto;
+        right: auto;
+        bottom: auto;
+      }
+      body.popup-open::before {
+        content: "";
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background-color: rgba(0,0,0,0.4);
+        z-index: 1040;
+        pointer-events: none;
+      }
     }
     @media (max-width: 600px) {
-        .calendar-header { font-size: 0.7rem; font-weight: 500; border-bottom: none; margin-bottom: 3px; }
-        .calendar-days { gap: 2px; }
-        .calendar-day { padding: 3px; font-size: 0.7rem; border-width: 1px; }
-        .day-number { font-size: 0.75em; margin-bottom: 1px; }
-        .calendar-event, .calendar-event a { font-size: 0.75rem; padding: 1px 2px; margin-bottom: 1px; border-left-width: 2px; }
+      .calendar-header { font-size: 0.7rem; font-weight: 500; border-bottom: none; margin-bottom: 3px; }
+      .calendar-days { gap: 2px; }
+      .calendar-day { padding: 3px; font-size: 0.7rem; border-width: 1px; }
+      .day-number { font-size: 0.75em; margin-bottom: 1px; }
+      /* reinforce floor on small phones */
+      .calendar-event, .calendar-event a {
+        font-size: clamp(0.7rem, 2vw, 0.8rem);
+        padding: 1px 2px;
+        margin-bottom: 1px;
+        border-left-width: 2px;
+      }
     }
     @media (max-width: 400px) {
-        .calendar-header { font-size: 0.65rem; }
-        .calendar-day { font-size: 0.65rem; padding: 2px; }
-        .day-number { font-size: 0.7em; }
-        /* Prevent font from shrinking below 0.75rem, add clamp */
-        .calendar-event,
-        .calendar-event a {
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            line-clamp: 2;
-            -webkit-line-clamp: 2;    /* max two lines */
-            overflow: hidden;
-            white-space: normal;      /* allow wrapping */
-            text-overflow: ellipsis;
-            font-size: 0.75rem;       /* floor at 0.75rem */
-            padding: 2px 3px;
-        }
+      .calendar-header { font-size: 0.65rem; }
+      .calendar-day { font-size: 0.65rem; padding: 2px; }
+      .day-number { font-size: 0.7em; }
+      .calendar-event,
+      .calendar-event a {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;    /* max two lines */
+        overflow: hidden;
+        white-space: normal;      /* allow wrapping */
+        text-overflow: ellipsis;
+        font-size: clamp(0.7rem, 2.2vw, 0.8rem);
+        padding: 2px 3px;
+      }
     }
-</style>
+  </style>
  </head>
  <body>
   <div id="header-placeholder"></div>
