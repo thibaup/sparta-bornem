@@ -3,13 +3,11 @@
  <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>
-   Kalender - Atletiekclub Sparta Bornem
-  </title>
+  <title id="page-title">Kalender - Atletiekclub Sparta Bornem</title>
   <link href="/images/website-logo.png" rel="icon" type="image/png">
   <link href="/css/style.css" rel="stylesheet">
-  <style>
-   /* === CALENDAR STYLES (Keep existing) === */
+    <style>
+    /* === CALENDAR STYLES (Keep existing) === */
     .calendar-view { margin-top: 30px; }
     .month-grid { margin-bottom: 50px; background-color: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.08); }
     .month-title { text-align: center; font-size: clamp(1.6em, 4vw, 2em); color: #1774b4; margin-bottom: 25px; }
@@ -19,10 +17,10 @@
     .calendar-day.padding-day { background-color: #f8f9fa; opacity: 0.6; border-color: transparent; }
     .calendar-day.padding-day .day-number { color: #adb5bd; }
     .day-number { font-weight: bold; color: #343a40; margin-bottom: 2px; display: block; text-align: right; font-size: 0.8em; align-self: flex-end; }
-    .calendar-event { display: block; font-size: 0.8em; padding: 2px 4px; margin-bottom: 2px; border-radius: 3px; line-height: 1.2; border-left: 3px solid transparent; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer; /* Make all events clickable */ position: relative; }
+    .calendar-event { display: block; font-size: 0.8em; padding: 2px 4px; margin-bottom: 2px; border-radius: 3px; line-height: 1.2; border-left: 3px solid transparent; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer; position: relative; }
     .calendar-event a { text-decoration: none; color: inherit; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .calendar-event a:hover { text-decoration: underline; }
-    /* --- Removed expansion styles --- */
+    /* Expanding / colouring styles */
     .event-green { border-left-color: #28a745; background-color: rgba(40, 167, 69, 0.1); }
     .event-blue { border-left-color: #007bff; background-color: rgba(0, 123, 255, 0.1); }
     .event-red { border-left-color: #dc3545; background-color: rgba(220, 53, 69, 0.1); }
@@ -38,24 +36,22 @@
     .legend .legend-red { color: #dc3545; }
     .legend .legend-black { color: #343a40; }
 
-    /* ==========================================================================
-       POPUP STYLING
-       ========================================================================== */
+    /* POPUP STYLES (Keep existing) */
     .event-popup {
-        position: absolute; /* Default for desktop, JS calculates top/left */
-        display: none; /* Hidden by default */
+        position: absolute;
+        display: none;
         background-color: white;
         border: 1px solid #ccc;
         box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         padding: 15px 20px;
         border-radius: 6px;
-        z-index: 1050; /* Ensure it's above other elements */
+        z-index: 1050;
         max-width: 300px;
         min-width: 200px;
         font-size: 0.9em;
         line-height: 1.5;
         pointer-events: auto;
-        transform: none; /* Reset transform for desktop */
+        transform: none;
     }
     .event-popup .close-btn {
         position: absolute; top: 5px; right: 10px; background: none; border: none;
@@ -69,1099 +65,208 @@
     .event-popup .popup-link a { color: #1774b4; text-decoration: underline; font-weight: 500; }
     .event-popup .popup-link a:hover { color: #105a8b; }
 
-    /* === RESPONSIVE CALENDAR STYLES (Keep Existing) === */
+    /* === RESPONSIVE ADJUSTMENTS === */
     @media (max-width: 768px) {
         .month-grid { padding: 15px; }
         .calendar-header { font-size: 0.75rem; padding-bottom: 6px; margin-bottom: 6px; }
         .calendar-day { padding: 4px; font-size: 0.75rem; }
         .day-number { font-size: 0.8em; }
-        .calendar-event { font-size: 0.75em; padding: 1px 3px; }
+        .calendar-event { font-size: 0.75rem; padding: 1px 3px; }
         .month-title { font-size: clamp(1.4em, 3.5vw, 1.8em); }
         .legend h2 { font-size: 1.3em; }
         .legend p { font-size: 0.9em; }
+        .event-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            width: auto;
+            max-height: 80vh;
+            overflow-y: auto;
+            right: auto;
+            bottom: auto;
+        }
+        body.popup-open::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.4);
+            z-index: 1040;
+            pointer-events: none;
+        }
     }
     @media (max-width: 600px) {
         .calendar-header { font-size: 0.7rem; font-weight: 500; border-bottom: none; margin-bottom: 3px; }
         .calendar-days { gap: 2px; }
         .calendar-day { padding: 3px; font-size: 0.7rem; border-width: 1px; }
         .day-number { font-size: 0.75em; margin-bottom: 1px; }
-        .calendar-event, .calendar-event a { font-size: 0.75em; padding: 1px 2px; margin-bottom: 1px; border-left-width: 2px; }
+        .calendar-event, .calendar-event a { font-size: 0.75rem; padding: 1px 2px; margin-bottom: 1px; border-left-width: 2px; }
     }
     @media (max-width: 400px) {
         .calendar-header { font-size: 0.65rem; }
         .calendar-day { font-size: 0.65rem; padding: 2px; }
         .day-number { font-size: 0.7em; }
-        .calendar-event, .calendar-event a { font-size: 0.7em; }
-    }
-
-    /* ==========================================================================
-       MOBILE POPUP OVERRIDES
-       ========================================================================== */
-    @media (max-width: 768px) {
-        .event-popup {
-            position: fixed;     /* Fixed to viewport */
-            top: 50%;            /* Center vertically */
-            left: 50%;           /* Center horizontally */
-            transform: translate(-50%, -50%); /* Adjust position */
-            max-width: 90%;      /* Limit width */
-            width: auto;         /* Auto width up to max */
-            max-height: 80vh;    /* Limit height */
-            overflow-y: auto;    /* Scroll tall content */
-            /* Ensure these are reset for fixed positioning */
-            right: auto;
-            bottom: auto;
+        /* Prevent font from shrinking below 0.75rem, add clamp */
+        .calendar-event,
+        .calendar-event a {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            line-clamp: 2;
+            -webkit-line-clamp: 2;    /* max two lines */
+            overflow: hidden;
+            white-space: normal;      /* allow wrapping */
+            text-overflow: ellipsis;
+            font-size: 0.75rem;       /* floor at 0.75rem */
+            padding: 2px 3px;
         }
-        /* Dark overlay for mobile */
-        body.popup-open::before {
-             content: "";
-             position: fixed;
-             top: 0; left: 0; width: 100%; height: 100%;
-             background-color: rgba(0,0,0,0.4);
-             z-index: 1040; /* Below popup */
-             pointer-events: none; /* Don't block clicks */
-         }
     }
-  </style>
+</style>
  </head>
  <body>
-  <div id="header-placeholder">
-  </div>
+  <div id="header-placeholder"></div>
+
   <main class="container main-content">
-   <h1>
-    Wedstrijden Kalender
-   </h1>
-   <section class="legend">
-    <h2>
-     Legende
-    </h2>
-    <p>
-     <span class="legend-green">
-      Groen:
-     </span>
-     'gewone' wedstrijden (incl. PK) waar begeleiding voorzien is.
-    </p>
-    <p>
-     <span class="legend-blue">
-      Blauw:
-     </span>
-     kampioenschappen (KVV/BK) & Interclub (BVV) waar begeleiding geprobeerd wordt te voorzien.
-    </p>
-    <p>
-     <span class="legend-red">
-      Rood:
-     </span>
-     'gewone' wedstrijden zonder voorziene begeleiding.
-    </p>
-    <p>
-     <span class="legend-black">
-      Zwart:
-     </span>
-     Andere clubactiviteiten of onbekende status.
-    </p>
+   <h1 id="main-heading">Wedstrijden Kalender</h1>
+
+   <section class="legend" id="calendar-legend">
+    <h2 id="legend-title">Legende</h2>
    </section>
-   <div class="calendar-view">
-    <!-- === MEI 2025 === -->
-    <section class="month-grid">
-     <h2 class="month-title">
-      Mei 2025
-     </h2>
-     <div class="calendar-header">
-      <span>
-       M
-      </span>
-      <span>
-       D
-      </span>
-      <span>
-       W
-      </span>
-      <span>
-       D
-      </span>
-      <span>
-       V
-      </span>
-      <span>
-       Z
-      </span>
-      <span>
-       Z
-      </span>
-     </div>
-     <div class="calendar-days">
-      <div class="calendar-day padding-day">
-      </div>
-      <div class="calendar-day padding-day">
-      </div>
-      <div class="calendar-day padding-day">
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        1
-       </span>
-       <span class="calendar-event event-green" data-category="Kan tot Min" data-info="Inschrijven kan via atletiek.nu!" data-location="Rooienberg 2570 Duffel" data-url="https://www.atletiek.nu/wedstrijd/main/42447/" title="Antwerps Jeugdcriterium Borremansmeeting">
-        Antwerps Jeugdcriterium Borremansmeeting
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        2
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        3
-       </span>
-       <span class="calendar-event event-green" data-category="Pup-Min" data-info="OPGELET! Hiervoor kan je zelf niet inschrijven. Dit doet de club zelf." data-location="Zwijndrecht Atletiek Team, Burcht" data-url="https://www.atletiek.nu/wedstrijd/main/42392/" title="Bvv Pup/Min Zwijndrecht">
-        Bvv Pup/Min Zwijndrecht
-       </span>
-       <span class="calendar-event event-blue" data-info="Zelf inschrijven niet mogelijk. Club maakt selectie." data-location="Heirbaan 78 2070 Burcht" data-url="https://www.atletiek.nu/wedstrijd/main/42392/" title="Bvv Pup/min Zwijndrecht">
-        Bvv Pup/min Zwijndrecht
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        4
-       </span>
-       <span class="calendar-event event-blue" data-category="Alle afstanden" data-info="OPGELET! Hiervoor kan je zelf niet inschrijven. Je moet hiervoor geselecteerd worden." data-location="Moorseelsestraat 144, 8500 Kortrijk" data-url="https://www.atletiek.nu/wedstrijd/main/42398/" title="BVV Cad/Sch">
-        BVV Cad/Sch
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        5
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        6
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        7
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        8
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        9
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        10
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        11
-       </span>
-       <span class="calendar-event event-blue" data-category="Alle afstanden" data-info="OPGELET! Hiervoor kan je zelf niet inschrijven. De atleten die deelnemen worden geselecteerd door de club zelf." data-location="Kaaiplein 30A 9220 Hamme" data-url="https://www.atletiek.nu/wedstrijd/main/42402/" title="BVV AC">
-        BVV AC
-       </span>
-       <span class="calendar-event event-green" data-category="Alle afstanden" data-location="Sportlaan, 9160 Lokeren" data-url="https://www.atletiek.nu/wedstrijd/main/42247/" title="Flanders CUP - Lokeren">
-        Flanders CUP - Lokeren
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        12
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        13
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        14
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        15
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        16
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        17
-       </span>
-       <span class="calendar-event event-green" data-category="Kan tot Min" data-location="Breevendreef, Bornem" data-url="https://www.atletiek.nu/wedstrijd/main/42487/" title="Klein Brabants Jeugdcriterium Bornem">
-        Klein Brabants Jeugdcriterium Bornem
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        18
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        19
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        20
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        21
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        22
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        23
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        24
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        25
-       </span>
-       <span class="calendar-event event-green" data-category="Pup/min" data-location="rode kruislaan 2400 Mol" data-url="https://www.atletiek.nu/wedstrijd/main/42451/" title="PK Pup/min Antwerpen">
-        PK Pup/min Antwerpen
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        26
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        27
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        28
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        29
-       </span>
-       <span class="calendar-event event-green" data-category="Kan tot Min" data-location="Blauwenhoek 76 1840 Londerzeel" data-url="https://www.atletiek.nu/wedstrijd/main/42489/" title="5de PEGA Jeugdmeeting">
-        5de PEGA Jeugdmeeting
-       </span>
-       <span class="calendar-event event-blue" data-category="Alle afstanden" data-info="Vlaams kampioenschap alle categorie&euml;n. Opgelet! Iedereen kan hier voor inschrijven maar de plekken zijn beperkt. Er zijn 24 plekken per nummer, de selectie wordt gedaan ahv beste seizoen & beste tijden." data-location="Veenderweg 48 3550 Heusden" data-url="https://www.atletiek.nu/wedstrijd/main/42626/" title="KVV AC">
-        KVV AC
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        30
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        31
-       </span>
-      </div>
-      <div class="calendar-day padding-day">
-      </div>
-     </div>
-    </section>
-    <section class="month-grid">
-     <h2 class="month-title">
-      Juni 2025
-     </h2>
-     <div class="calendar-header">
-      <span>
-       M
-      </span>
-      <span>
-       D
-      </span>
-      <span>
-       W
-      </span>
-      <span>
-       D
-      </span>
-      <span>
-       V
-      </span>
-      <span>
-       Z
-      </span>
-      <span>
-       Z
-      </span>
-     </div>
-     <div class="calendar-days">
-      <div class="calendar-day padding-day">
-      </div>
-      <div class="calendar-day padding-day">
-      </div>
-      <div class="calendar-day padding-day">
-      </div>
-      <div class="calendar-day padding-day">
-      </div>
-      <div class="calendar-day padding-day">
-      </div>
-      <div class="calendar-day padding-day">
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        1
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        2
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        3
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        4
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        5
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        6
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        7
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        8
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        9
-       </span>
-       <span class="calendar-event event-green" data-category="Lange afstand (5km - 10km)" data-info="Inschrijven via Atletiek.be" data-location="Heusden (AVT)" data-url="https://www.atletiek.be/competitie/atleten/outdoor-piste" title="BK 10.000M AC en MASTERS">
-        BK 10.000M AC en MASTERS
-       </span>
-       <span class="calendar-event event-green" data-category="Pup/min" data-location="OLSE AC, Merksem (Antwerpen)" data-url="https://www.atletiek.nu/wedstrijd/main/42704/" title="PK Jeugdmeerkamp (Pup/min) Antwerpen">
-        PK Jeugdmeerkamp (Pup/min) Antwerpen
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        10
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        11
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        12
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        13
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        14
-       </span>
-       <span class="calendar-event event-blue" data-info="Inschrijving via de club." data-location="Oordegem (VS)" data-url="https://www.atletiek.be/competitie/atleten/outdoor-piste" title="BK AMH">
-        BK AMH
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        15
-       </span>
-       <span class="calendar-event event-blue" data-category="Alle afstanden" data-info="Interclub Masters. Opgelet! Hier kan je zelf niet voor inschrijven. De club maakt zelf een selectie van atleten." data-location="KASV Oudenaarde, Oudenaarde" data-url="https://www.atletiek.nu/wedstrijd/main/42623/" title="BVV Masters">
-        BVV Masters
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        16
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        17
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        18
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        19
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        20
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        21
-       </span>
-       <span class="calendar-event event-blue" data-category="Alle nummers" data-location="Sint-Niklaas (ACW)" data-url="https://www.atletiek.be/competitie/atleten/outdoor-piste" title="BK Masters (dag 1)">
-        BK Masters (dag 1)
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        22
-       </span>
-       <span class="calendar-event event-blue" data-category="Alle nummers" data-location="Sint-Niklaas (ACW)" data-url="https://www.atletiek.be/competitie/atleten/outdoor-piste" title="BK Masters (dag 2)">
-        BK Masters (dag 2)
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        23
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        24
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        25
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        26
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        27
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        28
-       </span>
-       <span class="calendar-event event-green" data-category="Kan tot Min" data-location="Brusselsesteenweg 73 1800 Vilvoorde" data-url="https://www.atletiek.nu/wedstrijd/main/42735/" title="Jeugdmeeting Vilvoorde">
-        Jeugdmeeting Vilvoorde
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        29
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        30
-       </span>
-      </div>
-      <div class="calendar-day padding-day">
-      </div>
-      <div class="calendar-day padding-day">
-      </div>
-      <div class="calendar-day padding-day">
-      </div>
-      <div class="calendar-day padding-day">
-      </div>
-      <div class="calendar-day padding-day">
-      </div>
-      <div class="calendar-day padding-day">
-      </div>
-     </div>
-    </section>
-    <section class="month-grid">
-     <h2 class="month-title">
-      Augustus 2025
-     </h2>
-     <div class="calendar-header">
-      <span>
-       M
-      </span>
-      <span>
-       D
-      </span>
-      <span>
-       W
-      </span>
-      <span>
-       D
-      </span>
-      <span>
-       V
-      </span>
-      <span>
-       Z
-      </span>
-      <span>
-       Z
-      </span>
-     </div>
-     <div class="calendar-days">
-      <div class="calendar-day padding-day">
-      </div>
-      <div class="calendar-day padding-day">
-      </div>
-      <div class="calendar-day padding-day">
-      </div>
-      <div class="calendar-day padding-day">
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        1
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        2
-       </span>
-       <span class="calendar-event event-blue" data-category="Alle nummers" data-info="Inschrijving via Atletiek.nu, uitslagen via Atletiek.be" data-location="Brussel" data-url="https://www.atletiek.be/competitie/atleten/outdoor-piste" title="BK AC (dag 1)">
-        BK AC (dag 1)
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        3
-       </span>
-       <span class="calendar-event event-blue" data-category="Alle nummers" data-info="Inschrijven via Atletiek.nu, uitslagen via Atletiek.be" data-location="Brussel" data-url="https://www.atletiek.be/competitie/atleten/outdoor-piste" title="BK AC (dag 2)">
-        BK AC (dag 2)
-       </span>
-       <span class="calendar-event event-green" data-category="Kan tot Min" data-info="Staat momenteel nog niet op atletiek.nu" data-location="Hamme" title="Jeugdmeeting Hamme">
-        Jeugdmeeting Hamme
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        4
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        5
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        6
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        7
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        8
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        9
-       </span>
-       <span class="calendar-event event-blue" data-category="Meerkamp mannen en vrouwen AC" data-info="INSCHRIJVING VIA CLUB!" data-location="Bertrix (BBS)" data-url="https://www.atletiek.be/competitie/atleten/outdoor-piste" title="BK Meerkampen (dag 1)">
-        BK Meerkampen (dag 1)
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        10
-       </span>
-       <span class="calendar-event event-blue" data-category="Meerkamp mannen en vrouwen AC" data-info="INSCHRIJVING VIA CLUB!" data-location="Bertrix (BBS)" data-url="https://www.atletiek.be/competitie/atleten/outdoor-piste" title="BK Meerkampen (dag 2)">
-        BK Meerkampen (dag 2)
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        11
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        12
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        13
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        14
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        15
-       </span>
-       <span class="calendar-event event-blue" data-category="Cadetten en Scholieren" data-info="Inschrijving via Atletiek.nu, opgelet: plaatsen beperkt." data-location="Deinze (DEIN)" data-url="https://www.atletiek.be/competitie/atleten/outdoor-piste" title="KVV Cad/Sch">
-        KVV Cad/Sch
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        16
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        17
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        18
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        19
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        20
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        21
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        22
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        23
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        24
-       </span>
-       <span class="calendar-event event-green" data-category="Vanaf Pup" data-info="Thuiswedstrijd!! Hier kan je estaffete nummers lopen van 4x1OOm tot en met 4x1500m verdeeld over verschillende leeftijden." data-location="Bornem" data-url="https://www.atletiek.nu/wedstrijd/main/42878/" title="PK Estafette Bornem">
-        PK Estafette Bornem
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        25
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        26
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        27
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        28
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        29
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        30
-       </span>
-       <span class="calendar-event event-blue" data-category="Cadetten en Scholieren" data-info="Inschrijving via de club. Opgelet! Plaatsen beperkt!" data-location="Herentals (ACHL)" data-url="https://www.atletiek.be/competitie/atleten/outdoor-piste" title="BK Cad/Sch (dag 1)">
-        BK Cad/Sch (dag 1)
-       </span>
-       <span class="calendar-event event-green" data-category="Kan tot Min" data-location="Beukenlaan 3 2850 Boom" data-url="https://www.atletiek.nu/wedstrijd/main/42859/" title="Klein-Brabants Jeugdcriterium">
-        Klein-Brabants Jeugdcriterium
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        31
-       </span>
-       <span class="calendar-event event-blue" data-category="Cadetten en Scholieren" data-info="Inscrijving via de club. Opgelet! Plaatsen zijn beperkt." data-location="Herentals (ACHL)" data-url="https://www.atletiek.be/competitie/atleten/outdoor-piste" title="BK Cad/Sch (dag 2)">
-        BK Cad/Sch (dag 2)
-       </span>
-      </div>
-     </div>
-    </section>
-    <section class="month-grid">
-     <h2 class="month-title">
-      September 2025
-     </h2>
-     <div class="calendar-header">
-      <span>
-       M
-      </span>
-      <span>
-       D
-      </span>
-      <span>
-       W
-      </span>
-      <span>
-       D
-      </span>
-      <span>
-       V
-      </span>
-      <span>
-       Z
-      </span>
-      <span>
-       Z
-      </span>
-     </div>
-     <div class="calendar-days">
-      <div class="calendar-day">
-       <span class="day-number">
-        1
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        2
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        3
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        4
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        5
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        6
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        7
-       </span>
-       <span class="calendar-event event-blue" data-category="Juniors en Belofte (U23)" data-info="Inschrijven via club." data-location="Nijvel (CABW)" data-url="https://www.atletiek.be/competitie/atleten/outdoor-piste" title="BK Jun/Bel">
-        BK Jun/Bel
-       </span>
-       <span class="calendar-event event-red" data-category="Vanaf Cadet" data-info="Op deze meeting is er de mogelijkheid om vanaf Cadet verschillende nummers te doen: Sprint, Springen, Werpen, MiLa en tenslotte Zweedse estafette." data-location="Brusselsesteenweg 73 1800 Vilvoorde" data-url="https://www.atletiek.nu/wedstrijd/main/42901/" title="Open Meeting Sparta Vilvoorde">
-        Open Meeting Sparta Vilvoorde
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        8
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        9
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        10
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        11
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        12
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        13
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        14
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        15
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        16
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        17
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        18
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        19
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        20
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        21
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        22
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        23
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        24
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        25
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        26
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        27
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        28
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        29
-       </span>
-      </div>
-      <div class="calendar-day">
-       <span class="day-number">
-        30
-       </span>
-      </div>
-      <div class="calendar-day padding-day">
-      </div>
-      <div class="calendar-day padding-day">
-      </div>
-      <div class="calendar-day padding-day">
-      </div>
-      <div class="calendar-day padding-day">
-      </div>
-      <div class="calendar-day padding-day">
-      </div>
-     </div>
-    </section>
-    <!-- === SEPTEMBER 2025 === -->
-    <!-- === AUGUSTUS 2025 === -->
-    <!-- === JUNI 2025 === -->
+
+   <div class="calendar-view" id="calendar-view-container">
+    <p style="text-align: center; padding: 20px;">Kalender wordt geladen...</p>
    </div>
   </main>
-  <div id="footer-placeholder">
-  </div>
+
+  <div id="footer-placeholder"></div>
+
   <div class="event-popup" id="event-popup">
-   <button aria-label="Sluiten" class="close-btn">
-    &times;
-   </button>
-   <h4 class="popup-title">
-    Event Title
-   </h4>
-   <p class="popup-info">
-    Extra information about the event goes here.
-   </p>
-   <p class="popup-details">
-   </p>
-   <p class="popup-link">
-   </p>
+   <button aria-label="Sluiten" class="close-btn">×</button>
+   <h4 class="popup-title">Event Title</h4>
+   <p class="popup-info">Extra information about the event goes here.</p>
+   <p class="popup-details"></p>
+   <p class="popup-link"></p>
   </div>
-  <script defer src="/js/script.js">
-  </script>
+
+  <script defer src="/js/script.js"></script>
+  <script defer src="/html/wedstrijden/js/kalender.js"></script>
+  <!-- Popup JavaScript -->
   <script>
    document.addEventListener('DOMContentLoaded', () => {
-            const calendarView = document.querySelector('.calendar-view');
-            const popup = document.getElementById('event-popup');
-            if (!calendarView || !popup) {
-                return;
+        const calendarViewContainer = document.getElementById('calendar-view-container');
+        const popup = document.getElementById('event-popup');
+
+        if (!calendarViewContainer || !popup) {
+            console.warn("Calendar view or popup element not found. Popup functionality will be disabled.");
+            return;
+        }
+        const popupTitle = popup.querySelector('.popup-title');
+        const popupInfo = popup.querySelector('.popup-info');
+        const popupDetails = popup.querySelector('.popup-details');
+        const popupLink = popup.querySelector('.popup-link');
+        const closeButton = popup.querySelector('.close-btn');
+
+        if (!popupTitle || !popupInfo || !popupDetails || !popupLink || !closeButton) {
+            console.warn("One or more inner popup elements (title, info, details, link, close-btn) not found.");
+            // Allow script to continue if main popup exists, but log warning.
+        }
+
+        const mobileBreakpoint = 768;
+
+        const showPopup = (eventElement, clickEvent) => {
+            if (!popup || !popupTitle || !popupInfo || !popupDetails || !popupLink) return; 
+
+            const title = eventElement.getAttribute('title') || eventElement.innerText;
+            const info = eventElement.dataset.info;
+            const location = eventElement.dataset.location;
+            const category = eventElement.dataset.category;
+            const url = eventElement.dataset.url;
+
+            const hasPopupContent = info || location || category;
+
+            popupTitle.textContent = title;
+            popupInfo.textContent = info || '';
+            popupInfo.style.display = info ? 'block' : 'none';
+
+            let detailsHTML = '';
+            if (location) detailsHTML += `<strong>Locatie:</strong> ${location}<br>`;
+            if (category) detailsHTML += `<strong>Categorie:</strong> ${category}`;
+            popupDetails.innerHTML = detailsHTML;
+            popupDetails.style.display = detailsHTML.trim() ? 'block' : 'none';
+
+            if (url && url !== '#') {
+                popupLink.innerHTML = `<a href="${url}" target="_blank" rel="noopener noreferrer">Meer Info / Inschrijven</a>`;
+                popupLink.style.display = 'block';
+            } else {
+                popupLink.innerHTML = '';
+                popupLink.style.display = 'none';
             }
-            const popupTitle = popup.querySelector('.popup-title');
-            const popupInfo = popup.querySelector('.popup-info');
-            const popupDetails = popup.querySelector('.popup-details');
-            const popupLink = popup.querySelector('.popup-link');
-            const closeButton = popup.querySelector('.close-btn');
-            const mobileBreakpoint = 768;
-
-            const showPopup = (eventElement, clickEvent) => {
-                const title = eventElement.getAttribute('title') || eventElement.innerText;
-                const info = eventElement.dataset.info;
-                const location = eventElement.dataset.location;
-                const category = eventElement.dataset.category;
-                const url = eventElement.dataset.url;
-                
-                if (!info && !location && !category && !url && !title) {
-                    if (eventElement.dataset.url && eventElement.dataset.url !== '#') {
-                        window.location.href = eventElement.dataset.url;
-                    }
-                    return;
-                }
-
-                popupTitle.textContent = title;
-                popupInfo.textContent = info || '';
-                popupInfo.style.display = info ? 'block' : 'none';
-
-                let detailsHTML = '';
-                if (location) detailsHTML += `<strong>Locatie:</strong> ${location}<br>`;
-                if (category) detailsHTML += `<strong>Categorie:</strong> ${category}`;
-                popupDetails.innerHTML = detailsHTML;
-                popupDetails.style.display = detailsHTML ? 'block' : 'none';
-
-                if (url && url !== '#') {
-                    popupLink.innerHTML = `<a href="${url}" target="_blank" rel="noopener noreferrer">Meer Info / Inschrijven</a>`;
-                    popupLink.style.display = 'block';
-                } else {
-                    popupLink.innerHTML = '';
-                    popupLink.style.display = 'none';
-                }
-
-                const isMobile = window.innerWidth <= mobileBreakpoint;
-                if (isMobile) {
-                    document.body.classList.add('popup-open');
-                    popup.style.position = '';
-                    popup.style.top = '';
-                    popup.style.left = '';
-                } else {
-                    document.body.classList.remove('popup-open');
-                    const rect = eventElement.getBoundingClientRect();
-                    const clickY = clickEvent.clientY; const clickX = clickEvent.clientX;
-
-                    popup.style.visibility = 'hidden';
-                    popup.style.position = 'absolute'; 
-                    popup.style.display = 'block';
-                    const popupHeight = popup.offsetHeight;
-                    const popupWidth = popup.offsetWidth;
-                    popup.style.display = 'none'; 
-                    popup.style.visibility = 'visible';
-
-                    const viewportWidth = window.innerWidth; const viewportHeight = window.innerHeight;
-                    const scrollX = window.scrollX; const scrollY = window.scrollY;
-                    let top = clickY + scrollY + 10; let left = clickX + scrollX + 10;
-
-                    const buffer = 10;
-                    if (clickY + popupHeight + buffer > viewportHeight) top = clickY + scrollY - popupHeight - buffer;
-                    if (clickX + popupWidth + buffer > viewportWidth) left = clickX + scrollX - popupWidth - buffer;
-                    if (left < scrollX + buffer) left = scrollX + buffer;
-                    if (top < scrollY + buffer) top = scrollY + buffer;
-
-                    popup.style.position = 'absolute';
-                    popup.style.top = `${top}px`; popup.style.left = `${left}px`;
-                }
-                popup.style.display = 'block'; 
-            };
-
-            const hidePopup = () => {
-                if (popup) popup.style.display = 'none';
+            
+            const isMobile = window.innerWidth <= mobileBreakpoint;
+            if (isMobile) {
+                document.body.classList.add('popup-open');
+                popup.style.position = 'fixed'; popup.style.top = '50%'; popup.style.left = '50%';
+                popup.style.transform = 'translate(-50%, -50%)';
+            } else {
                 document.body.classList.remove('popup-open');
-            };
+                const rect = eventElement.getBoundingClientRect();
+                const clickY = clickEvent.clientY; const clickX = clickEvent.clientX;
+                popup.style.visibility = 'hidden'; popup.style.position = 'absolute'; popup.style.display = 'block';
+                const popupHeight = popup.offsetHeight; const popupWidth = popup.offsetWidth;
+                popup.style.display = 'none'; popup.style.visibility = 'visible';
+                const viewportWidth = window.innerWidth; const viewportHeight = window.innerHeight;
+                const scrollX = window.scrollX; const scrollY = window.scrollY;
+                let top = clickY + scrollY + 10; let left = clickX + scrollX + 10;
+                const buffer = 10;
+                if (clickY + popupHeight + buffer > viewportHeight) top = clickY + scrollY - popupHeight - buffer;
+                if (clickX + popupWidth + buffer > viewportWidth) left = clickX + scrollX - popupWidth - buffer;
+                if (left < scrollX + buffer) left = scrollX + buffer;
+                if (top < scrollY + buffer) top = scrollY + buffer;
+                popup.style.top = `${top}px`; popup.style.left = `${left}px`;
+                popup.style.transform = 'none';
+            }
+            popup.style.display = 'block';
+        };
 
-            calendarView.addEventListener('click', (event) => {
-                const eventElement = event.target.closest('.calendar-event');
-                if (eventElement) {
-                    event.preventDefault();
-                    showPopup(eventElement, event);
-                }
+        const hidePopup = () => {
+            if (popup) popup.style.display = 'none';
+            document.body.classList.remove('popup-open');
+        };
+
+        calendarViewContainer.addEventListener('click', (event) => {
+            const clickedElement = event.target;
+            const eventSpanElement = clickedElement.closest('.calendar-event');
+
+            if (eventSpanElement) {
+                event.preventDefault(); 
+                showPopup(eventSpanElement, event);
+            }
+        });
+
+        if (closeButton) {
+            closeButton.addEventListener('click', (event) => {
+                event.stopPropagation(); // Prevent click from bubbling to document listener
+                hidePopup();
             });
+        }
 
-            if (closeButton) closeButton.addEventListener('click', hidePopup);
-
-            document.addEventListener('click', (event) => {
-                if (popup && popup.style.display === 'block' &&
-                    !popup.contains(event.target) &&
-                    !event.target.closest('.calendar-event')) {
+        document.addEventListener('click', (event) => {
+            if (popup && popup.style.display === 'block') { // If popup is visible
+                const isClickInsidePopup = popup.contains(event.target);
+                const isClickOnAnEventSpan = event.target.closest('.calendar-event');
+                
+                if (!isClickInsidePopup && !isClickOnAnEventSpan) {
                     hidePopup();
                 }
-            });
-
-             document.addEventListener('keydown', (event) => {
-                 if (event.key === 'Escape' && popup && popup.style.display === 'block') {
-                     hidePopup();
-                 }
-             });
+            }
         });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && popup && popup.style.display === 'block') {
+                hidePopup();
+            }
+        });
+    });
   </script>
  </body>
 </html>

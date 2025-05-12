@@ -1,0 +1,525 @@
+{
+  "pageTitle": "Training & Trainers - Atletiekclub Sparta Bornem",
+  "trainingTimes": [
+    {
+      "category": "<strong>Kangoeroes</strong> & <strong>Benjamins</strong>",
+      "schedule": [
+        {
+          "day": "Vrijdag",
+          "time": "18:00u - 19:15u",
+          "note": null
+        },
+        {
+          "day": "Woensdag",
+          "time": "18:00u - 19:15u",
+          "note": null
+        }
+      ]
+    },
+    {
+      "category": "<strong>Pupillen</strong>",
+      "schedule": [
+        {
+          "day": "Vrijdag",
+          "time": "18:00u - 19:15u",
+          "note": null
+        },
+        {
+          "day": "Woensdag",
+          "time": "18:00u - 19:15u",
+          "note": null
+        },
+        {
+          "day": "Zondag",
+          "time": "10:00u - 11:30u",
+          "note": "(Enkel bij verwittiging van de trainers)"
+        }
+      ]
+    },
+    {
+      "category": "<strong>Miniemen</strong>",
+      "schedule": [
+        {
+          "day": "Vrijdag",
+          "time": "18:00u - 19:15u",
+          "note": null
+        },
+        {
+          "day": "Woensdag",
+          "time": "18:00u - 19:15u",
+          "note": null
+        },
+        {
+          "day": "Zondag",
+          "time": "10:00u - 11:30u",
+          "note": "(Enkel bij verwittiging van de trainers)"
+        }
+      ]
+    },
+    {
+      "category": "<strong>Fond, 1/2 fond (vanaf cadetten)</strong>",
+      "schedule": [
+        {
+          "day": "Maandag",
+          "time": "18:30u - 19:30u",
+          "note": null
+        },
+        {
+          "day": "Vrijdag",
+          "time": "18:00u - 19:30u",
+          "note": null
+        },
+        {
+          "day": "Woensdag",
+          "time": "18:00u - 19:30u",
+          "note": null
+        },
+        {
+          "day": "Zondag",
+          "time": "10:00u - 11:30u",
+          "note": null
+        }
+      ]
+    },
+    {
+      "category": "<strong>Spurt (vanaf cadetten)</strong>",
+      "schedule": [
+        {
+          "day": "Dinsdag",
+          "time": "19:00u - 21:00u",
+          "note": "(enkel tijdens vakanties en verwittiging van de trainer)"
+        },
+        {
+          "day": "Vrijdag",
+          "time": "18:00u - 20:00u",
+          "note": null
+        },
+        {
+          "day": "Woensdag",
+          "time": "18:00u - 20:00u",
+          "note": null
+        },
+        {
+          "day": "Zondag",
+          "time": "10:00u - 12:00u",
+          "note": null
+        }
+      ]
+    },
+    {
+      "category": "<strong>Springen (vanaf cadetten)</strong>",
+      "schedule": [
+        {
+          "day": "Dinsdag",
+          "time": "19:00u - 21:00u",
+          "note": "(enkel tijdens vakanties en verwittiging van de trainer)"
+        },
+        {
+          "day": "Vrijdag",
+          "time": "18:00u - 20:00u",
+          "note": null
+        },
+        {
+          "day": "Woensdag",
+          "time": "18:00u - 20:00u",
+          "note": null
+        },
+        {
+          "day": "Zondag",
+          "time": "10:00u - 12:00u",
+          "note": null
+        }
+      ]
+    },
+    {
+      "category": "<strong>Werpen (vanaf cadetten)</strong>",
+      "schedule": [
+        {
+          "day": "Dinsdag",
+          "time": "19:00u - 21:00u",
+          "note": "(enkel tijdens vakanties en verwittiging van de trainer)"
+        },
+        {
+          "day": "Vrijdag",
+          "time": "18:00u - 20:00u",
+          "note": null
+        },
+        {
+          "day": "Woensdag",
+          "time": "18:00u - 20:00u",
+          "note": null
+        },
+        {
+          "day": "Zondag",
+          "time": "10:00u - 12:00u",
+          "note": null
+        }
+      ]
+    },
+    {
+      "category": "<strong>Joggers (vanaf cadetten)</strong>",
+      "schedule": [
+        {
+          "day": "Vrijdag",
+          "time": "18:00u - 19:30u",
+          "note": "(Duurloop)"
+        },
+        {
+          "day": "Woensdag",
+          "time": "18:00u - 19:30u",
+          "note": "(Piste)"
+        },
+        {
+          "day": "Zondag",
+          "time": "10:00u - 11:30u",
+          "note": "(Geen begeleiding)"
+        }
+      ]
+    }
+  ],
+  "contacts": [
+    {
+      "role": "Jeugdcoördinator",
+      "name": "Hilde De Leeuw",
+      "email": "jeugdcoordinator@spartabornem.be",
+      "phone": null,
+      "image": "/images/personen/trainer-leeg.png",
+      "imageAlt": "Foto Hilde De Leeuw"
+    },
+    {
+      "role": "Vertrouwenspersoon",
+      "name": "Britta Vincke",
+      "email": "britta_vincke@skynet.be",
+      "phone": "03 889 70 33",
+      "image": "/images/personen/Britta_klein.jpg",
+      "imageAlt": "Foto Britta Vincke"
+    }
+  ],
+  "trainerGroups": [
+    {
+      "groupName": "Kangoeroes & Benjamins",
+      "mainPhoto": {
+        "src": "/images/personen/placeholder_kangben_main.jpg",
+        "alt": "Foto Kangoeroes en Benjamins Groep"
+      },
+      "thumbnails": [
+        {
+          "src": "/images/personen/placeholder_kangben_thumb1.jpg",
+          "alt": "Kangoeroes Actie 1"
+        },
+        {
+          "src": "/images/personen/placeholder_kangben_thumb2.jpg",
+          "alt": "Kangoeroes Actie 2"
+        },
+        {
+          "src": "/images/personen/placeholder_kangben_thumb3.jpg",
+          "alt": "Benjamins Actie 1"
+        },
+        {
+          "src": "/images/personen/placeholder_kangben_thumb4.jpg",
+          "alt": "Benjamins Actie 2"
+        },
+        {
+          "src": "/images/personen/placeholder_kangben_thumb5.jpg",
+          "alt": "Kangoeroes en Benjamins Plezier"
+        }
+      ],
+      "description": "Voor de allerkleinsten (Kangoeroes: 6 jaar, Benjamins: 7-8 jaar). Spelenderwijs kennismaken met alle basisvormen van atletiek: lopen, springen en werpen. Plezier staat voorop!",
+      "trainers": [
+        {
+          "name": "De Bisschop Wendy",
+          "email": null,
+          "phone": null
+        },
+        {
+          "name": "Genijn Lisa",
+          "email": null,
+          "phone": null
+        },
+        {
+          "name": "Duysters Sara-Lise",
+          "email": null,
+          "phone": null
+        },
+        {
+          "name": "Dalemans Marie",
+          "email": null,
+          "phone": null
+        },
+        {
+          "name": "Lambrechts Joëlle",
+          "email": null,
+          "phone": null
+        },
+        {
+          "name": "De Smet Wiebe",
+          "email": null,
+          "phone": null
+        },
+        {
+          "name": "Van Aken Jena",
+          "email": "None",
+          "phone": "None"
+        }
+      ]
+    },
+    {
+      "groupName": "Pupillen",
+      "mainPhoto": {
+        "src": "/images/personen/Schermafbeelding 2025-04-10 124345.png",
+        "alt": "Foto Pupillen Groep"
+      },
+      "thumbnails": [
+        {
+          "src": "/images/personen/placeholder_pup_thumb1.jpg",
+          "alt": "Pupillen Lopen"
+        },
+        {
+          "src": "/images/personen/placeholder_pup_thumb2.jpg",
+          "alt": "Pupillen Springen"
+        },
+        {
+          "src": "/images/personen/placeholder_pup_thumb3.jpg",
+          "alt": "Pupillen Werpen"
+        },
+        {
+          "src": "/images/personen/placeholder_pup_thumb4.jpg",
+          "alt": "Pupillen Estafette"
+        },
+        {
+          "src": "/images/personen/placeholder_pup_thumb5.jpg",
+          "alt": "Pupillen Plezier"
+        }
+      ],
+      "description": "Voor kinderen van 9-10 jaar. Hier worden de basisvaardigheden verder ontwikkeld en maken ze kennis met de verschillende atletiekdisciplines op een leuke en uitdagende manier.",
+      "trainers": [
+        {
+          "name": "Janssens Els",
+          "email": null,
+          "phone": null
+        },
+        {
+          "name": "Bernard Jolan",
+          "email": null,
+          "phone": null
+        },
+        {
+          "name": "Biesemans Fien",
+          "email": null,
+          "phone": null
+        },
+        {
+          "name": "Joos Els",
+          "email": null,
+          "phone": null
+        }
+      ]
+    },
+    {
+      "groupName": "Miniemen",
+      "mainPhoto": {
+        "src": "/images/personen/placeholder_min_main.jpg",
+        "alt": "Foto Miniemen Groep"
+      },
+      "thumbnails": [
+        {
+          "src": "/images/personen/placeholder_min_thumb1.jpg",
+          "alt": "Miniemen Horden"
+        },
+        {
+          "src": "/images/personen/placeholder_min_thumb2.jpg",
+          "alt": "Miniemen Verspringen"
+        },
+        {
+          "src": "/images/personen/placeholder_min_thumb3.jpg",
+          "alt": "Miniemen Kogelstoten"
+        },
+        {
+          "src": "/images/personen/placeholder_min_thumb4.jpg",
+          "alt": "Miniemen Hoogspringen"
+        },
+        {
+          "src": "/images/personen/placeholder_min_thumb5.jpg",
+          "alt": "Miniemen Team"
+        }
+      ],
+      "description": "Voor kinderen van 11-12 jaar. De training wordt specifieker en technischer. Atleten worden voorbereid op de latere specialisatie en leren hun eigen sterktes ontdekken.",
+      "trainers": [
+        {
+          "name": "De Bouw Ellen",
+          "email": "ellen.de.bouw@gmail.com",
+          "phone": null
+        },
+        {
+          "name": "De Groote Fenne",
+          "email": null,
+          "phone": null
+        },
+        {
+          "name": "Biesemans Fien",
+          "email": null,
+          "phone": null
+        },
+        {
+          "name": "Bernard Jolan",
+          "email": null,
+          "phone": null
+        },
+        {
+          "name": "De Leeuw Hilde",
+          "email": "jeugdcoordinator@spartabornem.be",
+          "phone": null
+        },
+        {
+          "name": "Inze Nick",
+          "email": "nick.inze@telenet.be",
+          "phone": null
+        }
+      ]
+    },
+    {
+      "groupName": "BST Team (sprint, springen, meerkamp)",
+      "mainPhoto": {
+        "src": "/images/personen/trainersBST.jpg",
+        "alt": "Foto trainers BST"
+      },
+      "thumbnails": [
+        {
+          "src": "/images/personen/333145274_218619830678271_2553016165337705398_n.jpg",
+          "alt": "BST groep 1"
+        },
+        {
+          "src": "/images/personen/interclubgroepsfoto.jpg",
+          "alt": "BST Interclub"
+        },
+        {
+          "src": "/images/personen/johanmetgroep.jpg",
+          "alt": "BST Johan met groep"
+        },
+        {
+          "src": "/images/personen/estafettegent.jpg",
+          "alt": "BST Estafette Gent"
+        },
+        {
+          "src": "/images/personen/groepsfoto.jpg",
+          "alt": "BST Groepsfoto"
+        }
+      ],
+      "description": "Het BST Team is speciaal opgezet voor atleten die zich willen verdiepen en specialiseren in de disciplines sprint, springen (hoogspringen, verspringen, hinkstapspringen, polsstokhoogspringen) en/of meerkamp. Onder deskundige begeleiding wordt er gewerkt aan techniek, snelheid, kracht en uithouding, specifiek gericht op het maximaliseren van de prestaties in deze explosieve en veelzijdige onderdelen.",
+      "trainers": [
+        {
+          "name": "Permentier Johan",
+          "email": "j_permentier@hotmail.com",
+          "phone": null
+        },
+        {
+          "name": "Vandenkerckhove Peter",
+          "email": "Peter.vdk@hotmail.com",
+          "phone": null
+        },
+        {
+          "name": "De Leeuw Marliese",
+          "email": "marliese.de.leeuw@skynet.be",
+          "phone": "0473/88 40 39"
+        }
+      ]
+    },
+    {
+      "groupName": "Recreanten / Joggers",
+      "mainPhoto": {
+        "src": "/images/personen/placeholder_rec_main.jpg",
+        "alt": "Foto Recreanten / Joggers Groep"
+      },
+      "thumbnails": [
+        {
+          "src": "/images/personen/placeholder_rec_thumb1.jpg",
+          "alt": "Joggers op de piste"
+        },
+        {
+          "src": "/images/personen/placeholder_rec_thumb2.jpg",
+          "alt": "Joggers duurloop"
+        },
+        {
+          "src": "/images/personen/placeholder_rec_thumb3.jpg",
+          "alt": "Joggers oefeningen"
+        },
+        {
+          "src": "/images/personen/placeholder_rec_thumb4.jpg",
+          "alt": "Joggers groepssfeer"
+        },
+        {
+          "src": "/images/personen/placeholder_rec_thumb5.jpg",
+          "alt": "Joggers stretchen"
+        }
+      ],
+      "description": "Voor volwassenen die op een ontspannen manier willen lopen en werken aan hun conditie. Trainingen omvatten zowel duurloop als oefeningen op de piste. Gezelligheid en gezondheid staan centraal.",
+      "trainers": [
+        {
+          "name": "D’Hont Tom",
+          "email": null,
+          "phone": null
+        },
+        {
+          "name": "Smet Erlinda",
+          "email": null,
+          "phone": null
+        }
+      ]
+    },
+    {
+      "groupName": "Boomerangs (werpen)",
+      "mainPhoto": {
+        "src": "/images/personen/placeholder_boom_main.jpg",
+        "alt": "Foto Boomerangs Werpers"
+      },
+      "thumbnails": [
+        {
+          "src": "/images/personen/placeholder_boom_thumb1.jpg",
+          "alt": "Boomerangs Kogelstoten"
+        },
+        {
+          "src": "/images/personen/placeholder_boom_thumb2.jpg",
+          "alt": "Boomerangs Discuswerpen"
+        },
+        {
+          "src": "/images/personen/placeholder_boom_thumb3.jpg",
+          "alt": "Boomerangs Speerwerpen"
+        },
+        {
+          "src": "/images/personen/placeholder_boom_thumb4.jpg",
+          "alt": "Boomerangs Hamerslingeren"
+        },
+        {
+          "src": "/images/personen/placeholder_boom_thumb5.jpg",
+          "alt": "Boomerangs Krachttraining"
+        }
+      ],
+      "description": "Specialisatiegroep gericht op de werpdisciplines (kogelstoten, discuswerpen, speerwerpen, hamerslingeren) voor oudere jeugd en volwassenen. Focus op techniek en kracht.",
+      "trainers": [
+        {
+          "name": "Hofmans Francis",
+          "email": null,
+          "phone": null
+        }
+      ]
+    }
+  ],
+  "times_category_order": [
+    "<strong>Kangoeroes</strong> & <strong>Benjamins</strong>",
+    "<strong>Pupillen</strong>",
+    "<strong>Miniemen</strong>",
+    "<strong>Fond, 1/2 fond (vanaf cadetten)</strong>",
+    "<strong>Spurt (vanaf cadetten)</strong>",
+    "<strong>Springen (vanaf cadetten)</strong>",
+    "<strong>Werpen (vanaf cadetten)</strong>",
+    "<strong>Joggers (vanaf cadetten)</strong>"
+  ],
+  "trainer_category_order": [
+    "Kangoeroes & Benjamins",
+    "Pupillen",
+    "Miniemen",
+    "BST Team (sprint, springen, meerkamp)",
+    "Recreanten / Joggers",
+    "Boomerangs (werpen)"
+  ]
+}

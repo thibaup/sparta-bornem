@@ -1,0 +1,42 @@
+{
+  "pageTitle": "Bestuur - Atletiekclub Sparta Bornem",
+  "mainHeading": "Bestuur",
+  "boardMembers": [
+    {
+      "name": "Christophe Van Herck",
+      "role": "Voorzitter",
+      "imageSrc": "/images/personen/bestuur/cvanherck_site.jpg",
+      "imageAlt": "Foto Christophe Van Herck",
+      "address": "Barelstraat 109a, 2880 Bornem",
+      "phone": "0476/496933",
+      "email": "christophe.van.herck1@telenet.be"
+    },
+    {
+      "name": "Johan Permentier",
+      "role": "Secretaris",
+      "imageSrc": "/images/personen/trainer-johan-2.png",
+      "imageAlt": "Foto Johan Permentier",
+      "address": "Albertstraat 64, 2880 Bornem",
+      "phone": "0472/642694",
+      "email": "j_permentier@hotmail.com"
+    },
+    {
+      "name": "Bart Segers",
+      "role": "Penningmeester",
+      "imageSrc": "/images/personen/bestuur-bart.png",
+      "imageAlt": "Foto Bart Segers",
+      "address": "Reststraat 19, 2870 Puurs",
+      "phone": "0497/448912",
+      "email": "segers.bart@skynet.be"
+    },
+    {
+      "name": "Benny De Prins",
+      "role": "Bestuurslid",
+      "imageSrc": "/images/personen/Benny_site.jpg",
+      "imageAlt": "Foto Benny De Prins",
+      "address": "Wolfstraat 90, 2870 Puurs",
+      "phone": "0496/281472",
+      "email": "bennydeprins@hotmail.com"
+    }
+  ]
+}

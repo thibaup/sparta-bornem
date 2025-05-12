@@ -1,0 +1,339 @@
+{
+  "pageTitle": "Kalender - Atletiekclub Sparta Bornem",
+  "mainHeading": "Wedstrijden Kalender",
+  "legend": {
+    "title": "Legende",
+    "items": [
+      {
+        "colorClass": "legend-green",
+        "label": "Groen:",
+        "description": "'gewone' wedstrijden (incl. PK) waar begeleiding voorzien is."
+      },
+      {
+        "colorClass": "legend-blue",
+        "label": "Blauw:",
+        "description": "kampioenschappen (KVV/BK) & Interclub (BVV) waar begeleiding geprobeerd wordt te voorzien."
+      },
+      {
+        "colorClass": "legend-red",
+        "label": "Rood:",
+        "description": "'gewone' wedstrijden zonder voorziene begeleiding."
+      },
+      {
+        "colorClass": "legend-black",
+        "label": "Zwart:",
+        "description": "Andere clubactiviteiten of onbekende status."
+      }
+    ]
+  },
+  "events": [
+    {
+      "date": "2025-05-01",
+      "name": "Antwerps Jeugdcriterium Borremansmeeting",
+      "color": "green",
+      "title": "Antwerps Jeugdcriterium Borremansmeeting",
+      "data_url": "https://www.atletiek.nu/wedstrijd/main/42447/",
+      "data_location": "Rooienberg 2570 Duffel",
+      "data_category": "Kan tot Min",
+      "data_info": "Inschrijven kan via atletiek.nu!"
+    },
+    {
+      "date": "2025-05-03",
+      "name": "Bvv Pup/Min Zwijndrecht",
+      "color": "green",
+      "title": "Bvv Pup/Min Zwijndrecht",
+      "data_info": "OPGELET! Hiervoor kan je zelf niet inschrijven. Dit doet de club zelf.",
+      "data_location": "Zwijndrecht Atletiek Team, Burcht",
+      "data_category": "Pup-Min",
+      "data_url": "https://www.atletiek.nu/wedstrijd/main/42392/"
+    },
+    {
+      "date": "2025-05-03",
+      "name": "Bvv Pup/min Zwijndrecht",
+      "color": "blue",
+      "title": "Bvv Pup/min Zwijndrecht",
+      "data_info": "Zelf inschrijven niet mogelijk. Club maakt selectie.",
+      "data_location": "Heirbaan 78 2070 Burcht",
+      "data_category": null,
+      "data_url": "https://www.atletiek.nu/wedstrijd/main/42392/"
+    },
+    {
+      "date": "2025-05-04",
+      "name": "BVV Cad/Sch",
+      "color": "blue",
+      "title": "BVV Cad/Sch",
+      "data_info": "OPGELET! Hiervoor kan je zelf niet inschrijven. Je moet hiervoor geselecteerd worden.",
+      "data_location": "Moorseelsestraat 144, 8500 Kortrijk",
+      "data_category": "Alle afstanden",
+      "data_url": "https://www.atletiek.nu/wedstrijd/main/42398/"
+    },
+    {
+      "date": "2025-05-11",
+      "name": "BVV AC",
+      "color": "blue",
+      "title": "BVV AC",
+      "data_info": "OPGELET! Hiervoor kan je zelf niet inschrijven. De atleten die deelnemen worden geselecteerd door de club zelf.",
+      "data_location": "Kaaiplein 30A 9220 Hamme",
+      "data_category": "Alle afstanden",
+      "data_url": "https://www.atletiek.nu/wedstrijd/main/42402/"
+    },
+    {
+      "date": "2025-05-11",
+      "name": "Flanders CUP - Lokeren",
+      "color": "green",
+      "title": "Flanders CUP - Lokeren",
+      "data_info": null,
+      "data_location": "Sportlaan, 9160 Lokeren",
+      "data_category": "Alle afstanden",
+      "data_url": "https://www.atletiek.nu/wedstrijd/main/42247/"
+    },
+    {
+      "date": "2025-05-17",
+      "name": "Klein Brabants Jeugdcriterium Bornem",
+      "color": "green",
+      "title": "Klein Brabants Jeugdcriterium Bornem",
+      "data_info": null,
+      "data_location": "Breevendreef, Bornem",
+      "data_category": "Kan tot Min",
+      "data_url": "https://www.atletiek.nu/wedstrijd/main/42487/"
+    },
+    {
+      "date": "2025-05-25",
+      "name": "PK Pup/min Antwerpen",
+      "color": "green",
+      "title": "PK Pup/min Antwerpen",
+      "data_info": null,
+      "data_location": "rode kruislaan 2400 Mol",
+      "data_category": "Pup/min",
+      "data_url": "https://www.atletiek.nu/wedstrijd/main/42451/"
+    },
+    {
+      "date": "2025-05-29",
+      "name": "5de PEGA Jeugdmeeting",
+      "color": "green",
+      "title": "5de PEGA Jeugdmeeting",
+      "data_info": null,
+      "data_location": "Blauwenhoek 76 1840 Londerzeel",
+      "data_category": "Kan tot Min",
+      "data_url": "https://www.atletiek.nu/wedstrijd/main/42489/"
+    },
+    {
+      "date": "2025-05-29",
+      "name": "KVV AC",
+      "color": "blue",
+      "title": "KVV AC",
+      "data_info": "Vlaams kampioenschap alle categorieën. Opgelet! Iedereen kan hier voor inschrijven maar de plekken zijn beperkt. Er zijn 24 plekken per nummer, de selectie wordt gedaan ahv beste seizoen & beste tijden.",
+      "data_location": "Veenderweg 48 3550 Heusden",
+      "data_category": "Alle afstanden",
+      "data_url": "https://www.atletiek.nu/wedstrijd/main/42626/"
+    },
+    {
+      "date": "2025-06-09",
+      "name": "BK 10.000M AC en MASTERS",
+      "color": "green",
+      "title": "BK 10.000M AC en MASTERS",
+      "data_info": "Inschrijven via Atletiek.be",
+      "data_location": "Heusden (AVT)",
+      "data_category": "Lange afstand (5km - 10km)",
+      "data_url": "https://www.atletiek.be/competitie/atleten/outdoor-piste"
+    },
+    {
+      "date": "2025-06-09",
+      "name": "PK Jeugdmeerkamp (Pup/min) Antwerpen",
+      "color": "green",
+      "title": "PK Jeugdmeerkamp (Pup/min) Antwerpen",
+      "data_info": null,
+      "data_location": "OLSE AC, Merksem (Antwerpen)",
+      "data_category": "Pup/min",
+      "data_url": "https://www.atletiek.nu/wedstrijd/main/42704/"
+    },
+    {
+      "date": "2025-06-14",
+      "name": "BK AMH",
+      "color": "blue",
+      "title": "BK AMH",
+      "data_info": "Inschrijving via de club.",
+      "data_location": "Oordegem (VS)",
+      "data_category": null,
+      "data_url": "https://www.atletiek.be/competitie/atleten/outdoor-piste"
+    },
+    {
+      "date": "2025-06-15",
+      "name": "BVV Masters",
+      "color": "blue",
+      "title": "BVV Masters",
+      "data_info": "Interclub Masters. Opgelet! Hier kan je zelf niet voor inschrijven. De club maakt zelf een selectie van atleten.",
+      "data_location": "KASV Oudenaarde, Oudenaarde",
+      "data_category": "Alle afstanden",
+      "data_url": "https://www.atletiek.nu/wedstrijd/main/42623/"
+    },
+    {
+      "date": "2025-06-21",
+      "name": "BK Masters (dag 1)",
+      "color": "blue",
+      "title": "BK Masters (dag 1)",
+      "data_info": null,
+      "data_location": "Sint-Niklaas (ACW)",
+      "data_category": "Alle nummers",
+      "data_url": "https://www.atletiek.be/competitie/atleten/outdoor-piste"
+    },
+    {
+      "date": "2025-06-22",
+      "name": "BK Masters (dag 2)",
+      "color": "blue",
+      "title": "BK Masters (dag 2)",
+      "data_info": null,
+      "data_location": "Sint-Niklaas (ACW)",
+      "data_category": "Alle nummers",
+      "data_url": "https://www.atletiek.be/competitie/atleten/outdoor-piste"
+    },
+    {
+      "date": "2025-06-28",
+      "name": "Jeugdmeeting Vilvoorde",
+      "color": "green",
+      "title": "Jeugdmeeting Vilvoorde",
+      "data_info": null,
+      "data_location": "Brusselsesteenweg 73 1800 Vilvoorde",
+      "data_category": "Kan tot Min",
+      "data_url": "https://www.atletiek.nu/wedstrijd/main/42735/"
+    },
+    {
+      "date": "2025-08-02",
+      "name": "BK AC (dag 1)",
+      "color": "blue",
+      "title": "BK AC (dag 1)",
+      "data_info": "Inschrijving via Atletiek.nu, uitslagen via Atletiek.be",
+      "data_location": "Brussel",
+      "data_category": "Alle nummers",
+      "data_url": "https://www.atletiek.be/competitie/atleten/outdoor-piste"
+    },
+    {
+      "date": "2025-08-03",
+      "name": "BK AC (dag 2)",
+      "color": "blue",
+      "title": "BK AC (dag 2)",
+      "data_info": "Inschrijven via Atletiek.nu, uitslagen via Atletiek.be",
+      "data_location": "Brussel",
+      "data_category": "Alle nummers",
+      "data_url": "https://www.atletiek.be/competitie/atleten/outdoor-piste"
+    },
+    {
+      "date": "2025-08-03",
+      "name": "Jeugdmeeting Hamme",
+      "color": "green",
+      "title": "Jeugdmeeting Hamme",
+      "data_info": "Staat momenteel nog niet op atletiek.nu",
+      "data_location": "Hamme",
+      "data_category": "Kan tot Min",
+      "data_url": null
+    },
+    {
+      "date": "2025-08-09",
+      "name": "BK Meerkampen (dag 1)",
+      "color": "blue",
+      "title": "BK Meerkampen (dag 1)",
+      "data_info": "INSCHRIJVING VIA CLUB!",
+      "data_location": "Bertrix (BBS)",
+      "data_category": "Meerkamp mannen en vrouwen AC",
+      "data_url": "https://www.atletiek.be/competitie/atleten/outdoor-piste"
+    },
+    {
+      "date": "2025-08-10",
+      "name": "BK Meerkampen (dag 2)",
+      "color": "blue",
+      "title": "BK Meerkampen (dag 2)",
+      "data_info": "INSCHRIJVING VIA CLUB!",
+      "data_location": "Bertrix (BBS)",
+      "data_category": "Meerkamp mannen en vrouwen AC",
+      "data_url": "https://www.atletiek.be/competitie/atleten/outdoor-piste"
+    },
+    {
+      "date": "2025-08-15",
+      "name": "KVV Cad/Sch",
+      "color": "blue",
+      "title": "KVV Cad/Sch",
+      "data_info": "Inschrijving via Atletiek.nu, opgelet: plaatsen beperkt.",
+      "data_location": "Deinze (DEIN)",
+      "data_category": "Cadetten en Scholieren",
+      "data_url": "https://www.atletiek.be/competitie/atleten/outdoor-piste"
+    },
+    {
+      "date": "2025-08-24",
+      "name": "PK Estafette Bornem",
+      "color": "green",
+      "title": "PK Estafette Bornem",
+      "data_info": "Thuiswedstrijd!! Hier kan je estaffete nummers lopen van 4x1OOm tot en met 4x1500m verdeeld over verschillende leeftijden.",
+      "data_location": "Bornem",
+      "data_category": "Vanaf Pup",
+      "data_url": "https://www.atletiek.nu/wedstrijd/main/42878/"
+    },
+    {
+      "date": "2025-08-30",
+      "name": "BK Cad/Sch (dag 1)",
+      "color": "blue",
+      "title": "BK Cad/Sch (dag 1)",
+      "data_info": "Inschrijving via de club. Opgelet! Plaatsen beperkt!",
+      "data_location": "Herentals (ACHL)",
+      "data_category": "Cadetten en Scholieren",
+      "data_url": "https://www.atletiek.be/competitie/atleten/outdoor-piste"
+    },
+    {
+      "date": "2025-08-30",
+      "name": "Klein-Brabants Jeugdcriterium",
+      "color": "green",
+      "title": "Klein-Brabants Jeugdcriterium",
+      "data_info": null,
+      "data_location": "Beukenlaan 3 2850 Boom",
+      "data_category": "Kan tot Min",
+      "data_url": "https://www.atletiek.nu/wedstrijd/main/42859/"
+    },
+    {
+      "date": "2025-08-31",
+      "name": "BK Cad/Sch (dag 2)",
+      "color": "blue",
+      "title": "BK Cad/Sch (dag 2)",
+      "data_info": "Inscrijving via de club. Opgelet! Plaatsen zijn beperkt.",
+      "data_location": "Herentals (ACHL)",
+      "data_category": "Cadetten en Scholieren",
+      "data_url": "https://www.atletiek.be/competitie/atleten/outdoor-piste"
+    },
+    {
+      "date": "2025-09-07",
+      "name": "BK Jun/Bel",
+      "color": "blue",
+      "title": "BK Jun/Bel",
+      "data_info": "Inschrijven via club.",
+      "data_location": "Nijvel (CABW)",
+      "data_category": "Juniors en Belofte (U23)",
+      "data_url": "https://www.atletiek.be/competitie/atleten/outdoor-piste"
+    },
+    {
+      "date": "2025-09-07",
+      "name": "Open Meeting Sparta Vilvoorde",
+      "color": "red",
+      "title": "Open Meeting Sparta Vilvoorde",
+      "data_info": "Op deze meeting is er de mogelijkheid om vanaf Cadet verschillende nummers te doen: Sprint, Springen, Werpen, MiLa en tenslotte Zweedse estafette.",
+      "data_location": "Brusselsesteenweg 73 1800 Vilvoorde",
+      "data_category": "Vanaf Cadet",
+      "data_url": "https://www.atletiek.nu/wedstrijd/main/42901/"
+    }
+  ],
+  "displayedMonths": [
+    [
+      2025,
+      5
+    ],
+    [
+      2025,
+      6
+    ],
+    [
+      2025,
+      8
+    ],
+    [
+      2025,
+      9
+    ]
+  ]
+}

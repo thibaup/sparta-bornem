@@ -3,6 +3,7 @@
 *.pyc
 *.py
 *.spec
+*.txt
 dist/
 build/
 
@@ -17,6 +18,8 @@ env/
 */venv/
 */env/
 */.venv/
+*venv_editor/
+*build-env/
 
 # OS-specific files
 .DS_Store
