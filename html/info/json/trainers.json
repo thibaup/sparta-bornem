@@ -425,6 +425,53 @@
       ]
     },
     {
+      "groupName": "TF Running Team",
+      "mainPhoto": {
+        "src": "/images/personen/placeholder_tfr_main.jpg",
+        "alt": "Foto TF Running Team Groep"
+      },
+      "thumbnails": [
+        {
+          "src": "/images/personen/placeholder_tfr_thumb1.jpg",
+          "alt": "TF Running Team Actie 1"
+        },
+        {
+          "src": "/images/personen/placeholder_tfr_thumb2.jpg",
+          "alt": "TF Running Team Actie 2"
+        },
+        {
+          "src": "/images/personen/placeholder_tfr_thumb3.jpg",
+          "alt": "TF Running Team Actie 3"
+        },
+        {
+          "src": "/images/personen/placeholder_tfr_thumb4.jpg",
+          "alt": "TF Running Team Actie 4"
+        },
+        {
+          "src": "/images/personen/placeholder_tfr_thumb5.jpg",
+          "alt": "TF Running Team Actie 5"
+        }
+      ],
+      "description": "Voor atleten die op een ontspannen manier willen lopen en werken aan hun conditie. Trainingen omvatten zowel duurloop als oefeningen op de piste. Gezelligheid en gezondheid staan centraal.",
+      "trainers": [
+        {
+          "name": "Spiessens Koen",
+          "email": "koen.spiessens@telenet.be",
+          "phone": null
+        },
+        {
+          "name": "De Bouw Ellen",
+          "email": "ellen.de.bouw@gmail.com",
+          "phone": null
+        },
+        {
+          "name": "Inze Nick",
+          "email": "nick.inze@telenet.be",
+          "phone": null
+        }
+      ]
+    },
+    {
       "groupName": "Recreanten / Joggers",
       "mainPhoto": {
         "src": "/images/personen/placeholder_rec_main.jpg",
@@ -494,7 +541,7 @@
           "alt": "Boomerangs Krachttraining"
         }
       ],
-      "description": "Specialisatiegroep gericht op de werpdisciplines (kogelstoten, discuswerpen, speerwerpen, hamerslingeren) voor oudere jeugd en volwassenen. Focus op techniek en kracht.",
+      "description": "Specialisatiegroep gericht op de werpdisciplines (kogelstoten, discuswerpen, speerwerpen, hamerslingeren) voor oudere jeugd en volwassenen. Fokus op techniek en kracht.",
       "trainers": [
         {
           "name": "Hofmans Francis",
@@ -518,6 +565,7 @@
     "Kangoeroes & Benjamins",
     "Pupillen",
     "Miniemen",
+    "TF Running Team",
     "BST Team (sprint, springen, meerkamp)",
     "Recreanten / Joggers",
     "Boomerangs (werpen)"
