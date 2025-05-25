@@ -425,31 +425,31 @@
       ]
     },
     {
-      "groupName": "TF Running Team",
+      "groupName": "TFR Team",
       "mainPhoto": {
         "src": "/images/personen/placeholder_tfr_main.jpg",
-        "alt": "Foto TF Running Team Groep"
+        "alt": "Foto TFR Team Groep"
       },
       "thumbnails": [
         {
           "src": "/images/personen/placeholder_tfr_thumb1.jpg",
-          "alt": "TF Running Team Actie 1"
+          "alt": "TFR Team Actie 1"
         },
         {
           "src": "/images/personen/placeholder_tfr_thumb2.jpg",
-          "alt": "TF Running Team Actie 2"
+          "alt": "TFR Team Actie 2"
         },
         {
           "src": "/images/personen/placeholder_tfr_thumb3.jpg",
-          "alt": "TF Running Team Actie 3"
+          "alt": "TFR Team Actie 3"
         },
         {
           "src": "/images/personen/placeholder_tfr_thumb4.jpg",
-          "alt": "TF Running Team Actie 4"
+          "alt": "TFR Team Actie 4"
         },
         {
           "src": "/images/personen/placeholder_tfr_thumb5.jpg",
-          "alt": "TF Running Team Actie 5"
+          "alt": "TFR Team Actie 5"
         }
       ],
       "description": "Voor atleten die op een ontspannen manier willen lopen en werken aan hun conditie. Trainingen omvatten zowel duurloop als oefeningen op de piste. Gezelligheid en gezondheid staan centraal.",
@@ -565,7 +565,7 @@
     "Kangoeroes & Benjamins",
     "Pupillen",
     "Miniemen",
-    "TF Running Team",
+    "TFR Team",
     "BST Team (sprint, springen, meerkamp)",
     "Recreanten / Joggers",
     "Boomerangs (werpen)"
