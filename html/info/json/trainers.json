@@ -21,12 +21,12 @@
       "schedule": [
         {
           "day": "Vrijdag",
-          "time": "18:00u - 19:15u",
+          "time": "18:00u - 19:30u",
           "note": null
         },
         {
           "day": "Woensdag",
-          "time": "18:00u - 19:15u",
+          "time": "18:00u - 19:30u",
           "note": null
         },
         {
@@ -41,12 +41,12 @@
       "schedule": [
         {
           "day": "Vrijdag",
-          "time": "18:00u - 19:15u",
+          "time": "18:00u - 19:30u",
           "note": null
         },
         {
           "day": "Woensdag",
-          "time": "18:00u - 19:15u",
+          "time": "18:00u - 19:30u",
           "note": null
         },
         {
@@ -59,11 +59,6 @@
     {
       "category": "<strong>Fond, 1/2 fond (vanaf cadetten)</strong>",
       "schedule": [
-        {
-          "day": "Maandag",
-          "time": "18:30u - 19:30u",
-          "note": null
-        },
         {
           "day": "Vrijdag",
           "time": "18:00u - 19:30u",
@@ -87,7 +82,7 @@
         {
           "day": "Dinsdag",
           "time": "19:00u - 21:00u",
-          "note": "(enkel tijdens vakanties en verwittiging van de trainer)"
+          "note":  null
         },
         {
           "day": "Vrijdag",
@@ -112,7 +107,7 @@
         {
           "day": "Dinsdag",
           "time": "19:00u - 21:00u",
-          "note": "(enkel tijdens vakanties en verwittiging van de trainer)"
+          "note":  null
         },
         {
           "day": "Vrijdag",
@@ -137,7 +132,7 @@
         {
           "day": "Dinsdag",
           "time": "19:00u - 21:00u",
-          "note": "(enkel tijdens vakanties en verwittiging van de trainer)"
+          "note":  null
         },
         {
           "day": "Vrijdag",
@@ -425,7 +420,7 @@
       ]
     },
     {
-      "groupName": "TFR (Track, Field, Running) Team",
+      "groupName": "TFR Running Team (Track, Field, Road)",
       "mainPhoto": {
         "src": "/images/personen/placeholder_tfr_main.jpg",
         "alt": "Foto TFR Team Groep"
@@ -565,7 +560,7 @@
     "Kangoeroes & Benjamins",
     "Pupillen",
     "Miniemen",
-    "TFR (Track, Field, Running) Team",
+    "TFR Running Team (Track, Field, Road)",
     "BST Team (sprint, springen, meerkamp)",
     "Recreanten / Joggers",
     "Boomerangs (werpen)"
