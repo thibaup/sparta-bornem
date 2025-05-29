@@ -509,7 +509,7 @@
       ]
     },
     {
-      "groupName": "Boomerangs (werpen)",
+      "groupName": "Boomerangs",
       "mainPhoto": {
         "src": "/images/personen/placeholder_boom_main.jpg",
         "alt": "Foto Boomerangs Werpers"
@@ -563,6 +563,6 @@
     "TFR Running Team (Track, Field, Road)",
     "BST Team (sprint, springen, meerkamp)",
     "Recreanten / Joggers",
-    "Boomerangs (werpen)"
+    "Boomerangs"
   ]
 }
