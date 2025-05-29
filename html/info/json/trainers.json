@@ -509,31 +509,31 @@
       ]
     },
     {
-      "groupName": "Boomerangs",
+      "groupName": "Boemerangs",
       "mainPhoto": {
         "src": "/images/personen/placeholder_boom_main.jpg",
-        "alt": "Foto Boomerangs Werpers"
+        "alt": "Foto Boemerangs Werpers"
       },
       "thumbnails": [
         {
           "src": "/images/personen/placeholder_boom_thumb1.jpg",
-          "alt": "Boomerangs Kogelstoten"
+          "alt": "Boemerangs Kogelstoten"
         },
         {
           "src": "/images/personen/placeholder_boom_thumb2.jpg",
-          "alt": "Boomerangs Discuswerpen"
+          "alt": "Boemerangs Discuswerpen"
         },
         {
           "src": "/images/personen/placeholder_boom_thumb3.jpg",
-          "alt": "Boomerangs Speerwerpen"
+          "alt": "Boemerangs Speerwerpen"
         },
         {
           "src": "/images/personen/placeholder_boom_thumb4.jpg",
-          "alt": "Boomerangs Hamerslingeren"
+          "alt": "Boemerangs Hamerslingeren"
         },
         {
           "src": "/images/personen/placeholder_boom_thumb5.jpg",
-          "alt": "Boomerangs Krachttraining"
+          "alt": "Boemerangs Krachttraining"
         }
       ],
       "description": "Specialisatiegroep gericht op de werpdisciplines (kogelstoten, discuswerpen, speerwerpen, hamerslingeren) voor oudere jeugd en volwassenen. Fokus op techniek en kracht.",
