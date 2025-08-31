@@ -1,4 +1,4 @@
-# Executables and Build Artifacts
+
 *.exe
 *.pyc
 *.py
@@ -7,11 +7,9 @@
 dist/
 build/
 
-# Python cache
 __pycache__/
 tabs/
 
-# Virtual environment folders (common names)
 venv/
 env/
 .venv/
@@ -20,7 +18,7 @@ env/
 */.venv/
 *venv_editor/
 *build-env/
+*.vscode/
 
-# OS-specific files
 .DS_Store
 Thumbs.db
