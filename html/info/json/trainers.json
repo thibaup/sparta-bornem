@@ -82,7 +82,7 @@
         {
           "day": "Dinsdag",
           "time": "19:00u - 21:00u",
-          "note":  null
+          "note": null
         },
         {
           "day": "Vrijdag",
@@ -107,7 +107,7 @@
         {
           "day": "Dinsdag",
           "time": "19:00u - 21:00u",
-          "note":  null
+          "note": null
         },
         {
           "day": "Vrijdag",
@@ -132,7 +132,7 @@
         {
           "day": "Dinsdag",
           "time": "19:00u - 21:00u",
-          "note":  null
+          "note": null
         },
         {
           "day": "Vrijdag",
@@ -253,8 +253,8 @@
         },
         {
           "name": "Van Aken Jena",
-          "email": "None",
-          "phone": "None"
+          "email": null,
+          "phone": null
         }
       ]
     },
