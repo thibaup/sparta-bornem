@@ -46,6 +46,15 @@
       "data_location": "Brusselsesteenweg 73 1800 Vilvoorde",
       "data_category": "Vanaf Cadet",
       "data_url": "https://www.atletiek.nu/wedstrijd/main/42901/"
+    },
+    {
+      "date": "2025-11-08",
+      "name": "Clubavond",
+      "color": "green",
+      "title": "Clubavond",
+      "data_location": "Zaal Kloosterheide, Bornem",
+      "data_category": "Festiviteiten",
+      "data_info": "Ontvangst met aperitief en aansluitend keuze tussen verschillende streetfood gerechten en dessert. Deuren openen vanaf 18u, DJ Jeanke vanaf 22u!"
     }
   ],
   "displayedMonths": [
