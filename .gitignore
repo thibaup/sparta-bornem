@@ -1,5 +1,5 @@
-
-*setup.exe
+*update.json
+*.exe
 *.pyc
 *.py
 *.spec
