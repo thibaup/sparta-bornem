@@ -1,0 +1,7 @@
+{
+  "version": "1.3.0.0",
+  "exe_url": "https://github.com/thibaup/sparta-bornem/releases/download/v1.3.0.0/ThibertaWebsiteEditor-1.3.0.0.exe",
+  "sha256": "6005B8488BF22C0178B83931D8C6E1C022922B2C426725F8621CB4FEE296FBFA",
+  "mandatory": false,
+  "notes": "Bugfixes and improvements."
+}
