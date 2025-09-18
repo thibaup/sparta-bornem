@@ -2,6 +2,6 @@
   "version": "1.2.0.0",
   "exe_url": "https://sparta-bornem.pages.dev/ThibertaWebsiteEditor-1.2.0.0.exe",
   "sha256": "88CB046FDC63165B45F0A2E4A9F57D6A5B05940C90013DF212919ECF6497BFA4",
-  "mandatory": false,
+  "mandatory": true,
   "notes": "Bugfixes and improvements."
 }
