@@ -393,19 +393,24 @@
       "description": "Het BST Team is speciaal opgezet voor atleten die zich willen verdiepen en specialiseren in de disciplines sprint, springen (hoogspringen, verspringen, hinkstapspringen), werpen (kogelstoten, discuswerpen, speerwerpen) en/of meerkamp. Onder deskundige begeleiding wordt er gewerkt aan techniek, snelheid, kracht en uithouding, specifiek gericht op het maximaliseren van de prestaties in deze explosieve en veelzijdige onderdelen. Wedstrijddeelname wordt gestimuleerd!",
       "trainers": [
         {
+          "name": "De Leeuw Marliese",
+          "email": "marliese.de.leeuw@skynet.be",
+          "phone": "0473/88 40 39"
+        },
+        {
           "name": "Permentier Johan",
           "email": "j_permentier@hotmail.com",
-          "phone": null
+          "phone": "0472/642694"
         },
         {
           "name": "Vandenkerckhove Peter",
           "email": "Peter.vdk@hotmail.com",
-          "phone": null
+          "phone": "0499/989128"
         },
         {
-          "name": "De Leeuw Marliese",
-          "email": "marliese.de.leeuw@skynet.be",
-          "phone": "0473/88 40 39"
+          "name": "Tibo De Schepper",
+          "email": "tibods09@gmail.com",
+          "phone": "0474/208303"
         }
       ]
     },
