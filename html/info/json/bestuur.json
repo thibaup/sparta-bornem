@@ -37,6 +37,42 @@
       "address": "Wolfstraat 90, 2870 Puurs",
       "phone": "0496/281472",
       "email": "bennydeprins@hotmail.com"
+    },
+    {
+      "name": "Leen Peeters",
+      "role": "Bestuurslid",
+      "imageSrc": "/images/personen/trainer-leeg.png",
+      "imageAlt": "Foto Leen Peeters",
+      "address": null,
+      "phone": null,
+      "email": null
+    },
+    {
+      "name": "Frederik Polen",
+      "role": "Bestuurslid",
+      "imageSrc": "/images/personen/trainer-leeg.png",
+      "imageAlt": "Foto Frederik Polen",
+      "address": null,
+      "phone": null,
+      "email": null
+    },
+    {
+      "name": "Tibo De Schepper",
+      "role": "Bestuurslid",
+      "imageSrc": "/images/personen/trainer-leeg.png",
+      "imageAlt": "Foto Tibo De Schepper",
+      "address": null,
+      "phone": null,
+      "email": null
+    },
+    {
+      "name": "Hugo Loosvelt",
+      "role": "Bestuurslid",
+      "imageSrc": "/images/personen/trainer-leeg.png",
+      "imageAlt": "Foto Hugo Loosvelt",
+      "address": null,
+      "phone": null,
+      "email": null
     }
   ]
 }
