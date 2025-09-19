@@ -55,6 +55,14 @@
       "data_location": "Zaal Kloosterheide, Bornem",
       "data_category": "Festiviteiten",
       "data_info": "Ontvangst met aperitief en aansluitend keuze tussen verschillende streetfood gerechten en dessert. Deuren openen vanaf 18u, DJ Jeanke vanaf 22u!"
+    },
+    {
+      "date": "2026-01-18",
+      "name": "cross Bornem",
+      "color": "green",
+      "title": "cross Bornem",
+      "data_location": "Breeven",
+      "data_category": "wedstrijd"
     }
   ],
   "displayedMonths": [
