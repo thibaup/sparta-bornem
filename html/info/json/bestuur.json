@@ -57,15 +57,6 @@
       "email": null
     },
     {
-      "name": "Tibo De Schepper",
-      "role": "Bestuurslid",
-      "imageSrc": "/images/personen/trainer-leeg.png",
-      "imageAlt": "Foto Tibo De Schepper",
-      "address": null,
-      "phone": null,
-      "email": null
-    },
-    {
       "name": "Hugo Loosvelt",
       "role": "Bestuurslid",
       "imageSrc": "/images/personen/trainer-leeg.png",
@@ -73,6 +64,15 @@
       "address": null,
       "phone": null,
       "email": null
+    },
+    {
+      "name": "Tibo De Schepper",
+      "role": "Bestuurslid",
+      "imageSrc": "/images/personen/bestuur/548195952_10172685092725192_755985442959409491_n.jpg",
+      "imageAlt": "Foto Tibo De Schepper",
+      "address": null,
+      "phone": "/",
+      "email": "/"
     }
   ]
 }
