@@ -105,8 +105,8 @@
       "category": "<strong>Springen (vanaf cadetten)</strong>",
       "schedule": [
         {
-          "day": "Dinsdag",
-          "time": "19:00u - 21:00u",
+          "day": "Woensdag",
+          "time": "18:00u - 20:00u",
           "note": null
         },
         {
@@ -115,14 +115,14 @@
           "note": null
         },
         {
-          "day": "Woensdag",
-          "time": "18:00u - 20:00u",
-          "note": null
+          "day": "Zondag",
+          "time": "9:30u - 20:00u",
+          "note": "(tweewekelijks)"
         },
         {
           "day": "Zondag",
-          "time": "10:00u - 12:00u",
-          "note": null
+          "time": "11:00u - 12:00u",
+          "note": "(op uitnodiging)"
         }
       ]
     },
@@ -168,6 +168,21 @@
           "day": "Zondag",
           "time": "10:00u - 11:30u",
           "note": "(Geen begeleiding)"
+        }
+      ]
+    },
+    {
+      "category": "<strong>Krachttraining</strong>",
+      "schedule": [
+        {
+          "day": "Maandag",
+          "time": "19:00u-20:00u",
+          "note": null
+        },
+        {
+          "day": "Maandag",
+          "time": "20:00u-21:00u",
+          "note": null
         }
       ]
     }
@@ -517,11 +532,6 @@
       "description": "Voor volwassenen die op een ontspannen manier willen lopen en werken aan hun conditie. Trainingen omvatten zowel duurloop als oefeningen op de piste. Gezelligheid en gezondheid staan centraal.",
       "trainers": [
         {
-          "name": "Tom D’Hont",
-          "email": null,
-          "phone": null
-        },
-        {
           "name": "Erlinda Smet",
           "email": null,
           "phone": null
@@ -569,6 +579,48 @@
           "phone": null
         }
       ]
+    },
+    {
+      "groupName": "Stamina",
+      "description": "Info voor groep Stamina",
+      "mainPhoto": {
+        "src": "/images/personen/stamina_main.jpg",
+        "alt": "Hoofdfoto Stamina"
+      },
+      "thumbnails": [
+        {
+          "src": "/images/personen/stamina_thumb1.jpg",
+          "alt": "Thumbnail Stamina 1"
+        }
+      ],
+      "trainers": [
+        {
+          "name": "Tom D'hont",
+          "email": null,
+          "phone": null
+        }
+      ]
+    },
+    {
+      "groupName": "Krachttraining",
+      "description": "Info voor groep Krachttraining",
+      "mainPhoto": {
+        "src": "/images/personen/krachttraining_main.jpg",
+        "alt": "Hoofdfoto Krachttraining"
+      },
+      "thumbnails": [
+        {
+          "src": "/images/personen/krachttraining_thumb1.jpg",
+          "alt": "Thumbnail Krachttraining 1"
+        }
+      ],
+      "trainers": [
+        {
+          "name": "Merijn De Clerck",
+          "email": null,
+          "phone": null
+        }
+      ]
     }
   ],
   "times_category_order": [
@@ -579,7 +631,8 @@
     "<strong>Spurt (vanaf cadetten)</strong>",
     "<strong>Springen (vanaf cadetten)</strong>",
     "<strong>Werpen (vanaf cadetten)</strong>",
-    "<strong>Joggers (vanaf cadetten)</strong>"
+    "<strong>Joggers (vanaf cadetten)</strong>",
+    "<strong>Krachttraining</strong>"
   ],
   "trainer_category_order": [
     "Kangoeroes & Benjamins",
@@ -588,6 +641,8 @@
     "TFR Running Team (Track, Field, Road)",
     "BST Team (sprint, springen, meerkamp, werpen)",
     "Recreanten / Joggers",
-    "Boemerangs"
+    "Boemerangs",
+    "Stamina",
+    "Krachttraining"
   ]
 }
