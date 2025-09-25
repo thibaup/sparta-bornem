@@ -227,16 +227,6 @@
           "phone": null
         },
         {
-          "name": "Genijn Lisa",
-          "email": null,
-          "phone": null
-        },
-        {
-          "name": "Duysters Sara-Lise",
-          "email": null,
-          "phone": null
-        },
-        {
           "name": "Dalemans Marie",
           "email": null,
           "phone": null
@@ -247,12 +237,27 @@
           "phone": null
         },
         {
-          "name": "De Smet Wiebe",
+          "name": "Van Aken Jena",
           "email": null,
           "phone": null
         },
         {
-          "name": "Van Aken Jena",
+          "name": "Schilders Elisabeth",
+          "email": null,
+          "phone": null
+        },
+        {
+          "name": "Schilders Rens",
+          "email": null,
+          "phone": null
+        },
+        {
+          "name": "De Smet Jitse",
+          "email": null,
+          "phone": null
+        },
+        {
+          "name": "Ilegems Mona",
           "email": null,
           "phone": null
         }
@@ -297,6 +302,26 @@
           "name": "Biesemans Fien",
           "email": null,
           "phone": null
+        },
+        {
+          "name": "Peersman Sarah",
+          "email": null,
+          "phone": null
+        },
+        {
+          "name": "De Smet Wiebe",
+          "email": null,
+          "phone": null
+        },
+        {
+          "name": "Genijn Lisa",
+          "email": null,
+          "phone": null
+        },
+        {
+          "name": "De Groote Fenne",
+          "email": null,
+          "phone": null
         }
       ]
     },
@@ -331,23 +356,8 @@
       "description": "Voor kinderen van 11-12 jaar. De training wordt specifieker en technischer. Atleten worden voorbereid op de latere specialisatie en leren hun eigen sterktes ontdekken.",
       "trainers": [
         {
-          "name": "De Groote Fenne",
-          "email": null,
-          "phone": null
-        },
-        {
           "name": "Biesemans Fien",
           "email": null,
-          "phone": null
-        },
-        {
-          "name": "Bernard Jolan",
-          "email": null,
-          "phone": null
-        },
-        {
-          "name": "De Leeuw Hilde",
-          "email": "jeugdcoordinator@spartabornem.be",
           "phone": null
         },
         {
@@ -357,6 +367,16 @@
         },
         {
           "name": "Joos Els",
+          "email": null,
+          "phone": null
+        },
+        {
+          "name": "Ruys Jente",
+          "email": null,
+          "phone": null
+        },
+        {
+          "name": "Sara Anné",
           "email": null,
           "phone": null
         }
@@ -493,6 +513,11 @@
         },
         {
           "name": "Smet Erlinda",
+          "email": null,
+          "phone": null
+        },
+        {
+          "name": "Van Aken Danny",
           "email": null,
           "phone": null
         }
