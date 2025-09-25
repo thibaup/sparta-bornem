@@ -222,42 +222,42 @@
       "description": "Voor de allerkleinsten (Kangoeroes: 6 jaar, Benjamins: 7-8 jaar). Spelenderwijs kennismaken met alle basisvormen van atletiek: lopen, springen en werpen. Plezier staat voorop!",
       "trainers": [
         {
-          "name": "De Bisschop Wendy",
+          "name": "Wendy De Bisschop",
           "email": null,
           "phone": null
         },
         {
-          "name": "Dalemans Marie",
+          "name": "Marie Dalemans",
           "email": null,
           "phone": null
         },
         {
-          "name": "Lambrechts Joëlle",
+          "name": "Joëlle Lambrechts",
           "email": null,
           "phone": null
         },
         {
-          "name": "Van Aken Jena",
+          "name": "Jena Van Aken",
           "email": null,
           "phone": null
         },
         {
-          "name": "Schilders Elisabeth",
+          "name": "Elisabeth Schilders",
           "email": null,
           "phone": null
         },
         {
-          "name": "Schilders Rens",
+          "name": "Rens Schilders",
           "email": null,
           "phone": null
         },
         {
-          "name": "De Smet Jitse",
+          "name": "Jitse De Smet",
           "email": null,
           "phone": null
         },
         {
-          "name": "Ilegems Mona",
+          "name": "Mona Ilegems",
           "email": null,
           "phone": null
         }
@@ -294,32 +294,37 @@
       "description": "Voor kinderen van 9-10 jaar. Hier worden de basisvaardigheden verder ontwikkeld en maken ze kennis met de verschillende atletiekdisciplines op een leuke en uitdagende manier.",
       "trainers": [
         {
-          "name": "Bernard Jolan",
+          "name": "Jolan Bernard",
           "email": null,
           "phone": null
         },
         {
-          "name": "Biesemans Fien",
+          "name": "Fien Biesemans",
           "email": null,
           "phone": null
         },
         {
-          "name": "Peersman Sarah",
+          "name": "Sarah Peersman",
           "email": null,
           "phone": null
         },
         {
-          "name": "De Smet Wiebe",
+          "name": "Wiebe De Smet",
           "email": null,
           "phone": null
         },
         {
-          "name": "Genijn Lisa",
+          "name": "Lisa Genijn",
           "email": null,
           "phone": null
         },
         {
-          "name": "De Groote Fenne",
+          "name": "Fenne De Groote",
+          "email": null,
+          "phone": null
+        },
+        {
+          "name": "Eline Schelkens",
           "email": null,
           "phone": null
         }
@@ -356,27 +361,32 @@
       "description": "Voor kinderen van 11-12 jaar. De training wordt specifieker en technischer. Atleten worden voorbereid op de latere specialisatie en leren hun eigen sterktes ontdekken.",
       "trainers": [
         {
-          "name": "Biesemans Fien",
+          "name": "Sara Anné",
           "email": null,
           "phone": null
         },
         {
-          "name": "Inze Nick",
+          "name": "Eline Schelkens",
+          "email": null,
+          "phone": null
+        },
+        {
+          "name": "Fien Biesemans",
+          "email": null,
+          "phone": null
+        },
+        {
+          "name": "Nick Inze",
           "email": "nick.inze@telenet.be",
           "phone": null
         },
         {
-          "name": "Joos Els",
+          "name": "Els Joos",
           "email": null,
           "phone": null
         },
         {
-          "name": "Ruys Jente",
-          "email": null,
-          "phone": null
-        },
-        {
-          "name": "Sara Anné",
+          "name": "Jente Ruys",
           "email": null,
           "phone": null
         }
@@ -413,22 +423,22 @@
       "description": "Het BST Team is speciaal opgezet voor atleten die zich willen verdiepen en specialiseren in de disciplines sprint, springen (hoogspringen, verspringen, hinkstapspringen), werpen (kogelstoten, discuswerpen, speerwerpen) en/of meerkamp. Onder deskundige begeleiding wordt er gewerkt aan techniek, snelheid, kracht en uithouding, specifiek gericht op het maximaliseren van de prestaties in deze explosieve en veelzijdige onderdelen. Wedstrijddeelname wordt gestimuleerd!",
       "trainers": [
         {
-          "name": "De Leeuw Marliese",
+          "name": "Marliese De Leeuw",
           "email": "marliese.de.leeuw@skynet.be",
           "phone": "0473/88 40 39"
         },
         {
-          "name": "Permentier Johan",
+          "name": "Johan Permentier",
           "email": "j_permentier@hotmail.com",
           "phone": "0472/642694"
         },
         {
-          "name": "Vandenkerckhove Peter",
+          "name": "Peter Vandenkerckhove",
           "email": "Peter.vdk@hotmail.com",
           "phone": "0499/989128"
         },
         {
-          "name": "De Schepper Tibo",
+          "name": "Tibo De Schepper",
           "email": "tibods09@gmail.com",
           "phone": "0474/208303"
         }
@@ -465,12 +475,12 @@
       "description": "Je bent een gemotiveerde sportieveling van 13 jaar of ouder met aanleg voor afstandslopen. Dat zijn alle afstanden vanaf 800m. De trainingen bestaan uit zowel intensieve trainingen op piste als uit duurlopen.  Daarbij word je begeleid door trainers.  Alsook ben je gemotiveerd om aan wedstrijden deel te nemen.",
       "trainers": [
         {
-          "name": "Spiessens Koen",
+          "name": "Koen Spiessens",
           "email": "koen.spiessens@telenet.be",
           "phone": null
         },
         {
-          "name": "De Bouw Ellen",
+          "name": "Ellen De Bouw",
           "email": "ellen.de.bouw@gmail.com",
           "phone": null
         }
@@ -507,17 +517,17 @@
       "description": "Voor volwassenen die op een ontspannen manier willen lopen en werken aan hun conditie. Trainingen omvatten zowel duurloop als oefeningen op de piste. Gezelligheid en gezondheid staan centraal.",
       "trainers": [
         {
-          "name": "D’Hont Tom",
+          "name": "Tom D’Hont",
           "email": null,
           "phone": null
         },
         {
-          "name": "Smet Erlinda",
+          "name": "Erlinda Smet",
           "email": null,
           "phone": null
         },
         {
-          "name": "Van Aken Danny",
+          "name": "Danny Van Aken",
           "email": null,
           "phone": null
         }
@@ -554,7 +564,7 @@
       "description": "Voor volwassenen die op een ontspannen manier willen lopen en werken aan hun conditie. Trainingen omvatten zowel duurloop als oefeningen op de piste. Gezelligheid en gezondheid staan centraal.",
       "trainers": [
         {
-          "name": "Hofmans Francis",
+          "name": "Francis Hofmans",
           "email": null,
           "phone": null
         }
