@@ -376,11 +376,6 @@
       "description": "Voor kinderen van 11-12 jaar. De training wordt specifieker en technischer. Atleten worden voorbereid op de latere specialisatie en leren hun eigen sterktes ontdekken.",
       "trainers": [
         {
-          "name": "Sara Anné",
-          "email": null,
-          "phone": null
-        },
-        {
           "name": "Eline Schelkens",
           "email": null,
           "phone": null
@@ -402,6 +397,11 @@
         },
         {
           "name": "Jente Ruys",
+          "email": null,
+          "phone": null
+        },
+        {
+          "name": "Sarah Anné",
           "email": null,
           "phone": null
         }
