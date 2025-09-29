@@ -1,5 +1,168 @@
 {
   "pageTitle": "Juryleden - Atletiekclub Sparta Bornem",
   "mainHeading": "Juryleden",
-  "juryMembers": []
+  "juryMembers": [
+    {
+      "name": "Erik Borms",
+      "role": "Jurylid/starter",
+      "imageSrc": "/images/personen/trainer-leeg.png",
+      "imageAlt": "Foto Erik Borms",
+      "address": null,
+      "phone": null,
+      "email": null
+    },
+    {
+      "name": "Britta Vincke",
+      "role": "Jurylid",
+      "imageSrc": "/images/personen/trainer-leeg.png",
+      "imageAlt": "Foto Britta Vincke",
+      "address": null,
+      "phone": null,
+      "email": null
+    },
+    {
+      "name": "Leo Baeyens",
+      "role": "Jurylid/starter",
+      "imageSrc": "/images/personen/trainer-leeg.png",
+      "imageAlt": "Foto Leo Baeyens",
+      "address": null,
+      "phone": null,
+      "email": null
+    },
+    {
+      "name": "Annelies Borms",
+      "role": "Jurylid/ET-operator",
+      "imageSrc": "/images/personen/trainer-leeg.png",
+      "imageAlt": "Foto Annelies Borms",
+      "address": null,
+      "phone": null,
+      "email": null
+    },
+    {
+      "name": "Marc Van Puyvelde",
+      "role": "Jurylid",
+      "imageSrc": "/images/personen/trainer-leeg.png",
+      "imageAlt": "Foto Marc Van Puyvelde",
+      "address": null,
+      "phone": null,
+      "email": null
+    },
+    {
+      "name": "Stefan Peeters",
+      "role": "Jurylid",
+      "imageSrc": "/images/personen/trainer-leeg.png",
+      "imageAlt": "Foto Stefan Peeters",
+      "address": null,
+      "phone": null,
+      "email": null
+    },
+    {
+      "name": "Sally De Maeyer",
+      "role": "Jurylid",
+      "imageSrc": "/images/personen/trainer-leeg.png",
+      "imageAlt": "Foto Sally De Maeyer",
+      "address": null,
+      "phone": null,
+      "email": null
+    },
+    {
+      "name": "Michael Verbruggen",
+      "role": "Jurylid",
+      "imageSrc": "/images/personen/trainer-leeg.png",
+      "imageAlt": "Foto Michael Verbruggen",
+      "address": null,
+      "phone": null,
+      "email": null
+    },
+    {
+      "name": "Fenne De Groote",
+      "role": "Kidsjurylid",
+      "imageSrc": "/images/personen/trainer-leeg.png",
+      "imageAlt": "Foto Fenne De Groote",
+      "address": null,
+      "phone": null,
+      "email": null
+    },
+    {
+      "name": "Marliese De Leeuw",
+      "role": "Kidsjurylid",
+      "imageSrc": "/images/personen/trainer-leeg.png",
+      "imageAlt": "Foto Marliese De Leeuw",
+      "address": null,
+      "phone": null,
+      "email": null
+    },
+    {
+      "name": "Vik Verbruggen",
+      "role": "Kidsjurylid",
+      "imageSrc": "/images/personen/trainer-leeg.png",
+      "imageAlt": "Foto Vik Verbruggen",
+      "address": null,
+      "phone": null,
+      "email": null
+    },
+    {
+      "name": "Rens Schilders",
+      "role": "Kidsjurylid",
+      "imageSrc": "/images/personen/trainer-leeg.png",
+      "imageAlt": "Foto Rens Schilders",
+      "address": null,
+      "phone": null,
+      "email": null
+    },
+    {
+      "name": "Sarah Peersman",
+      "role": "Kidsjurylid",
+      "imageSrc": "/images/personen/trainer-leeg.png",
+      "imageAlt": "Foto Sarah Peersman",
+      "address": null,
+      "phone": null,
+      "email": null
+    },
+    {
+      "name": "Max Reynaert",
+      "role": "Kidsjurylid",
+      "imageSrc": "/images/personen/trainer-leeg.png",
+      "imageAlt": "Foto Max Reynaert",
+      "address": null,
+      "phone": null,
+      "email": null
+    },
+    {
+      "name": "Sverre Reynaert",
+      "role": "Kidsjurylid",
+      "imageSrc": "/images/personen/trainer-leeg.png",
+      "imageAlt": "Foto Sverre Reynaert",
+      "address": null,
+      "phone": null,
+      "email": null
+    },
+    {
+      "name": "Liesl Van Barel",
+      "role": "Kidsjurylid",
+      "imageSrc": "/images/personen/trainer-leeg.png",
+      "imageAlt": "Foto Liesl Van Barel",
+      "address": null,
+      "phone": null,
+      "email": null
+    },
+    {
+      "name": "Senne Rombaut",
+      "role": "Kidsjurylid",
+      "imageSrc": "/images/personen/trainer-leeg.png",
+      "imageAlt": "Foto Senne Rombaut",
+      "address": null,
+      "phone": null,
+      "email": null
+    },
+    {
+      "name": "Johan Permentier",
+      "role": "Kidsjurylid",
+      "imageSrc": "/images/personen/trainer-leeg.png",
+      "imageAlt": "Foto Johan Permentier",
+      "address": null,
+      "phone": null,
+      "email": null
+    }
+  ]
 }
