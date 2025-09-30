@@ -1,6 +1,6 @@
 {
-  "version": "1.3.1.0",
-  "exe_url": "https://github.com/thibaup/sparta-bornem/releases/download/v1.3.1.0/ThibertaWebsiteEditor.exe",
+  "version": "1.3.2.0",
+  "exe_url": "https://github.com/thibaup/sparta-bornem/releases/download/v1.3.2.0/ThibertaWebsiteEditor.exe",
   "mandatory": false,
-  "notes": "bugfixes bestuursverslagen"
+  "notes": "bugfixes text_editor"
 }
