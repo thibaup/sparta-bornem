@@ -57,21 +57,154 @@
       "data_info": "Net-echt cross voor de jeugd (kan tot en met min)"
     },
     {
+      "date": "2025-11-02",
+      "name": "cross Bonheiden",
+      "color": "green",
+      "title": "cross Bonheiden",
+      "data_url": "https://www.atletiek.nu/wedstrijd/main/43575/",
+      "data_location": "Waversesteenweg 2820 Bonheiden",
+      "data_category": "wedstrijd"
+    },
+    {
       "date": "2025-11-08",
       "name": "Clubavond",
-      "color": "green",
+      "color": "black",
       "title": "Clubavond",
       "data_url": "https://docs.google.com/forms/d/e/1FAIpQLScAJOgDCFfyna6H_klzVwnln4cTQWoo-gWgxHPPm5ENiRQi7g/viewform",
       "data_location": "Zaal Kloosterheide, Bornem",
-      "data_category": "Festiviteiten",
-      "data_info": "Inschrijven via de link (uiterlijk 20 oktober). De deuren openen vanaf 18u."
+      "data_category": "Festiviteiten"
+    },
+    {
+      "date": "2025-11-11",
+      "name": "cross Mechelen",
+      "color": "green",
+      "title": "cross Mechelen",
+      "data_location": "De Nekker, Mechelen",
+      "data_category": "wedstrijd"
+    },
+    {
+      "date": "2025-11-16",
+      "name": "cross Lebbeke",
+      "color": "green",
+      "title": "cross Lebbeke",
+      "data_url": "https://www.atletiek.nu/wedstrijd/main/43596/",
+      "data_location": "Koning Albert I-straat 124 9280 Lebbeke",
+      "data_category": "wedstrijd"
+    },
+    {
+      "date": "2025-11-30",
+      "name": "BK cross Hulshout",
+      "color": "blue",
+      "title": "BK cross Hulshout",
+      "data_location": "Hulshout",
+      "data_category": "wedstrijd"
+    },
+    {
+      "date": "2025-12-21",
+      "name": "cross Gierle",
+      "color": "green",
+      "title": "cross Gierle",
+      "data_location": "Lilse Bergen",
+      "data_category": "wedstrijd"
+    },
+    {
+      "date": "2025-12-26",
+      "name": "Indoormeeting Gent (Dag1)",
+      "color": "green",
+      "title": "Indoormeeting Gent (Dag1)",
+      "data_location": "Zuiderlaan 14, 9000 Gent",
+      "data_category": "wedstrijd"
+    },
+    {
+      "date": "2025-12-27",
+      "name": "Indoormeeting Gent (Dag2)",
+      "color": "green",
+      "title": "Indoormeeting Gent (Dag2)",
+      "data_location": "Zuiderlaan 14, 9000 Gent",
+      "data_category": "wedstrijd"
+    },
+    {
+      "date": "2026-01-04",
+      "name": "PK indoor Gent",
+      "color": "green",
+      "title": "PK indoor Gent",
+      "data_location": "Zuiderlaan 14, 9000 Gent",
+      "data_category": "wedstrijd"
+    },
+    {
+      "date": "2026-01-11",
+      "name": "PK cross Nijlen",
+      "color": "green",
+      "title": "PK cross Nijlen",
+      "data_location": "Nijlen",
+      "data_category": "wedstrijd"
     },
     {
       "date": "2026-01-18",
       "name": "cross Bornem",
-      "color": "green",
+      "color": "purple",
       "title": "cross Bornem",
       "data_location": "Breeven",
+      "data_category": "wedstrijd"
+    },
+    {
+      "date": "2026-01-18",
+      "name": "KVV indoor CAD/SCH Gent",
+      "color": "blue",
+      "title": "KVV indoor CAD/SCH Gent",
+      "data_location": "Zuiderlaan 14, 9000 Gent",
+      "data_category": "wedstrijd"
+    },
+    {
+      "date": "2026-01-25",
+      "name": "KVV Indoor A.C. Gent",
+      "color": "blue",
+      "title": "KVV Indoor A.C. Gent",
+      "data_location": "Zuiderlaan 14, 9000 Gent",
+      "data_category": "wedstrijd"
+    },
+    {
+      "date": "2026-01-31",
+      "name": "cross Vilvoorde",
+      "color": "green",
+      "title": "cross Vilvoorde",
+      "data_location": "Vilvoorde"
+    },
+    {
+      "date": "2026-02-01",
+      "name": "cross Hamme",
+      "color": "green",
+      "title": "cross Hamme",
+      "data_location": "Hamme"
+    },
+    {
+      "date": "2026-02-08",
+      "name": "cross Duffel",
+      "color": "green",
+      "title": "cross Duffel",
+      "data_location": "Duffel"
+    },
+    {
+      "date": "2026-02-22",
+      "name": "KVV cross Lokeren",
+      "color": "blue",
+      "title": "KVV cross Lokeren",
+      "data_location": "Lokeren"
+    },
+    {
+      "date": "2026-03-07",
+      "name": "BK Indoor CAD/SCH Gent",
+      "color": "blue",
+      "title": "BK Indoor CAD/SCH Gent",
+      "data_location": "Zuiderlaan 14, 9000 Gent",
+      "data_category": "wedstrijd"
+    },
+    {
+      "date": "2026-03-08",
+      "name": "BK Junioren Gent",
+      "color": "blue",
+      "title": "BK Junioren Gent",
+      "data_location": "Zuiderlaan 14, 9000 Gent",
       "data_category": "wedstrijd"
     }
   ],
