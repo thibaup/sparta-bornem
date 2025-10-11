@@ -28,26 +28,6 @@
   },
   "events": [
     {
-      "date": "2025-09-07",
-      "name": "BK Jun/Bel",
-      "color": "blue",
-      "title": "BK Jun/Bel",
-      "data_info": "Inschrijven via club.",
-      "data_location": "Nijvel (CABW)",
-      "data_category": "Juniors en Belofte (U23)",
-      "data_url": "https://www.atletiek.be/competitie/atleten/outdoor-piste"
-    },
-    {
-      "date": "2025-09-07",
-      "name": "Open Meeting Sparta Vilvoorde",
-      "color": "red",
-      "title": "Open Meeting Sparta Vilvoorde",
-      "data_info": "Op deze meeting is er de mogelijkheid om vanaf Cadet verschillende nummers te doen: Sprint, Springen, Werpen, MiLa en tenslotte Zweedse estafette.",
-      "data_location": "Brusselsesteenweg 73 1800 Vilvoorde",
-      "data_category": "Vanaf Cadet",
-      "data_url": "https://www.atletiek.nu/wedstrijd/main/42901/"
-    },
-    {
       "date": "2025-10-17",
       "name": "Net-echt cross jeugd",
       "color": "green",
@@ -209,10 +189,6 @@
     }
   ],
   "displayedMonths": [
-    [
-      2025,
-      9
-    ],
     [
       2025,
       10
