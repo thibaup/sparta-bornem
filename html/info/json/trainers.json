@@ -214,24 +214,28 @@
       },
       "thumbnails": [
         {
-          "src": "/images/personen/placeholder_kangben_thumb1.jpg",
-          "alt": "Kangoeroes Actie 1"
+          "alt": "Kangoeroes & Benjamins Actie 1",
+          "src": "/images/personen/CIMG9246.JPG"
         },
         {
-          "src": "/images/personen/placeholder_kangben_thumb2.jpg",
-          "alt": "Kangoeroes Actie 2"
+          "alt": "Kangoeroes & Benjamins Actie 2",
+          "src": "/images/personen/CIMG9247.JPG"
         },
         {
-          "src": "/images/personen/placeholder_kangben_thumb3.jpg",
-          "alt": "Benjamins Actie 1"
+          "alt": "Kangoeroes & Benjamins Actie 3",
+          "src": "/images/personen/CIMG9249.JPG"
         },
         {
-          "src": "/images/personen/placeholder_kangben_thumb4.jpg",
-          "alt": "Benjamins Actie 2"
+          "alt": "Kangoeroes & Benjamins Actie 4",
+          "src": "/images/personen/CIMG9250.JPG"
         },
         {
-          "src": "/images/personen/placeholder_kangben_thumb5.jpg",
-          "alt": "Kangoeroes en Benjamins Plezier"
+          "alt": "Kangoeroes & Benjamins Actie 5",
+          "src": "/images/personen/CIMG9251.JPG"
+        },
+        {
+          "alt": "Kangoeroes & Benjamins Actie 6",
+          "src": "/images/personen/CIMG9252.JPG"
         }
       ],
       "description": "Voor de allerkleinsten (Kangoeroes: 5-6 jaar, Benjamins: 7-8 jaar). Spelenderwijs kennismaken met alle basisvormen van atletiek: lopen, springen en werpen. Plezier staat voorop!",
