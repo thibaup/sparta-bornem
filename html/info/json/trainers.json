@@ -236,6 +236,10 @@
         {
           "alt": "Kangoeroes & Benjamins Actie 6",
           "src": "/images/personen/CIMG9252.JPG"
+        },
+        {
+          "alt": "Kangoeroes & Benjamins Actie 7",
+          "src": "/images/personen/CIMG9254.JPG"
         }
       ],
       "description": "Voor de allerkleinsten (Kangoeroes: 5-6 jaar, Benjamins: 7-8 jaar). Spelenderwijs kennismaken met alle basisvormen van atletiek: lopen, springen en werpen. Plezier staat voorop!",
@@ -290,24 +294,16 @@
       },
       "thumbnails": [
         {
-          "src": "/images/personen/placeholder_pup_thumb1.jpg",
-          "alt": "Pupillen Lopen"
+          "alt": "Pupillen Actie 1",
+          "src": "/images/personen/CIMG9245.JPG"
         },
         {
-          "src": "/images/personen/placeholder_pup_thumb2.jpg",
-          "alt": "Pupillen Springen"
+          "alt": "Pupillen Actie 2",
+          "src": "/images/personen/CIMG9255.JPG"
         },
         {
-          "src": "/images/personen/placeholder_pup_thumb3.jpg",
-          "alt": "Pupillen Werpen"
-        },
-        {
-          "src": "/images/personen/placeholder_pup_thumb4.jpg",
-          "alt": "Pupillen Estafette"
-        },
-        {
-          "src": "/images/personen/placeholder_pup_thumb5.jpg",
-          "alt": "Pupillen Plezier"
+          "alt": "Pupillen Actie 3",
+          "src": "/images/personen/CIMG9242.JPG"
         }
       ],
       "description": "Voor kinderen van 9-10 jaar. Hier worden de basisvaardigheden verder ontwikkeld en maken ze kennis met de verschillende atletiekdisciplines op een leuke en uitdagende manier.",
@@ -357,24 +353,16 @@
       },
       "thumbnails": [
         {
-          "src": "/images/personen/placeholder_min_thumb1.jpg",
-          "alt": "Miniemen Horden"
+          "alt": "Miniemen Actie 1",
+          "src": "/images/personen/CIMG9242.JPG"
         },
         {
-          "src": "/images/personen/placeholder_min_thumb2.jpg",
-          "alt": "Miniemen Verspringen"
+          "alt": "Miniemen Actie 2",
+          "src": "/images/personen/CIMG9248.JPG"
         },
         {
-          "src": "/images/personen/placeholder_min_thumb3.jpg",
-          "alt": "Miniemen Kogelstoten"
-        },
-        {
-          "src": "/images/personen/placeholder_min_thumb4.jpg",
-          "alt": "Miniemen Hoogspringen"
-        },
-        {
-          "src": "/images/personen/placeholder_min_thumb5.jpg",
-          "alt": "Miniemen Team"
+          "alt": "Miniemen Actie 3",
+          "src": "/images/personen/CIMG9273.JPG"
         }
       ],
       "description": "Voor kinderen van 11-12 jaar. De training wordt specifieker en technischer. Atleten worden voorbereid op de latere specialisatie en leren hun eigen sterktes ontdekken.",
@@ -414,29 +402,25 @@
     {
       "groupName": "BST Team (sprint, springen, meerkamp, werpen)",
       "mainPhoto": {
-        "src": "/images/personen/trainersBST.jpg",
+        "src": "/images/personen/CIMG9276.JPG",
         "alt": "Foto trainers BST"
       },
       "thumbnails": [
         {
-          "src": "/images/personen/333145274_218619830678271_2553016165337705398_n.jpg",
-          "alt": "BST groep 1"
+          "alt": "BST Team (sprint, springen, meerkamp, werpen) Actie 1",
+          "src": "/images/personen/CIMG9263.JPG"
         },
         {
-          "src": "/images/personen/interclubgroepsfoto.jpg",
-          "alt": "BST Interclub"
+          "alt": "BST Team (sprint, springen, meerkamp, werpen) Actie 2",
+          "src": "/images/personen/CIMG9266.JPG"
         },
         {
-          "src": "/images/personen/johanmetgroep.jpg",
-          "alt": "BST Johan met groep"
+          "alt": "BST Team (sprint, springen, meerkamp, werpen) Actie 3",
+          "src": "/images/personen/CIMG9271.JPG"
         },
         {
-          "src": "/images/personen/estafettegent.jpg",
-          "alt": "BST Estafette Gent"
-        },
-        {
-          "src": "/images/personen/groepsfoto.jpg",
-          "alt": "BST Groepsfoto"
+          "alt": "BST Team (sprint, springen, meerkamp, werpen) Actie 4",
+          "src": "/images/personen/CIMG9269.JPG"
         }
       ],
       "description": "Ben jij klaar om alles uit jezelf te halen? Het BST Team is er voor atleten die zich willen verdiepen én specialiseren in de explosieve onderdelen van de atletiek: sprint (tot en met 400 meter en horden), springen (hoog-, ver- en hinkstapspringen), werpen (kogel, discus, speer) en meerkamp.\n\nOnder deskundige en enthousiaste begeleiding werk je gericht aan techniek, snelheid, kracht, weerstand en uithoudingsvermogen – alles wat je nodig hebt om te groeien als atleet en je persoonlijke records te verbreken.\n\nWedstrijddeelname wordt aangemoedigd en ondersteund – want samen gaan we voor topprestaties!",
@@ -466,31 +450,10 @@
     {
       "groupName": "TFR Running Team (Track, Field, Road)",
       "mainPhoto": {
-        "src": "/images/personen/placeholder_tfr_main.jpg",
+        "src": "/images/personen/CIMG9275.JPG",
         "alt": "Foto TFR Team Groep"
       },
-      "thumbnails": [
-        {
-          "src": "/images/personen/placeholder_tfr_thumb1.jpg",
-          "alt": "TFR Team Actie 1"
-        },
-        {
-          "src": "/images/personen/placeholder_tfr_thumb2.jpg",
-          "alt": "TFR Team Actie 2"
-        },
-        {
-          "src": "/images/personen/placeholder_tfr_thumb3.jpg",
-          "alt": "TFR Team Actie 3"
-        },
-        {
-          "src": "/images/personen/placeholder_tfr_thumb4.jpg",
-          "alt": "TFR Team Actie 4"
-        },
-        {
-          "src": "/images/personen/placeholder_tfr_thumb5.jpg",
-          "alt": "TFR Team Actie 5"
-        }
-      ],
+      "thumbnails": [],
       "description": "Je bent een gemotiveerde sportieveling van 13 jaar of ouder met aanleg voor afstandslopen ( alle afstanden vanaf 800m ) en je wil uw algemene conditie aanscherpen, hebt motivatie om aan wedstrijden deel te nemen op piste, in het veld of op de weg, dan is het TFR Running team iets voor jou. Naast algemene trainingschema's waarbij de trainingen bestaan uit zowel intensieve trainingen op piste als uit duurlopen kan er voor elke atleet ook naar eigen behoefte / doelstelling een individueel schema opgemaakt worden specifiek gericht op het maximaliseren van gevraagde doelstelling. In dit alles wordt je ondersteund en begeleid door trainers.",
       "trainers": [
         {
@@ -513,24 +476,8 @@
       },
       "thumbnails": [
         {
-          "src": "/images/personen/placeholder_rec_thumb1.jpg",
-          "alt": "Joggers op de piste"
-        },
-        {
-          "src": "/images/personen/placeholder_rec_thumb2.jpg",
-          "alt": "Joggers duurloop"
-        },
-        {
-          "src": "/images/personen/placeholder_rec_thumb3.jpg",
-          "alt": "Joggers oefeningen"
-        },
-        {
-          "src": "/images/personen/placeholder_rec_thumb4.jpg",
-          "alt": "Joggers groepssfeer"
-        },
-        {
-          "src": "/images/personen/placeholder_rec_thumb5.jpg",
-          "alt": "Joggers stretchen"
+          "alt": "Recreanten / Joggers Actie 1",
+          "src": "/images/personen/CIMG9253.JPG"
         }
       ],
       "description": "Voor volwassenen die op een ontspannen manier willen lopen en werken aan hun conditie. Trainingen omvatten zowel duurloop als oefeningen op de piste. Gezelligheid en gezondheid staan centraal.",
@@ -555,24 +502,8 @@
       },
       "thumbnails": [
         {
-          "src": "/images/personen/placeholder_boom_thumb1.jpg",
-          "alt": "Boemerangs Kogelstoten"
-        },
-        {
-          "src": "/images/personen/placeholder_boom_thumb2.jpg",
-          "alt": "Boemerangs Discuswerpen"
-        },
-        {
-          "src": "/images/personen/placeholder_boom_thumb3.jpg",
-          "alt": "Boemerangs Speerwerpen"
-        },
-        {
-          "src": "/images/personen/placeholder_boom_thumb4.jpg",
-          "alt": "Boemerangs Hamerslingeren"
-        },
-        {
-          "src": "/images/personen/placeholder_boom_thumb5.jpg",
-          "alt": "Boemerangs Krachttraining"
+          "alt": "Boemerangs Actie 1",
+          "src": "/images/personen/CIMG9261.JPG"
         }
       ],
       "description": "De boemerangs bij Sparta zijn een groep atleten/joggers die graag samen willen lopen met vrienden.\nWe zorgen ervoor dat niemand achter blijft, zodat de snelle lopers en paar keer moet teruglopen om de laatste joggers op te halen.\nOp woensdag doen we versnellingen, op vrijdag een duurloop met intervallen (10 km) en op zondag een trage duurloop, ongeveer 12 km tegen een tempo van 9 a 10 km/u.\nNa de training kunnen we samen nog eventueel iets drinken.",
@@ -593,8 +524,8 @@
       },
       "thumbnails": [
         {
-          "src": "/images/personen/stamina_thumb1.jpg",
-          "alt": "Thumbnail Stamina 1"
+          "alt": "Stamina Actie 1",
+          "src": "/images/personen/CIMG9260.JPG"
         }
       ],
       "trainers": [
