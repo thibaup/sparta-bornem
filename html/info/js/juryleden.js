@@ -5,6 +5,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const mainHeadingElement = document.getElementById('main-heading');
   if (!container) return;
 
+  const applyRotation = async (img, mode = 'auto') => {
+    await img.decode();
+    let angle = 0;
+    if (mode === 'auto') angle = img.naturalWidth > img.naturalHeight ? 90 : 0;
+    else if (mode === 'cw') angle = 90;
+    else if (mode === 'ccw') angle = -90;
+    else if (mode === '180') angle = 180;
+    if (!angle) return;
+    const bmp = await createImageBitmap(img);
+    const c = document.createElement('canvas');
+    if (angle % 180) { c.width = bmp.height; c.height = bmp.width; } else { c.width = bmp.width; c.height = bmp.height; }
+    const ctx = c.getContext('2d');
+    ctx.translate(c.width / 2, c.height / 2);
+    ctx.rotate(angle * Math.PI / 180);
+    ctx.drawImage(bmp, -bmp.width / 2, -bmp.height / 2);
+    img.src = c.toDataURL('image/jpeg', 0.9);
+  };
+
   const load = async () => {
     try {
       const response = await fetch(jsonPath, { cache: 'no-store' });
@@ -15,19 +33,19 @@ document.addEventListener('DOMContentLoaded', () => {
       if (data.mainHeading && mainHeadingElement) mainHeadingElement.textContent = data.mainHeading;
 
       const members = Array.isArray(data.juryMembers) ? data.juryMembers : [];
-      if (members.length === 0) {
-        container.innerHTML = '<p>Geen juryleden gevonden.</p>';
-        return;
-      }
+      if (members.length === 0) { container.innerHTML = '<p>Geen juryleden gevonden.</p>'; return; }
 
-      members.forEach(member => {
+      for (const member of members) {
         const div = document.createElement('div');
         div.className = 'board-member';
 
         if (member.imageSrc) {
           const img = document.createElement('img');
+          img.loading = 'lazy';
+          img.decoding = 'async';
           img.src = member.imageSrc;
           img.alt = member.imageAlt || member.name || 'Jurylid';
+          img.addEventListener('load', () => applyRotation(img, member.rotate || 'auto'));
           div.appendChild(img);
         }
 
@@ -65,9 +83,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         container.appendChild(div);
-      });
+      }
     } catch (error) {
-      console.error('Error loading or processing juryleden data:', error);
+      console.error('Error loading of verwerken juryleden:', error);
       container.innerHTML = '<p style="color: red;">Kon jury-informatie niet laden.</p>';
     }
   };
