@@ -80,6 +80,21 @@
       "data_category": "wedstrijd"
     },
     {
+      "date": "2025-12-05",
+      "name": "Sintfeest",
+      "color": "black",
+      "title": "Sintfeest"
+    },
+    {
+      "date": "2025-12-20",
+      "name": "Indoormeeting Gent",
+      "color": "green",
+      "title": "Indoormeeting Gent",
+      "data_url": "https://www.atletiek.nu/wedstrijd/main/43532/",
+      "data_location": "Topsporthal Gent",
+      "data_category": "Wedstrijd"
+    },
+    {
       "date": "2025-12-21",
       "name": "cross Gierle",
       "color": "green",
@@ -89,17 +104,19 @@
     },
     {
       "date": "2025-12-26",
-      "name": "Indoormeeting Gent (Dag1)",
+      "name": "Indoormeeting Gent",
       "color": "green",
-      "title": "Indoormeeting Gent (Dag1)",
+      "title": "Indoormeeting Gent",
+      "data_url": "https://www.atletiek.nu/wedstrijd/main/43533/",
       "data_location": "Zuiderlaan 14, 9000 Gent",
       "data_category": "wedstrijd"
     },
     {
       "date": "2025-12-27",
-      "name": "Indoormeeting Gent (Dag2)",
+      "name": "Indoormeeting Gent",
       "color": "green",
-      "title": "Indoormeeting Gent (Dag2)",
+      "title": "Indoormeeting Gent",
+      "data_url": "https://www.atletiek.nu/wedstrijd/main/43594/",
       "data_location": "Zuiderlaan 14, 9000 Gent",
       "data_category": "wedstrijd"
     },
@@ -165,11 +182,67 @@
       "data_location": "Duffel"
     },
     {
+      "date": "2026-02-14",
+      "name": "BK studenten indoor",
+      "color": "green",
+      "title": "BK studenten indoor",
+      "data_location": "Topsporthal Gent",
+      "data_category": "Kampioenschap"
+    },
+    {
+      "date": "2026-02-14",
+      "name": "BK Masters indoor",
+      "color": "blue",
+      "title": "BK Masters indoor",
+      "data_location": "Louvain-La-Neuve",
+      "data_category": "Kampioenschap"
+    },
+    {
+      "date": "2026-02-21",
+      "name": "BK Meerkampen dag 1",
+      "color": "blue",
+      "title": "BK Meerkampen dag 1",
+      "data_location": "Topsporthal Gent",
+      "data_category": "Kampioenschap"
+    },
+    {
+      "date": "2026-02-21",
+      "name": "BK 4x400m indoor",
+      "color": "blue",
+      "title": "BK 4x400m indoor",
+      "data_location": "Topsporthal Gent",
+      "data_category": "Kampioenschap"
+    },
+    {
       "date": "2026-02-22",
       "name": "KVV cross Lokeren",
       "color": "blue",
       "title": "KVV cross Lokeren",
       "data_location": "Lokeren"
+    },
+    {
+      "date": "2026-02-22",
+      "name": "BK Meerkampen dag 2",
+      "color": "blue",
+      "title": "BK Meerkampen dag 2",
+      "data_location": "Topsporthal Gent",
+      "data_category": "Kampioenschap"
+    },
+    {
+      "date": "2026-02-22",
+      "name": "BK 4x400m mixed indoor",
+      "color": "blue",
+      "title": "BK 4x400m mixed indoor",
+      "data_location": "Topsporthal Gent",
+      "data_category": "Kampioenschap"
+    },
+    {
+      "date": "2026-03-01",
+      "name": "BK alle categorieën indoor",
+      "color": "blue",
+      "title": "BK alle categorieën indoor",
+      "data_location": "Louvain-La-Neuve",
+      "data_category": "Topsporthal Gent"
     },
     {
       "date": "2026-03-07",
@@ -181,11 +254,19 @@
     },
     {
       "date": "2026-03-08",
-      "name": "BK Junioren Gent",
+      "name": "BK Juniores en beloften",
       "color": "blue",
-      "title": "BK Junioren Gent",
-      "data_location": "Zuiderlaan 14, 9000 Gent",
-      "data_category": "wedstrijd"
+      "title": "BK Juniores en beloften",
+      "data_location": "Louvain-La-Neuve",
+      "data_category": "Kampioenschap"
+    },
+    {
+      "date": "2026-03-08",
+      "name": "BK AMH indoor",
+      "color": "blue",
+      "title": "BK AMH indoor",
+      "data_location": "Topsporthal Gent",
+      "data_category": "Kampioenschap"
     }
   ],
   "displayedMonths": [
