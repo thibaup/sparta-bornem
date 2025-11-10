@@ -267,6 +267,170 @@
       "title": "BK AMH indoor",
       "data_location": "Topsporthal Gent",
       "data_category": "Kampioenschap"
+    },
+    {
+      "date": "2026-04-04",
+      "name": "KSPBO feest",
+      "color": "black",
+      "title": "KSPBO feest",
+      "data_location": "Breevendreef 108, 2880 Bornem",
+      "data_category": "Feestelijkheden"
+    },
+    {
+      "date": "2026-04-25",
+      "name": "PK alle categorieën dag 1",
+      "color": "blue",
+      "title": "PK alle categorieën dag 1",
+      "data_location": "Bornem, Breevendreef 108, 2880 Bornem",
+      "data_category": "Kampioenschap"
+    },
+    {
+      "date": "2026-04-26",
+      "name": "PK alle categorieën dag 2",
+      "color": "blue",
+      "title": "PK alle categorieën dag 2",
+      "data_location": "Lier",
+      "data_category": "Kampioenschap"
+    },
+    {
+      "date": "2026-05-09",
+      "name": "BVV pupillen en miniemen",
+      "color": "blue",
+      "title": "BVV pupillen en miniemen",
+      "data_category": "Interclub"
+    },
+    {
+      "date": "2026-05-10",
+      "name": "BVV cadetten en scholieren",
+      "color": "blue",
+      "title": "BVV cadetten en scholieren",
+      "data_category": "Interclub"
+    },
+    {
+      "date": "2026-05-14",
+      "name": "KVV alle categorieën",
+      "color": "blue",
+      "title": "KVV alle categorieën",
+      "data_category": "Kampioenschap"
+    },
+    {
+      "date": "2026-05-17",
+      "name": "BVV alle categorieën",
+      "color": "blue",
+      "title": "BVV alle categorieën",
+      "data_category": "Interclub"
+    },
+    {
+      "date": "2026-06-06",
+      "name": "BK Masters dag 1",
+      "color": "blue",
+      "title": "BK Masters dag 1",
+      "data_category": "Kampioenschap"
+    },
+    {
+      "date": "2026-06-07",
+      "name": "BK Masters dag 2",
+      "color": "blue",
+      "title": "BK Masters dag 2",
+      "data_category": "Kampioenschap"
+    },
+    {
+      "date": "2026-06-14",
+      "name": "BVV Masters",
+      "color": "blue",
+      "title": "BVV Masters",
+      "data_category": "Interclub"
+    },
+    {
+      "date": "2026-06-27",
+      "name": "BK AMH",
+      "color": "blue",
+      "title": "BK AMH",
+      "data_category": "Kampioenschap"
+    },
+    {
+      "date": "2026-06-28",
+      "name": "PK pupillen en miniemen",
+      "color": "blue",
+      "title": "PK pupillen en miniemen",
+      "data_category": "Kampioenschap"
+    },
+    {
+      "date": "2026-07-25",
+      "name": "BK alle categorieën dag 1",
+      "color": "blue",
+      "title": "BK alle categorieën dag 1",
+      "data_category": "Kampioenschap"
+    },
+    {
+      "date": "2026-07-26",
+      "name": "BK alle categorieën dag 2",
+      "color": "blue",
+      "title": "BK alle categorieën dag 2",
+      "data_category": "Kampioenschap"
+    },
+    {
+      "date": "2026-08-08",
+      "name": "BK meerkampen dag 1",
+      "color": "blue",
+      "title": "BK meerkampen dag 1",
+      "data_category": "Kampioenschap"
+    },
+    {
+      "date": "2026-08-09",
+      "name": "BK meerkampen dag 2",
+      "color": "blue",
+      "title": "BK meerkampen dag 2",
+      "data_category": "Kampioenschap"
+    },
+    {
+      "date": "2026-08-15",
+      "name": "KVV cadetten/scholieren",
+      "color": "blue",
+      "title": "KVV cadetten/scholieren",
+      "data_category": "Kampioenschap"
+    },
+    {
+      "date": "2026-08-16",
+      "name": "KVV Masters",
+      "color": "blue",
+      "title": "KVV Masters",
+      "data_category": "Kampioenschap"
+    },
+    {
+      "date": "2026-08-22",
+      "name": "PK estafette",
+      "color": "blue",
+      "title": "PK estafette",
+      "data_category": "Kampioenschap"
+    },
+    {
+      "date": "2026-08-29",
+      "name": "BK cadetten en scholieren dag 1",
+      "color": "blue",
+      "title": "BK cadetten en scholieren dag 1",
+      "data_category": "Kampioenschap"
+    },
+    {
+      "date": "2026-08-30",
+      "name": "BK cadetten en scholieren dag 2",
+      "color": "blue",
+      "title": "BK cadetten en scholieren dag 2",
+      "data_category": "Kampioenschap"
+    },
+    {
+      "date": "2026-09-13",
+      "name": "BK juniores en beloften",
+      "color": "blue",
+      "title": "BK juniores en beloften",
+      "data_category": "Kampioenschap"
+    },
+    {
+      "date": "2026-09-20",
+      "name": "BK estafette",
+      "color": "blue",
+      "title": "BK estafette",
+      "data_category": "Kampioenschap"
     }
   ],
   "displayedMonths": [
@@ -293,6 +457,30 @@
     [
       2026,
       3
+    ],
+    [
+      2026,
+      4
+    ],
+    [
+      2026,
+      5
+    ],
+    [
+      2026,
+      6
+    ],
+    [
+      2026,
+      7
+    ],
+    [
+      2026,
+      8
+    ],
+    [
+      2026,
+      9
     ]
   ]
 }
