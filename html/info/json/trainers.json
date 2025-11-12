@@ -200,7 +200,7 @@
       "role": "Vertrouwenspersoon",
       "name": "Britta Vincke",
       "email": "britta_vincke@skynet.be",
-      "phone": "03 889 70 33",
+      "phone": null,
       "image": "/images/personen/Britta_klein.jpg",
       "imageAlt": "Foto Britta Vincke"
     }
