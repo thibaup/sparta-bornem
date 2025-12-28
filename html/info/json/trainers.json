@@ -5,12 +5,12 @@
       "category": "<strong>Kangoeroes</strong> & <strong>Benjamins</strong>",
       "schedule": [
         {
-          "day": "Vrijdag",
+          "day": "Woensdag",
           "time": "18:00u - 19:15u",
           "note": null
         },
         {
-          "day": "Woensdag",
+          "day": "Vrijdag",
           "time": "18:00u - 19:15u",
           "note": null
         }
@@ -20,12 +20,12 @@
       "category": "<strong>Pupillen</strong>",
       "schedule": [
         {
-          "day": "Vrijdag",
+          "day": "Woensdag",
           "time": "18:00u - 19:30u",
           "note": null
         },
         {
-          "day": "Woensdag",
+          "day": "Vrijdag",
           "time": "18:00u - 19:30u",
           "note": null
         },
@@ -40,12 +40,12 @@
       "category": "<strong>Miniemen</strong>",
       "schedule": [
         {
-          "day": "Vrijdag",
+          "day": "Woensdag",
           "time": "18:00u - 19:30u",
           "note": null
         },
         {
-          "day": "Woensdag",
+          "day": "Vrijdag",
           "time": "18:00u - 19:30u",
           "note": null
         },
@@ -60,12 +60,12 @@
       "category": "<strong>Fond, 1/2 fond (vanaf cadetten)</strong>",
       "schedule": [
         {
-          "day": "Vrijdag",
+          "day": "Woensdag",
           "time": "18:00u - 19:30u",
           "note": null
         },
         {
-          "day": "Woensdag",
+          "day": "Vrijdag",
           "time": "18:00u - 19:30u",
           "note": null
         },
@@ -85,12 +85,12 @@
           "note": null
         },
         {
-          "day": "Vrijdag",
+          "day": "Woensdag",
           "time": "18:00u - 20:00u",
           "note": null
         },
         {
-          "day": "Woensdag",
+          "day": "Vrijdag",
           "time": "18:00u - 20:00u",
           "note": null
         },
@@ -135,12 +135,12 @@
           "note": null
         },
         {
-          "day": "Vrijdag",
+          "day": "Woensdag",
           "time": "18:00u - 20:00u",
           "note": null
         },
         {
-          "day": "Woensdag",
+          "day": "Vrijdag",
           "time": "18:00u - 20:00u",
           "note": null
         },
@@ -155,14 +155,14 @@
       "category": "<strong>Joggers (vanaf cadetten)</strong>",
       "schedule": [
         {
-          "day": "Vrijdag",
-          "time": "18:00u - 19:30u",
-          "note": "(Duurloop)"
-        },
-        {
           "day": "Woensdag",
           "time": "18:00u - 19:30u",
           "note": "(Piste)"
+        },
+        {
+          "day": "Vrijdag",
+          "time": "18:00u - 19:30u",
+          "note": "(Duurloop)"
         },
         {
           "day": "Zondag",
