@@ -28,99 +28,6 @@
   },
   "events": [
     {
-      "date": "2025-10-17",
-      "name": "Net-echt cross jeugd",
-      "color": "green",
-      "title": "Net-echt cross jeugd",
-      "data_location": "Kantine",
-      "data_category": "Activiteiten",
-      "data_info": "Net-echt cross voor de jeugd (kan tot en met min)"
-    },
-    {
-      "date": "2025-11-02",
-      "name": "cross Bonheiden",
-      "color": "green",
-      "title": "cross Bonheiden",
-      "data_url": "https://www.atletiek.nu/wedstrijd/main/43575/",
-      "data_location": "Waversesteenweg 2820 Bonheiden",
-      "data_category": "wedstrijd"
-    },
-    {
-      "date": "2025-11-08",
-      "name": "Clubavond",
-      "color": "black",
-      "title": "Clubavond",
-      "data_url": "https://docs.google.com/forms/d/e/1FAIpQLScAJOgDCFfyna6H_klzVwnln4cTQWoo-gWgxHPPm5ENiRQi7g/viewform",
-      "data_location": "Zaal Kloosterheide, Bornem",
-      "data_category": "Festiviteiten"
-    },
-    {
-      "date": "2025-11-11",
-      "name": "cross Mechelen",
-      "color": "green",
-      "title": "cross Mechelen",
-      "data_location": "De Nekker, Mechelen",
-      "data_category": "wedstrijd"
-    },
-    {
-      "date": "2025-11-16",
-      "name": "cross Lebbeke",
-      "color": "green",
-      "title": "cross Lebbeke",
-      "data_url": "https://www.atletiek.nu/wedstrijd/main/43596/",
-      "data_location": "Koning Albert I-straat 124 9280 Lebbeke",
-      "data_category": "wedstrijd"
-    },
-    {
-      "date": "2025-11-30",
-      "name": "BK cross Hulshout",
-      "color": "blue",
-      "title": "BK cross Hulshout",
-      "data_location": "Hulshout",
-      "data_category": "wedstrijd"
-    },
-    {
-      "date": "2025-12-05",
-      "name": "Sintfeest",
-      "color": "black",
-      "title": "Sintfeest"
-    },
-    {
-      "date": "2025-12-20",
-      "name": "Indoormeeting Gent",
-      "color": "green",
-      "title": "Indoormeeting Gent",
-      "data_url": "https://www.atletiek.nu/wedstrijd/main/43532/",
-      "data_location": "Topsporthal Gent",
-      "data_category": "Wedstrijd"
-    },
-    {
-      "date": "2025-12-21",
-      "name": "cross Gierle",
-      "color": "green",
-      "title": "cross Gierle",
-      "data_location": "Lilse Bergen",
-      "data_category": "wedstrijd"
-    },
-    {
-      "date": "2025-12-26",
-      "name": "Indoormeeting Gent",
-      "color": "green",
-      "title": "Indoormeeting Gent",
-      "data_url": "https://www.atletiek.nu/wedstrijd/main/43533/",
-      "data_location": "Zuiderlaan 14, 9000 Gent",
-      "data_category": "wedstrijd"
-    },
-    {
-      "date": "2025-12-27",
-      "name": "Indoormeeting Gent",
-      "color": "green",
-      "title": "Indoormeeting Gent",
-      "data_url": "https://www.atletiek.nu/wedstrijd/main/43594/",
-      "data_location": "Zuiderlaan 14, 9000 Gent",
-      "data_category": "wedstrijd"
-    },
-    {
       "date": "2026-01-04",
       "name": "PK indoor Gent",
       "color": "green",
@@ -314,6 +221,13 @@
       "data_category": "Kampioenschap"
     },
     {
+      "date": "2026-05-16",
+      "name": "Jeugdmeeting Klein-Brabants jeugdcritrium",
+      "color": "green",
+      "title": "Jeugdmeeting Klein-Brabants jeugdcritrium",
+      "data_location": "Bornem"
+    },
+    {
       "date": "2026-05-17",
       "name": "BVV alle categorieën",
       "color": "blue",
@@ -340,6 +254,12 @@
       "color": "blue",
       "title": "BVV Masters",
       "data_category": "Interclub"
+    },
+    {
+      "date": "2026-06-26",
+      "name": "Memorial Jos Muyshondt",
+      "color": "green",
+      "title": "Memorial Jos Muyshondt"
     },
     {
       "date": "2026-06-27",
@@ -435,18 +355,6 @@
   ],
   "displayedMonths": [
     [
-      2025,
-      10
-    ],
-    [
-      2025,
-      11
-    ],
-    [
-      2025,
-      12
-    ],
-    [
       2026,
       1
     ],
@@ -481,6 +389,18 @@
     [
       2026,
       9
+    ],
+    [
+      2026,
+      10
+    ],
+    [
+      2026,
+      11
+    ],
+    [
+      2026,
+      12
     ]
   ]
 }
