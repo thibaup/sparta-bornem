@@ -11,26 +11,27 @@
         p { margin-bottom: 1em; }
 
         .main-content { padding: 40px 0; }
-        .main-content h1 { font-size: 2.2em; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        .main-content h2 { font-size: 1.8em; margin-top: 30px; margin-bottom: 15px; color: #1774b4; }
+        .main-content h1 { font-size: 2.2em; margin-bottom: 22px; border-bottom: 2px solid #e7edf3; padding-bottom: 12px; color: #1f2b36; }
+        .main-content h2 { font-size: 1.7em; margin-top: 28px; margin-bottom: 14px; color: #1774b4; }
 
         .board-member {
             background-color: #fff;
-            border: 1px solid #eee;
+            border: 1px solid #e6ecf2;
             padding: 20px;
             margin-bottom: 20px;
             overflow: hidden; /* Clear floats */
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            border-radius: 5px;
+            box-shadow: 0 8px 18px rgba(17,44,74,0.08);
+            border-radius: 12px;
         }
         .board-member img {
             float: right;
-            width: 100px;
-            height: 100px;
+            width: 96px;
+            height: 96px;
             margin-left: 20px;
             margin-bottom: 10px;
-            border-radius: 3px;
+            border-radius: 10px;
             object-fit: cover;
+            border: 2px solid #e6ecf2;
         }
          .board-member h3 {
              font-size: 1.5em;
@@ -39,7 +40,7 @@
          }
          .board-member .role {
              font-weight: bold;
-             color: #555;
+             color: #4e5a66;
              margin-bottom: 10px;
              display: block;
          }
@@ -49,6 +50,11 @@
         }
         .board-member a {
              word-break: break-all;
+        }
+
+        @media (max-width: 768px) {
+            .board-member { text-align: center; }
+            .board-member img { float: none; margin: 0 auto 12px; }
         }
   </style>
   <link href="/css/style.css" rel="stylesheet"> <!-- Global styles -->

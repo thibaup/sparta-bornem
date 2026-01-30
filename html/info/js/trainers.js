@@ -8,6 +8,14 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('One or more placeholder elements not found in the HTML.');
         return;
     }
+    const hideImageOnError = (img, onAfterRemove) => {
+        img.addEventListener('error', () => {
+            img.remove();
+            if (typeof onAfterRemove === 'function') {
+                onAfterRemove();
+            }
+        });
+    };
     fetch(jsonPath)
         .then(response => {
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status} while fetching ${jsonPath}`);
@@ -63,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         const img = document.createElement('img');
                         img.src = contact.image;
                         img.alt = contact.imageAlt || `Foto ${contact.name}`;
+                        hideImageOnError(img);
                         personDiv.appendChild(img);
                     }
                     const pName = document.createElement('p');
@@ -112,6 +121,11 @@ document.addEventListener('DOMContentLoaded', function() {
                         mainImg.src = group.mainPhoto.src;
                         mainImg.alt = group.mainPhoto.alt || `Hoofdfoto ${group.groupName}`;
                         mainImg.addEventListener('click', window.openTrainerImageInLightbox);
+                        hideImageOnError(mainImg, () => {
+                            if (!imageCenterDiv.querySelector('img')) {
+                                imageCenterDiv.remove();
+                            }
+                        });
                         imageCenterDiv.appendChild(mainImg);
                     }
                     if (group.thumbnails && group.thumbnails.length > 0) {
@@ -123,6 +137,11 @@ document.addEventListener('DOMContentLoaded', function() {
                             thumbImg.src = thumb.src;
                             thumbImg.alt = thumb.alt || `Thumbnail ${group.groupName}`;
                             thumbImg.addEventListener('click', window.openTrainerImageInLightbox);
+                            hideImageOnError(thumbImg, () => {
+                                if (!imageCenterDiv.querySelector('img')) {
+                                    imageCenterDiv.remove();
+                                }
+                            });
                             extraContentDiv.appendChild(thumbImg);
                         });
                         imageCenterDiv.appendChild(extraContentDiv);

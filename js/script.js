@@ -165,6 +165,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 const isActive = mainNavUl.classList.toggle('active'); 
                 menuToggle.innerHTML = isActive ? '✕' : '☰'; 
                 menuToggle.setAttribute('aria-expanded', isActive);
+                if (isActive && !mainNavUl.dataset.firstOpened) {
+                    mainNavUl.dataset.firstOpened = 'true';
+                    mainNavUl.classList.add('menu-first-open');
+                    mainNavUl.addEventListener('animationend', () => {
+                        mainNavUl.classList.remove('menu-first-open');
+                    }, { once: true });
+                }
 
                 if (!isActive) {
                     mainNavUl.querySelectorAll('li.submenu-open').forEach(li => {
@@ -398,3 +405,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
 window.addEventListener('load', adjustFooterPosition);
 window.addEventListener('resize', debounceFooterAdjust);
+

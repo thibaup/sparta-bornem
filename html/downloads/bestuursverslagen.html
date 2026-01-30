@@ -22,9 +22,29 @@
 
     /* --- Main Content Area --- */
     .main-content { padding: 40px 0; }
-    .main-content h1 { font-size: 2.2em; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-    .main-content h2 { font-size: 1.8em; margin-top: 30px; margin-bottom: 15px; color: #1774b4; }
-    .report-list li { margin-bottom: 0.5em; }
+    .main-content h1 { font-size: 2.2em; margin-bottom: 22px; border-bottom: 2px solid #e7edf3; padding-bottom: 12px; color: #1f2b36; }
+    .main-content h2 { font-size: 1.6em; margin-top: 28px; margin-bottom: 14px; color: #1774b4; }
+    .report-list { list-style: none; margin-left: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+    .report-list li { margin: 0; }
+    .report-list a {
+        display: block;
+        padding: 12px 14px;
+        border-radius: 10px;
+        border: 1px solid #e2e6ea;
+        background: #ffffff;
+        box-shadow: 0 6px 14px rgba(17, 44, 74, 0.08);
+        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    .report-list a:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 24px rgba(17, 44, 74, 0.12);
+        border-color: #cfe0f1;
+        text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+        .report-list { grid-template-columns: 1fr; }
+    }
   </style>
   <link href="/css/style.css" rel="stylesheet">
  </head>
