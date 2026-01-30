@@ -5,7 +5,7 @@
     {
       "name": "Christophe Van Herck",
       "role": "Voorzitter",
-      "imageSrc": "/images/personen/bestuur/cvanherck_site.jpg",
+      "imageSrc": "/images/personen/bestuur/CIMG9262.JPG",
       "imageAlt": "Foto Christophe Van Herck",
       "address": "Barelstraat 109a, 2880 Bornem",
       "phone": "0476/496933",
@@ -14,7 +14,7 @@
     {
       "name": "Johan Permentier",
       "role": "Secretaris",
-      "imageSrc": "/images/personen/trainer-johan-2.png",
+      "imageSrc": "/images/personen/bestuur/CIMG9266.JPG",
       "imageAlt": "Foto Johan Permentier",
       "address": "Albertstraat 64, 2880 Bornem",
       "phone": "0472/642694",
@@ -43,15 +43,6 @@
       "role": "Bestuurslid",
       "imageSrc": "/images/personen/trainer-leeg.png",
       "imageAlt": "Foto Leen Peeters",
-      "address": null,
-      "phone": null,
-      "email": null
-    },
-    {
-      "name": "Frederik Polen",
-      "role": "Bestuurslid",
-      "imageSrc": "/images/personen/trainer-leeg.png",
-      "imageAlt": "Foto Frederik Polen",
       "address": null,
       "phone": null,
       "email": null
