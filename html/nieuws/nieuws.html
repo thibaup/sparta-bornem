@@ -8,208 +8,397 @@
     <!-- Link the GLOBAL stylesheet FIRST -->
     <link rel="stylesheet" href="/css/style.css">
     <!-- Add ONLY the PAGE-SPECIFIC styles here -->
-    <style>
-        /* Keep ONLY styles specific to the News Archive page layout */
+        <style>
+        :root {
+            --news-ink: #17212b;
+            --news-muted: #526071;
+            --news-accent: #0f4f77;
+            --news-accent-bright: #1b6ea8;
+            --news-gold: #f3b541;
+            --news-surface: #ffffff;
+            --news-border: rgba(15, 79, 119, 0.12);
+            --news-shadow: 0 14px 32px rgba(15, 38, 64, 0.14);
+            --news-radius: 22px;
+        }
 
-        /* ==========================================================================
-           News Search Bar Styling
-           ========================================================================== */
+        body.news-archive-page {
+            font-family: "Palatino Linotype", "Book Antiqua", Palatino, "Georgia", serif;
+            color: var(--news-ink);
+            background-color: #f3f4f7;
+            background-image:
+                radial-gradient(circle at 12% 16%, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0) 50%),
+                radial-gradient(circle at 82% 6%, rgba(219, 234, 246, 0.75) 0%, rgba(219, 234, 246, 0) 55%),
+                linear-gradient(180deg, #fbfbf8 0%, #f1f3f7 55%, #eef2f7 100%);
+            background-attachment: fixed;
+        }
+
+        .news-archive-page main.main-content {
+            padding-top: 32px;
+            padding-bottom: 60px;
+        }
+
+        .news-hero {
+            display: grid;
+            gap: 20px;
+            padding: 32px 32px 26px;
+            border-radius: var(--news-radius);
+            background: linear-gradient(120deg, rgba(219, 234, 246, 0.7), rgba(243, 181, 65, 0.2));
+            border: 1px solid var(--news-border);
+            box-shadow: var(--news-shadow);
+            position: relative;
+            overflow: hidden;
+            animation: newsReveal 0.6s ease-out both;
+        }
+
+        .news-hero::after {
+            content: "";
+            position: absolute;
+            right: -140px;
+            top: -140px;
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle, rgba(15, 79, 119, 0.18), transparent 65%);
+            pointer-events: none;
+        }
+
+        .news-hero > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .news-eyebrow {
+            text-transform: uppercase;
+            letter-spacing: 0.4em;
+            font-size: 0.7em;
+            color: var(--news-accent);
+            margin-bottom: 10px;
+            font-family: "Franklin Gothic Medium", "Trebuchet MS", "Gill Sans", sans-serif;
+        }
+
+        .news-hero h1 {
+            font-size: clamp(2.2rem, 4vw, 3.1rem);
+            margin-bottom: 10px;
+            color: #0f2f46;
+            font-family: "Franklin Gothic Medium", "Trebuchet MS", "Gill Sans", sans-serif;
+        }
+
+        .news-lede {
+            font-size: 1.05rem;
+            color: var(--news-muted);
+            max-width: 60ch;
+        }
+
         .news-search-container {
-            margin-bottom: 30px; /* Space below search bar */
-            position: relative; /* For potential future icons */
+            margin-top: 10px;
+            max-width: 420px;
         }
 
         #news-search-input {
-            width: 100%; /* Full width */
-            padding: 12px 15px; /* Comfortable padding */
-            font-size: 1em;
-            font-family: inherit; /* Use body font */
-            border: 1px solid #ced4da; /* Standard border */
-            border-radius: 5px; /* Rounded corners */
-            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075); /* Subtle inner shadow */
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            width: 100%;
+            padding: 12px 18px;
+            font-size: 0.95rem;
+            font-family: "Franklin Gothic Medium", "Trebuchet MS", "Gill Sans", sans-serif;
+            border: 1px solid rgba(15, 79, 119, 0.25);
+            border-radius: 999px;
+            background: #ffffff;
+            box-shadow: inset 0 1px 2px rgba(15, 79, 119, 0.08);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
         }
 
         #news-search-input:focus {
-            border-color: #1774b4; /* Highlight border on focus */
-            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075), 0 0 0 0.2rem rgba(23, 116, 180, 0.25); /* Add focus ring */
-            outline: none; /* Remove default outline */
+            border-color: rgba(15, 79, 119, 0.6);
+            box-shadow: 0 0 0 3px rgba(243, 181, 65, 0.35);
+            outline: none;
         }
 
         #news-search-input::placeholder {
-            color: #999;
-            opacity: 1; /* Firefox */
+            color: #8a96a3;
+            opacity: 1;
         }
 
         #news-search-input::-webkit-search-cancel-button,
         #news-search-input::-webkit-search-decoration {
-           -webkit-appearance: none;
-           appearance: none;
+            -webkit-appearance: none;
+            appearance: none;
         }
 
-        /* ==========================================================================
-           News Grid & Item Styling
-           ========================================================================== */
+        .news-results-meta {
+            margin: 22px 4px 12px;
+            font-size: 0.8rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: #6a7785;
+            font-family: "Franklin Gothic Medium", "Trebuchet MS", "Gill Sans", sans-serif;
+            display: none;
+        }
 
         .news-archive-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            padding-top: 20px;
-            align-items: stretch;
-            margin-bottom: 40px; /* Space above footer */
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 26px;
+            padding-top: 8px;
+            margin-bottom: 40px;
         }
 
         .news-item {
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+            background-color: var(--news-surface);
+            border-radius: 20px;
+            border: 1px solid var(--news-border);
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            transition: box-shadow 0.3s ease, transform 0.3s ease;
-            flex-grow: 1;
-            flex-shrink: 1;
-            flex-basis: 300px;
-            min-width: 280px;
-            max-width: calc(50% - 15px);
+            position: relative;
+            box-shadow: 0 12px 28px rgba(15, 38, 64, 0.12);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: newsReveal 0.6s ease-out both;
         }
-         .news-item > .news-item-image-link {
-             display: block;
-             line-height: 0;
-         }
-         .news-item img {
-             width: 100%;
-             aspect-ratio: 16 / 9;
-             object-fit: cover;
-             border-bottom: 1px solid #eee;
-             display: block;
-         }
+
+        .news-item::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 4px;
+            width: 100%;
+            background: linear-gradient(90deg, var(--news-accent), var(--news-gold));
+        }
+
+        .news-item > .news-item-image-link {
+            display: block;
+            line-height: 0;
+            position: relative;
+        }
+
+        .news-item > .news-item-image-link::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 55%, rgba(15, 31, 47, 0.5));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .news-item img {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
 
         .news-item:hover {
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
-            transform: translateY(-3px);
+            transform: translateY(-6px);
+            box-shadow: 0 18px 40px rgba(15, 38, 64, 0.18);
+        }
+
+        .news-item:hover img {
+            transform: scale(1.04);
+        }
+
+        .news-item:hover .news-item-image-link::after {
+            opacity: 1;
         }
 
         .news-content {
-            padding: 20px;
+            padding: 22px 22px 26px;
             display: flex;
             flex-direction: column;
+            gap: 10px;
             flex-grow: 1;
         }
 
         .news-meta {
-            font-size: 0.85em;
-            color: #6c757d;
-            margin-bottom: 8px;
-            display: block;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: #6a7785;
+            font-family: "Franklin Gothic Medium", "Trebuchet MS", "Gill Sans", sans-serif;
+        }
+
+        .news-sep {
+            color: #c2cbd5;
+        }
+
+        .news-category {
+            background: rgba(15, 79, 119, 0.08);
+            color: #0f4f77;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-weight: 700;
         }
 
         .news-title {
-            font-size: 1.2em;
-            margin-bottom: 10px;
+            font-size: 1.35rem;
             line-height: 1.3;
-            color: #1a1a1a;
-            font-weight: 600;
+            color: #0f2f46;
+            font-family: "Franklin Gothic Medium", "Trebuchet MS", "Gill Sans", sans-serif;
         }
 
         .news-title a {
-            color: #1774b4;
+            color: inherit;
             text-decoration: none;
-            transition: color 0.2s ease;
         }
-         .news-title a:hover {
-             color: #125a8c;
-             text-decoration: underline;
-         }
+
+        .news-title a:hover {
+            color: var(--news-accent-bright);
+        }
 
         .news-summary {
-            font-size: 0.95em;
-            color: #495057;
+            font-size: 0.98rem;
+            color: #2f3a46;
             line-height: 1.6;
-            flex-grow: 1; 
-            margin-bottom: 15px;
-            line-clamp: 3;
-            -webkit-line-clamp: 3;
-
+            flex-grow: 1;
+            margin-bottom: 4px;
             display: -webkit-box;
             -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
             overflow: hidden;
             text-overflow: ellipsis;
-
             max-height: 4.8em;
         }
 
         .read-more {
             margin-top: auto;
-            align-self: flex-start; 
-            font-size: 0.9em;
-            font-weight: 600;
-            color: #1774b4;
-            text-decoration: none;
-            transition: color 0.2s ease;
-            padding: 5px 0;
+            align-self: flex-start;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 16px;
+            border-radius: 999px;
+            border: 1px solid rgba(15, 79, 119, 0.25);
+            background: rgba(15, 79, 119, 0.06);
+            font-family: "Franklin Gothic Medium", "Trebuchet MS", "Gill Sans", sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-size: 0.72rem;
+            color: var(--news-accent);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
         }
-         .read-more:hover {
-             color: #125a8c;
-             text-decoration: underline;
-         }
+
+        .read-more::after {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-right: 2px solid currentColor;
+            border-top: 2px solid currentColor;
+            transform: rotate(45deg);
+        }
+
+        .read-more:hover {
+            transform: translateY(-2px);
+            background: rgba(15, 79, 119, 0.12);
+            box-shadow: 0 8px 16px rgba(15, 38, 64, 0.16);
+        }
 
         #news-no-results,
         #news-loading-container {
             width: 100%;
+        }
+
+        .news-state {
             text-align: center;
             padding: 30px;
             font-style: italic;
-            color: #6c757d;
+            color: var(--news-muted);
         }
 
         #news-no-results {
             display: none;
-            margin-bottom: 40px; /* Space above footer */
+            margin-bottom: 40px;
         }
 
         .visually-hidden {
             position: absolute !important;
-            height: 1px; width: 1px;
+            height: 1px;
+            width: 1px;
             overflow: hidden;
             clip: rect(1px, 1px, 1px, 1px);
             white-space: nowrap;
         }
 
-        /* Responsive adjustments specifically FOR NEWS ITEMS */
-        @media (min-width: 992px) {
-            .news-item {
-                 max-width: calc(33.333% - 20px); /* 3 columns */
+        @keyframes newsReveal {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .news-item:nth-child(1) { animation-delay: 0.05s; }
+        .news-item:nth-child(2) { animation-delay: 0.1s; }
+        .news-item:nth-child(3) { animation-delay: 0.15s; }
+        .news-item:nth-child(4) { animation-delay: 0.2s; }
+        .news-item:nth-child(5) { animation-delay: 0.25s; }
+        .news-item:nth-child(6) { animation-delay: 0.3s; }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important;
+                scroll-behavior: auto !important;
             }
         }
 
-        @media (max-width: 600px) {
-            .news-item {
-                 max-width: 100%; /* 1 column */
+        @media (min-width: 900px) {
+            .news-hero {
+                grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+                align-items: end;
+            }
+
+            .news-search-container {
+                justify-self: end;
+                width: 100%;
+                max-width: 360px;
             }
         }
 
+        @media (max-width: 640px) {
+            .news-hero {
+                padding: 24px 20px 20px;
+            }
+
+            .news-content {
+                padding: 20px;
+            }
+
+            .news-title {
+                font-size: 1.2rem;
+            }
+
+            .read-more {
+                width: 100%;
+                justify-content: center;
+            }
+        }
     </style>
 </head>
-<body>
+<body class="news-archive-page">
     <div id="header-placeholder"></div>
 
-    <main class="container main-content"> <!-- These classes get styled by style.css -->
-        <h1>Nieuwsarchief</h1> <!-- Styled by style.css -->
-        <p>Bekijk hier alle nieuwsberichten van Sparta Bornem.</p> <!-- Styled by style.css -->
+    <main class="container main-content news-archive">
+        <section class="news-hero">
+            <div class="news-hero-text">
+                <p class="news-eyebrow">Sparta Bornem</p>
+                <h1>Nieuwsarchief</h1>
+                <p class="news-lede">Bekijk hier alle nieuwsberichten van Sparta Bornem.</p>
+            </div>
+            <div class="news-search-container">
+                <label for="news-search-input" class="visually-hidden">Zoek nieuws:</label>
+                <input type="search" id="news-search-input" placeholder="Zoek op titel of samenvatting...">
+            </div>
+        </section>
 
-        <!-- News specific elements -->
-        <div class="news-search-container">
-             <label for="news-search-input" class="visually-hidden">Zoek nieuws:</label>
-             <input type="search" id="news-search-input" placeholder="Zoek op titel of samenvatting...">
-        </div>
+        <div id="news-results-count" class="news-results-meta"></div>
 
-        <div id="news-loading-container" style="text-align: center; padding: 30px; font-style: italic;">
+        <div id="news-loading-container" class="news-state">
             <p id="news-loading">Nieuws wordt geladen...</p>
         </div>
 
-        <div id="news-no-results" style="display: none; text-align: center; padding: 30px; font-style: italic; color: #6c757d;">
+        <div id="news-no-results" class="news-state">
             <p>Geen nieuwsberichten gevonden die voldoen aan uw zoekopdracht.</p>
         </div>
 
@@ -221,12 +410,13 @@
     <div id="footer-placeholder"></div>
     <script src="/js/script.js" defer></script>
     <script>
-        // --- JavaScript remains the same ---
+        // News archive logic
         let allNewsArticles = [];
         const newsPlaceholder = document.getElementById('news-archive-placeholder');
         const loadingContainer = document.getElementById('news-loading-container');
         const searchInput = document.getElementById('news-search-input');
         const noResultsEl = document.getElementById('news-no-results');
+        const resultsCountEl = document.getElementById('news-results-count');
         const newsDataUrl = '/html/nieuws/nieuws-data.json';
 
         function AdjustFooter() {
@@ -256,9 +446,23 @@
              }, 10);
         }
 
+        function updateResultsCount(count) {
+            if (!resultsCountEl) return;
+            const total = allNewsArticles.length;
+            if (!total) {
+                resultsCountEl.textContent = '';
+                resultsCountEl.style.display = 'none';
+                return;
+            }
+            const label = count === total ? `${total} berichten` : `${count} van ${total} berichten`;
+            resultsCountEl.textContent = label;
+            resultsCountEl.style.display = 'block';
+        }
+
          function renderNewsArticles(articlesToRender) {
             newsPlaceholder.innerHTML = '';
             noResultsEl.style.display = 'none';
+            updateResultsCount(articlesToRender.length);
 
             if (articlesToRender.length === 0 && allNewsArticles.length > 0) {
                 noResultsEl.style.display = 'block';
@@ -289,17 +493,23 @@
 
                 const summaryText = item.summary || '';
                 const itemLink = `/html/nieuws/artikel.html?id=${item.id || ''}&ref=${encodeURIComponent(referrerPath)}`;
+                const categoryText = item.category || 'Algemeen';
+                const imageAlt = item.alt || item.title || 'Nieuwsafbeelding';
 
                 const articleHtml = `
                     <article class="news-item" id="news-${item.id || ''}">
                         <a href="${itemLink}" class="news-item-image-link" aria-hidden="true" tabindex="-1">
-                            <img src="${finalImageUrl}" alt="" loading="lazy">
+                            <img src="${finalImageUrl}" alt="${imageAlt}" loading="lazy">
                         </a>
                         <div class="news-content">
+                            <p class="news-meta">
+                                <span class="news-date">${formattedDate}</span>
+                                <span class="news-sep">|</span>
+                                <span class="news-category">${categoryText}</span>
+                            </p>
                             <h3 class="news-title"><a href="${itemLink}">${item.title}</a></h3>
-                            <p class="news-meta">${formattedDate} | ${item.category || 'Algemeen'}</p>
                             ${summaryText ? `<p class="news-summary">${summaryText}</p>` : ''}
-                            <a href="${itemLink}" class="read-more">Lees meer »</a>
+                            <a href="${itemLink}" class="read-more">Lees meer</a>
                         </div>
                     </article>
                     `;
@@ -368,6 +578,10 @@
                  if (searchInput) {
                     searchInput.disabled = true;
                     searchInput.placeholder = "Nieuws laden mislukt";
+                 }
+                 if (resultsCountEl) {
+                    resultsCountEl.textContent = '';
+                    resultsCountEl.style.display = 'none';
                  }
                  AdjustFooter(); // Adjust footer even on error
             }
