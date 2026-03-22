@@ -45,18 +45,18 @@
     },
     {
       "date": "2026-01-18",
-      "name": "cross Bornem",
-      "color": "blue",
-      "title": "cross Bornem",
-      "data_location": "Breeven",
-      "data_category": "wedstrijd"
-    },
-    {
-      "date": "2026-01-18",
       "name": "KVV indoor CAD/SCH Gent",
       "color": "blue",
       "title": "KVV indoor CAD/SCH Gent",
       "data_location": "Zuiderlaan 14, 9000 Gent",
+      "data_category": "wedstrijd"
+    },
+    {
+      "date": "2026-01-18",
+      "name": "cross Bornem",
+      "color": "blue",
+      "title": "cross Bornem",
+      "data_location": "Breeven",
       "data_category": "wedstrijd"
     },
     {
@@ -90,14 +90,6 @@
     },
     {
       "date": "2026-02-14",
-      "name": "BK studenten indoor",
-      "color": "green",
-      "title": "BK studenten indoor",
-      "data_location": "Topsporthal Gent",
-      "data_category": "Kampioenschap"
-    },
-    {
-      "date": "2026-02-14",
       "name": "BK Masters indoor",
       "color": "blue",
       "title": "BK Masters indoor",
@@ -105,10 +97,10 @@
       "data_category": "Kampioenschap"
     },
     {
-      "date": "2026-02-21",
-      "name": "BK Meerkampen dag 1",
-      "color": "blue",
-      "title": "BK Meerkampen dag 1",
+      "date": "2026-02-14",
+      "name": "BK studenten indoor",
+      "color": "green",
+      "title": "BK studenten indoor",
       "data_location": "Topsporthal Gent",
       "data_category": "Kampioenschap"
     },
@@ -121,11 +113,20 @@
       "data_category": "Kampioenschap"
     },
     {
-      "date": "2026-02-22",
-      "name": "KVV cross Lokeren",
+      "date": "2026-02-21",
+      "name": "BK Meerkampen dag 1",
       "color": "blue",
-      "title": "KVV cross Lokeren",
-      "data_location": "Lokeren"
+      "title": "BK Meerkampen dag 1",
+      "data_location": "Topsporthal Gent",
+      "data_category": "Kampioenschap"
+    },
+    {
+      "date": "2026-02-22",
+      "name": "BK 4x400m mixed indoor",
+      "color": "blue",
+      "title": "BK 4x400m mixed indoor",
+      "data_location": "Topsporthal Gent",
+      "data_category": "Kampioenschap"
     },
     {
       "date": "2026-02-22",
@@ -137,11 +138,10 @@
     },
     {
       "date": "2026-02-22",
-      "name": "BK 4x400m mixed indoor",
+      "name": "KVV cross Lokeren",
       "color": "blue",
-      "title": "BK 4x400m mixed indoor",
-      "data_location": "Topsporthal Gent",
-      "data_category": "Kampioenschap"
+      "title": "KVV cross Lokeren",
+      "data_location": "Lokeren"
     },
     {
       "date": "2026-03-01",
@@ -161,6 +161,14 @@
     },
     {
       "date": "2026-03-08",
+      "name": "BK AMH indoor",
+      "color": "blue",
+      "title": "BK AMH indoor",
+      "data_location": "Topsporthal Gent",
+      "data_category": "Kampioenschap"
+    },
+    {
+      "date": "2026-03-08",
       "name": "BK Juniores en beloften",
       "color": "blue",
       "title": "BK Juniores en beloften",
@@ -168,12 +176,12 @@
       "data_category": "Kampioenschap"
     },
     {
-      "date": "2026-03-08",
-      "name": "BK AMH indoor",
-      "color": "blue",
-      "title": "BK AMH indoor",
-      "data_location": "Topsporthal Gent",
-      "data_category": "Kampioenschap"
+      "date": "2026-03-29",
+      "name": "Jeugdmeeting Edegem",
+      "color": "green",
+      "title": "Jeugdmeeting Edegem",
+      "data_location": "Edegem",
+      "data_category": "wedstrijd"
     },
     {
       "date": "2026-04-04",
@@ -200,11 +208,20 @@
       "data_category": "Kampioenschap"
     },
     {
+      "date": "2026-05-01",
+      "name": "Jeugdmeeting Duffel",
+      "color": "green",
+      "title": "Jeugdmeeting Duffel",
+      "data_location": "Duffel",
+      "data_category": "wedstrijd"
+    },
+    {
       "date": "2026-05-09",
       "name": "BVV pupillen en miniemen",
       "color": "blue",
       "title": "BVV pupillen en miniemen",
-      "data_category": "Interclub"
+      "data_category": "Interclub",
+      "data_location": "Huizingen"
     },
     {
       "date": "2026-05-10",
@@ -215,6 +232,14 @@
     },
     {
       "date": "2026-05-14",
+      "name": "KBJ Londerzeel (Pegasus)",
+      "color": "green",
+      "title": "KBJ Londerzeel (Pegasus)",
+      "data_location": "Londerzeel (Pegasus)",
+      "data_category": "wedstrijd"
+    },
+    {
+      "date": "2026-05-14",
       "name": "KVV alle categorieën",
       "color": "blue",
       "title": "KVV alle categorieën",
@@ -222,10 +247,11 @@
     },
     {
       "date": "2026-05-16",
-      "name": "Jeugdmeeting Klein-Brabants jeugdcritrium",
+      "name": "KBJ Bornem",
       "color": "green",
-      "title": "Jeugdmeeting Klein-Brabants jeugdcritrium",
-      "data_location": "Bornem"
+      "title": "KBJ Bornem",
+      "data_location": "Bornem",
+      "data_category": "wedstrijd"
     },
     {
       "date": "2026-05-17",
@@ -233,6 +259,22 @@
       "color": "blue",
       "title": "BVV alle categorieën",
       "data_category": "Interclub"
+    },
+    {
+      "date": "2026-05-25",
+      "name": "PK meerkamp",
+      "color": "blue",
+      "title": "PK meerkamp",
+      "data_location": "Mol",
+      "data_category": "Kampioenschap"
+    },
+    {
+      "date": "2026-05-31",
+      "name": "Jeugdmeeting Mechelen",
+      "color": "green",
+      "title": "Jeugdmeeting Mechelen",
+      "data_location": "Mechelen",
+      "data_category": "wedstrijd"
     },
     {
       "date": "2026-06-06",
@@ -273,7 +315,16 @@
       "name": "PK pupillen en miniemen",
       "color": "blue",
       "title": "PK pupillen en miniemen",
-      "data_category": "Kampioenschap"
+      "data_category": "Kampioenschap",
+      "data_location": "Mechelen"
+    },
+    {
+      "date": "2026-07-04",
+      "name": "Jeugdmeeting Vilvoorde",
+      "color": "green",
+      "title": "Jeugdmeeting Vilvoorde",
+      "data_location": "Vilvoorde",
+      "data_category": "wedstrijd"
     },
     {
       "date": "2026-07-25",
@@ -304,6 +355,14 @@
       "data_category": "Kampioenschap"
     },
     {
+      "date": "2026-08-12",
+      "name": "WDK meeting",
+      "color": "green",
+      "title": "WDK meeting",
+      "data_location": "Sint-Niklaas",
+      "data_category": "wedstrijd"
+    },
+    {
       "date": "2026-08-15",
       "name": "KVV cadetten/scholieren",
       "color": "blue",
@@ -322,7 +381,8 @@
       "name": "PK estafette",
       "color": "blue",
       "title": "PK estafette",
-      "data_category": "Kampioenschap"
+      "data_category": "Kampioenschap",
+      "data_location": "Booischot"
     },
     {
       "date": "2026-08-29",
@@ -332,11 +392,27 @@
       "data_category": "Kampioenschap"
     },
     {
+      "date": "2026-08-29",
+      "name": "KBJ Boom",
+      "color": "green",
+      "title": "KBJ Boom",
+      "data_location": "Boom",
+      "data_category": "wedstrijd"
+    },
+    {
       "date": "2026-08-30",
       "name": "BK cadetten en scholieren dag 2",
       "color": "blue",
       "title": "BK cadetten en scholieren dag 2",
       "data_category": "Kampioenschap"
+    },
+    {
+      "date": "2026-09-12",
+      "name": "Jeugdmeeting Aartselaar",
+      "color": "green",
+      "title": "Jeugdmeeting Aartselaar",
+      "data_location": "Aartselaar",
+      "data_category": "wedstrijd"
     },
     {
       "date": "2026-09-13",
