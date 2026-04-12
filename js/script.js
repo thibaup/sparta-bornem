@@ -2,6 +2,26 @@
 
 let resizeTimerFooter; 
 
+function escapeHtml(value) {
+    return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
+function getNewsImageUrl(image) {
+    const imageValue = String(image || '').trim();
+    if (!imageValue) {
+        return '/images/nieuws/placeholder-news.png';
+    }
+    if (imageValue.startsWith('http://') || imageValue.startsWith('https://') || imageValue.startsWith('/')) {
+        return imageValue;
+    }
+    return `/images/nieuws/${imageValue}`;
+}
+
 function adjustFooterPosition() {
     const footerElement = document.querySelector('.site-footer');
     const body = document.body;
@@ -74,39 +94,42 @@ async function loadLatestNews(count = 3, containerId = 'latest-news-grid', loadi
                 day: 'numeric', month: 'long', year: 'numeric'
             });
 
-            let finalImageUrl = '/images/nieuws/placeholder-news.png'; 
-            if (item.image) { 
-                if (!item.image.startsWith('http://') && !item.image.startsWith('https://')) {
-                    finalImageUrl = `/images/nieuws/${item.image.trim()}`;
-                } else {
-                    finalImageUrl = item.image.trim();
-                }
-            }
+            const finalImageUrl = getNewsImageUrl(item.image);
 
             const summaryText = item.summary || '';
-            const itemLink = `/html/nieuws/artikel.html?id=${item.id || ''}&ref=${encodeURIComponent(referrerPath)}`;
+            const itemLink = `/html/nieuws/artikel.html?id=${encodeURIComponent(item.id || '')}&ref=${encodeURIComponent(referrerPath)}`;
+            const safeTitle = escapeHtml(item.title || '');
+            const safeSummary = escapeHtml(summaryText);
+            const safeCategory = escapeHtml(item.category || 'Algemeen');
+            const safeImageUrl = escapeHtml(finalImageUrl);
+            const safeItemLink = escapeHtml(itemLink);
+            const safeId = escapeHtml(item.id || '');
 
             let articleHtml;
             if (summaryText) {
                 articleHtml = `
-                <article class="news-item" id="latest-${item.id || ''}">
-                    <img src="${finalImageUrl}" alt="${item.title}" loading="lazy">
+                <article class="news-item" id="latest-${safeId}">
+                    <a href="${safeItemLink}" class="news-item-image-link" aria-hidden="true" tabindex="-1">
+                        <img src="${safeImageUrl}" alt="${safeTitle}" loading="lazy">
+                    </a>
                     <div class="news-content">
-                        <h3><a href="${itemLink}">${item.title}</a></h3>
-                        <p class="news-meta">${formattedDate} | ${item.category || 'Algemeen'}</p>
-                        <p>${summaryText}</p>
-                        <a href="${itemLink}" class="read-more">Lees meer »</a>
+                        <h3><a href="${safeItemLink}">${safeTitle}</a></h3>
+                        <p class="news-meta">${formattedDate} | ${safeCategory}</p>
+                        <p>${safeSummary}</p>
+                        <a href="${safeItemLink}" class="read-more">Lees meer »</a>
                     </div>
                 </article>
                 `;
             } else {
                  articleHtml = `
-                 <article class="news-item" id="latest-${item.id || ''}">
-                     <img src="${finalImageUrl}" alt="${item.title}" loading="lazy">
+                 <article class="news-item" id="latest-${safeId}">
+                     <a href="${safeItemLink}" class="news-item-image-link" aria-hidden="true" tabindex="-1">
+                         <img src="${safeImageUrl}" alt="${safeTitle}" loading="lazy">
+                     </a>
                      <div class="news-content">
-                         <h3><a href="${itemLink}">${item.title}</a></h3>
-                         <p class="news-meta">${formattedDate} | ${item.category || 'Algemeen'}</p>
-                         <a href="${itemLink}" class="read-more">Lees meer »</a>
+                         <h3><a href="${safeItemLink}">${safeTitle}</a></h3>
+                         <p class="news-meta">${formattedDate} | ${safeCategory}</p>
+                         <a href="${safeItemLink}" class="read-more">Lees meer »</a>
                      </div>
                  </article>
              `;
@@ -383,7 +406,7 @@ document.addEventListener('DOMContentLoaded', function() {
              initializeFooter();
              adjustFooterPosition();
          } else {
-             console.warn("loadAll: .site-footer not found after attempting load/checking static.");r
+             console.warn("loadAll: .site-footer not found after attempting load/checking static.");
              adjustFooterPosition();
          }
 

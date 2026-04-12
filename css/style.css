@@ -573,6 +573,78 @@ ol { margin-bottom: 1em; margin-left: 20px; }
 }
 
 /* ========== MAIN CONTENT STYLES ========== */
+body > main.container,
+body > main.main-content.container {
+    padding-top: clamp(32px, 5vw, 58px);
+    padding-bottom: clamp(46px, 7vw, 76px);
+}
+
+body > main.container > h1:first-child,
+body > main.main-content.container > h1:first-child {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    line-height: 1.15;
+    color: #13283a;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(15, 79, 119, 0.16);
+    position: relative;
+}
+
+body > main.container > h2,
+body > main.main-content.container > h2 {
+    color: var(--theme-blue-dark);
+    margin-top: 34px;
+    padding-top: 8px;
+}
+
+body > main.container > h3,
+body > main.main-content.container > h3 {
+    color: #26323d;
+    margin-top: 26px;
+}
+
+body > main.container > p,
+body > main.main-content.container > p,
+body > main.container > ol,
+body > main.main-content.container > ol,
+body > main.container > ul:not(.report-list):not(#downloads-list),
+body > main.main-content.container > ul:not(.report-list):not(#downloads-list) {
+    font-size: 1.03rem;
+}
+
+body > main.container > p,
+body > main.main-content.container > p {
+    line-height: 1.75;
+    color: #26323d;
+}
+
+body > main.container > ul:not(.report-list):not(#downloads-list),
+body > main.main-content.container > ul:not(.report-list):not(#downloads-list),
+body > main.container > ol,
+body > main.main-content.container > ol {
+    padding-left: 1.2rem;
+    line-height: 1.7;
+}
+
+body > main.container > ul:not(.report-list):not(#downloads-list) li,
+body > main.main-content.container > ul:not(.report-list):not(#downloads-list) li,
+body > main.container > ol li,
+body > main.main-content.container > ol li {
+    margin-bottom: 0.5rem;
+}
+
+.main-content a:not(.cta-button),
+body > main.container a:not(.cta-button) {
+    font-weight: 600;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+}
+
+.main-content em,
+body > main.container em {
+    color: #526071;
+}
+
 .main-content .contact-image {
     float: none;
     display: block;
@@ -590,10 +662,12 @@ ol { margin-bottom: 1em; margin-left: 20px; }
 
 .table-responsive {
     overflow-x: auto;
-    margin-top: 20px;
+    margin-top: 24px;
     margin-bottom: 30px;
-    border: 1px solid #dee2e6;
-    border-radius: 5px;
+    border: 1px solid rgba(15, 79, 119, 0.12);
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: var(--shadow-soft);
 }
 
 .records-table {
@@ -601,41 +675,75 @@ ol { margin-bottom: 1em; margin-left: 20px; }
     border-collapse: collapse;
     min-width: 600px;
     font-size: 0.95em;
+    background: #ffffff;
 }
 
 .records-table th,
 .records-table td {
-    border: 1px solid #dee2e6;
-    padding: 10px 12px;
+    border: 1px solid rgba(15, 79, 119, 0.1);
+    padding: 12px 14px;
     text-align: left;
     vertical-align: top;
 }
 
 .records-table th {
-    background-color: #e9ecef;
-    font-weight: 600;
+    background: linear-gradient(120deg, var(--theme-blue-dark), var(--theme-blue));
+    color: #ffffff;
+    font-weight: 700;
     white-space: nowrap;
+    letter-spacing: 0.02em;
 }
 
 .records-table tbody tr:nth-child(even) {
-    background-color: #f8f9fa;
+    background-color: #f6f9fc;
 }
 
 .records-table tbody tr:hover {
     background-color: #e8f1f8;
 }
 
+.records-table tbody td:first-child {
+    font-weight: 700;
+    color: var(--theme-blue-dark);
+    background-color: rgba(219, 234, 246, 0.35);
+    white-space: nowrap;
+}
+
 .record-notice {
     margin-top: 20px;
-    padding: 15px;
-    background-color: #fff3cd;
-    border: 1px solid #ffeeba;
-    border-left: 5px solid #ffc107;
-    border-radius: 4px;
-    font-size: 0.9em;
+    padding: 16px 18px;
+    background-color: #ffffff;
+    border: 1px solid rgba(243, 181, 65, 0.45);
+    border-left: 5px solid var(--accent-gold);
+    border-radius: 8px;
+    box-shadow: 0 8px 18px rgba(17, 44, 74, 0.08);
+    font-size: 0.95em;
 }
 .record-notice a {
     font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    body > main.container,
+    body > main.main-content.container {
+        padding-top: 26px;
+        padding-bottom: 48px;
+    }
+
+    .table-responsive {
+        margin-left: -12px;
+        margin-right: -12px;
+        border-radius: 8px;
+    }
+
+    .records-table {
+        font-size: 0.9em;
+    }
+
+    .records-table th,
+    .records-table td {
+        padding: 10px 12px;
+    }
 }
 
 [contenteditable="true"] {

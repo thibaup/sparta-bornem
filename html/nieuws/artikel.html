@@ -454,6 +454,8 @@
 </head>
 <body class="news-article-page">
 
+    <div id="header-placeholder"></div>
+
     <main class="container main-content">
 
         <div class="article-container">
@@ -488,6 +490,9 @@
         </div>
     </div>
     
+    <div id="footer-placeholder"></div>
+
+    <script src="/js/script.js" defer></script>
     <script>
         function setArticleMeta(metaEl, formattedDate, categoryText) {
             if (!metaEl) {
@@ -620,14 +625,17 @@
                     }
 
                     const imageAlt = articleData.alt || articleData.title || 'Nieuwsafbeelding';
-                    imageContainer.innerHTML = `
-                        <img class="article-image"
-                            src="${finalImageUrl}"
-                            alt="${imageAlt}"
-                            loading="lazy"
-                            title="Klik om de volledige afbeelding te bekijken">
-                        <span class="sr-only">Klik op de afbeelding om te vergroten</span>
-                    `;
+                    const imageEl = document.createElement('img');
+                    imageEl.className = 'article-image';
+                    imageEl.src = finalImageUrl;
+                    imageEl.alt = imageAlt;
+                    imageEl.loading = 'lazy';
+                    imageEl.title = 'Klik om de volledige afbeelding te bekijken';
+                    const srText = document.createElement('span');
+                    srText.className = 'sr-only';
+                    srText.textContent = 'Klik op de afbeelding om te vergroten';
+                    imageContainer.appendChild(imageEl);
+                    imageContainer.appendChild(srText);
                     imageContainer.setAttribute('role', 'button');
                     imageContainer.setAttribute('tabindex', '0');
                     imageContainer.setAttribute('aria-label', 'Vergroot afbeelding');
