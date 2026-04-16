@@ -304,6 +304,12 @@
       "title": "Memorial Jos Muyshondt"
     },
     {
+      "date": "2026-06-26",
+      "name": "Zomerbar SPBO",
+      "color": "black",
+      "title": "Zomerbar SPBO"
+    },
+    {
       "date": "2026-06-27",
       "name": "BK AMH",
       "color": "blue",
@@ -405,6 +411,12 @@
       "color": "blue",
       "title": "BK cadetten en scholieren dag 2",
       "data_category": "Kampioenschap"
+    },
+    {
+      "date": "2026-08-30",
+      "name": "Dag van de Bornemnaar",
+      "color": "black",
+      "title": "Dag van de Bornemnaar"
     },
     {
       "date": "2026-09-12",
