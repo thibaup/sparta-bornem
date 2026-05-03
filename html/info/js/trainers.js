@@ -16,6 +16,10 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     };
+    const normalizeEmailAddress = value => {
+        const email = (value || '').toString().trim();
+        return /^[^\s<>"']+@[^\s<>"']+$/.test(email) ? email : '';
+    };
     fetch(jsonPath)
         .then(response => {
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status} while fetching ${jsonPath}`);
@@ -44,11 +48,26 @@ document.addEventListener('DOMContentLoaded', function() {
                     cellCategory.innerHTML = item.category;
                     const cellSchedule = row.insertCell();
                     const ul = document.createElement('ul');
-                    item.schedule.forEach(s => {
+                    (item.schedule || []).forEach(s => {
                         const li = document.createElement('li');
-                        let scheduleHtml = `<strong>${s.day}:</strong> ${s.time}`;
-                        if (s.note) scheduleHtml += ` <em>${s.note}</em>`;
-                        li.innerHTML = scheduleHtml;
+                        if (s.day) {
+                            const strongDay = document.createElement('strong');
+                            strongDay.textContent = `${s.day}:`;
+                            li.appendChild(strongDay);
+                            if (s.time) {
+                                li.appendChild(document.createTextNode(` ${s.time}`));
+                            }
+                        } else {
+                            li.appendChild(document.createTextNode(s.time || ''));
+                        }
+                        if (s.note) {
+                            if (li.childNodes.length) {
+                                li.appendChild(document.createTextNode(' '));
+                            }
+                            const note = document.createElement('em');
+                            note.textContent = s.note;
+                            li.appendChild(note);
+                        }
                         ul.appendChild(li);
                     });
                     cellSchedule.appendChild(ul);
@@ -80,9 +99,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     pName.appendChild(strongName);
                     personDiv.appendChild(pName);
                     if (contact.email) {
-                        const pEmail = document.createElement('p');
-                        pEmail.innerHTML = `E-mail: <a href="mailto:${contact.email}">${contact.email}</a>`;
-                        personDiv.appendChild(pEmail);
+                        const safeEmail = normalizeEmailAddress(contact.email);
+                        if (safeEmail) {
+                            const pEmail = document.createElement('p');
+                            const emailLink = document.createElement('a');
+                            emailLink.href = `mailto:${safeEmail}`;
+                            emailLink.textContent = safeEmail;
+                            pEmail.appendChild(document.createTextNode('E-mail: '));
+                            pEmail.appendChild(emailLink);
+                            personDiv.appendChild(pEmail);
+                        }
                     }
                     if (contact.phone) {
                         const pPhone = document.createElement('p');
@@ -159,10 +185,18 @@ document.addEventListener('DOMContentLoaded', function() {
                         const ulTrainers = document.createElement('ul');
                         group.trainers.forEach(trainer => {
                             const liTrainer = document.createElement('li');
-                            let trainerHtml = escapeHtml(trainer.name);
-                            if (trainer.email) trainerHtml += ` : <a href="mailto:${escapeHtml(trainer.email)}">${escapeHtml(trainer.email)}</a>`;
-                            if (trainer.phone) trainerHtml += ` | ${escapeHtml(trainer.phone)}`;
-                            liTrainer.innerHTML = trainerHtml;
+                            liTrainer.appendChild(document.createTextNode(trainer.name || ''));
+                            const safeEmail = normalizeEmailAddress(trainer.email);
+                            if (safeEmail) {
+                                const emailLink = document.createElement('a');
+                                emailLink.href = `mailto:${safeEmail}`;
+                                emailLink.textContent = safeEmail;
+                                liTrainer.appendChild(document.createTextNode(' : '));
+                                liTrainer.appendChild(emailLink);
+                            }
+                            if (trainer.phone) {
+                                liTrainer.appendChild(document.createTextNode(` | ${trainer.phone}`));
+                            }
                             ulTrainers.appendChild(liTrainer);
                         });
                         textDescriptionDiv.appendChild(ulTrainers);
@@ -181,13 +215,4 @@ document.addEventListener('DOMContentLoaded', function() {
             contactsContainer.innerHTML = '<p style="text-align:center; color:red;">Kon contactinformatie niet laden.</p>';
             trainerGroupsContainer.innerHTML = '<p style="text-align:center; color:red;">Kon trainergroepen niet laden.</p>';
         });
-    function escapeHtml(unsafe) {
-        if (unsafe === null || typeof unsafe === 'undefined') return '';
-        return unsafe.toString()
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#39;");
-    }
 });

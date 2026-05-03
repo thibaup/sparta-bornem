@@ -484,29 +484,75 @@
                 }
 
                 const summaryText = item.summary || '';
-                const itemLink = `/html/nieuws/artikel.html?id=${item.id || ''}&ref=${encodeURIComponent(referrerPath)}`;
+                const articleId = item.id || '';
+                const itemLink = `/html/nieuws/artikel.html?id=${encodeURIComponent(articleId)}&ref=${encodeURIComponent(referrerPath)}`;
                 const categoryText = item.category || 'Algemeen';
                 const imageAlt = item.alt || item.title || 'Nieuwsafbeelding';
 
-                const articleHtml = `
-                    <article class="news-item" id="news-${item.id || ''}">
-                        <a href="${itemLink}" class="news-item-image-link" aria-hidden="true" tabindex="-1">
-                            <img src="${finalImageUrl}" alt="${imageAlt}" loading="lazy">
-                        </a>
-                        <div class="news-content">
-                            <p class="news-meta">
-                                <span class="news-date">${formattedDate}</span>
-                                <span class="news-sep">|</span>
-                                <span class="news-category">${categoryText}</span>
-                            </p>
-                            <h3 class="news-title"><a href="${itemLink}">${item.title}</a></h3>
-                            ${summaryText ? `<p class="news-summary">${summaryText}</p>` : ''}
-                            <a href="${itemLink}" class="read-more">Lees meer</a>
-                        </div>
-                    </article>
-                    `;
+                const article = document.createElement('article');
+                article.className = 'news-item';
+                if (articleId) {
+                    article.id = `news-${articleId}`;
+                }
 
-                newsPlaceholder.insertAdjacentHTML('beforeend', articleHtml);
+                const imageLink = document.createElement('a');
+                imageLink.href = itemLink;
+                imageLink.className = 'news-item-image-link';
+                imageLink.setAttribute('aria-hidden', 'true');
+                imageLink.tabIndex = -1;
+
+                const image = document.createElement('img');
+                image.src = finalImageUrl;
+                image.alt = imageAlt;
+                image.loading = 'lazy';
+                imageLink.appendChild(image);
+                article.appendChild(imageLink);
+
+                const content = document.createElement('div');
+                content.className = 'news-content';
+
+                const meta = document.createElement('p');
+                meta.className = 'news-meta';
+
+                const dateSpan = document.createElement('span');
+                dateSpan.className = 'news-date';
+                dateSpan.textContent = formattedDate;
+                meta.appendChild(dateSpan);
+
+                const separatorSpan = document.createElement('span');
+                separatorSpan.className = 'news-sep';
+                separatorSpan.textContent = '|';
+                meta.appendChild(separatorSpan);
+
+                const categorySpan = document.createElement('span');
+                categorySpan.className = 'news-category';
+                categorySpan.textContent = categoryText;
+                meta.appendChild(categorySpan);
+                content.appendChild(meta);
+
+                const title = document.createElement('h3');
+                title.className = 'news-title';
+                const titleLink = document.createElement('a');
+                titleLink.href = itemLink;
+                titleLink.textContent = item.title || '';
+                title.appendChild(titleLink);
+                content.appendChild(title);
+
+                if (summaryText) {
+                    const summary = document.createElement('p');
+                    summary.className = 'news-summary';
+                    summary.textContent = summaryText;
+                    content.appendChild(summary);
+                }
+
+                const readMore = document.createElement('a');
+                readMore.href = itemLink;
+                readMore.className = 'read-more';
+                readMore.textContent = 'Lees meer';
+                content.appendChild(readMore);
+
+                article.appendChild(content);
+                newsPlaceholder.appendChild(article);
             });
 
             AdjustFooter() // Call after rendering articles
