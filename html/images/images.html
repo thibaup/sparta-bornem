@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="nl-NL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Images - Atletiekclub Sparta Bornem</title>
+    <link rel="icon" type="image/png" href="/images/website-logo.png">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        :root {
+            --images-border: rgba(15, 79, 119, 0.14);
+            --images-muted: #5c6976;
+            --images-surface: #ffffff;
+            --images-blue: #1774b4;
+            --images-blue-dark: #0f4f77;
+            --images-gold: #f3b541;
+        }
+
+        .images-page main.main-content {
+            padding-top: clamp(30px, 4vw, 54px);
+        }
+
+        .images-intro {
+            margin-bottom: 24px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid var(--images-border);
+        }
+
+        .images-intro h1 {
+            margin-bottom: 10px;
+            color: #13283a;
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            line-height: 1.15;
+        }
+
+        .images-intro p {
+            max-width: 62ch;
+            color: var(--images-muted);
+            margin-bottom: 0;
+        }
+
+        .images-state {
+            padding: 26px 22px;
+            border: 1px solid var(--images-border);
+            border-radius: 8px;
+            background: var(--images-surface);
+            box-shadow: var(--shadow-soft);
+            color: var(--images-muted);
+            text-align: center;
+        }
+
+        .images-folders {
+            display: grid;
+            gap: 18px;
+        }
+
+        .images-folder {
+            border: 1px solid var(--images-border);
+            border-radius: 8px;
+            background: var(--images-surface);
+            box-shadow: var(--shadow-soft);
+            overflow: hidden;
+        }
+
+        .images-folder-toggle {
+            width: 100%;
+            border: 0;
+            background: linear-gradient(180deg, #ffffff 0%, #f8fbfd 100%);
+            color: #17212b;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            align-items: center;
+            gap: 14px;
+            padding: 18px 20px;
+            cursor: pointer;
+            text-align: left;
+            font: inherit;
+        }
+
+        .images-folder-toggle:hover,
+        .images-folder-toggle:focus-visible {
+            background: #eef6fb;
+            outline: none;
+        }
+
+        .images-folder-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 0;
+            font-weight: 700;
+            color: var(--images-blue-dark);
+            font-size: 1.12rem;
+        }
+
+        .images-folder-icon {
+            width: 34px;
+            height: 25px;
+            border-radius: 4px;
+            background: linear-gradient(180deg, #f9cf77 0%, var(--images-gold) 100%);
+            border: 1px solid rgba(143, 94, 16, 0.18);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            position: relative;
+            flex: 0 0 auto;
+        }
+
+        .images-folder-icon::before {
+            content: "";
+            position: absolute;
+            left: 3px;
+            top: -7px;
+            width: 16px;
+            height: 8px;
+            border-radius: 4px 4px 0 0;
+            background: #f7c45d;
+            border: 1px solid rgba(143, 94, 16, 0.16);
+            border-bottom: 0;
+        }
+
+        .images-folder-name {
+            overflow-wrap: anywhere;
+        }
+
+        .images-folder-meta {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--images-muted);
+            font-size: 0.92rem;
+            white-space: nowrap;
+        }
+
+        .images-folder-chevron {
+            width: 10px;
+            height: 10px;
+            border-right: 2px solid currentColor;
+            border-bottom: 2px solid currentColor;
+            transform: rotate(45deg);
+            transition: transform 0.2s ease;
+        }
+
+        .images-folder.is-open .images-folder-chevron {
+            transform: rotate(225deg);
+        }
+
+        .images-folder-panel {
+            display: none;
+            padding: 0 20px 22px;
+            border-top: 1px solid rgba(15, 79, 119, 0.08);
+        }
+
+        .images-folder.is-open .images-folder-panel {
+            display: block;
+        }
+
+        .images-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+            gap: 16px;
+            padding-top: 18px;
+        }
+
+        .images-card {
+            background: #f8fafc;
+            border: 1px solid rgba(15, 79, 119, 0.11);
+            border-radius: 8px;
+            overflow: hidden;
+            min-width: 0;
+        }
+
+        .images-card-frame {
+            aspect-ratio: 4 / 3;
+            background: linear-gradient(135deg, #eaf2f8, #f7f9fb);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .images-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            cursor: zoom-in;
+            transition: opacity 0.25s ease;
+        }
+
+        .images-card.is-loaded img {
+            opacity: 1;
+        }
+
+        .images-card-caption {
+            padding: 10px 12px;
+            color: #33414f;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .images-card-broken {
+            color: #9b1c1c;
+            padding: 12px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .images-empty-folder {
+            margin-top: 16px;
+            padding: 18px;
+            border: 1px dashed rgba(15, 79, 119, 0.25);
+            border-radius: 8px;
+            color: var(--images-muted);
+            background: #f8fbfd;
+        }
+
+        .images-sentinel {
+            min-height: 1px;
+        }
+
+        .images-load-more {
+            margin: 18px auto 0;
+            display: none;
+            border: 1px solid rgba(15, 79, 119, 0.28);
+            border-radius: 8px;
+            background: #ffffff;
+            color: var(--images-blue-dark);
+            font-weight: 700;
+            padding: 9px 16px;
+            cursor: pointer;
+        }
+
+        .images-load-more.is-visible {
+            display: block;
+        }
+
+        .images-lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background: rgba(0, 0, 0, 0.9);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+
+        .images-lightbox.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .images-lightbox-content {
+            position: relative;
+            max-width: 95vw;
+            max-height: 92vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .images-lightbox-image {
+            max-width: 95vw;
+            max-height: 88vh;
+            object-fit: contain;
+            border: 4px solid #ffffff;
+            box-shadow: 0 12px 34px rgba(0, 0, 0, 0.45);
+        }
+
+        .images-lightbox-close {
+            position: absolute;
+            top: -44px;
+            right: 0;
+            width: 40px;
+            height: 40px;
+            border: 0;
+            background: transparent;
+            color: #ffffff;
+            font-size: 32px;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        .images-lightbox-close:hover,
+        .images-lightbox-close:focus-visible {
+            transform: scale(1.08);
+            outline: none;
+        }
+
+        @media (max-width: 640px) {
+            .images-page main.main-content {
+                padding-bottom: 84px;
+            }
+
+            .images-folders {
+                padding-bottom: 20px;
+            }
+
+            .images-folder-toggle {
+                grid-template-columns: 1fr;
+                padding: 16px;
+            }
+
+            .images-folder-meta {
+                justify-content: space-between;
+                width: 100%;
+            }
+
+            .images-folder-panel {
+                padding: 0 14px 18px;
+            }
+
+            .images-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+                gap: 12px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="images-page">
+    <div id="header-placeholder"></div>
+
+    <main class="container main-content">
+        <section class="images-intro">
+            <h1 id="images-heading">Images</h1>
+            <p>Bekijk de fotoalbums van Sparta Bornem.</p>
+        </section>
+
+        <div id="images-loading" class="images-state">Images worden geladen...</div>
+        <div id="images-empty" class="images-state" hidden>Nog geen mappen aangemaakt.</div>
+        <section id="images-folders" class="images-folders" aria-live="polite"></section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+    <div class="images-lightbox" id="images-lightbox" aria-hidden="true">
+        <div class="images-lightbox-content" role="dialog" aria-modal="true" aria-label="Afbeelding">
+            <button class="images-lightbox-close" id="images-lightbox-close" type="button" aria-label="Sluiten">&times;</button>
+            <img class="images-lightbox-image" id="images-lightbox-image" src="" alt="">
+        </div>
+    </div>
+    <script defer src="/js/script.js"></script>
+    <script defer src="/html/images/images.js"></script>
+</body>
+</html>
