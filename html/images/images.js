@@ -26,7 +26,16 @@
                 if (!entry.isIntersecting) return;
                 const folderId = entry.target.dataset.folderId;
                 const state = folderStates.get(folderId);
-                if (state) renderNextBatch(state);
+                if (!state || state.isRenderingBatch) return;
+
+                state.isRenderingBatch = true;
+                loadObserver.unobserve(state.sentinel);
+                renderNextBatch(state);
+
+                requestAnimationFrame(() => {
+                    state.isRenderingBatch = false;
+                    updateLoadControls(state);
+                });
             });
         }, { rootMargin: '600px 0px' })
         : null;
@@ -48,6 +57,14 @@
         }
     }
 
+    function makeSafeId(value, fallback) {
+        const raw = normalizeText(value, fallback)
+            .toLowerCase()
+            .replace(/[^a-z0-9_-]+/g, '-')
+            .replace(/^-+|-+$/g, '');
+        return raw || fallback;
+    }
+
     function requestFooterAdjust() {
         if (typeof adjustFooterPosition === 'function') {
             setTimeout(adjustFooterPosition, 80);
@@ -61,10 +78,20 @@
     }
 
     function setupLightbox() {
-        lightbox = document.getElementById('images-lightbox');
-        lightboxImage = document.getElementById('images-lightbox-image');
-        lightboxClose = document.getElementById('images-lightbox-close');
-        if (!lightbox || !lightboxImage || !lightboxClose) return;
+        const box = document.getElementById('images-lightbox');
+        const image = document.getElementById('images-lightbox-image');
+        const close = document.getElementById('images-lightbox-close');
+
+        if (!box || !image || !close) {
+            lightbox = null;
+            lightboxImage = null;
+            lightboxClose = null;
+            return;
+        }
+
+        lightbox = box;
+        lightboxImage = image;
+        lightboxClose = close;
 
         lightboxClose.addEventListener('click', closeLightbox);
         lightbox.addEventListener('click', event => {
@@ -103,9 +130,10 @@
     }
 
     function createFolder(folder, index) {
-        const title = normalizeText(folder.title, 'Naamloze map');
-        const images = Array.isArray(folder.images) ? folder.images : [];
-        const folderId = normalizeText(folder.id, `folder-${index}`);
+        const folderData = folder && typeof folder === 'object' ? folder : {};
+        const title = normalizeText(folderData.title, 'Naamloze map');
+        const images = Array.isArray(folderData.images) ? folderData.images : [];
+        const folderId = `${makeSafeId(folderData.id, `folder-${index}`)}-${index}`;
 
         const article = document.createElement('article');
         article.className = 'images-folder';
@@ -143,6 +171,7 @@
         const panel = document.createElement('div');
         panel.className = 'images-folder-panel';
         panel.id = `images-folder-panel-${folderId}`;
+        panel.hidden = true;
 
         const gallery = document.createElement('div');
         gallery.className = 'images-gallery';
@@ -160,19 +189,21 @@
         loadMore.type = 'button';
         loadMore.className = 'images-load-more';
         loadMore.textContent = 'Meer laden';
+        loadMore.hidden = true;
 
         panel.append(empty, gallery, sentinel, loadMore);
         article.append(button, panel);
 
         const state = {
             folderId,
-            folder,
+            folder: folderData,
             images,
             gallery,
             sentinel,
             loadMore,
             rendered: 0,
-            initialized: false
+            initialized: false,
+            isRenderingBatch: false
         };
         folderStates.set(folderId, state);
 
@@ -180,6 +211,7 @@
             const willOpen = !article.classList.contains('is-open');
             article.classList.toggle('is-open', willOpen);
             button.setAttribute('aria-expanded', String(willOpen));
+            panel.hidden = !willOpen;
             if (willOpen && !state.initialized) {
                 state.initialized = true;
                 renderNextBatch(state);
@@ -193,9 +225,10 @@
     }
 
     function createImageCard(imageData, index) {
-        const src = normalizeImageSrc(imageData.src);
-        const filename = normalizeText(imageData.filename, src.split('/').pop() || `Afbeelding ${index + 1}`);
-        const alt = normalizeText(imageData.alt, filename);
+        const image = imageData && typeof imageData === 'object' ? imageData : {};
+        const src = normalizeImageSrc(image.src);
+        const filename = normalizeText(image.filename, src.split('/').pop() || `Afbeelding ${index + 1}`);
+        const alt = normalizeText(image.alt, filename);
 
         const figure = document.createElement('figure');
         figure.className = 'images-card';
@@ -265,7 +298,11 @@
     function updateLoadControls(state) {
         if (!state) return;
         const hasMore = state.rendered < state.images.length;
-        state.loadMore.classList.toggle('is-visible', hasMore && !loadObserver);
+        const showButton = hasMore && !loadObserver;
+
+        state.loadMore.hidden = !showButton;
+        state.loadMore.classList.toggle('is-visible', showButton);
+
         if (loadObserver) {
             if (hasMore) {
                 loadObserver.observe(state.sentinel);
@@ -273,6 +310,11 @@
                 loadObserver.unobserve(state.sentinel);
             }
         }
+    }
+
+    function initImagesPage() {
+        setupLightbox();
+        loadImagesPage();
     }
 
     async function loadImagesPage() {
@@ -324,8 +366,9 @@
         }
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-        setupLightbox();
-        loadImagesPage();
-    });
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initImagesPage);
+    } else {
+        initImagesPage();
+    }
 }());

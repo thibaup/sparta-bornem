@@ -221,7 +221,7 @@
 
         .images-load-more {
             margin: 18px auto 0;
-            display: none;
+            display: block;
             border: 1px solid rgba(15, 79, 119, 0.28);
             border-radius: 8px;
             background: #ffffff;
@@ -231,8 +231,8 @@
             cursor: pointer;
         }
 
-        .images-load-more.is-visible {
-            display: block;
+        .images-load-more[hidden] {
+            display: none;
         }
 
         .images-lightbox {
