@@ -419,6 +419,27 @@
       "title": "Dag van de Bornemnaar"
     },
     {
+      "date": "2026-09-02",
+      "name": "Overgang jeugd",
+      "color": "red",
+      "title": "Overgang jeugd",
+      "data_info": "De kangoeroes, benjamins, pupillen en miniemen starten vanaf deze dag in hun nieuwe leeftijdscategorie!"
+    },
+    {
+      "date": "2026-09-04",
+      "name": "Memorial Van Damme",
+      "color": "blue",
+      "title": "Memorial Van Damme"
+    },
+    {
+      "date": "2026-09-11",
+      "name": "Algemene ledenvergadering",
+      "color": "red",
+      "title": "Algemene ledenvergadering",
+      "data_url": "https://docs.google.com/forms/d/e/1FAIpQLSfFWbHP4p8JyVrjYYkegmmLEcimzbF9ThA1n02BGmiVrbLvbA/viewform",
+      "data_info": "Op deze dag worden leden en sympathisanten uitgenodigd om deel te nemen aan de algemene ledenvergadering."
+    },
+    {
       "date": "2026-09-12",
       "name": "Jeugdmeeting Aartselaar",
       "color": "green",
@@ -439,47 +460,93 @@
       "color": "blue",
       "title": "BK estafette",
       "data_category": "Kampioenschap"
+    },
+    {
+      "date": "2026-09-25",
+      "name": "Infomoment jeugd + ouder/kind-training",
+      "color": "red",
+      "title": "Infomoment jeugd + ouder/kind-training"
+    },
+    {
+      "date": "2026-10-23",
+      "name": "Net-echt-cross",
+      "color": "red",
+      "title": "Net-echt-cross",
+      "data_info": "Oefenwedstrijd voor jeugd tot en met miniem"
+    },
+    {
+      "date": "2026-10-24",
+      "name": "Clubavond SPBO",
+      "color": "red",
+      "title": "Clubavond SPBO",
+      "data_info": "Jaarlijkse clubavond! Inschrijvingen starten weldra."
+    },
+    {
+      "date": "2027-04-09",
+      "name": "Stageweekend SPBO",
+      "color": "red",
+      "title": "Stageweekend SPBO"
+    },
+    {
+      "date": "2027-04-10",
+      "name": "Stageweekend SPBO",
+      "color": "red",
+      "title": "Stageweekend SPBO"
+    },
+    {
+      "date": "2027-04-11",
+      "name": "Stageweekend SPBO",
+      "color": "red",
+      "title": "Stageweekend SPBO"
     }
   ],
   "displayedMonths": [
     [
-      2026,
+      2027,
+      1
+    ],
+    [
+      2027,
+      2
+    ],
+    [
+      2027,
       3
     ],
     [
-      2026,
+      2027,
       4
     ],
     [
-      2026,
+      2027,
       5
     ],
     [
-      2026,
+      2027,
       6
     ],
     [
-      2026,
+      2027,
       7
     ],
     [
-      2026,
+      2027,
       8
     ],
     [
-      2026,
+      2027,
       9
     ],
     [
-      2026,
+      2027,
       10
     ],
     [
-      2026,
+      2027,
       11
     ],
     [
-      2026,
+      2027,
       12
     ]
   ]
