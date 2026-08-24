@@ -421,7 +421,7 @@
     {
       "date": "2026-09-02",
       "name": "Overgang jeugd",
-      "color": "red",
+      "color": "black",
       "title": "Overgang jeugd",
       "data_info": "De kangoeroes, benjamins, pupillen en miniemen starten vanaf deze dag in hun nieuwe leeftijdscategorie!"
     },
@@ -434,7 +434,7 @@
     {
       "date": "2026-09-11",
       "name": "Algemene ledenvergadering",
-      "color": "red",
+      "color": "black",
       "title": "Algemene ledenvergadering",
       "data_url": "https://docs.google.com/forms/d/e/1FAIpQLSfFWbHP4p8JyVrjYYkegmmLEcimzbF9ThA1n02BGmiVrbLvbA/viewform",
       "data_info": "Op deze dag worden leden en sympathisanten uitgenodigd om deel te nemen aan de algemene ledenvergadering."
@@ -464,43 +464,67 @@
     {
       "date": "2026-09-25",
       "name": "Infomoment jeugd + ouder/kind-training",
-      "color": "red",
+      "color": "black",
       "title": "Infomoment jeugd + ouder/kind-training"
     },
     {
       "date": "2026-10-23",
       "name": "Net-echt-cross",
-      "color": "red",
+      "color": "black",
       "title": "Net-echt-cross",
       "data_info": "Oefenwedstrijd voor jeugd tot en met miniem"
     },
     {
       "date": "2026-10-24",
       "name": "Clubavond SPBO",
-      "color": "red",
+      "color": "black",
       "title": "Clubavond SPBO",
       "data_info": "Jaarlijkse clubavond! Inschrijvingen starten weldra."
     },
     {
       "date": "2027-04-09",
       "name": "Stageweekend SPBO",
-      "color": "red",
+      "color": "black",
       "title": "Stageweekend SPBO"
     },
     {
       "date": "2027-04-10",
       "name": "Stageweekend SPBO",
-      "color": "red",
+      "color": "black",
       "title": "Stageweekend SPBO"
     },
     {
       "date": "2027-04-11",
       "name": "Stageweekend SPBO",
-      "color": "red",
+      "color": "black",
       "title": "Stageweekend SPBO"
     }
   ],
   "displayedMonths": [
+    [
+      2026,
+      7
+    ],
+    [
+      2026,
+      8
+    ],
+    [
+      2026,
+      9
+    ],
+    [
+      2026,
+      10
+    ],
+    [
+      2026,
+      11
+    ],
+    [
+      2026,
+      12
+    ],
     [
       2027,
       1
