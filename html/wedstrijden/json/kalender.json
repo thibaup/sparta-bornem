@@ -482,6 +482,116 @@
       "data_info": "Jaarlijkse clubavond! Inschrijvingen starten weldra."
     },
     {
+      "date": "2026-11-29",
+      "name": "BK veldlopen",
+      "color": "green",
+      "title": "BK veldlopen",
+      "data_location": "Hulshout"
+    },
+    {
+      "date": "2027-01-02",
+      "name": "PK alle categorieën Antwerpen",
+      "color": "green",
+      "title": "PK alle categorieën Antwerpen"
+    },
+    {
+      "date": "2027-01-10",
+      "name": "PK veldlopen te Bornem",
+      "color": "green",
+      "title": "PK veldlopen te Bornem",
+      "data_location": "Bornem"
+    },
+    {
+      "date": "2027-01-17",
+      "name": "KVV cadetten en scholieren indoor",
+      "color": "green",
+      "title": "KVV cadetten en scholieren indoor",
+      "data_location": "Gent"
+    },
+    {
+      "date": "2027-01-24",
+      "name": "KVV alle ctegorieën indoor",
+      "color": "green",
+      "title": "KVV alle ctegorieën indoor"
+    },
+    {
+      "date": "2027-01-24",
+      "name": "BK AMH indoor",
+      "color": "green",
+      "title": "BK AMH indoor",
+      "data_location": "Gent"
+    },
+    {
+      "date": "2027-01-31",
+      "name": "KVV veldlopen",
+      "color": "green",
+      "title": "KVV veldlopen",
+      "data_location": "Lokeren"
+    },
+    {
+      "date": "2027-02-07",
+      "name": "BK studenten indoor",
+      "color": "green",
+      "title": "BK studenten indoor",
+      "data_location": "Louvain-La-Neuve"
+    },
+    {
+      "date": "2027-02-13",
+      "name": "BK meerkampen indoor",
+      "color": "green",
+      "title": "BK meerkampen indoor",
+      "data_location": "Louvain-La-Neuve"
+    },
+    {
+      "date": "2027-02-13",
+      "name": "BK 4x400m AC indoor",
+      "color": "green",
+      "title": "BK 4x400m AC indoor",
+      "data_location": "Louvain-La-Neuve"
+    },
+    {
+      "date": "2027-02-14",
+      "name": "BK meerkampen indoor",
+      "color": "green",
+      "title": "BK meerkampen indoor",
+      "data_location": "Louvain-La-Neuve"
+    },
+    {
+      "date": "2027-02-14",
+      "name": "BK 4x400m mixed AC indoor",
+      "color": "green",
+      "title": "BK 4x400m mixed AC indoor",
+      "data_location": "Louvain-La-Neuve"
+    },
+    {
+      "date": "2027-02-20",
+      "name": "BK/PK Masters indoor",
+      "color": "green",
+      "title": "BK/PK Masters indoor",
+      "data_location": "Gent"
+    },
+    {
+      "date": "2027-02-21",
+      "name": "BK alle categorieën indoor",
+      "color": "green",
+      "title": "BK alle categorieën indoor",
+      "data_location": "Gent"
+    },
+    {
+      "date": "2027-03-06",
+      "name": "BK cadetten en scholieren indoor",
+      "color": "green",
+      "title": "BK cadetten en scholieren indoor",
+      "data_location": "Louvain-La-Neuve"
+    },
+    {
+      "date": "2027-03-07",
+      "name": "BK juniores en beloften indoor",
+      "color": "green",
+      "title": "BK juniores en beloften indoor",
+      "data_location": "Gent"
+    },
+    {
       "date": "2027-04-09",
       "name": "Stageweekend SPBO",
       "color": "black",
