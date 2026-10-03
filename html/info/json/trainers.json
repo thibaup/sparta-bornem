@@ -270,11 +270,6 @@
           "phone": null
         },
         {
-          "name": "Rens Schilders",
-          "email": null,
-          "phone": null
-        },
-        {
           "name": "Jitse De Smet",
           "email": null,
           "phone": null
@@ -283,11 +278,21 @@
           "name": "Mona Ilegems",
           "email": null,
           "phone": null
+        },
+        {
+          "name": "Maite Vandenkerckhove",
+          "email": null,
+          "phone": null
+        },
+        {
+          "name": "Zoë Peeters",
+          "email": null,
+          "phone": null
         }
       ]
     },
     {
-      "groupName": "Pupillen",
+      "groupName": "Pupillen en miniemen",
       "mainPhoto": {
         "src": "/images/personen/Schermafbeelding 2025-04-10 124345.png",
         "alt": "Foto Pupillen Groep"
@@ -329,11 +334,6 @@
           "phone": null
         },
         {
-          "name": "Lisa Genijn",
-          "email": null,
-          "phone": null
-        },
-        {
           "name": "Fenne De Groote",
           "email": null,
           "phone": null
@@ -342,48 +342,19 @@
           "name": "Eline Schelkens",
           "email": null,
           "phone": null
-        }
-      ]
-    },
-    {
-      "groupName": "Miniemen",
-      "mainPhoto": {
-        "src": "/images/personen/placeholder_min_main.jpg",
-        "alt": "Foto Miniemen Groep"
-      },
-      "thumbnails": [
-        {
-          "alt": "Miniemen Actie 1",
-          "src": "/images/personen/CIMG9242.JPG"
         },
         {
-          "alt": "Miniemen Actie 2",
-          "src": "/images/personen/CIMG9248.JPG"
+          "name": "Rens Schilders",
+          "email": null,
+          "phone": null
         },
         {
-          "alt": "Miniemen Actie 3",
-          "src": "/images/personen/CIMG9273.JPG"
-        }
-      ],
-      "description": "Voor kinderen van 11-12 jaar. De training wordt specifieker en technischer. Atleten worden voorbereid op de latere specialisatie en leren hun eigen sterktes ontdekken.",
-      "trainers": [
+          "name": "Sarah Anné",
+          "email": null,
+          "phone": null
+        },
         {
           "name": "Eline Schelkens",
-          "email": null,
-          "phone": null
-        },
-        {
-          "name": "Fien Biesemans",
-          "email": null,
-          "phone": null
-        },
-        {
-          "name": "Nick Inze",
-          "email": "nick.inze@telenet.be",
-          "phone": null
-        },
-        {
-          "name": "Els Joos",
           "email": null,
           "phone": null
         },
@@ -393,7 +364,7 @@
           "phone": null
         },
         {
-          "name": "Sarah Anné",
+          "name": "Marie Moens",
           "email": null,
           "phone": null
         }
@@ -491,6 +462,11 @@
           "name": "Jan Van Gool",
           "email": null,
           "phone": null
+        },
+        {
+          "name": "Hilde De Leeuw",
+          "email": null,
+          "phone": null
         }
       ]
     },
@@ -576,8 +552,7 @@
   ],
   "trainer_category_order": [
     "Kangoeroes & Benjamins",
-    "Pupillen",
-    "Miniemen",
+    "Pupillen en miniemen",
     "TFR Running Team (Track, Field, Road)",
     "BST Team (sprint, springen, meerkamp, werpen)",
     "Recreanten / Joggers",
