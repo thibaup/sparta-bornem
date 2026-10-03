@@ -1,6 +1,62 @@
 [
   {
     "question": "Ikzelf of mijn kind wil graag proeven van atletiek. Kan ik/hij/zij eens komen proberen?",
-    "answer": "We laten inderdaad toe dat potentieel nieuwe leden een drietal keer gratis komen proberen. Na de testtrainingen heb je de keuze om effectief aan te sluiten of gewoon te stoppen."
+    "answer": "Potentieel nieuwe leden kunnen een drietal keer gratis komen proberen. Na de testtrainingen heb je de keuze om effectief aan te sluiten of gewoon te stoppen."
+  },
+  {
+    "question": "Vanaf welke leeftijd kunnen atleten aansluiten bij Sparta Bornem?",
+    "answer": "Je kan aansluiten vanaf oktober in het jaar dat je 5 jaar bent/wordt. Voor de meeste kinderen is dit wanneer ze in het derde kleuterklasje zitten.\n\nConcreet voor het seizoen 2026-2027 betekent dit vanaf het geboortejaar 2021 of ouder."
+  },
+  {
+    "question": "Ikzelf of mijn kind wil eens komen proberen. Bij welke groep sluit ik/hij/zij aan?",
+    "answer": "Dat hangt af van het geboortejaar. Voor seizoen 2026-2027 zijn dit de verschillende leeftijdscategorieën:\n\nKangoeroes (2021-2020)\nBenjamins (2019-2018)\nPupillen (2017-2016)\nMiniemen (2015-2014)\nCadetten (2013-2012)\nScholieren (2011-2010)\nJuniores (2009-2008)\nSeniores (2007 tot en met de dag dat je 35j wordt)\nMasters (35+)\n\nJe spreekt best even met de betrokken trainer om de details te bespreken."
+  },
+  {
+    "question": "Moeten we het volledige lidgeld betalen als we halverwege het seizoen aansluiten?",
+    "answer": "Als je aansluit vóór Nieuwjaar betaal je inderdaad het volledige tarief. Na Nieuwjaar hanteren we de regel dat er 12,5 euro (15 euro voor jeugdatleten) per maand die er nog rest, betaald wordt. Voor een eerste aansluiting blijft de 30 euro administratieve kost wel gelden."
+  },
+  {
+    "question": "Ik wil definitief inschrijven in de club. Hoe doe ik dat?",
+    "answer": "Je schrijft in via de link die gepubliceerd staat op onze website www.spartabornem.be (onder \"nieuwe leden\" en \"aansluiten\"). De betaling dient te gebeuren binnen de week na inschrijving via het rekeningnummer dat vermeld staat op de website. Pas daarna vragen wij als club je lidmaatschap aan bij de federatie."
+  },
+  {
+    "question": "Wat is er inbegrepen in mijn lidgeld?",
+    "answer": "Je bent het hele jaar verzekerd tegen sportongevallen en kan een heel jaar genieten van de trainingen die begeleid worden door onze (jeugd)trainers. Bij een eerste lidmaatschap krijg je een kaartje voor een gratis clubtruitje. Elk (nieuw) lid krijgt ook een lidkaart waarmee je korting kan krijgen bij onze hoofdsponsors. Ook krijg je een attest van de mutualiteit en enkele drankbonnetjes die je kan gebruiken in de kantine. Het deelnamegeld aan wedstrijden is niet inbegrepen in het lidgeld."
+  },
+  {
+    "question": "Ik heb mijn lidgeld betaald maar heb mij borstnummer (dat ik nodig heb om me in te schrijven voor een wedstrijd) nog niet ontvangen. Wat doe ik?",
+    "answer": "Vanaf je lidgeld in ons bezit is, wordt je lidmaatschap aangevraagd bij de Vlaamse Atletiekliga. Meestal duurt het dan twee weken tot een maand alvorens het borstnummer in ons bezit is. Je kan dit daarna afhalen in de kantine  of je krijgt het via de trainers.\n\nMaar, ook als je borstnummer nog niet fysiek is afgeleverd, toch hebben wij het al virtueel ontvangen. Stuur gewoon een mailtje naar SPBO@atletiek.be en dan sturen onze medewerkers je het virtuele borstnummer al door."
+  },
+  {
+    "question": "Welke disciplines kan mijn kind (miniem of jonger) beoefenen in de club?",
+    "answer": "Tot en met miniem wordt een algemene vorming aangeboden. Disciplinespecialisatie is op dat moment dus nog niet mogelijk. Deze algemene vorming omvat wel elke discipline binnen de atletiek (afstandslopen, sprinten, werpen en springen). Afhankelijk van de periode in het jaar en de weersomstandigheden zullen al deze disciplines af en toe aan bod komen."
+  },
+  {
+    "question": "Ik ben cadet of ouder. Waar kan ik terecht?",
+    "answer": "We werken met verschillende trainingsgroepen, elk met een verschillende focus.\n\n* Ben je een werper, springer of sprinter? Dan kan je terecht bij het BST-team (trainers Peter, Marliese, Tibo en Johan).\n* Ben je een wedstrijdgerichte afstandsloper? Dan is er het TFR-running team (trainers Koen en Ellen).\n* Ben je een recreatieve afstandsloper? Dan heb je de keuze tussen team Stamina (trainer Tom), team Boemerang (trainer Francis), Start2run (trainer Danny) en de Madammekes (trainer Jan). De concrete invulling van die recreantengroepen vind je ook op de website.\n\nStuur gerust ook een mail naar SPBO@atletiek.be en dan brengen wij je meteen in contact met de juiste trainer."
+  },
+  {
+    "question": "Op welke manier bereik ik de club voor algemene vragen?",
+    "answer": "Je stuurt het best een mail naar SPBO@atletiek.be, dan komt je vraag ongetwijfeld bij de juiste persoon terecht.\nHeb je een specifieke vraag voor een bestuurslid of een trainer? Je vindt zijn/haar contactgegevens op onze website www.spartabornem.be."
+  },
+  {
+    "question": "Ik ben een atleet van Sparta Bornem. Ben ik verplicht om deel te nemen aan wedstrijden?",
+    "answer": "Deelnemen aan wedstrijden is zeker geen verplichting. Toch willen wij atleten stimuleren om af en toe eens in actie te komen op een veldloop of een pistewedstrijd. We vragen vooral om deel te nemen aan onze eigen organisaties of de wedstrijden die de club geselecteerd heeft (lokale criteriums, provinciale kampioenschappen, interclubs…)."
+  },
+  {
+    "question": "Hoe en waar kan ik me inschrijven voor een wedstrijd?",
+    "answer": "Inschrijvingen gebeuren via www.atletiek.nu. Nadat je daar een account gemaakt hebt, kan je je voor elke wedstrijd inschrijven."
+  },
+  {
+    "question": "Ik probeer mezelf of mijn kind te registreren via www.atletiek.nu, maar het borstnummer wordt niet erkend. Wat moet ik doen?",
+    "answer": "* Zorg ervoor dat je het juiste borstnummer (seizoen 2026-2027) bij de hand hebt.\n* Zorg ervoor dat je als federatie \"VAL/LBFA\" aanklikt.\n* Controleer of inschrijven voor je gekozen wedstrijd (nog) mogelijk is. Het zou kunnen dat de inschrijvingen nog niet geopend zijn of juist al afgesloten zijn.\n\nLukt het nog steeds niet? Stuur dan een mailtje naar SPBO@atletiek.be en wij proberen je verder te helpen."
+  },
+  {
+    "question": "Hoe kan ik clubkledij (al dan niet met mijn naam erop) bestellen?",
+    "answer": "Het bestellen van clubkledij dient te gebeuren via onze website www.spartabornem.be. Ga naar \"nfo\" en dan \"clubkledij\" en je wordt onmiddellijk doorverwezen naar de webshop. Daar zie je dan een overzicht van alle mogelijke kledij die je kan bestellen.\n\nJe ontvangt na bestelling een mail wanneer je product geleverd is. Daarna kan  je de kledij bij Topsport (Mechelsesteenweg 53/55, 9200 Dendermonde) gaan ophalen."
+  },
+  {
+    "question": "Wat nemen atleten best mee naar een training?",
+    "answer": "Bij mooi weer kunnen atleten een short en t-shirt dragen, maar in de winter (november tot en met maart) vragen we om zeker een lange broek en trui te dragen om blessures tegen te gaan.\n\nAtleten dragen steeds loopschoenen, dus geen sneakers of ander schoeisel. Cadetten en ouder nemen ook steeds hun spikes mee (als ze die hebben).\n\nNeem ook zeker een volle drinkbus water mee, zeker bij warm weer!"
   }
 ]
