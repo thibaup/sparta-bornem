@@ -1,14 +1,12 @@
 *update.json
 *.exe
 *.pyc
-*.py
 *.spec
 *.txt
 dist/
 build/
 
 __pycache__/
-tabs/
 
 venv/
 env/
@@ -22,3 +20,12 @@ env/
 
 .DS_Store
 Thumbs.db
+
+# Editor source and release metadata are versioned; generated binaries stay in releases.
+!ThibertaWebsiteEditor.spec
+!version_info.txt
+!requirements-editor.txt
+!update.json
+.editor-recovery/
+.release-backup-location
+additional-editor-fixes.patch

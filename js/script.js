@@ -31,6 +31,15 @@ function adjustFooterPosition() {
         return;
     }
 
+    // The gallery uses a flex layout so every expansion keeps the footer in flow.
+    if (body.classList.contains('images-page')) {
+        footerElement.style.position = '';
+        footerElement.style.left = '';
+        footerElement.style.width = '';
+        footerElement.style.bottom = '';
+        return;
+    }
+
     setTimeout(() => {
         const totalPageHeight = Math.max( body.scrollHeight, body.offsetHeight,
                                html.clientHeight, html.scrollHeight, html.offsetHeight );
