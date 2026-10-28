@@ -23,7 +23,7 @@ def sanitize_for_path(name):
     return name_str[:50]
 
 
-APP_VERSION = "1.5.2.0"
+APP_VERSION = "1.5.3.0"
 UPDATE_MANIFEST_URL = "https://raw.githubusercontent.com/thibaup/sparta-bornem/main/update.json"
 FALLBACK_UPDATE_MANIFEST_URL = "https://raw.githubusercontent.com/thibaup/sparta-bornem/main/update.json"
 DEBUG_UPDATER = False
