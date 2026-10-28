@@ -395,6 +395,41 @@ class InterfaceTests(unittest.TestCase):
         self.assertEqual(target.read_bytes(), original)
         error.assert_called_once()
 
+    def test_media_copy_link_uses_website_paths_for_images_and_pdfs(self):
+        image = self.base / 'images' / 'Team foto.png'
+        pdf = self.base / 'docs' / 'Reglement puntensysteem 2026-2027.pdf'
+        image.parent.mkdir()
+        pdf.parent.mkdir()
+        Image.new('RGB', (8, 8), 'blue').save(image)
+        pdf.write_bytes(b'%PDF-1.4\n')
+
+        with patch.object(config, 'APP_BASE_DIR', str(self.base)), \
+             patch.dict(config.IMAGE_COMMON_DIRS_ABSOLUTE, {'images': str(image.parent)}, clear=True), \
+             patch('tabs.media_manager_tab.HAS_PYMUPDF', False):
+            tab = MediaManagerTab(tk.Frame(self.root), self.app)
+            self.assertEqual(str(tab.images_copy_link_button['state']), tk.DISABLED)
+            self.assertEqual(str(tab.pdfs_copy_link_button['state']), tk.DISABLED)
+
+            tab.images_tree.selection_set(str(image))
+            tab._images_on_select()
+            self.assertEqual(str(tab.images_copy_link_button['state']), tk.NORMAL)
+            tab.images_copy_link_button.invoke()
+            self.assertEqual(self.root.clipboard_get(), '/images/Team%20foto.png')
+
+            tab.pdfs_tree.selection_set(str(pdf))
+            tab._pdfs_on_select()
+            self.assertEqual(str(tab.pdfs_copy_link_button['state']), tk.NORMAL)
+            tab.pdfs_copy_link_button.invoke()
+            self.assertEqual(self.root.clipboard_get(), '/docs/Reglement%20puntensysteem%202026-2027.pdf')
+
+            pdf.unlink()
+            tab._pdfs_on_select()
+            self.assertEqual(str(tab.pdfs_copy_link_button['state']), tk.DISABLED)
+            tab._copy_file_link(str(pdf))
+            self.assertEqual(self.root.clipboard_get(), '/docs/Reglement%20puntensysteem%202026-2027.pdf')
+            self.app.set_status.assert_called_with(
+                'Kan geen link kopiëren: bestand niet gevonden binnen de website.', is_error=True)
+
     def test_invalid_gallery_reload_preserves_previous_model_and_disables_writes(self):
         tab = self.gallery_tab([{'id': 'a', 'title': 'A', 'images': []}])
         original = copy.deepcopy(tab.data)

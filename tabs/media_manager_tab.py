@@ -5,6 +5,7 @@ import os
 import shutil
 import pathlib
 import traceback
+from urllib.parse import quote
 import config
 import utils
 
@@ -257,6 +258,30 @@ class MediaManagerTab:
         self._images_scan_files()
         self._pdfs_scan_files()
 
+    def _copy_file_link(self, abs_path):
+        """Copy a site-root URL suitable for pasting into the HTML link editor."""
+        if not abs_path or not _path_is_inside(config.APP_BASE_DIR, abs_path) or not os.path.isfile(abs_path):
+            self.app.set_status("Kan geen link kopiëren: bestand niet gevonden binnen de website.", is_error=True)
+            return
+        rel_path = pathlib.Path(os.path.relpath(abs_path, config.APP_BASE_DIR)).as_posix()
+        web_link = quote('/' + rel_path, safe='/')
+        try:
+            self.app.root.clipboard_clear()
+            self.app.root.clipboard_append(web_link)
+            self.app.root.update_idletasks()
+        except tk.TclError as exc:
+            messagebox.showerror("Kopiëren mislukt", f"Kon de link niet kopiëren:\n{exc}", parent=self.app.root)
+            return
+        self.app.set_status(f"Link gekopieerd: {web_link}", duration_ms=6000)
+
+    def _images_copy_link(self):
+        if self.selected_image_data:
+            self._copy_file_link(self.selected_image_data['abs_path'])
+
+    def _pdfs_copy_link(self):
+        if self.pdfs_selected_abs_path:
+            self._copy_file_link(self.pdfs_selected_abs_path)
+
     def _create_main_layout(self):
         self.parent.grid_rowconfigure(0, weight=1)
         self.parent.grid_columnconfigure(0, weight=1)
@@ -309,8 +334,10 @@ class MediaManagerTab:
         self.images_add_button.grid(row=0, column=0, padx=5, pady=5, sticky="ew")
         self.images_replace_button = ttk.Button(img_actions_frame, text="Vervang Geselecteerd Bestand...", command=self._images_replace_file, state=tk.DISABLED)
         self.images_replace_button.grid(row=1, column=0, padx=5, pady=5, sticky="ew")
+        self.images_copy_link_button = ttk.Button(img_actions_frame, text="Kopieer link", command=self._images_copy_link, state=tk.DISABLED)
+        self.images_copy_link_button.grid(row=2, column=0, padx=5, pady=5, sticky="ew")
         self.images_delete_button = ttk.Button(img_actions_frame, text="Verwijder Geselecteerd Bestand...", command=self._images_delete_file, state=tk.DISABLED)
-        self.images_delete_button.grid(row=2, column=0, padx=5, pady=5, sticky="ew")
+        self.images_delete_button.grid(row=3, column=0, padx=5, pady=5, sticky="ew")
 
         img_preview_frame = ttk.Labelframe(right_frame, text=" Voorvertoning ", padding=10)
         img_preview_frame.grid(row=1, column=0, sticky="nsew", pady=(10, 0)); img_preview_frame.grid_rowconfigure(0, weight=1); img_preview_frame.grid_columnconfigure(0, weight=1)
@@ -396,6 +423,7 @@ class MediaManagerTab:
         self._image_preview_widget = None
         self.images_replace_button.config(state=tk.DISABLED)
         self.images_delete_button.config(state=tk.DISABLED)
+        self.images_copy_link_button.config(state=tk.DISABLED)
         if self.images_rotate_button:
             self.images_rotate_button.config(state=tk.DISABLED)
 
@@ -445,6 +473,7 @@ class MediaManagerTab:
 
         self.images_replace_button.config(state=tk.NORMAL)
         self.images_delete_button.config(state=tk.NORMAL if os.path.isfile(abs_path) else tk.DISABLED)
+        self.images_copy_link_button.config(state=tk.NORMAL if os.path.isfile(abs_path) else tk.DISABLED)
         if self.images_rotate_button:
             rotate_state = tk.DISABLED
             if HAS_PILLOW and Image and os.path.isfile(abs_path):
@@ -670,15 +699,18 @@ class MediaManagerTab:
         self.pdfs_add_button.grid(row=0, column=0, padx=5, pady=5, sticky="ew")
         self.pdfs_change_button = ttk.Button(pdf_actions_frame, text="Wijzig/Voeg Geselecteerd Bestand Toe...", command=self._pdfs_change, state=tk.DISABLED)
         self.pdfs_change_button.grid(row=1, column=0, padx=5, pady=5, sticky="ew")
+        self.pdfs_copy_link_button = ttk.Button(pdf_actions_frame, text="Kopieer link", command=self._pdfs_copy_link, state=tk.DISABLED)
+        self.pdfs_copy_link_button.grid(row=2, column=0, padx=5, pady=5, sticky="ew")
         self.pdfs_delete_button = ttk.Button(pdf_actions_frame, text="Verwijder Geselecteerd PDF Bestand...", command=self._pdfs_delete, state=tk.DISABLED)
-        self.pdfs_delete_button.grid(row=2, column=0, padx=5, pady=5, sticky="ew")
+        self.pdfs_delete_button.grid(row=3, column=0, padx=5, pady=5, sticky="ew")
         ttk.Label(pdf_actions_frame,
                   text=("Selecteer een rij in de lijst.\n"
+                        "Gebruik 'Kopieer link' bij 'Link bewerken' in de teksteditor.\n"
                         "Gebruik 'Wijzig/Voeg Toe' om:\n"
                         " - Een BESTAAND bestand te vervangen.\n"
                         " - Een ONTBREKEND bestand toe te voegen.\n"
                         "'Verwijder' werkt enkel op bestaande bestanden."),
-                  justify=tk.LEFT, style="Warning.TLabel").grid(row=3, column=0, padx=5, pady=(10, 5), sticky="w")
+                  justify=tk.LEFT, style="Warning.TLabel").grid(row=4, column=0, padx=5, pady=(10, 5), sticky="w")
 
         pdf_preview_frame = ttk.Labelframe(right_frame, text=" Voorvertoning (Pagina 1) ", padding=10)
         pdf_preview_frame.grid(row=1, column=0, sticky="nsew")
@@ -772,6 +804,7 @@ class MediaManagerTab:
         self._pdf_preview_image = None
         self.pdfs_change_button.config(state=tk.DISABLED)
         self.pdfs_delete_button.config(state=tk.DISABLED)
+        self.pdfs_copy_link_button.config(state=tk.DISABLED)
 
     def _pdfs_on_select(self, event=None):
         selected_items = self.pdfs_tree.selection()
@@ -837,6 +870,7 @@ class MediaManagerTab:
 
         self.pdfs_change_button.config(state=tk.NORMAL)
         self.pdfs_delete_button.config(state=tk.NORMAL if exists else tk.DISABLED)
+        self.pdfs_copy_link_button.config(state=tk.NORMAL if exists and os.path.isfile(abs_path) else tk.DISABLED)
 
     def _pdfs_add_dialog(self):
         PdfAddDialog(self.app.root, "Nieuw PDF Bestand Toevoegen", self._pdfs_process_add)

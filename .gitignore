@@ -29,3 +29,19 @@ Thumbs.db
 .editor-recovery/
 .release-backup-location
 additional-editor-fixes.patch
+
+# Keep personal documents accidentally dropped in the website root out of Git.
+# Website/media PDFs under docs/ (and assets under images/) remain trackable.
+/*.pdf
+/*.zip
+/*.doc
+/*.docx
+/*.xls
+/*.xlsx
+/*.ppt
+/*.pptx
+/Download.json
+
+# Local generated files; never publish them as website content.
+/output/
+/tmp/
