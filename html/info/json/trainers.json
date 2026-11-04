@@ -311,7 +311,7 @@
           "src": "/images/personen/CIMG9242.JPG"
         }
       ],
-      "description": "Voor kinderen van 9-10 jaar. Hier worden de basisvaardigheden verder ontwikkeld en maken ze kennis met de verschillende atletiekdisciplines op een leuke en uitdagende manier.",
+      "description": "Voor kinderen van 9-12 jaar. Hier worden de basisvaardigheden verder ontwikkeld en maken ze kennis met de verschillende atletiekdisciplines op een leuke en uitdagende manier. Er wordt specifiek gewerkt op woensdagen terwijl er CLUSK aangeleerd wordt op vrijdagen.",
       "trainers": [
         {
           "name": "Jolan Bernard",
@@ -365,6 +365,16 @@
         },
         {
           "name": "Marie Moens",
+          "email": null,
+          "phone": null
+        },
+        {
+          "name": "Robbe Van Damme",
+          "email": null,
+          "phone": null
+        },
+        {
+          "name": "Jutta De Gussem",
           "email": null,
           "phone": null
         }
