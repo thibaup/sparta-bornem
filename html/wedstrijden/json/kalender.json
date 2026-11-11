@@ -482,17 +482,66 @@
       "data_info": "Jaarlijkse clubavond! Inschrijvingen starten weldra."
     },
     {
+      "date": "2026-11-15",
+      "name": "Indoormeeting Hoboken",
+      "color": "green",
+      "title": "Indoormeeting Hoboken",
+      "data_location": "Hoboken",
+      "data_category": "PUP/MIN"
+    },
+    {
       "date": "2026-11-29",
       "name": "BK veldlopen",
       "color": "blue",
       "title": "BK veldlopen",
-      "data_location": "Hulshout"
+      "data_location": "Hulshout",
+      "data_category": "KAN/BEN/PUP/MIN/CAD+"
+    },
+    {
+      "date": "2026-12-05",
+      "name": "Indoormeeting KAAG",
+      "color": "green",
+      "title": "Indoormeeting KAAG",
+      "data_location": "Gent",
+      "data_category": "KAN/BEN"
+    },
+    {
+      "date": "2026-12-13",
+      "name": "PK pupillen en miniemen indoor",
+      "color": "green",
+      "title": "PK pupillen en miniemen indoor",
+      "data_location": "Hoboken",
+      "data_category": "PUP/MIN"
+    },
+    {
+      "date": "2026-12-19",
+      "name": "Indoormeeting VITA",
+      "color": "green",
+      "title": "Indoormeeting VITA",
+      "data_category": "CAD+"
+    },
+    {
+      "date": "2026-12-20",
+      "name": "Cross Gierle",
+      "color": "green",
+      "title": "Cross Gierle",
+      "data_location": "Gierle",
+      "data_category": "AC"
+    },
+    {
+      "date": "2026-12-27",
+      "name": "Indoormeeting STAX",
+      "color": "green",
+      "title": "Indoormeeting STAX",
+      "data_category": "CAD+"
     },
     {
       "date": "2027-01-02",
       "name": "PK alle categorieën Antwerpen",
       "color": "green",
-      "title": "PK alle categorieën Antwerpen"
+      "title": "PK alle categorieën Antwerpen",
+      "data_location": "Gent",
+      "data_category": "CAD+"
     },
     {
       "date": "2027-01-10",
@@ -506,13 +555,32 @@
       "name": "KVV cadetten en scholieren indoor",
       "color": "blue",
       "title": "KVV cadetten en scholieren indoor",
-      "data_location": "Gent"
+      "data_location": "Gent",
+      "data_category": "CAD/SCHOL"
+    },
+    {
+      "date": "2027-01-23",
+      "name": "Indoormeeting RIEM",
+      "color": "green",
+      "title": "Indoormeeting RIEM",
+      "data_location": "Gent",
+      "data_category": "PUP/MIN/CAD+"
+    },
+    {
+      "date": "2027-01-23",
+      "name": "Cross Sparta Vilvoorde",
+      "color": "green",
+      "title": "Cross Sparta Vilvoorde",
+      "data_location": "Vilvoorde",
+      "data_category": "AC"
     },
     {
       "date": "2027-01-24",
       "name": "KVV alle ctegorieën indoor",
       "color": "blue",
-      "title": "KVV alle ctegorieën indoor"
+      "title": "KVV alle ctegorieën indoor",
+      "data_location": "Gent",
+      "data_category": "AC"
     },
     {
       "date": "2027-01-24",
@@ -522,6 +590,14 @@
       "data_location": "Gent"
     },
     {
+      "date": "2027-01-30",
+      "name": "IFAM indoor",
+      "color": "green",
+      "title": "IFAM indoor",
+      "data_location": "Gent",
+      "data_category": "AC"
+    },
+    {
       "date": "2027-01-31",
       "name": "KVV veldlopen",
       "color": "blue",
@@ -529,39 +605,60 @@
       "data_location": "Lokeren"
     },
     {
+      "date": "2027-02-06",
+      "name": "Indoormeeting LEBB",
+      "color": "green",
+      "title": "Indoormeeting LEBB",
+      "data_location": "Gent",
+      "data_category": "PUP/MIN/CAD+"
+    },
+    {
       "date": "2027-02-07",
       "name": "BK studenten indoor",
       "color": "blue",
       "title": "BK studenten indoor",
-      "data_location": "Louvain-La-Neuve"
+      "data_location": "Louvain-La-Neuve",
+      "data_category": "Studenten"
+    },
+    {
+      "date": "2027-02-07",
+      "name": "Cross Duffel",
+      "color": "green",
+      "title": "Cross Duffel",
+      "data_location": "Duffel",
+      "data_category": "AC"
     },
     {
       "date": "2027-02-13",
       "name": "BK meerkampen indoor",
       "color": "blue",
       "title": "BK meerkampen indoor",
-      "data_location": "Louvain-La-Neuve"
+      "data_location": "Louvain-La-Neuve",
+      "data_category": "CAD+"
     },
     {
       "date": "2027-02-13",
       "name": "BK 4x400m AC indoor",
       "color": "blue",
       "title": "BK 4x400m AC indoor",
-      "data_location": "Louvain-La-Neuve"
+      "data_location": "Louvain-La-Neuve",
+      "data_category": "AC"
     },
     {
       "date": "2027-02-14",
       "name": "BK meerkampen indoor",
       "color": "blue",
       "title": "BK meerkampen indoor",
-      "data_location": "Louvain-La-Neuve"
+      "data_location": "Louvain-La-Neuve",
+      "data_category": "CAD+"
     },
     {
       "date": "2027-02-14",
       "name": "BK 4x400m mixed AC indoor",
       "color": "blue",
       "title": "BK 4x400m mixed AC indoor",
-      "data_location": "Louvain-La-Neuve"
+      "data_location": "Louvain-La-Neuve",
+      "data_category": "AC"
     },
     {
       "date": "2027-02-20",
@@ -575,39 +672,136 @@
       "name": "BK alle categorieën indoor",
       "color": "blue",
       "title": "BK alle categorieën indoor",
-      "data_location": "Gent"
+      "data_location": "Gent",
+      "data_category": "AC"
+    },
+    {
+      "date": "2027-02-27",
+      "name": "Estafettermeeting indoor KAAG",
+      "color": "green",
+      "title": "Estafettermeeting indoor KAAG",
+      "data_location": "Gent",
+      "data_category": "PUP/MIN/CAD+"
+    },
+    {
+      "date": "2027-02-28",
+      "name": "Indoormeeting RCG",
+      "color": "green",
+      "title": "Indoormeeting RCG",
+      "data_location": "Gent",
+      "data_category": "KAN/BEN"
     },
     {
       "date": "2027-03-06",
       "name": "BK cadetten en scholieren indoor",
       "color": "blue",
       "title": "BK cadetten en scholieren indoor",
-      "data_location": "Louvain-La-Neuve"
+      "data_location": "Louvain-La-Neuve",
+      "data_category": "CAD/SCHOL"
     },
     {
       "date": "2027-03-07",
       "name": "BK juniores en beloften indoor",
       "color": "blue",
       "title": "BK juniores en beloften indoor",
-      "data_location": "Gent"
+      "data_location": "Gent",
+      "data_category": "JUN/BEL"
+    },
+    {
+      "date": "2027-03-13",
+      "name": "Jeugddag",
+      "color": "green",
+      "title": "Jeugddag",
+      "data_location": "Gent",
+      "data_category": "KAN/BEN/PUP/MIN"
+    },
+    {
+      "date": "2027-04-03",
+      "name": "Buitenlandse stage",
+      "color": "black",
+      "title": "Buitenlandse stage",
+      "data_location": "Lloret De Mar",
+      "data_category": "CAD+"
+    },
+    {
+      "date": "2027-04-04",
+      "name": "Buitenlandse stage",
+      "color": "black",
+      "title": "Buitenlandse stage",
+      "data_location": "Lloret De Mar",
+      "data_category": "CAD+"
+    },
+    {
+      "date": "2027-04-05",
+      "name": "Buitenlandse stage",
+      "color": "black",
+      "title": "Buitenlandse stage",
+      "data_location": "Lloret De Mar",
+      "data_category": "CAD+"
+    },
+    {
+      "date": "2027-04-06",
+      "name": "Buitenlandse stage",
+      "color": "black",
+      "title": "Buitenlandse stage",
+      "data_location": "Lloret De Mar",
+      "data_category": "CAD+"
+    },
+    {
+      "date": "2027-04-07",
+      "name": "Buitenlandse stage",
+      "color": "black",
+      "title": "Buitenlandse stage",
+      "data_location": "Lloret De Mar",
+      "data_category": "CAD+"
+    },
+    {
+      "date": "2027-04-08",
+      "name": "Buitenlandse stage",
+      "color": "black",
+      "title": "Buitenlandse stage",
+      "data_location": "Lloret De Mar",
+      "data_category": "CAD+"
     },
     {
       "date": "2027-04-09",
       "name": "Stageweekend SPBO",
       "color": "black",
-      "title": "Stageweekend SPBO"
+      "title": "Stageweekend SPBO",
+      "data_location": "Brasschaat",
+      "data_category": "AC"
+    },
+    {
+      "date": "2027-04-09",
+      "name": "Buitenlandse stage",
+      "color": "black",
+      "title": "Buitenlandse stage",
+      "data_location": "Lloret De Mar",
+      "data_category": "CAD+"
     },
     {
       "date": "2027-04-10",
       "name": "Stageweekend SPBO",
       "color": "black",
-      "title": "Stageweekend SPBO"
+      "title": "Stageweekend SPBO",
+      "data_location": "Brasschaat",
+      "data_category": "AC"
+    },
+    {
+      "date": "2027-04-10",
+      "name": "Buitenlandse stage",
+      "color": "black",
+      "title": "Buitenlandse stage",
+      "data_location": "Lloret De Mar",
+      "data_category": "CAD+"
     },
     {
       "date": "2027-04-11",
       "name": "Stageweekend SPBO",
       "color": "black",
-      "title": "Stageweekend SPBO"
+      "title": "Stageweekend SPBO",
+      "data_location": "Brasschaat",
+      "data_category": "AC"
     }
   ],
   "displayedMonths": [
