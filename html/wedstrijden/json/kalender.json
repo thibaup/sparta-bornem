@@ -802,6 +802,157 @@
       "title": "Stageweekend SPBO",
       "data_location": "Brasschaat",
       "data_category": "AC"
+    },
+    {
+      "date": "2027-04-17",
+      "name": "BVV pupillen en miniemen",
+      "color": "green",
+      "title": "BVV pupillen en miniemen",
+      "data_category": "PUP/MIN"
+    },
+    {
+      "date": "2027-04-18",
+      "name": "BVV cadetten en scholieren",
+      "color": "green",
+      "title": "BVV cadetten en scholieren",
+      "data_category": "CAD/SCHOL"
+    },
+    {
+      "date": "2027-04-24",
+      "name": "PK AC dag 1",
+      "color": "green",
+      "title": "PK AC dag 1",
+      "data_location": "Mechelen",
+      "data_category": "AC"
+    },
+    {
+      "date": "2027-04-25",
+      "name": "PK AC dag 2",
+      "color": "green",
+      "title": "PK AC dag 2",
+      "data_location": "Mol",
+      "data_category": "AC"
+    },
+    {
+      "date": "2027-05-06",
+      "name": "KVV AC",
+      "color": "green",
+      "title": "KVV AC",
+      "data_category": "AC"
+    },
+    {
+      "date": "2027-05-16",
+      "name": "BVV alle categorieën",
+      "color": "green",
+      "title": "BVV alle categorieën",
+      "data_category": "AC"
+    },
+    {
+      "date": "2027-06-05",
+      "name": "BK Masters dag 1",
+      "color": "green",
+      "title": "BK Masters dag 1",
+      "data_category": "MAS"
+    },
+    {
+      "date": "2027-06-06",
+      "name": "BK Masters dag 2",
+      "color": "green",
+      "title": "BK Masters dag 2",
+      "data_category": "MAS"
+    },
+    {
+      "date": "2027-06-13",
+      "name": "BVV Masters",
+      "color": "green",
+      "title": "BVV Masters",
+      "data_category": "MAS"
+    },
+    {
+      "date": "2027-06-27",
+      "name": "PK pupillen en miniemen",
+      "color": "green",
+      "title": "PK pupillen en miniemen",
+      "data_category": "PUP/MIN"
+    },
+    {
+      "date": "2027-07-31",
+      "name": "BK AC en beloften dag 1",
+      "color": "green",
+      "title": "BK AC en beloften dag 1",
+      "data_category": "BEL/AC"
+    },
+    {
+      "date": "2027-08-01",
+      "name": "BK AC en beloften dag 2",
+      "color": "green",
+      "title": "BK AC en beloften dag 2",
+      "data_category": "BEL/AC"
+    },
+    {
+      "date": "2027-08-07",
+      "name": "BK meerkampen dag 1",
+      "color": "green",
+      "title": "BK meerkampen dag 1",
+      "data_category": "AC"
+    },
+    {
+      "date": "2027-08-08",
+      "name": "BK meerkampen dag 2",
+      "color": "green",
+      "title": "BK meerkampen dag 2",
+      "data_category": "AC"
+    },
+    {
+      "date": "2027-08-15",
+      "name": "KVV cadetten en scholieren",
+      "color": "green",
+      "title": "KVV cadetten en scholieren",
+      "data_category": "CAD/SCHOL"
+    },
+    {
+      "date": "2027-08-22",
+      "name": "PK estafette",
+      "color": "green",
+      "title": "PK estafette",
+      "data_location": "Arendonk",
+      "data_category": "PUP/MN/CAD/SCHOL/JUN/AC/MAS"
+    },
+    {
+      "date": "2027-08-29",
+      "name": "KVV Masters",
+      "color": "green",
+      "title": "KVV Masters",
+      "data_category": "MAS"
+    },
+    {
+      "date": "2027-09-04",
+      "name": "BK cadetten, scholieren en juniores dag 1",
+      "color": "green",
+      "title": "BK cadetten, scholieren en juniores dag 1",
+      "data_category": "CAD/SCHOL/JUN"
+    },
+    {
+      "date": "2027-09-05",
+      "name": "BK cadetten, scholieren en juniores dag 2",
+      "color": "green",
+      "title": "BK cadetten, scholieren en juniores dag 2",
+      "data_category": "CAD/SCHOL/JUN"
+    },
+    {
+      "date": "2027-09-12",
+      "name": "BK estafette",
+      "color": "green",
+      "title": "BK estafette",
+      "data_category": "CAD/SCHOL/JUN/AC/MAS"
+    },
+    {
+      "date": "2027-10-23",
+      "name": "Clubavond",
+      "color": "black",
+      "title": "Clubavond",
+      "data_location": "zaal Kloosterheide",
+      "data_category": "AC"
     }
   ],
   "displayedMonths": [
